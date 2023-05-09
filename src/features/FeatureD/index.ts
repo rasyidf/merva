@@ -2,17 +2,17 @@ import { FeatureMetadata } from "@/types/FeatureMetadata";
 import { VersionConfig } from "@/types/VersionConfig";
 import { RouteObject } from "react-router-dom";
 
-const FeatureC = {
-    id: 'FeatureC',
-    name: 'Feature C',
+const FeatureD = {
+    id: 'FeatureD',
+    name: 'Feature D',
     enabled: true, // Feature flag to enable/disable the entire feature
     routes: [{
-        path: '/feature-c',
+        path: '/feature-d',
         async lazy() {
-            let { FeatureC } = await import("./pages/FeatureC");
-            return { Component: FeatureC };
+            let { FeatureD } = await import("./pages/FeatureD");
+            return { Component: FeatureD };
         },
-    }] satisfies RouteObject[], 
+    }] satisfies RouteObject[],
     versions: [
         {
             version: '1.0.0',
@@ -20,9 +20,9 @@ const FeatureC = {
                 FeatureAComponent1: true,
                 FeatureAComponent2: false,
             },
-        }, 
+        },
     ] as VersionConfig[],
-    activeVersion: 'dev', // Set the active version for A/B testing or staging
+    activeVersion: '1.0.0', // Set the active version for A/B testing or staging
 } satisfies FeatureMetadata;
 
-export default FeatureC;
+export default FeatureD;

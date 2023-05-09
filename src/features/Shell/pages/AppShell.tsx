@@ -1,5 +1,5 @@
 import { useFeatureFlags } from '@/contexts/FeatureProvider';
-import { AppShell, Header, NavLink, Navbar } from '@mantine/core';
+import { AppShell, Badge, Header, NavLink, Navbar } from '@mantine/core';
 import { Outlet, Link } from 'react-router-dom';
 
 type Props = {};
@@ -16,7 +16,8 @@ export const Dashboard = (props: Props) => {
         <NavLink variant="subtle" component={Link} to="/" label='Home'></NavLink>
         {
           enabledFeatures.map((feature, i) => {
-            return <NavLink variant="subtle" component={Link} key={`nav-${feature.id}`} to={`${feature.routes?.[0].path ?? ""}`} label={`${feature.name}`}></NavLink>;
+            return <NavLink variant="subtle" component={Link} key={`nav-${feature.id}`} to={`${feature.routes?.[0].path ?? ""}`} label={`${feature.name}`}
+              rightSection={<Badge color={feature.activeVersion == "DEV" ? 'blue' : 'green'}>{feature.activeVersion}</Badge>}></NavLink>;
           })
         }
       </Navbar>} >
