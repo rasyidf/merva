@@ -4,6 +4,11 @@ import { Route } from '@/types/RouteConfig';
 import { useFeatureFlags } from '../contexts/FeatureProvider';
 import ShellMetadata from '../features/Shell';
 
+/**
+ * Renders the main router for the application.
+ *
+ * @returns {JSX.Element} The router provider component.
+ */
 function MainRouter() {
   const { enabledFeatures } = useFeatureFlags();
 
