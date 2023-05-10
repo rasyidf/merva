@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create, createStore } from "zustand";
 
 export type PreferenceState = {
     language: string;
@@ -6,7 +6,7 @@ export type PreferenceState = {
     setPreference: (key: keyof PreferenceState, value: string) => void;
 };
 
-export const usePreferencesStore = create<PreferenceState>((set) => ({
+export const usePreferencesStore = createStore<PreferenceState>((set) => ({
     language: "en",
     theme: "light",
     setPreference: (key, value) => set({ [key]: value }),
