@@ -23,10 +23,9 @@ function MainRouter() {
       }
     }
 
-    ShellMetadata.routes[0].children = routes;
-    routes.push(...ShellMetadata.routes);
-    return routes;
-  }, []);
+    ShellMetadata.routes[0].children.push(...routes);
+    return [...ShellMetadata.routes];
+  }, [enabledFeatures]);
 
 
   const router = createBrowserRouter(enabledRoutes);

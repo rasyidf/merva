@@ -12,7 +12,15 @@ const ShellMetadata = {
             let { Dashboard } = await import("./pages/AppShell");
             return { Component: Dashboard };
         },
-        children: [] as RouteObject[], 
+        children: [
+            {
+                path: '/',
+                async lazy() {
+                    let { Dashboard } = await import("./pages/Dashboard");
+                    return { Component: Dashboard };
+                }
+            }
+        ] as RouteObject[],
     }] satisfies RouteObject[],
     versions: [
         {

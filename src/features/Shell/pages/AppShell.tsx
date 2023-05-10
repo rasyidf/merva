@@ -1,5 +1,5 @@
 import { useFeatureFlags } from '@/contexts/FeatureProvider';
-import { AppShell, Badge, Header, NavLink, Navbar } from '@mantine/core';
+import { AppShell, Badge, Header, NavLink, Navbar, Title } from '@mantine/core';
 import { Outlet, Link } from 'react-router-dom';
 
 type Props = {};
@@ -11,7 +11,7 @@ export const Dashboard = (props: Props) => {
     padding="md" styles={(theme) => ({
       main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
     })}
-    header={<Header height={60} p="xs">{/* Header content */}</Header>} navbar={
+    header={<Header height={56} p="xs"><Title color='blue' order={2}>MERVA</Title></Header>} navbar={
       <Navbar width={{ base: 200 }} p="sm">
         <NavLink variant="subtle" component={Link} to="/" label='Home'></NavLink>
         {
