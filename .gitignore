@@ -25,3 +25,4 @@ dist-ssr
 
 # Yarn
 .yarn/cache/*
+.yarn
