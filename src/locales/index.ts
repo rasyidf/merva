@@ -1,3 +1,1 @@
-export const locales = {
-    
-}; 
+export const locales = {};
