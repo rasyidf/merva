@@ -7,25 +7,17 @@ import { useMemo } from "react";
 
 /**
  * Renders the main router for the application.
- *
- * @returns {JSX.Element} The router provider component.
  */
 function MainRouter(): JSX.Element {
 	const { enabledFeatures } = useFeatureFlags();
 
 	const enabledRoutes: RouteConfig[] = useMemo(() => {
-		const routes: RouteConfig[] = [];
-		for (let i = 0; i < enabledFeatures.length; i++) {
-			const feature = enabledFeatures[i];
-			const featureRoutes = feature.routes;
-			if (featureRoutes && feature.enabled) {
-				routes.push(...featureRoutes);
-			}
-		}
-
-		ShellMetadata.routes[0].children.push(...routes);
-		return [...ShellMetadata.routes];
+		const shellRoutes: RouteConfig[] = enabledFeatures.filter((x) => x.placement === "shell").flatMap(feature => feature.routes ?? []);
+		const featureRoutes: RouteConfig[] = enabledFeatures.filter((x) => !x.placement || (x.placement === "feature")).flatMap(feature => feature.routes ?? []);
+		const root: RouteConfig = { ...ShellMetadata.routes[0], children: [...ShellMetadata.routes[0].children ?? [], ...featureRoutes] };
+		return [root, ...shellRoutes];
 	}, [enabledFeatures]);
+
 
 	const router = createBrowserRouter(enabledRoutes);
 

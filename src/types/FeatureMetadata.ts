@@ -4,7 +4,8 @@ import { NavigationConfig } from "./NavigationConfig";
 export interface FeatureMetadata {
 	id: string;
 	name: string;
-	enabled: boolean;
+	enabled?: boolean;
+	placement?: "shell" | "feature" | "hidden" | "none";
 	routes?: RouteConfig[];
 	navigation?: NavigationConfig[];
 	versions: VersionConfig[];

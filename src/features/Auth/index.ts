@@ -1,20 +1,21 @@
+import { RouteObject } from "react-router-dom";
 import { FeatureMetadata } from "@/types/FeatureMetadata";
 import { VersionConfig } from "@/types/VersionConfig";
-import { RouteObject } from "react-router-dom";
 
-const FeatureBMetadata = {
-	id: "FeatureB",
-	name: "Feature B",
+const AuthFeatureMetadata = {
+	id: "Auth",
+	name: "Authentication Feature",
 	enabled: true,
+	placement: "shell",
 	routes: [
 		{
-			path: "/feature-b",
+			path: "/login",
 			async lazy() {
-				const { FeatureB } = await import("./pages/FeatureB");
-				return { Component: FeatureB };
+				const { default: LoginPage } = await import("./pages/Login");
+				return { Component: LoginPage };
 			},
 		},
-	] satisfies RouteObject[],
+	] as RouteObject[],
 	versions: [
 		{
 			version: "1.0.0",
@@ -34,4 +35,4 @@ const FeatureBMetadata = {
 	activeVersion: "1.1.0", // Set the active version for A/B testing or staging
 } satisfies FeatureMetadata;
 
-export default FeatureBMetadata;
+export default AuthFeatureMetadata;

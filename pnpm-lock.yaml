@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -17,6 +17,9 @@ dependencies:
   '@mantine/hooks':
     specifier: ^6.0.10
     version: 6.0.10(react@18.2.0)
+  '@mantine/notifications':
+    specifier: ^6.0.20
+    version: 6.0.20(@mantine/core@6.0.10)(@mantine/hooks@6.0.10)(react-dom@18.2.0)(react@18.2.0)
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
@@ -38,6 +41,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-hook-form:
+    specifier: ^7.46.1
+    version: 7.46.1(react@18.2.0)
   react-i18next:
     specifier: ^12.2.2
     version: 12.2.2(i18next@22.4.15)(react-dom@18.2.0)(react@18.2.0)
@@ -58,6 +64,9 @@ dependencies:
     version: 4.3.8(react@18.2.0)
 
 devDependencies:
+  '@biomejs/biome':
+    specifier: 1.1.2
+    version: 1.1.2
   '@types/node':
     specifier: ^18.15.11
     version: 18.15.11
@@ -70,9 +79,6 @@ devDependencies:
   '@vitejs/plugin-react-swc':
     specifier: ^3.0.0
     version: 3.2.0(vite@4.2.1)
-  rome:
-    specifier: ^12.1.3
-    version: 12.1.3
   typescript:
     specifier: ^4.9.3
     version: 4.9.5
@@ -130,6 +136,74 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
     dev: false
+
+  /@biomejs/biome@1.1.2:
+    resolution: {integrity: sha512-JEVWchqo0Xhl86IJgOh0xESWnNRUXBUDByCBR8TA4lIPzm/6U6Tv77+MblNkZ8MvwCtP6PlBNGdQcGKKabtuHA==}
+    engines: {node: '>=14.*'}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      '@biomejs/cli-darwin-arm64': 1.1.2
+      '@biomejs/cli-darwin-x64': 1.1.2
+      '@biomejs/cli-linux-arm64': 1.1.2
+      '@biomejs/cli-linux-x64': 1.1.2
+      '@biomejs/cli-win32-arm64': 1.1.2
+      '@biomejs/cli-win32-x64': 1.1.2
+    dev: true
+
+  /@biomejs/cli-darwin-arm64@1.1.2:
+    resolution: {integrity: sha512-YyqWeNZchPxlvxtdo2vMBkzrwllaNS3+DZ6j01mUCVIZE9kAzF/edMV2O38L2AEtnRLU1TI1f71Jai3ThILClg==}
+    engines: {node: '>=14.*'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@biomejs/cli-darwin-x64@1.1.2:
+    resolution: {integrity: sha512-Sofxcu50AHJyQS6Xx3OF2egQQ7Un5YFVF5/umNFa+kSNrrCu/ucmzrk8FcGS2dOSs4L2LqD6ZDWjvbcikjzLYQ==}
+    engines: {node: '>=14.*'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@biomejs/cli-linux-arm64@1.1.2:
+    resolution: {integrity: sha512-wtaQgpoVMZEKf1GlDlFGAJP1j6gnh4L4kJN8PQPOBAdKIUZ/YSjqVp0z28vli5xCQ57xCn1gH4Xoqw2gVYu1tQ==}
+    engines: {node: '>=14.*'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@biomejs/cli-linux-x64@1.1.2:
+    resolution: {integrity: sha512-TYIUjCXbY+kxnJgv8GESplMagB1GdOcMV21JGRATqnhUI4BvG6sjs3gfi+sdjLBQdbHhsISXW3yfUlv07HKqhg==}
+    engines: {node: '>=14.*'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@biomejs/cli-win32-arm64@1.1.2:
+    resolution: {integrity: sha512-yApn85KuJ+Ty5zxbqWnaifX4ONtZG+snu12RNKi8fxSVVCXzQ/k2PfsWQbsyvCG05qshSvNKtM54cuf+vhUIsw==}
+    engines: {node: '>=14.*'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@biomejs/cli-win32-x64@1.1.2:
+    resolution: {integrity: sha512-qebNvIrFj2TJ+K0JVGo1HkgV2y5jis6aOZDC1SWuk53GnqjSLdR+p1v86ZByOjYr1v+tjc67EXmEepk06VVvpA==}
+    engines: {node: '>=14.*'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /@emotion/babel-plugin@11.11.0:
     resolution: {integrity: sha512-m4HEDZleaaCH+XgDDsPF15Ht6wTLsgDTeR3WYj9Q/k76JtWhrJjcP4+/XlG8LGT/Rol9qUfOIztXeA84ATpqPQ==}
@@ -496,6 +570,22 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@mantine/notifications@6.0.20(@mantine/core@6.0.10)(@mantine/hooks@6.0.10)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-cEBmuu5G3Pz1dUBtFTfcT56jK8QGd87/TQKpYn4vtiEnwSqVAJ+KwIv30CBl8z1T9/LGDpNhcFtho8H2tkGOxQ==}
+    peerDependencies:
+      '@mantine/core': 6.0.20
+      '@mantine/hooks': 6.0.20
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 6.0.10(@emotion/react@11.11.0)(@mantine/hooks@6.0.10)(@types/react@18.0.31)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 6.0.10(react@18.2.0)
+      '@mantine/utils': 6.0.20(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-transition-group: 4.4.2(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
   /@mantine/styles@6.0.10(@emotion/react@11.11.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-TVyo4xNBO7PhP2jubu2OI1YK2DEULrVgdsP0+1wfwj/bhSTnTLYmh2aOb1FyTiFvFn1dfq4If428z/ZuGiLtdQ==}
     peerDependencies:
@@ -512,6 +602,14 @@ packages:
 
   /@mantine/utils@6.0.10(react@18.2.0):
     resolution: {integrity: sha512-Lo4VUn3+/kqhdjSoPzUFbxXEjMxj5vS4pqRjKRGtJsTwHiMFNcm8u4cIESzMBAEsoaBrI1dGE4WttwOJhjUaSw==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@mantine/utils@6.0.20(react@18.2.0):
+    resolution: {integrity: sha512-9vsSskPtFyfPW2DOad6brLl9x4MnZtlyhszyoZOyMgXf/vdQbThKhL6PpqUbmlalwQpnCObbkEwVydugeh2dyQ==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
@@ -634,54 +732,6 @@ packages:
     resolution: {integrity: sha512-BJ9SxXux8zAg991UmT8slpwpsd31K1dHHbD3Ba4VzD+liLQ4WAMSxQp2d2ZPRPfN0jN2NPRowcSSoM7lCaF08Q==}
     engines: {node: '>=14'}
     dev: false
-
-  /@rometools/cli-darwin-arm64@12.1.3:
-    resolution: {integrity: sha512-AmFTUDYjBuEGQp/Wwps+2cqUr+qhR7gyXAUnkL5psCuNCz3807TrUq/ecOoct5MIavGJTH6R4aaSL6+f+VlBEg==}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rometools/cli-darwin-x64@12.1.3:
-    resolution: {integrity: sha512-k8MbWna8q4LRlb005N2X+JS1UQ+s3ZLBBvwk4fP8TBxlAJXUz17jLLu/Fi+7DTTEmMhM84TWj4FDKW+rNar28g==}
-    cpu: [x64]
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rometools/cli-linux-arm64@12.1.3:
-    resolution: {integrity: sha512-X/uLhJ2/FNA3nu5TiyeNPqiD3OZoFfNfRvw6a3ut0jEREPvEn72NI7WPijH/gxSz55znfQ7UQ6iM4DZumUknJg==}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rometools/cli-linux-x64@12.1.3:
-    resolution: {integrity: sha512-csP17q1eWiUXx9z6Jr/JJPibkplyKIwiWPYNzvPCGE8pHlKhwZj3YHRuu7Dm/4EOqx0XFIuqqWZUYm9bkIC8xg==}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rometools/cli-win32-arm64@12.1.3:
-    resolution: {integrity: sha512-RymHWeod57EBOJY4P636CgUwYA6BQdkQjh56XKk4pLEHO6X1bFyMet2XL7KlHw5qOTalzuzf5jJqUs+vf3jdXQ==}
-    cpu: [arm64]
-    os: [win32]
-    requiresBuild: true
-    dev: true
-    optional: true
-
-  /@rometools/cli-win32-x64@12.1.3:
-    resolution: {integrity: sha512-yHSKYidqJMV9nADqg78GYA+cZ0hS1twANAjiFibQdXj9aGzD+s/IzIFEIi/U/OBLvWYg/SCw0QVozi2vTlKFDQ==}
-    cpu: [x64]
-    os: [win32]
-    requiresBuild: true
-    dev: true
-    optional: true
 
   /@swc/core-darwin-arm64@1.3.42:
     resolution: {integrity: sha512-hM6RrZFyoCM9mX3cj/zM5oXwhAqjUdOCLXJx7KTQps7NIkv/Qjvobgvyf2gAb89j3ARNo9NdIoLjTjJ6oALtiA==}
@@ -908,6 +958,13 @@ packages:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
     dev: false
 
+  /dom-helpers@5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.21.0
+      csstype: 3.1.1
+    dev: false
+
   /error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
     dependencies:
@@ -1078,6 +1135,11 @@ packages:
     hasBin: true
     dev: true
 
+  /object-assign@4.1.1:
+    resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /object-path@0.6.0:
     resolution: {integrity: sha512-fxrwsCFi3/p+LeLOAwo/wyRMODZxdGBtUlWRzsEpsUVrisZbEfZ21arxLGfaWfcnqb8oHPNihIb4XPE8CQPN5A==}
     engines: {node: '>=0.8.0'}
@@ -1121,6 +1183,14 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /prop-types@15.8.1:
+    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+    dev: false
+
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -1129,6 +1199,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form@7.46.1(react@18.2.0):
+    resolution: {integrity: sha512-0GfI31LRTBd5tqbXMGXT1Rdsv3rnvy0FjEk8Gn9/4tp6+s77T7DPZuGEpBRXOauL+NhyGT5iaXzdIM2R6F/E+w==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-i18next@12.2.2(i18next@22.4.15)(react-dom@18.2.0)(react@18.2.0):
@@ -1244,6 +1323,20 @@ packages:
       - '@types/react'
     dev: false
 
+  /react-transition-group@4.4.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.21.0
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -1278,20 +1371,6 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
-
-  /rome@12.1.3:
-    resolution: {integrity: sha512-e+ff72hxDpe/t5/Us7YRBVw3PBET7SeczTQNn6tvrWdrCaAw3qOukQQ+tDCkyFtS4yGsnhjrJbm43ctNbz27Yg==}
-    engines: {node: '>=14.*'}
-    hasBin: true
-    requiresBuild: true
-    optionalDependencies:
-      '@rometools/cli-darwin-arm64': 12.1.3
-      '@rometools/cli-darwin-x64': 12.1.3
-      '@rometools/cli-linux-arm64': 12.1.3
-      '@rometools/cli-linux-x64': 12.1.3
-      '@rometools/cli-win32-arm64': 12.1.3
-      '@rometools/cli-win32-x64': 12.1.3
     dev: true
 
   /scheduler@0.23.0:

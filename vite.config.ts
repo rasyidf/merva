@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  envPrefix: "MERVA",
+  envPrefix: "MERVA", // change this to something unique
   server: {
     port: 3000,
     strictPort: true,

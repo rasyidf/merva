@@ -5,7 +5,7 @@ import { VersionConfig } from "../../types/VersionConfig";
 const ShellMetadata = {
 	id: "Shell",
 	name: "Shell",
-	enabled: true, // Feature flag to enable/disable the entire feature
+	enabled: true,
 	routes: [
 		{
 			path: "/",
