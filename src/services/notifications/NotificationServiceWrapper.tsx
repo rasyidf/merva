@@ -44,12 +44,12 @@ const NotificationServiceWrapper = ({ children }: NotificationServiceWrapperProp
             date: new Date(),
         };
         notificationService.showNotification(notification.type, notification.message);
-        pushNotification({
-            title: notification.type.charAt(0).toUpperCase() + notification.type.slice(1),
-            message: notification.message,
-            color: theme.colors[notification.type][6],
-            icon: notification.type,
-        });
+        // pushNotification({
+        //     title: notification.type.charAt(0).toUpperCase() + notification.type.slice(1),
+        //     message: notification.message,
+        //     color: theme.colors[notification.type]?.[6],
+        //     icon: notification.type,
+        // });
     };
 
     const getNotifications = () => {

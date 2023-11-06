@@ -21,7 +21,7 @@ export default function Login() {
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
             <Card shadow="sm" padding="lg" style={{ width: 400 }}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Text align="center" weight={700} size="lg" style={{ marginBottom: 20 }}>
+                    <Text ta="center" fw={700} size="lg" style={{ marginBottom: 20 }}>
                         Login
                     </Text>
                     <Input

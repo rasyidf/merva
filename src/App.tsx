@@ -1,11 +1,14 @@
-import { FeatureFlagsProvider } from "./contexts/FeatureProvider";
-import MainRouter from "./utils/MainRouter";
+import { LanguageProvider, QueryProvider, RouteProvider, ThemeProvider } from "./contexts";
 
 function App() {
 	return (
-		<FeatureFlagsProvider>
-			<MainRouter />
-		</FeatureFlagsProvider>
+		<QueryProvider>
+			<ThemeProvider>
+				<LanguageProvider>
+					<RouteProvider />
+				</LanguageProvider>
+			</ThemeProvider>
+		</QueryProvider>
 	);
 }
 

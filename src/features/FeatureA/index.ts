@@ -8,7 +8,7 @@ const FeatureAMetadata = {
 	enabled: true, // Feature flag to enable/disable the entire feature
 	routes: [
 		{
-			path: "/feature-a",
+			path: "/app/feature-a",
 			async lazy() {
 				const { FeatureA } = await import("./pages/FeatureA");
 				return { Component: FeatureA };

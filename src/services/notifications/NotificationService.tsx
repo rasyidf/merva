@@ -2,21 +2,21 @@ import { useState } from 'react';
 import { DefaultMantineColor, useMantineTheme } from '@mantine/core';
 import { notifications } from "@mantine/notifications";
 
-type NotificationType = 'success' | 'info' | 'warning' | 'error';
+export type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-interface Notification {
+export interface Notification {
     id: string;
     type: NotificationType;
     message: string;
     date: Date;
 }
 
-interface NotificationSettings {
+export interface NotificationSettings {
     enableEmailNotifications: boolean;
     enablePushNotifications: boolean;
 }
 
-class NotificationService {
+export class NotificationService {
     private notifications: Notification[] = [];
 
     private settings: NotificationSettings = {
@@ -37,7 +37,7 @@ class NotificationService {
         const date = new Date();
         const notification = { id, type, message, date };
         this.notifications.push(notification);
-        addNotificationToDatabase(notification);
+        // addNotificationToDatabase(notification);
         this.showMantineNotification(type, message);
     }
 
@@ -45,7 +45,7 @@ class NotificationService {
         const id = Math.random().toString(36).substr(2, 9);
         const notification = { id, type, message, date };
         this.notifications.push(notification);
-        addNotificationToDatabase(notification);
+        // addNotificationToDatabase(notification);
     }
 
     public getNotifications(): Notification[] {
@@ -72,7 +72,7 @@ class NotificationService {
 export default NotificationService;
 
 
-function typeToColor(type: string): DefaultMantineColor {
+export function typeToColor(type: string): DefaultMantineColor {
     switch (type) {
         case 'success':
             return 'teal';

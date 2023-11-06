@@ -26,26 +26,6 @@ export class FeatureService {
 		return this.storage.getFeatures();
 	}
 
-	public editFeatureMetadata(
-		id: string,
-		data: Partial<FeatureMetadata>,
-	): boolean {
-		const featureList = this.storage.getFeatures();
-		const featureIndex = featureList.findIndex((feature) => feature.id === id);
-
-		if (featureIndex === -1) {
-			return false; // Feature not found
-		}
-
-		featureList[featureIndex] = {
-			...featureList[featureIndex],
-			...data,
-		};
-
-		this.storage.setFeatures(featureList);
-
-		return true; // Successfully updated
-	}
 }
 
 const zustandStorage = new ZustandStorage();

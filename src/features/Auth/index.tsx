@@ -1,4 +1,4 @@
-import { RouteObject } from "react-router-dom";
+import { Navigate, RouteObject } from "react-router-dom";
 import { FeatureMetadata } from "@/types/FeatureMetadata";
 import { VersionConfig } from "@/types/VersionConfig";
 
@@ -9,30 +9,18 @@ const AuthFeatureMetadata = {
 	placement: "shell",
 	routes: [
 		{
-			path: "/login",
+			path: "/app/login",
 			async lazy() {
 				const { default: LoginPage } = await import("./pages/Login");
 				return { Component: LoginPage };
 			},
 		},
+		{
+			path: "/app/logout",
+			element: <Navigate to="/app/login" />,
+		}
 	] as RouteObject[],
-	versions: [
-		{
-			version: "1.0.0",
-			components: {
-				FeatureAComponent1: true,
-				FeatureAComponent2: false,
-			},
-		},
-		{
-			version: "1.1.0",
-			components: {
-				FeatureAComponent1: true,
-				FeatureAComponent2: true,
-			},
-		},
-	] as VersionConfig[],
-	activeVersion: "1.1.0", // Set the active version for A/B testing or staging
+
 } satisfies FeatureMetadata;
 
 export default AuthFeatureMetadata;

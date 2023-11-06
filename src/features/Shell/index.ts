@@ -8,14 +8,14 @@ const ShellMetadata = {
 	enabled: true,
 	routes: [
 		{
-			path: "/",
+			path: "/app",
 			async lazy() {
-				const { Dashboard } = await import("./pages/AppShell");
+				const { DashboardLayout: Dashboard } = await import("@/components/layouts/DashboardLayout");
 				return { Component: Dashboard };
 			},
 			children: [
 				{
-					path: "/",
+					path: "/app/dashboard",
 					async lazy() {
 						const { Dashboard } = await import("./pages/Dashboard");
 						return { Component: Dashboard };
@@ -24,15 +24,6 @@ const ShellMetadata = {
 			] as RouteObject[],
 		},
 	] satisfies RouteObject[],
-	versions: [
-		{
-			version: "1.0.0",
-			components: {
-				FeatureAComponent1: true,
-				FeatureAComponent2: false,
-			},
-		},
-	] as VersionConfig[],
 	activeVersion: "1.0.0", // Set the active version for A/B testing or staging
 } satisfies FeatureMetadata;
 

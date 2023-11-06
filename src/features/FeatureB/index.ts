@@ -8,7 +8,7 @@ const FeatureBMetadata = {
 	enabled: true,
 	routes: [
 		{
-			path: "/feature-b",
+			path: "/app/feature-b",
 			async lazy() {
 				const { FeatureB } = await import("./pages/FeatureB");
 				return { Component: FeatureB };

@@ -1,38 +1,20 @@
-import React from "react";
-import { createContext, useContext, ReactNode } from "react";
-import featuresRegistry from "../configs/feature-registry";
-import { FeatureMetadata } from "../types/FeatureMetadata";
+import { create } from 'zustand';
+import { featureRegistry } from '@/configs';
+import { FeatureMetadata } from '@/types/FeatureMetadata';
 
-interface FeatureFlagsContextValue {
+type FeatureFlagsStore = {
 	enabledFeatures: FeatureMetadata[];
-}
-const FeatureFlagsContext = createContext<FeatureFlagsContextValue | undefined>(
-	undefined,
-);
+};
+// Create a Zustand store
+const useFeatureFlagsStore = create<FeatureFlagsStore>((set) => ({
+	enabledFeatures: featureRegistry.filter(
+		(feature: FeatureMetadata) =>
+			feature.enabled || feature?.enabled === undefined || feature?.enabled
+	) as FeatureMetadata[],
+}));
 
-interface FeatureFlagsContextProviderProps {
-	children: ReactNode;
-}
+export const useFeatureFlags = () => {
+	const { enabledFeatures } = useFeatureFlagsStore.getState();
 
-export const FeatureFlagsProvider: React.FC<FeatureFlagsContextProviderProps> =
-	({ children }) => {
-		const enabledFeatures = featuresRegistry.filter(
-			(feature) => feature.enabled,
-		) as FeatureMetadata[];
-
-		return (
-			<FeatureFlagsContext.Provider value={{ enabledFeatures }}>
-				{children}
-			</FeatureFlagsContext.Provider>
-		);
-	};
-
-export const useFeatureFlags = (): FeatureFlagsContextValue => {
-	const context = useContext(FeatureFlagsContext);
-	if (!context) {
-		throw new Error(
-			"useFeatureFlags must be used within a FeatureFlagsContextProvider",
-		);
-	}
-	return context;
+	return { enabledFeatures };
 };
