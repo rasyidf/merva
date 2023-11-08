@@ -31,7 +31,8 @@ The following is a list of utilities and features included in the MERVA Codebase
 
 To get started with the MERVA Codebase, follow these steps:
 
-1. Clone the repository.
+1. Clone the repository, make sure to remove .git file, or try
+```npx degit https://github.com/rasyidf/merva.git```
 2. Install the required dependencies.
 3. Follow the instructions in the `README.md` file for setting up and configuring your environment.
 4. Begin developing your super-app using the provided utilities and features.
