@@ -7,7 +7,7 @@ import Landing from "@/features/Landing";
 
 const featuresRegistry = [
 	Landing,
-	FeatureA, // DashboardFeature
+	FeatureA, // ListFeature
 	FeatureB, // SettingsFeature,
 	AuthFeature,
 ] satisfies FeatureMetadata[];

@@ -1,9 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
-);
+import "@fontsource-variable/inter";
+import "@fontsource/poppins";
+
+import "@/styles/index.scss";
+import RootComponent from "./App";
+
+createRoot(document.getElementById("root") as HTMLElement)
+	.render(
+		<React.StrictMode>
+			<RootComponent />
+		</React.StrictMode>,
+	);
