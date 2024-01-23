@@ -16,11 +16,11 @@ export default defineConfig({
 	},
 	plugins: [react(), svgr(), nodePolyfills({
 		exclude: [
-			"fs", 
+			"fs",
 		],
-		
+
 		globals: {
-			Buffer: true, 
+			Buffer: true,
 			global: true,
 			process: true,
 		},
@@ -48,5 +48,11 @@ export default defineConfig({
 			}
 		}
 	},
-
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: `@import "./src/styles/_mantine";`,
+			},
+		},
+	},
 });

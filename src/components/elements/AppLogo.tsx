@@ -1,13 +1,10 @@
-import { Image, ImageProps } from '@mantine/core'
-import { ArchiveBox } from '@phosphor-icons/react'
-import React from 'react'
-
-type Props = {} & ImageProps
+import { Image, ImageProps } from '@mantine/core';
+type Props = {} & ImageProps;
 
 const AppLogo = (props: Props) => {
     return (
-        <Image w={32} h={32} {...props} src="/logo.svg" fit="contain" />
-    )
-}
+        <Image w={64} h={64} {...props} src="/logo-merva.svg" fit="contain" />
+    );
+};
 
-export default AppLogo
+export default AppLogo;

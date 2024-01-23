@@ -1,10 +1,11 @@
-import { ActionIcon, AppShell, Button, Drawer, Flex, Group, Menu, ScrollArea, rem } from "@mantine/core";
+import { ActionIcon, AppShell, Avatar, Button, Drawer, Flex, Group, Menu, ScrollArea, rem } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import { CaretUp, Gear, List, SignOut } from "@phosphor-icons/react";
 import { MainNavbar } from "../groups/MainNavbar";
+import { ThemeSwitcher } from "../elements/ThemeSwitcher";
 
 export const DashboardLayout = () => {
 
@@ -27,7 +28,7 @@ export const DashboardLayout = () => {
 			layout="alt"
 		>
 			<Drawer opened={mobileOpened} onClose={toggleMobile} withCloseButton={false} withinPortal p={0} title="">
-				<MainNavbar expanded={true} />
+				<MainNavbar expanded={true} toggle={toggleMobile} />
 			</Drawer>
 			<AppShell.Header>
 				<Flex align="center" h="100%" w="100%">
@@ -43,40 +44,43 @@ export const DashboardLayout = () => {
 								</ActionIcon>
 							)}
 						</Group>
-						<Menu shadow="md" width={200}>
-							<Menu.Target>
-								<Button variant="filled" radius="xl">
-									Hallo, Guest
-								</Button>
-							</Menu.Target>
+						<Group justify="right" m={0} p={0} px={8}>
+							<ThemeSwitcher />
+							<Menu shadow="md" width={200}>
+								<Menu.Target>
+									<Button variant="subtle" radius="xl" p={8} leftSection={<Avatar size="sm" color="blue" />}>
+										Hallo, Guest
+									</Button>
+								</Menu.Target>
 
-							<Menu.Dropdown>
-								<Menu.Item
-									component="button"
-									leftSection={<Gear style={{ width: rem(14), height: rem(14) }} />}
-									onClick={() => navigate("/app/profile")}
-								>
-									Pengaturan
-								</Menu.Item>
-								<Menu.Divider />
-								<Menu.Item
-									color="red"
-									leftSection={<SignOut style={{ width: rem(14), height: rem(14) }} />}
-									onClick={() => navigate("/app/logout")}
-								>
-									Keluar
-								</Menu.Item>
-							</Menu.Dropdown>
-						</Menu>
+								<Menu.Dropdown>
+									<Menu.Item
+										component="button"
+										leftSection={<Gear style={{ width: rem(14), height: rem(14) }} />}
+										onClick={() => navigate("/app/settings")}
+									>
+										Pengaturan
+									</Menu.Item>
+									<Menu.Divider />
+									<Menu.Item
+										color="red"
+										leftSection={<SignOut style={{ width: rem(14), height: rem(14) }} />}
+										onClick={() => navigate("/app/logout")}
+									>
+										Keluar
+									</Menu.Item>
+								</Menu.Dropdown>
+							</Menu>
+						</Group>
 					</Group>
 				</Flex>
 			</AppShell.Header>
 			{!isMobile && (
 				<AppShell.Navbar>
-					<MainNavbar expanded={desktopOpened} toggle={toggleDesktop} />
+					<MainNavbar expanded={desktopOpened} />
 				</AppShell.Navbar>
 			)}
-			<AppShell.Main bg="gray.1">
+			<AppShell.Main  >
 				<ScrollArea
 					h="calc(100vh - var(--app-shell-header-offset))"
 					p={16}

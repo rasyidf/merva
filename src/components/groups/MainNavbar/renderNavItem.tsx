@@ -8,8 +8,8 @@ export function renderNavItem({ navItem, activePath, navigate }: { navItem: Navi
 	return (
 		<NavLink
 			className={classes.link}
-			variant="subtle"
-
+			variant="light"
+			
 			key={`nav-${navItem.id}`}
 			onClick={() => {
 				navItem.children && navItem.children.length > 0 ? navigate(navItem.children[0]?.path ?? "#") : navigate(navItem.path ?? "#");

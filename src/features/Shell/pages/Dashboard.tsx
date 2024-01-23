@@ -1,5 +1,7 @@
+import { PageHeader } from "@/components/groups/Header";
 import {
 	Card,
+	Stack,
 	Text,
 	Title
 } from "@mantine/core";
@@ -8,16 +10,14 @@ type Props = {};
 
 export const Dashboard = (props: Props) => {
 	return (
-		<>
-			<Card withBorder>
-				<Title order={4}>Merva Codebase</Title>
-				<Text>Welcome to Merva Codebase!</Text>
+		<Stack gap={16}>
+			
+			<PageHeader title="Dashboard" subtitle="Welcome to Merva Codebase" />
+
+			<Card withBorder >
+
 			</Card>
-			<Card withBorder>
-				<Title order={4}>Merva Codebase</Title>
-				<Text>Welcome to Merva Codebase!</Text>
-			</Card>
-		</>
+		</Stack>
 	);
 };
 
