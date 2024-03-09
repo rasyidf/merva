@@ -31,7 +31,7 @@
     <!-- webmanifest -->
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="application-name" content="MERVA" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#3a7fc4" />
 
     <!-- preload strategy -->
     <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet" />
@@ -45,6 +45,9 @@
         width: 100%;
         overflow: hidden;
         font-family: "Poppins", sans-serif;
+      }
+      :root {
+        --theme-color: #3a7fc4; 
       }
     </style>
   </head>
@@ -85,7 +88,7 @@
         }
 
         .spinner .path {
-          stroke: #fcc419;
+          stroke: var(--theme-color);
           stroke-linecap: round;
         }
       </style>

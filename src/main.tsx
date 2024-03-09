@@ -5,11 +5,16 @@ import "@fontsource-variable/inter";
 import "@fontsource/poppins";
 
 import "@/styles/index.scss";
-import RootComponent from "./App";
+import RootComponent from "./contexts/RootComponent";
 
-createRoot(document.getElementById("root") as HTMLElement)
-	.render(
-		<React.StrictMode>
+
+const container = document.getElementById("root") as HTMLElement;
+const root = createRoot(container);
+
+root.render(
+	<React.StrictMode>
+		<React.Suspense fallback="loading">
 			<RootComponent />
-		</React.StrictMode>,
-	);
+		</React.Suspense>
+	</React.StrictMode>
+);

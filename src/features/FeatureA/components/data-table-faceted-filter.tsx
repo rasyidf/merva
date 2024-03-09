@@ -1,0 +1,153 @@
+import * as React from "react";
+import { Column } from "@tanstack/react-table";
+import { Badge, Button, CheckIcon, Checkbox, Divider, Flex, Group, Popover, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
+import { PlusCircle } from "@phosphor-icons/react";
+import { useDebouncedValue } from "@mantine/hooks";
+
+
+interface DataTableFacetedFilterProps<TData, TValue> {
+  column?: Column<TData, TValue>;
+  title?: string;
+  options: {
+    label: string;
+    value: string;
+    icon?: React.ComponentType<{ className?: string; }>;
+  }[];
+}
+
+export function DataTableFacetedFilter<TData, TValue>({
+  column,
+  title,
+  options,
+}: DataTableFacetedFilterProps<TData, TValue>) {
+  const facets = column?.getFacetedUniqueValues();
+  const selectedValues = new Set(column?.getFilterValue() as string[]);
+  const [filterValue, setFilterValue] = React.useState<string | undefined>(undefined);
+  const [filter] = useDebouncedValue(filterValue, 200);
+
+  const filteredOptions = options.filter((option) =>
+    option.label.toLowerCase().includes((filter ?? "").toLowerCase())
+  );
+
+
+  return (
+    <Popover position="bottom-start">
+      <Popover.Target>
+        <Button
+          color="dark"
+          style={{
+            border: "1px dashed"
+          }}
+          leftSection={
+            <PlusCircle width={16} height={16} />
+          }
+          rightSection={
+            selectedValues?.size > 0 && (
+              <>
+                <Divider orientation="vertical" mr={8} />
+                {/* <Badge
+                  variant="light"
+                  color="gray"
+                >
+                  {selectedValues.size}
+                </Badge> */}
+                <Flex  >
+                  {selectedValues.size > 2 ? (
+                    <Badge
+                      variant="light"
+                      color="gray"
+                      radius="sm"
+                    >
+                      {selectedValues.size} selected
+                    </Badge>
+                  ) : (
+                    options
+                      .filter((option) => selectedValues.has(option.value))
+                      .map((option) => (
+                        <Badge
+                          variant="light"
+                          color="gray"
+                          radius="sm"
+                          key={option.value}
+
+                        >
+                          {option.label}
+                        </Badge>
+                      ))
+                  )}
+                </Flex>
+              </>
+            )
+          }
+          variant="outline" size="sm" radius="md">
+          {title}
+
+        </Button>
+      </Popover.Target>
+      <Popover.Dropdown p={8} >
+        <Stack gap={8} justify="stretch">
+          <TextInput size="xs" placeholder={title} value={filterValue} onChange={(event) => setFilterValue(event.target.value)} />
+          {
+            facets?.size === 0 && (
+              <div className="text-muted-foreground text-center">
+                No item found
+              </div>
+            )
+          }
+          {filteredOptions.map((option) => {
+            return (
+              <Checkbox
+                w="100%"
+                size="sm"
+                key={option.value}
+                defaultChecked={selectedValues.has(option.value)}
+                onClick={() => {
+                  if (selectedValues.has(option.value)) {
+                    selectedValues.delete(option.value);
+                  } else {
+                    selectedValues.add(option.value);
+                  }
+                  const filterValues = Array.from(selectedValues);
+                  column?.setFilterValue(
+                    filterValues.length ? filterValues : undefined
+                  );
+                }}
+
+                label={
+                  <Group justify="space-between" align="center">
+                    {option.icon && (
+                      <ThemeIcon size="xs" variant="transparent">
+                        <option.icon />
+                      </ThemeIcon>
+                    )}
+                    <Text size="sm" miw={80}>{option.label}</Text>
+                    {facets?.get(option.value) && (
+                      <Text size="sm">
+                        {facets.get(option.value)}
+                      </Text>
+                    )}
+                  </Group>
+                }
+
+              />
+            );
+          })}
+
+          {selectedValues.size > 0 && (
+            <>
+              <Divider />
+              <Button
+                py={0}
+                size="xs"
+                variant="transparent"
+                onClick={() => column?.setFilterValue(undefined)}
+              >
+                Clear filters
+              </Button>
+            </>
+          )}
+        </Stack>
+      </Popover.Dropdown>
+    </Popover>
+  );
+}

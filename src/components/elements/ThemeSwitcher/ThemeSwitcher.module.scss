@@ -4,21 +4,21 @@
 }
 
 .dark {
-  @mixin dark {
+  [data-mantine-color-scheme='dark'] & {
     display: none;
   }
 
-  @mixin light {
+  [data-mantine-color-scheme='light'] & {
     display: block;
   }
 }
 
 .light {
-  @mixin light {
+  [data-mantine-color-scheme='light'] & {
     display: none;
   }
 
-  @mixin dark {
+  [data-mantine-color-scheme='dark'] & {
     display: block;
   }
 }

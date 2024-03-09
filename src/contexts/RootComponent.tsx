@@ -1,4 +1,4 @@
-import { LanguageProvider, QueryProvider, RouteProvider, ThemeProvider } from "./contexts";
+import { LanguageProvider, QueryProvider, RouteProvider, ThemeProvider } from ".";
 
 function App() {
 	return (

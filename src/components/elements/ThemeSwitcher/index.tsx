@@ -11,8 +11,8 @@ export function ThemeSwitcher() {
         <Group justify="center">
             <ActionIcon
                 onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
-                variant="default"
-                size="xl"
+                variant="transparent"
+                size="md"
                 aria-label="Toggle color scheme"
             >
                 <Sun className={cx(classes.icon, classes.light)} weight="duotone" />

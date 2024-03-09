@@ -13,10 +13,8 @@ export const Dashboard = (props: Props) => {
 		<Stack gap={16}>
 			
 			<PageHeader title="Dashboard" subtitle="Welcome to Merva Codebase" />
-
-			<Card withBorder >
-
-			</Card>
+			
+			
 		</Stack>
 	);
 };

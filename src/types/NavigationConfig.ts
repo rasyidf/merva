@@ -5,6 +5,7 @@ export type NavigationConfig = {
   title?: string | ReactNode;
   path?: string;
   icon?: string | ReactNode;
+  group?: string;
   disabled?: boolean;
   visible?: boolean;
   children?: NavigationConfig[];

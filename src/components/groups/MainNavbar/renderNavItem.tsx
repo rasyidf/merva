@@ -9,13 +9,13 @@ export function renderNavItem({ navItem, activePath, navigate }: { navItem: Navi
 		<NavLink
 			className={classes.link}
 			variant="light"
-			
+
 			key={`nav-${navItem.id}`}
 			onClick={() => {
 				navItem.children && navItem.children.length > 0 ? navigate(navItem.children[0]?.path ?? "#") : navigate(navItem.path ?? "#");
 			}}
 			label={`${navItem.title}`}
-			active={navItem.path === activePath ?? false}
+			active={activePath.startsWith(navItem?.path ?? "#")}
 			leftSection={navItem.icon}
 		>
 			{navItem.children && navItem.children.length > 0
