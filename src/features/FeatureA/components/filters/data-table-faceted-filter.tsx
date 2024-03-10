@@ -1,9 +1,20 @@
-import { Badge, Button, Checkbox, Divider, Flex, Group, Popover, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
+import {
+  Badge,
+  Button,
+  Checkbox,
+  Divider,
+  Flex,
+  Group,
+  Popover,
+  Stack,
+  Text,
+  TextInput,
+  ThemeIcon,
+} from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { PlusCircle } from "@phosphor-icons/react";
 import { Column } from "@tanstack/react-table";
 import * as React from "react";
-
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
@@ -11,7 +22,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   options: {
     label: string;
     value: string;
-    icon?: React.ComponentType<{ className?: string; }>;
+    icon?: React.ComponentType<{ className?: string }>;
   }[];
 }
 
@@ -24,10 +35,7 @@ export function DataTableFacetedFilter<TData, TValue>({
   const [filterValue, setFilterValue] = React.useState<string | undefined>(undefined);
   const [filter] = useDebouncedValue(filterValue, 200);
 
-  const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes((filter ?? "").toLowerCase())
-  );
-
+  const filteredOptions = options.filter((option) => option.label.toLowerCase().includes((filter ?? "").toLowerCase()));
 
   return (
     <Popover position="bottom-start">
@@ -35,11 +43,9 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Button
           color="var(--mantine-color-text)"
           style={{
-            border: "1px dashed"
+            border: "1px dashed",
           }}
-          leftSection={
-            <PlusCircle width={16} height={16} />
-          }
+          leftSection={<PlusCircle width={16} height={16} />}
           rightSection={
             selectedValues?.size > 0 && (
               <>
@@ -50,26 +56,16 @@ export function DataTableFacetedFilter<TData, TValue>({
                 >
                   {selectedValues.size}
                 </Badge> */}
-                <Flex  >
+                <Flex>
                   {selectedValues.size > 2 ? (
-                    <Badge
-                      variant="light"
-                      color="gray"
-                      radius="sm"
-                    >
+                    <Badge variant="light" color="gray" radius="sm">
                       {selectedValues.size} selected
                     </Badge>
                   ) : (
                     options
                       .filter((option) => selectedValues.has(option.value))
                       .map((option) => (
-                        <Badge
-                          variant="light"
-                          color="gray"
-                          radius="sm"
-                          key={option.value}
-
-                        >
+                        <Badge variant="light" color="gray" radius="sm" key={option.value}>
                           {option.label}
                         </Badge>
                       ))
@@ -78,14 +74,21 @@ export function DataTableFacetedFilter<TData, TValue>({
               </>
             )
           }
-          variant="outline" size="sm" radius="md">
+          variant="outline"
+          size="sm"
+          radius="md"
+        >
           {title}
-
         </Button>
       </Popover.Target>
-      <Popover.Dropdown p={8} >
+      <Popover.Dropdown p={8}>
         <Stack gap={8} justify="stretch">
-          <TextInput size="xs" placeholder={title} value={filterValue} onChange={(event) => setFilterValue(event.target.value)} />
+          <TextInput
+            size="xs"
+            placeholder={title}
+            value={filterValue}
+            onChange={(event) => setFilterValue(event.target.value)}
+          />
           {/* {
             facets?.size === 0 && (
               <div className="text-muted-foreground text-center">
@@ -107,11 +110,8 @@ export function DataTableFacetedFilter<TData, TValue>({
                     selectedValues.add(option.value);
                   }
                   const filterValues = Array.from(selectedValues);
-                  column?.setFilterValue(
-                    filterValues.length ? filterValues : undefined
-                  );
+                  column?.setFilterValue(filterValues.length ? filterValues : undefined);
                 }}
-
                 label={
                   <Group justify="space-between" align="center">
                     {option.icon && (
@@ -119,7 +119,9 @@ export function DataTableFacetedFilter<TData, TValue>({
                         <option.icon />
                       </ThemeIcon>
                     )}
-                    <Text size="sm" miw={80}>{option.label}</Text>
+                    <Text size="sm" miw={80}>
+                      {option.label}
+                    </Text>
                     {/* {facets?.get(option.value) && (
                       <Text size="sm">
                         {facets.get(option.value)}
@@ -127,7 +129,6 @@ export function DataTableFacetedFilter<TData, TValue>({
                     )} */}
                   </Group>
                 }
-
               />
             );
           })}
@@ -135,12 +136,7 @@ export function DataTableFacetedFilter<TData, TValue>({
           {selectedValues.size > 0 && (
             <>
               <Divider />
-              <Button
-                py={0}
-                size="xs"
-                variant="transparent"
-                onClick={() => column?.setFilterValue(undefined)}
-              >
+              <Button py={0} size="xs" variant="transparent" onClick={() => column?.setFilterValue(undefined)}>
                 Clear filters
               </Button>
             </>

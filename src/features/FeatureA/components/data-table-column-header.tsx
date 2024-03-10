@@ -1,11 +1,8 @@
-
 import { Button, Menu, ThemeIcon } from "@mantine/core";
 import { ArrowDown, ArrowUp, ArrowsDownUp, EyeSlash } from "@phosphor-icons/react";
 import { Column } from "@tanstack/react-table";
 
-
-interface DataTableColumnHeaderProps<TData, TValue>
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
   title: string;
 }
@@ -22,7 +19,7 @@ export function DataTableColumnHeader<TData, TValue>({
   return (
     <div className={className}>
       <Menu>
-        <Menu.Target >
+        <Menu.Target>
           <Button
             variant="subtle"
             size="sm"
@@ -42,37 +39,39 @@ export function DataTableColumnHeader<TData, TValue>({
           </Button>
         </Menu.Target>
         <Menu.Dropdown w={150}>
-          <Menu.Item leftSection={
-            <ThemeIcon variant="transparent" size="sm"
-              color={
-                column.getIsSorted() === "asc" ? "blue" : "dark"
-              }>
-              <ArrowUp />
-            </ThemeIcon>
-          } onClick={() => {
-            return column.toggleSorting(column.getIsSorted() !== "asc" ? false : undefined);
-          }}>
+          <Menu.Item
+            leftSection={
+              <ThemeIcon variant="transparent" size="sm" color={column.getIsSorted() === "asc" ? "blue" : "dark"}>
+                <ArrowUp />
+              </ThemeIcon>
+            }
+            onClick={() => {
+              return column.toggleSorting(column.getIsSorted() !== "asc" ? false : undefined);
+            }}
+          >
             Asc
           </Menu.Item>
-          <Menu.Item leftSection={
-            <ThemeIcon variant="transparent" size="sm"
-              color={
-                column.getIsSorted() === "desc" ? "blue" : "dark"
-              }>
-              <ArrowDown />
-            </ThemeIcon>
-          } onClick={() => {
-            return column.toggleSorting(column.getIsSorted() !== "desc" ? true : undefined);
-          }}>
+          <Menu.Item
+            leftSection={
+              <ThemeIcon variant="transparent" size="sm" color={column.getIsSorted() === "desc" ? "blue" : "dark"}>
+                <ArrowDown />
+              </ThemeIcon>
+            }
+            onClick={() => {
+              return column.toggleSorting(column.getIsSorted() !== "desc" ? true : undefined);
+            }}
+          >
             Desc
           </Menu.Item>
           <Menu.Divider />
-          <Menu.Item leftSection={
-            <ThemeIcon variant="transparent" size="sm" color={"dark"}>
-              <EyeSlash />
-            </ThemeIcon>
-          } onClick={() => column.toggleVisibility(false)}>
-
+          <Menu.Item
+            leftSection={
+              <ThemeIcon variant="transparent" size="sm" color={"dark"}>
+                <EyeSlash />
+              </ThemeIcon>
+            }
+            onClick={() => column.toggleVisibility(false)}
+          >
             Hide
           </Menu.Item>
         </Menu.Dropdown>

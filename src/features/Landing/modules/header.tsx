@@ -14,7 +14,7 @@ import {
   Text,
   UnstyledButton,
   rem,
-  useMantineTheme
+  useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
@@ -115,5 +115,3 @@ export function Header() {
     </Box>
   );
 }
-
-

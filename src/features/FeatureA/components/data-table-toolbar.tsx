@@ -15,9 +15,7 @@ interface DataTableToolbarProps<TData> {
   table: Table<TData>;
 }
 
-export function DataTableToolbar<TData>({
-  table,
-}: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const [debouncedValue, setDebouncedValue] = useDebouncedState(table.getState().globalFilter, 500);
@@ -27,37 +25,27 @@ export function DataTableToolbar<TData>({
   }, [debouncedValue, table]);
 
   return (
-    <Flex align="center" justify="space-between" >
-      <Flex flex={1} align="center" gap={4} >
+    <Flex align="center" justify="space-between">
+      <Flex flex={1} align="center" gap={4}>
         <TextInput
-          leftSection={
-            <MagnifyingGlass width={16} height={16} />}
+          leftSection={<MagnifyingGlass width={16} height={16} />}
           placeholder="Search..."
           defaultValue={debouncedValue}
           onChange={(event) => setDebouncedValue(event.target.value)}
           w={170}
         />
         {table.getColumn("status") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("status")}
-            title="Status"
-            options={statuses}
-          />
+          <DataTableFacetedFilter column={table.getColumn("status")} title="Status" options={statuses} />
         )}
         {table.getColumn("priority") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
-            options={priorities}
-          />
+          <DataTableFacetedFilter column={table.getColumn("priority")} title="Priority" options={priorities} />
         )}
         {isFiltered && (
           <Button
             variant="transparent"
             color="dark"
             onClick={() => table.resetColumnFilters()}
-            rightSection={
-              <X width={16} height={16} />}
+            rightSection={<X width={16} height={16} />}
           >
             Reset
           </Button>

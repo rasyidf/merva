@@ -1,4 +1,3 @@
-
 import {
   ColumnDef,
   TableState,
@@ -10,7 +9,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
+  useReactTable,
 } from "@tanstack/react-table";
 
 import { Stack } from "@mantine/core";
@@ -21,26 +20,21 @@ import { DataTableCore } from "./data-table-core";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: {
-    data: TData[];
-    meta: {
-      pageIndex: number;
-      pageSize: number;
-      pageCount: number;
-    };
-  } | undefined;
+  data:
+    | {
+        data: TData[];
+        meta: {
+          pageIndex: number;
+          pageSize: number;
+          pageCount: number;
+        };
+      }
+    | undefined;
   state: TableState;
   setState: Dispatch<SetStateAction<TableState>>;
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-  state,
-  setState,
-}: DataTableProps<TData, TValue>) {
-
-
+export function DataTable<TData, TValue>({ columns, data, state, setState }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data: data?.data ?? [],
     columns,
@@ -56,7 +50,7 @@ export function DataTable<TData, TValue>({
     pageCount: data?.meta.pageCount ?? 1,
   });
 
-  table.setOptions(prev => {
+  table.setOptions((prev) => {
     return {
       ...prev,
       state,
@@ -70,10 +64,10 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <Stack gap={6} mt={8} >
+    <Stack gap={6} mt={8}>
       <DataTableToolbar table={table} />
       <DataTableCore table={table} />
       <DataTablePagination table={table} />
-    </Stack >
+    </Stack>
   );
 }

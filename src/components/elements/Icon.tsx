@@ -1,7 +1,5 @@
-import { Rectangle } from "@phosphor-icons/react"
+import { Rectangle } from "@phosphor-icons/react";
 
 export const SvgIcon = (props: any) => {
-    return (
-        <Rectangle {...props} />
-    )
-}
+  return <Rectangle {...props} />;
+};

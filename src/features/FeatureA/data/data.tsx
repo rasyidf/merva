@@ -1,5 +1,15 @@
-import { ArrowDown, ArrowRight, ArrowUp, CheckCircle, Circle, CircleWavyQuestion, MarkerCircle, Timer, Watch, XCircle } from "@phosphor-icons/react";
-
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUp,
+  CheckCircle,
+  Circle,
+  CircleWavyQuestion,
+  MarkerCircle,
+  Timer,
+  Watch,
+  XCircle,
+} from "@phosphor-icons/react";
 
 export const labels = [
   {

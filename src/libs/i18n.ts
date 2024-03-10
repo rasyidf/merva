@@ -7,15 +7,15 @@ import { z } from "zod";
 import { zodI18nMap } from "zod-i18n-map";
 
 i18n.use(initReact).init({
-	debug: isDev,
-	lng: "en",
-	interpolation: {
-		escapeValue: false,
-		skipOnVariables: false,
-	},
-	resources: locales,
-	supportedLngs: ["en", "id"],
-	defaultNS: "translation",
+  debug: isDev,
+  lng: "en",
+  interpolation: {
+    escapeValue: false,
+    skipOnVariables: false,
+  },
+  resources: locales,
+  supportedLngs: ["en", "id"],
+  defaultNS: "translation",
 } satisfies InitOptions);
 
 z.setErrorMap(zodI18nMap);

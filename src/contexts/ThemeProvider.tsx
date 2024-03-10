@@ -19,7 +19,7 @@ export const colorSchemeManager = localStorageColorSchemeManager({
   key: "merva-color-scheme",
 });
 
-export const ThemeProvider = (props: { children: React.ReactNode; }) => {
+export const ThemeProvider = (props: { children: React.ReactNode }) => {
   return (
     <>
       <MantineProvider

@@ -4,19 +4,19 @@ import { ZodLocalization } from "./ZodLocalization";
 import { LocalizationService } from "./localization";
 
 const thirdPartyLocalizations = {
-	dayjs: DayjsLocalization,
-	zod: ZodLocalization,
+  dayjs: DayjsLocalization,
+  zod: ZodLocalization,
 };
 
 export const I18nService = {
-	handleLanguageChange: async (language: string): Promise<void> => {
-		await LocalizationService.changeLanguage(language);
-		PreferenceService.setPreference("language", language);
+  handleLanguageChange: async (language: string): Promise<void> => {
+    await LocalizationService.changeLanguage(language);
+    PreferenceService.setPreference("language", language);
 
-		if (thirdPartyLocalizations) {
-			Object.values(thirdPartyLocalizations).forEach((localization) => {
-				localization.changeLanguage(language);
-			});
-		}
-	},
+    if (thirdPartyLocalizations) {
+      Object.values(thirdPartyLocalizations).forEach((localization) => {
+        localization.changeLanguage(language);
+      });
+    }
+  },
 };
