@@ -50,10 +50,7 @@ export function DataTableColumnHeader<TData, TValue>({
               <ArrowUp />
             </ThemeIcon>
           } onClick={() => {
-            if (column.getIsSorted() === "asc") {
-              return column.toggleSorting(undefined);
-            }
-            return column.toggleSorting(false);
+            return column.toggleSorting(column.getIsSorted() !== "asc" ? false : undefined);
           }}>
             Asc
           </Menu.Item>
@@ -65,10 +62,7 @@ export function DataTableColumnHeader<TData, TValue>({
               <ArrowDown />
             </ThemeIcon>
           } onClick={() => {
-            if (column.getIsSorted() === "desc") {
-              return column.toggleSorting(undefined);
-            }
-            return column.toggleSorting(true);
+            return column.toggleSorting(column.getIsSorted() !== "desc" ? true : undefined);
           }}>
             Desc
           </Menu.Item>
@@ -77,7 +71,6 @@ export function DataTableColumnHeader<TData, TValue>({
             <ThemeIcon variant="transparent" size="sm" color={"dark"}>
               <EyeSlash />
             </ThemeIcon>
-
           } onClick={() => column.toggleVisibility(false)}>
 
             Hide

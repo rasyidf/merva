@@ -4,9 +4,7 @@ import { Row } from "@tanstack/react-table";
 
 
 
-import { labels } from "../data/data";
-import { taskSchema } from "../data/schema";
-import { ActionIcon, Button, Menu, Text } from "@mantine/core";
+import { ActionIcon, Menu, Tooltip } from "@mantine/core";
 import { DotsThree } from "@phosphor-icons/react";
 
 interface DataTableRowActionsProps<TData> {
@@ -16,22 +14,19 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const task = taskSchema.parse(row.original);
-
   return (
-    <Menu>
+    <Menu position="bottom-end">
       <Menu.Target>
-        <ActionIcon
-          variant="transparent"
-        >
-          <DotsThree width={16} height={16} />
-          <Text hidden>Open menu</Text>
-        </ActionIcon>
+        <Tooltip label="Open Menu">
+          <ActionIcon
+            variant="transparent"
+          >
+            <DotsThree width={16} height={16} />
+          </ActionIcon>
+        </Tooltip>
       </Menu.Target>
-      <Menu.Dropdown>
+      <Menu.Dropdown w={120}>
         <Menu.Item>Edit</Menu.Item>
-        <Menu.Item>Make a copy</Menu.Item>
-        <Menu.Item>Favorite</Menu.Item>
         <Menu.Divider />
         <Menu.Item>
           Delete

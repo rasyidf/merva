@@ -13,7 +13,7 @@ export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
   return (
-    <Menu>
+    <Menu position="bottom-end" offset={7} shadow="md">
       <Menu.Target>
         <Button
           variant="subtle"
@@ -22,12 +22,11 @@ export function DataTableViewOptions<TData>({
           leftSection={
             <Sliders width={16} height={16} style={{ marginLeft: 8 }} />
           }
-
         >
           View
         </Button>
       </Menu.Target>
-      <Menu.Dropdown  >
+      <Menu.Dropdown miw={180} >
         <Menu.Label>Toggle columns</Menu.Label>
         <Menu.Divider />
         <Stack gap={8} mx={8} my={8}>
@@ -39,7 +38,7 @@ export function DataTableViewOptions<TData>({
             )
             .map((column) => {
               return (
-                <Checkbox 
+                <Checkbox
                   key={column.id}
                   checked={column.getIsVisible()}
                   onChange={(e) => column.toggleVisibility(!!e.currentTarget.checked)}

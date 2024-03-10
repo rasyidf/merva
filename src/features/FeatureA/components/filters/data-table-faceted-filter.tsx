@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Column } from "@tanstack/react-table";
-import { Badge, Button, CheckIcon, Checkbox, Divider, Flex, Group, Popover, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
-import { PlusCircle } from "@phosphor-icons/react";
+import { Badge, Button, Checkbox, Divider, Flex, Group, Popover, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
+import { PlusCircle } from "@phosphor-icons/react";
+import { Column } from "@tanstack/react-table";
+import * as React from "react";
 
 
 interface DataTableFacetedFilterProps<TData, TValue> {
@@ -20,7 +20,6 @@ export function DataTableFacetedFilter<TData, TValue>({
   title,
   options,
 }: DataTableFacetedFilterProps<TData, TValue>) {
-  const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set(column?.getFilterValue() as string[]);
   const [filterValue, setFilterValue] = React.useState<string | undefined>(undefined);
   const [filter] = useDebouncedValue(filterValue, 200);
@@ -34,7 +33,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover position="bottom-start">
       <Popover.Target>
         <Button
-          color="dark"
+          color="var(--mantine-color-text)"
           style={{
             border: "1px dashed"
           }}
@@ -87,19 +86,19 @@ export function DataTableFacetedFilter<TData, TValue>({
       <Popover.Dropdown p={8} >
         <Stack gap={8} justify="stretch">
           <TextInput size="xs" placeholder={title} value={filterValue} onChange={(event) => setFilterValue(event.target.value)} />
-          {
+          {/* {
             facets?.size === 0 && (
               <div className="text-muted-foreground text-center">
                 No item found
               </div>
             )
-          }
-          {filteredOptions.map((option) => {
+          } */}
+          {filteredOptions.map((option, index) => {
             return (
               <Checkbox
                 w="100%"
                 size="sm"
-                key={option.value}
+                key={option.value + index + selectedValues.size}
                 defaultChecked={selectedValues.has(option.value)}
                 onClick={() => {
                   if (selectedValues.has(option.value)) {
@@ -121,11 +120,11 @@ export function DataTableFacetedFilter<TData, TValue>({
                       </ThemeIcon>
                     )}
                     <Text size="sm" miw={80}>{option.label}</Text>
-                    {facets?.get(option.value) && (
+                    {/* {facets?.get(option.value) && (
                       <Text size="sm">
                         {facets.get(option.value)}
                       </Text>
-                    )}
+                    )} */}
                   </Group>
                 }
 

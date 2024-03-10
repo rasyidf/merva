@@ -1,118 +1,78 @@
-"use client";
 
-import * as React from "react";
 import {
   ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
+  TableState,
   getCoreRowModel,
+  getExpandedRowModel,
+  getFacetedMinMaxValues,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
+  useReactTable
 } from "@tanstack/react-table";
 
+import { Stack } from "@mantine/core";
+import { Dispatch, SetStateAction } from "react";
 import { DataTablePagination } from "../components/data-table-pagination";
 import { DataTableToolbar } from "../components/data-table-toolbar";
-import { Flex, Paper, Stack, Table, TableTbody, TableTd, TableTh, TableThead, TableTr, rem } from "@mantine/core";
+import { DataTableCore } from "./data-table-core";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[] | undefined;
+  data: {
+    data: TData[];
+    meta: {
+      pageIndex: number;
+      pageSize: number;
+      pageCount: number;
+    };
+  } | undefined;
+  state: TableState;
+  setState: Dispatch<SetStateAction<TableState>>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  state,
+  setState,
 }: DataTableProps<TData, TValue>) {
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+
 
   const table = useReactTable({
-    data: data ?? [],
+    data: data?.data ?? [],
     columns,
-    state: {
-      sorting,
-      columnVisibility,
-      rowSelection,
-      columnFilters,
-    },
-    enableRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
+    meta: data?.meta,
+    pageCount: data?.meta.pageCount ?? 1,
+  });
+
+  table.setOptions(prev => {
+    return {
+      ...prev,
+      state,
+      onStateChange: setState,
+      enableRowSelection: true,
+      manualFiltering: true,
+      manualPagination: true,
+      manualSorting: true,
+      enableGlobalFilter: false,
+    };
   });
 
   return (
     <Stack gap={6} mt={8} >
       <DataTableToolbar table={table} />
-      <Paper radius="sm" withBorder>
-        <Table>
-          <TableThead pos="sticky" top={0} bg="var(--mantine-color-body)">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableTr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableTh key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    </TableTh>
-                  );
-                })}
-              </TableTr>
-            ))}
-          </TableThead>
-          <TableTbody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableTr
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableTd key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableTd>
-                  ))}
-                </TableTr>
-              ))
-            ) : (
-              <TableTr>
-                <TableTd
-                  colSpan={columns.length}
-                  h={rem(64)}
-                  ta="center"
-                >
-                  No results.
-                </TableTd>
-              </TableTr>
-            )}
-          </TableTbody>
-        </Table>
-      </Paper>
+      <DataTableCore table={table} />
       <DataTablePagination table={table} />
     </Stack >
   );
