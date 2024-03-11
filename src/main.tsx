@@ -7,6 +7,7 @@ import "@fontsource/poppins";
 import "@/styles/index.scss";
 import RootComponent from "./contexts/RootComponent";
 
+
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 

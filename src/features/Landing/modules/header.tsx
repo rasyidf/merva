@@ -4,28 +4,22 @@ import {
   Burger,
   Button,
   Center,
-  Collapse,
   Divider,
   Drawer,
   Group,
-  HoverCard,
   ScrollArea,
-  SimpleGrid,
-  Text,
-  UnstyledButton,
   rem,
-  useMantineTheme,
+  useMantineTheme
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import AppLogo from "@/components/elements/AppLogo";
+import AppLogo from "@/components/elements/icons/AppLogo";
 import { useViewNavigate } from "@/utils/routers";
 import { CaretDown } from "@phosphor-icons/react";
 import classes from "./header.module.css";
 
 export function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const theme = useMantineTheme();
 
   const viewNavigate = useViewNavigate();

@@ -1,4 +1,4 @@
-import { SvgIcon } from "@/components/elements/Icon";
+import { SvgIcon } from "@/components/elements/icons/Icon";
 import { NotificationData, notifications } from "@mantine/notifications";
 import { merge } from "lodash";
 

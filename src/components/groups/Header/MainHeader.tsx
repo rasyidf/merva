@@ -1,6 +1,6 @@
 import { ActionIcon, Avatar, Button, Flex, Group, Menu, rem } from "@mantine/core";
 import { Gear, List, SignOut } from "@phosphor-icons/react";
-import { ThemeSwitcher } from "../../elements/ThemeSwitcher";
+import { ThemeSwitcher } from "../../elements/theme-switcher";
 
 export function MainHeader(props: {
   isMobile?: boolean;

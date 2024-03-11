@@ -10,4 +10,6 @@ export const BASE_URL_API = import.meta.env.MERVA_API_URL ?? "https://merva-api.
 
 export const BASIC_API_AUTH = import.meta.env.MERVA_API_BASIC_AUTH ?? "BASIC {token}";
 
+export const DATABASE_URL = import.meta.env.MERVA_DATABASE_URL ?? "./database.sqlite";
+
 export const isDev = import.meta.env.MODE === "development";

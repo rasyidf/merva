@@ -1,1 +1,1 @@
-export { default as featureRegistry } from "./featureRegistry";
+export { default as featureRegistry } from "./features";

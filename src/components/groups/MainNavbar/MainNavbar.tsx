@@ -3,7 +3,7 @@ import { AppShell, Box, NavLink, ScrollArea, Space } from "@mantine/core";
 import { Link, NavLink as nLink, useLocation, useNavigate } from "react-router-dom";
 import { Gauge } from "@phosphor-icons/react";
 import classes from "./Dashboardlayout.module.scss";
-import AppLogo from "../../elements/AppLogo";
+import AppLogo from "../../elements/icons/AppLogo";
 import { getNavigationItems } from "./getNavigationItems";
 import { renderNavItem } from "./renderNavItem";
 

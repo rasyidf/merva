@@ -42,6 +42,7 @@ export const DashboardLayout = () => {
           <ScrollArea
             h="calc(100vh - var(--app-shell-header-offset))"
             p={16}
+            scrollbars="y"
             type="hover"
             offsetScrollbars
             viewportRef={viewport}

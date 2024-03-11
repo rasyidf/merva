@@ -8,9 +8,9 @@ import Landing from "@/features/Landing";
 
 const featuresRegistry = [
   Landing,
-  FeatureA, // ListFeature
-  FeatureB, // TableFeature,
-  Settings, // SettingsFeature,
+  FeatureA, // TableFeature
+  FeatureB, // ListFeature
+  Settings, // SettingsFeature
   AuthFeature,
 ] satisfies FeatureMetadata[];
 

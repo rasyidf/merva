@@ -18,12 +18,12 @@ export function DataTableColumnHeader<TData, TValue>({
 
   return (
     <div className={className}>
-      <Menu>
+      <Menu position="bottom-start">
         <Menu.Target>
           <Button
             variant="subtle"
             size="sm"
-            radius="md"
+            radius="sm"
             color="dark"
             rightSection={
               column.getIsSorted() === "desc" ? (

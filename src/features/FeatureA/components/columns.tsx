@@ -6,11 +6,13 @@ import { labels, priorities, statuses } from "../data/data";
 import { Task } from "../data/schema";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
-import { Badge, Checkbox, Flex, ThemeIcon } from "@mantine/core";
+import { Badge, Checkbox, Flex, Group, Text, ThemeIcon } from "@mantine/core";
 
 export const columns: ColumnDef<Task>[] = [
   {
     id: "select",
+    minSize: 24,
+    size: 24,
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -32,27 +34,31 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "id",
+    minSize: 80,
+    size: 80,
     header: ({ column }) => <DataTableColumnHeader column={column} title="Task" />,
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    cell: ({ row }) => <Text>{row.getValue("id") as String}</Text>,
     enableSorting: false,
     enableHiding: false,
   },
   {
     accessorKey: "title",
+    size: 0.7,
     header: ({ column }) => <DataTableColumnHeader column={column} title="Title" />,
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label);
-
       return (
-        <Flex align="center" gap={4}>
+        <Group align="center" gap={4} w="100%" style={{ overflow: "hidden" }} wrap="nowrap">
           {label && <Badge variant="default">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">{row.getValue("title")}</span>
-        </Flex>
+          <Text maw="100%" truncate fz="md">{row.getValue("title") as String}</Text>
+        </Group>
       );
     },
+
   },
   {
     accessorKey: "status",
+    size: 64,
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => {
       const status = statuses.find((status) => status.value === row.getValue("status"));
@@ -72,12 +78,10 @@ export const columns: ColumnDef<Task>[] = [
         </Flex>
       );
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
   },
   {
     accessorKey: "priority",
+    size: 48,
     header: ({ column }) => <DataTableColumnHeader column={column} title="Priority" />,
     cell: ({ row }) => {
       const priority = priorities.find((priority) => priority.value === row.getValue("priority"));
@@ -97,12 +101,10 @@ export const columns: ColumnDef<Task>[] = [
         </Flex>
       );
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
   },
   {
     id: "actions",
+    size: 30,
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

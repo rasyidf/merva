@@ -1,4 +1,4 @@
-import AppLogo from "@/components/elements/AppLogo";
+import AppLogo from "@/components/elements/icons/AppLogo";
 import {
   BackgroundImage,
   Box,

@@ -21,15 +21,15 @@ import { DataTableCore } from "./data-table-core";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data:
-    | {
-        data: TData[];
-        meta: {
-          pageIndex: number;
-          pageSize: number;
-          pageCount: number;
-        };
-      }
-    | undefined;
+  | {
+    data: TData[];
+    meta: {
+      pageIndex: number;
+      pageSize: number;
+      pageCount: number;
+    };
+  }
+  | undefined;
   state: TableState;
   setState: Dispatch<SetStateAction<TableState>>;
 }
@@ -54,8 +54,14 @@ export function DataTable<TData, TValue>({ columns, data, state, setState }: Dat
     return {
       ...prev,
       state,
+      defaultColumn: {
+        minSize: 0,
+        maxSize: 800,
+      },
       onStateChange: setState,
       enableRowSelection: true,
+      columnResizeMode: 'onChange',
+      enableColumnResizing: true,
       manualFiltering: true,
       manualPagination: true,
       manualSorting: true,
