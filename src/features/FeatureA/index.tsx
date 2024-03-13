@@ -1,6 +1,6 @@
 import { FeatureMetadata } from "@/types/FeatureMetadata";
 import { NavigationConfig } from "@/types/NavigationConfig";
-import { BookOpenText } from "@phosphor-icons/react";
+import { BookOpen, BookOpenText } from "@phosphor-icons/react";
 import { RouteObject } from "react-router-dom";
 
 const baseUri = "/app/product";
@@ -48,8 +48,8 @@ const FeatureAMetadata = {
     {
       id: "entity-a",
       path: `${baseUri}/entity-a/`,
-      title: "Entity A",
-      icon: "📗",
+      title: "Table Feature",
+      icon: <BookOpen weight="duotone" />,
     },
   ] as NavigationConfig[],
 } satisfies FeatureMetadata;

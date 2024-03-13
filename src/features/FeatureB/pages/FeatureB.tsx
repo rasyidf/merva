@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/groups/Header";
 export const FeatureB = () => {
   return (
     <div>
-      <PageHeader title="Feature B" subtitle="This is Feature B" />
+      <PageHeader title="List View" subtitle="This is the list view for Entity B." />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Button, Menu, ThemeIcon } from "@mantine/core";
+import { ActionIcon, Button, Menu, ThemeIcon } from "@mantine/core";
 import { ArrowDown, ArrowUp, ArrowsDownUp, EyeSlash } from "@phosphor-icons/react";
 import { Column } from "@tanstack/react-table";
 
@@ -18,7 +18,40 @@ export function DataTableColumnHeader<TData, TValue>({
 
   return (
     <div className={className}>
-      <Menu position="bottom-start">
+      <Button
+        variant="transparent"
+        size="sm"
+        radius="sm"
+        color="dark"
+        styles={{ inner: { justifyContent: "space-between", width: "100%" } }}
+        rightSection={
+          <ActionIcon variant="subtle" size="sm" radius="sm" color="dark"
+            onClick={() => {
+              if (column.getIsSorted() === "desc") {
+                return column.toggleSorting(undefined);
+              }
+
+              if (column.getIsSorted() === "asc") {
+                return column.toggleSorting(true);
+              }
+
+              return column.toggleSorting(false);
+            }}
+          >
+            {column.getIsSorted() === "desc" ? (
+              <ArrowDown width={16} height={16} />
+            ) : column.getIsSorted() === "asc" ? (
+              <ArrowUp width={16} height={16} />
+            ) : (
+              <ArrowsDownUp width={16} height={16} />
+            )}
+          </ActionIcon>
+
+        }
+      >
+        {title}
+      </Button>
+      {/* <Menu position="bottom-start">
         <Menu.Target>
           <Button
             variant="subtle"
@@ -75,7 +108,7 @@ export function DataTableColumnHeader<TData, TValue>({
             Hide
           </Menu.Item>
         </Menu.Dropdown>
-      </Menu>
+      </Menu> */}
     </div>
   );
 }

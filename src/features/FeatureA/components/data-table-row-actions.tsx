@@ -3,7 +3,7 @@
 import { Row } from "@tanstack/react-table";
 
 import { ActionIcon, Menu, Tooltip } from "@mantine/core";
-import { DotsThree } from "@phosphor-icons/react";
+import { DotsThree, Pencil, PencilSimple, Trash, TrashSimple } from "@phosphor-icons/react";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -11,18 +11,18 @@ interface DataTableRowActionsProps<TData> {
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
   return (
-    <Menu position="bottom-end">
+    <Menu position="bottom-end" shadow="md">
       <Menu.Target>
-        <Tooltip label="Open Menu">
+        <Tooltip label="Actions">
           <ActionIcon variant="transparent">
-            <DotsThree width={16} height={16} />
+            <DotsThree width={24} height={24} />
           </ActionIcon>
         </Tooltip>
       </Menu.Target>
-      <Menu.Dropdown w={120}>
-        <Menu.Item>Edit</Menu.Item>
+      <Menu.Dropdown w={200}>
+        <Menu.Item leftSection={<PencilSimple />}>Edit</Menu.Item>
         <Menu.Divider />
-        <Menu.Item>Delete</Menu.Item>
+        <Menu.Item leftSection={<TrashSimple />}>Delete</Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

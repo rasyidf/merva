@@ -9,20 +9,20 @@ export function getNavigationItems(enabledFeatures: FeatureMetadata[]) {
       // Handling feature with explicit navigation property
       if (feature.navigation) {
         return feature.navigation.map((navItem) => ({ ...navItem, group: feature.group }));
-      } else {
-        // Handling feature without explicit navigation property
-        return [
-          {
-            id: feature.id,
-            title: feature.name,
-            path: feature.routes?.[0]?.path ?? "#",
-            icon: <Rectangle />,
-            group: feature.group,
-            disabled: !feature.enabled,
-            visible: feature.visible,
-          },
-        ];
       }
+
+      // Handling feature without explicit navigation property
+      return [
+        {
+          id: feature.id,
+          title: feature.name,
+          path: feature.routes?.[0]?.path ?? "#",
+          icon: <Rectangle />,
+          group: feature.group,
+          disabled: !feature.enabled,
+          visible: feature.visible,
+        },
+      ];
     });
 
   // Step 2: Grouping by group property

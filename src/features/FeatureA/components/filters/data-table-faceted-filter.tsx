@@ -22,7 +22,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   options: {
     label: string;
     value: string;
-    icon?: React.ComponentType<{ className?: string }>;
+    icon?: React.ComponentType<{ className?: string; }>;
   }[];
 }
 
@@ -50,13 +50,7 @@ export function DataTableFacetedFilter<TData, TValue>({
             selectedValues?.size > 0 && (
               <>
                 <Divider orientation="vertical" mr={8} />
-                {/* <Badge
-                  variant="light"
-                  color="gray"
-                >
-                  {selectedValues.size}
-                </Badge> */}
-                <Flex>
+                <Flex columnGap={4}>
                   {selectedValues.size > 2 ? (
                     <Badge variant="light" color="gray" radius="sm">
                       {selectedValues.size} selected
@@ -89,13 +83,6 @@ export function DataTableFacetedFilter<TData, TValue>({
             value={filterValue}
             onChange={(event) => setFilterValue(event.target.value)}
           />
-          {/* {
-            facets?.size === 0 && (
-              <div className="text-muted-foreground text-center">
-                No item found
-              </div>
-            )
-          } */}
           {filteredOptions.map((option, index) => {
             return (
               <Checkbox

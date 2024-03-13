@@ -2,11 +2,12 @@ import { FeatureMetadata } from "@/types/FeatureMetadata";
 import { NavigationConfig } from "@/types/NavigationConfig";
 import { VersionConfig } from "@/types/VersionConfig";
 import { RouteObject } from "react-router-dom";
+import { ListPlus } from "@phosphor-icons/react";
 
 const baseUrl = "/app/products";
 const FeatureBMetadata = {
   id: "entity-b",
-  name: "Entity B",
+  name: "List Feature",
   group: "Products",
   enabled: true,
   routes: [
@@ -21,9 +22,9 @@ const FeatureBMetadata = {
   navigation: [
     {
       id: "entity-b",
-      title: "Entity B",
+      title: "List Feature",
       path: `${baseUrl}/entity-b`,
-      icon: "🎁",
+      icon: <ListPlus weight="duotone" />
     },
   ] satisfies NavigationConfig[],
   activeVersion: "1.1.0", // Set the active version for A/B testing or staging

@@ -81,7 +81,7 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "priority",
-    size: 48,
+    size: 64,
     header: ({ column }) => <DataTableColumnHeader column={column} title="Priority" />,
     cell: ({ row }) => {
       const priority = priorities.find((priority) => priority.value === row.getValue("priority"));

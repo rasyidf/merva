@@ -14,7 +14,7 @@ export function renderNavItem({
       key={`nav-${navItem.id}`}
       onClick={() => {
         navItem.children && navItem.children.length > 0
-          ? navigate(navItem.children[0]?.path ?? "#")
+          ? null // navItem.children[0]?.path ?? 
           : navigate(navItem.path ?? "#");
       }}
       label={`${navItem.title}`}

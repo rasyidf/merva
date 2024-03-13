@@ -41,7 +41,7 @@ export const DashboardLayout = () => {
         <Paper radius={0}>
           <ScrollArea
             h="calc(100vh - var(--app-shell-header-offset))"
-            p={16}
+            px={16}
             scrollbars="y"
             type="hover"
             offsetScrollbars

@@ -1,5 +1,5 @@
 import { useFeatureFlags } from "@/contexts/FeatureProvider";
-import { AppShell, Box, NavLink, ScrollArea, Space } from "@mantine/core";
+import { AppShell, Box, Group, NavLink, ScrollArea, Space, Title } from "@mantine/core";
 import { Link, NavLink as nLink, useLocation, useNavigate } from "react-router-dom";
 import { Gauge } from "@phosphor-icons/react";
 import classes from "./Dashboardlayout.module.scss";
@@ -27,11 +27,14 @@ export function MainNavbar({ toggle }: { expanded: boolean; toggle?: () => void 
   return (
     <>
       <AppShell.Section>
-        <Box h={64} p={6} pl={24}>
+        <Group h={64} p={6} pl={24}>
           <Link to="/app/dashboard">
-            <AppLogo fit="contain" w={83} />
+            <AppLogo fit="contain" w={72} />
           </Link>
-        </Box>
+
+          <Title order={4} tt="uppercase">MERVA</Title>
+          
+        </Group>
       </AppShell.Section>
       <AppShell.Section grow my="md" mx="sm" component={ScrollArea}>
         <NavLink
