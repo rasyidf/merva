@@ -1,4 +1,4 @@
-import { ActionIcon, AppShell, Drawer, Paper, ScrollArea } from "@mantine/core";
+import { ActionIcon, AppShell, Drawer, Flex, Paper, ScrollArea } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useCallback, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -6,6 +6,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { CaretUp } from "@phosphor-icons/react";
 import { MainHeader } from "../groups/Header/MainHeader";
 import { MainNavbar } from "../groups/MainNavbar";
+
+import classes from "./DashboardLayout.module.scss";
+
 
 export const DashboardLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -18,7 +21,7 @@ export const DashboardLayout = () => {
   return (
     <AppShell
       padding={{ base: 0 }}
-      header={{ height: 60 }}
+      header={{ height: 56 }}
       navbar={{
         width: 300,
         breakpoint: "sm",
@@ -27,21 +30,23 @@ export const DashboardLayout = () => {
       layout="alt"
     >
       <Drawer opened={mobileOpened} onClose={toggleMobile} withCloseButton={false} withinPortal p={0} title="">
-        <MainNavbar expanded={true} toggle={toggleMobile} />
+        <Flex h="calc(100dvh - 32px)" direction="column" p={6} justify="space-between" align="stretch">
+          <MainNavbar expanded={true} toggle={toggleMobile} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
+        </Flex>
       </Drawer>
-      <AppShell.Header style={{ border: "none" }}>
-        <MainHeader isMobile={isMobile} navigate={navigate} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
+      <AppShell.Header >
+        <MainHeader navigate={navigate} collapsed={!desktopOpened} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
       </AppShell.Header>
       {!isMobile && (
-        <AppShell.Navbar>
-          <MainNavbar expanded={desktopOpened} />
+        <AppShell.Navbar className={classes.navbar}>
+          <MainNavbar expanded={desktopOpened} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
         </AppShell.Navbar>
       )}
       <AppShell.Main>
         <Paper radius={0}>
           <ScrollArea
             h="calc(100vh - var(--app-shell-header-offset))"
-            px={16}
+            p={16}
             scrollbars="y"
             type="hover"
             offsetScrollbars

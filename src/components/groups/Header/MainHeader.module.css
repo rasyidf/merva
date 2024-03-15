@@ -1,0 +1,11 @@
+.searchCode {
+  font-weight: 700;
+  font-size: rem(10px);
+  background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-dark-7)
+  );
+  border-radius: rem(16px);
+  border: rem(1px) solid
+    light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-7));
+}

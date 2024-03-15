@@ -14,7 +14,6 @@ i18n.use(initReact).init({
     skipOnVariables: false,
   },
   resources: locales,
-  supportedLngs: ["en", "id"],
   defaultNS: "translation",
 } satisfies InitOptions);
 

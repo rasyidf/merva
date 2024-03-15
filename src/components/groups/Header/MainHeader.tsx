@@ -1,6 +1,12 @@
-import { ActionIcon, Avatar, Button, ComboboxSearch, Flex, Group, Menu, TextInput, rem } from "@mantine/core";
-import { CaretLeft, Gear, List, SignOut } from "@phosphor-icons/react";
+import { ActionIcon, Avatar, Button, Code, ComboboxSearch, Flex, Group, Kbd, Menu, TextInput, rem } from "@mantine/core";
+import { CaretLeft, CaretRight, Gear, List, MagnifyingGlass, SignOut } from "@phosphor-icons/react";
 import { ThemeSwitcher } from "../../elements/theme-switcher";
+import { Spotlight, spotlight } from "@mantine/spotlight";
+import { useState } from "react";
+
+import classes from './MainHeader.module.css';
+
+const data = ['Dashboard', 'Settings', 'Logout', 'Tasks', 'Users'];
 
 export function MainHeader(props: {
   isMobile?: boolean;
@@ -9,30 +15,57 @@ export function MainHeader(props: {
   toggleDesktop: () => void;
   collapsed?: boolean;
 }) {
+
+  const [query, setQuery] = useState('');
+
+  const items = data
+    .filter((item) => item.toLowerCase().includes(query.toLowerCase().trim()))
+    .map((item) => <Spotlight.Action key={item} label={item} />);
+
   return (
     <Flex align="center" h="100%" w="100%">
-      <Group justify="space-between" p={0} w="100%" px={8}>
+      <Group justify="space-between" p={0} w="100%" px={8} wrap="nowrap">
+
         <ActionIcon variant="transparent" onClick={props.isMobile ? props.toggleMobile : props.toggleDesktop}>
-          {props.isMobile ? (
+          {props.isMobile && (
             <List
               style={{
                 width: rem(16),
                 height: rem(16),
               }}
             />
-          ) : (
-            <CaretLeft />
           )}
+          {
+            props.collapsed && (
+              <CaretRight />
+            )
+          }
         </ActionIcon>
 
-        <TextInput radius="lg" miw="40%" />
+        <TextInput
+          placeholder="Cari"
+          size="xs"
+          radius="lg"
+          leftSection={<MagnifyingGlass style={{ width: rem(12), height: rem(12) }} weight="bold" />}
+          rightSectionWidth={70}
+          rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
+          styles={{ section: { pointerEvents: 'none' } }}
+          my="sm"
+          onClick={spotlight.open}
+        />
 
-        <Group justify="right" m={0} p={0} px={8}>
+        <Spotlight.Root query={query} onQueryChange={setQuery}>
+          <Spotlight.Search placeholder="Cari..." leftSection={<MagnifyingGlass />} />
+          <Spotlight.ActionsList>
+            {items.length > 0 ? items : <Spotlight.Empty>Tidak Ditemukan Apapun...</Spotlight.Empty>}
+          </Spotlight.ActionsList>
+        </Spotlight.Root>
+        <Group justify="right" m={0} p={0} px={8} gap={8} wrap="nowrap">
           <ThemeSwitcher />
           <Menu shadow="md" width={200}>
             <Menu.Target>
               <Button variant="subtle" radius="xl" p={8} leftSection={<Avatar size="sm" color="blue" />}>
-                Hallo, Guest
+                Hallo, Admin
               </Button>
             </Menu.Target>
 
