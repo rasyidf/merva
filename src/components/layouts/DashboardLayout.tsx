@@ -23,7 +23,7 @@ export const DashboardLayout = () => {
       padding={{ base: 0 }}
       header={{ height: 56 }}
       navbar={{
-        width: 300,
+        width: { base: 0, md: 280 },
         breakpoint: "sm",
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
