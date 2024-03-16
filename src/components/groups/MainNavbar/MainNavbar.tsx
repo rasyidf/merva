@@ -64,7 +64,11 @@ export function MainNavbar({ toggle, isMobile, toggleMobile, toggleDesktop }: { 
       <AppShell.Section>
         <Box p={6}>
 
-          <Title order={5} tt="uppercase">MERVA</Title>
+          <Title order={5} tt="uppercase" opacity={0.5} style={{
+            userSelect: 'none',
+            pointerEvents: 'none',
+          }}>MERVA v 0.1.0
+          </Title>
 
         </Box>
       </AppShell.Section>

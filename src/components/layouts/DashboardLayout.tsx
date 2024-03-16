@@ -34,7 +34,7 @@ export const DashboardLayout = () => {
           <MainNavbar expanded={true} toggle={toggleMobile} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
         </Flex>
       </Drawer>
-      <AppShell.Header >
+      <AppShell.Header className={classes.header}>
         <MainHeader navigate={navigate} collapsed={!desktopOpened} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
       </AppShell.Header>
       {!isMobile && (

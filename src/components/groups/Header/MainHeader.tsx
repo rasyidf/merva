@@ -1,4 +1,4 @@
-import { ActionIcon, Avatar, Button, Code, ComboboxSearch, Flex, Group, Kbd, Menu, TextInput, rem } from "@mantine/core";
+import { ActionIcon, Avatar, Button, Code, ComboboxSearch, Flex, Group, Kbd, Menu, Stack, Text, TextInput, UnstyledButton, rem } from "@mantine/core";
 import { CaretLeft, CaretRight, Gear, List, MagnifyingGlass, SignOut } from "@phosphor-icons/react";
 import { ThemeSwitcher } from "../../elements/theme-switcher";
 import { Spotlight, spotlight } from "@mantine/spotlight";
@@ -25,22 +25,34 @@ export function MainHeader(props: {
   return (
     <Flex align="center" h="100%" w="100%">
       <Group justify="space-between" p={0} w="100%" px={8} wrap="nowrap">
+        <Group align="center" gap={8} m={0} p={0} wrap="nowrap">
+          {props.isMobile || props.collapsed ? (
 
-        <ActionIcon variant="transparent" onClick={props.isMobile ? props.toggleMobile : props.toggleDesktop}>
-          {props.isMobile && (
-            <List
-              style={{
-                width: rem(16),
-                height: rem(16),
-              }}
-            />
-          )}
-          {
-            props.collapsed && (
-              <CaretRight />
-            )
-          }
-        </ActionIcon>
+            <ActionIcon variant="transparent" onClick={props.isMobile ? props.toggleMobile : props.toggleDesktop}>
+              {props.isMobile && (
+                <List
+                  style={{
+                    width: rem(16),
+                    height: rem(16),
+                  }}
+                />
+              )}
+              {
+                props.collapsed && (
+                  <CaretRight />
+                )
+              }
+            </ActionIcon>)
+            : null}
+          <UnstyledButton ml={16}>
+            <Stack gap={0}>
+              <Text fz="xs" >Halo</Text>
+              <Text fz="sm" fw="bold">
+                Admin
+              </Text>
+            </Stack>
+          </UnstyledButton>
+        </Group>
 
         <TextInput
           placeholder="Cari"
@@ -49,7 +61,7 @@ export function MainHeader(props: {
           leftSection={<MagnifyingGlass style={{ width: rem(12), height: rem(12) }} weight="bold" />}
           rightSectionWidth={70}
           rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
-          styles={{ section: { pointerEvents: 'none' } }}
+          styles={{ section: { pointerEvents: 'none' }, input: { border: "none" } }}
           my="sm"
           onClick={spotlight.open}
         />
@@ -65,7 +77,7 @@ export function MainHeader(props: {
           <Menu shadow="md" width={200}>
             <Menu.Target>
               <Button variant="subtle" radius="xl" p={8} leftSection={<Avatar size="sm" color="blue" />}>
-                Hallo, Admin
+
               </Button>
             </Menu.Target>
 
