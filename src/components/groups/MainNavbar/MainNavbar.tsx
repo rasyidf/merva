@@ -1,5 +1,5 @@
 import { useFeatureFlags } from "@/contexts/FeatureProvider";
-import { ActionIcon, AppShell, Box, Flex, Group, NavLink, ScrollArea, Title, Tooltip, rem } from "@mantine/core";
+import { ActionIcon, AppShell, Box, Flex, Group, NavLink, ScrollArea, Text, Title, Tooltip, rem } from "@mantine/core";
 import { Gauge, List, Sidebar } from "@phosphor-icons/react";
 import { Link, NavLink as nLink, useLocation, useNavigate } from "react-router-dom";
 import AppLogo from "../../elements/icons/AppLogo";
@@ -64,11 +64,11 @@ export function MainNavbar({ toggle, isMobile, toggleMobile, toggleDesktop }: { 
       <AppShell.Section>
         <Box p={6}>
 
-          <Title order={5} tt="uppercase" opacity={0.5} style={{
+          <Text size="sm" tt="uppercase"  opacity={0.5} style={{
             userSelect: 'none',
             pointerEvents: 'none',
           }}>MERVA v 0.1.0
-          </Title>
+          </Text>
 
         </Box>
       </AppShell.Section>

@@ -1,12 +1,6 @@
 .navbar {
     background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
 
-    background-image:
-        radial-gradient(at 82% 59%, hsla(319, 78%, 97%, 1) 0px, transparent 50%),
-        radial-gradient(at 62% 83%, hsla(312, 71%, 97%, 1) 0px, transparent 50%),
-        // radial-gradient(at 75% 100%, hsla(42, 77%, 97%, 1) 0px, transparent 50%),
-        radial-gradient(at 5% 21%, hsla(277, 91%, 97%, 1) 0px, transparent 50%);
-        // radial-gradient(at 51% 44%, hsla(239, 98%, 97%, 1) 0px, transparent 50%);
     opacity: 1;
     backdrop-filter: blur(80px);
     padding: 0.5rem 1rem;
@@ -15,11 +9,32 @@
     transition: all 0.3s;
 }
 
-.header {
-    // background-color: #f0e9f6;
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
+// light mode
+[data-mantine-color-scheme='light'] .navbar {
     background-image:
         radial-gradient(at 82% 59%, hsla(319, 78%, 97%, 1) 0px, transparent 50%),
-        radial-gradient(at 62% 83%, hsla(312, 71%, 97%, 1) 0px, transparent 50%), 
-        radial-gradient(at 51% 44%, hsla(239, 98%, 97%, 1) 0px, transparent 50%);
+        radial-gradient(at 62% 83%, hsla(312, 71%, 97%, 1) 0px, transparent 50%),
+        radial-gradient(at 5% 21%, hsla(277, 91%, 97%, 1) 0px, transparent 50%)
+}
+
+// dark mode
+[data-mantine-color-scheme='dark'] .navbar {
+    background-image:
+        radial-gradient(at 82% 59%, hsl(314, 88%, 6%, 1) 0px, transparent 50%),
+        radial-gradient(at 42% 53%, hsla(312, 71%, 6%, 1) 0px, transparent 50%),
+        radial-gradient(at 5% 21%, hsla(277, 91%, 6%, 1) 0px, transparent 50%);
+}
+
+[data-mantine-color-scheme='light'] .header {
+    background-image:
+        radial-gradient(at 82% 59%, hsla(319, 78%, 97%, 1) 0px, transparent 50%),
+        radial-gradient(at 62% 83%, hsla(312, 71%, 97%, 1) 0px, transparent 50%),
+        radial-gradient(at 5% 21%, hsla(277, 91%, 97%, 1) 0px, transparent 50%);
+}
+
+[data-mantine-color-scheme='dark'] .header {
+    background-image:
+        radial-gradient(at 82% 59%, hsl(314, 88%, 6%, 1) 0px, transparent 50%),
+        radial-gradient(at 62% 83%, hsla(312, 71%, 6%, 1) 0px, transparent 50%),
+        radial-gradient(at 5% 21%, hsla(277, 91%, 6%, 1) 0px, transparent 50%);
 }
