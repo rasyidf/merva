@@ -6,6 +6,7 @@ import AppLogo from "../../elements/icons/AppLogo";
 import classes from "./MainNavbar.module.scss";
 import { getNavigationItems } from "./getNavigationItems";
 import { renderNavItem } from "./renderNavItem";
+import { APP_VERSION } from "@/utils/constants";
 
 export function MainNavbar({ toggle, isMobile, toggleMobile, toggleDesktop }: { expanded: boolean; toggle?: () => void; isMobile?: boolean; toggleMobile?: () => void; toggleDesktop?: () => void; }) {
   const { enabledFeatures } = useFeatureFlags();
@@ -67,7 +68,7 @@ export function MainNavbar({ toggle, isMobile, toggleMobile, toggleDesktop }: { 
           <Text size="sm" tt="uppercase"  opacity={0.5} style={{
             userSelect: 'none',
             pointerEvents: 'none',
-          }}>MERVA v 0.1.0
+          }}>MERVA v {APP_VERSION}
           </Text>
 
         </Box>
