@@ -9,7 +9,6 @@ import classes from './MainHeader.module.css';
 const data = ['Dashboard', 'Settings', 'Logout', 'Tasks', 'Users'];
 
 export function MainHeader(props: {
-  isMobile?: boolean;
   navigate: (path: string) => void;
   toggleMobile: () => void;
   toggleDesktop: () => void;
@@ -26,24 +25,18 @@ export function MainHeader(props: {
     <Flex align="center" h="100%" w="100%">
       <Group justify="space-between" p={0} w="100%" px={8} wrap="nowrap">
         <Group align="center" gap={8} m={0} p={0} wrap="nowrap">
-          {props.isMobile || props.collapsed ? (
 
-            <ActionIcon variant="transparent" onClick={props.isMobile ? props.toggleMobile : props.toggleDesktop}>
-              {props.isMobile && (
-                <List
-                  style={{
-                    width: rem(16),
-                    height: rem(16),
-                  }}
-                />
-              )}
-              {
-                props.collapsed && (
-                  <CaretRight />
-                )
-              }
-            </ActionIcon>)
-            : null}
+          <ActionIcon hiddenFrom="md" variant="transparent" onClick={props.toggleMobile}>
+            <List style={{ width: rem(16), height: rem(16) }} />
+          </ActionIcon>
+          {
+            props.collapsed && (
+              <ActionIcon visibleFrom="md" variant="transparent" onClick={props.toggleDesktop}>
+                <CaretRight style={{ width: rem(16), height: rem(16) }} />
+              </ActionIcon>
+            )
+          }
+
           <UnstyledButton ml={16}>
             <Stack gap={0}>
               <Text fz="xs" >Halo</Text>

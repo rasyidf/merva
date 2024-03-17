@@ -13,7 +13,6 @@ import classes from "./DashboardLayout.module.scss";
 export const DashboardLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const viewport = useRef<HTMLDivElement>(null);
   const scrollToTop = useCallback(() => viewport.current?.scrollTo({ top: 0, behavior: "smooth" }), [viewport]);
   const navigate = useNavigate();
@@ -24,24 +23,24 @@ export const DashboardLayout = () => {
       header={{ height: 56 }}
       navbar={{
         width: { base: 0, md: 280 },
-        breakpoint: "sm",
+        breakpoint: "md",
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
       layout="alt"
     >
-      <Drawer opened={mobileOpened} onClose={toggleMobile} withCloseButton={false} withinPortal p={0} title="">
+      <Drawer opened={mobileOpened} hiddenFrom="md" onClose={toggleMobile} withCloseButton={false} withinPortal p={0} title="">
         <Flex h="calc(100dvh - 32px)" direction="column" p={6} justify="space-between" align="stretch">
-          <MainNavbar expanded={true} toggle={toggleMobile} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
+          <MainNavbar expanded={true} toggle={toggleMobile} collapseOnClick />
         </Flex>
       </Drawer>
       <AppShell.Header className={classes.header}>
-        <MainHeader navigate={navigate} collapsed={!desktopOpened} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
+        <MainHeader navigate={navigate} collapsed={!desktopOpened} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
       </AppShell.Header>
-      {!isMobile && (
-        <AppShell.Navbar className={classes.navbar}>
-          <MainNavbar expanded={desktopOpened} isMobile={isMobile} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
-        </AppShell.Navbar>
-      )}
+
+      <AppShell.Navbar visibleFrom="md" className={classes.navbar}>
+        <MainNavbar expanded={desktopOpened} toggle={toggleDesktop} />
+      </AppShell.Navbar>
+
       <AppShell.Main>
         <Paper radius={0}>
           <ScrollArea
