@@ -3,7 +3,7 @@ import { columns } from "../components/columns";
 import { DataTable } from "../components/data-table";
 
 
-import { Box } from "@mantine/core";
+import { Box, Paper } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import {
   ColumnFiltersState,
@@ -44,12 +44,12 @@ export const EntityList = (props: Props) => {
   });
 
   return (
-    <>
+    <Paper p={16}>
       <PageHeader title="Task" subtitle="This is CRUD Feature contains Create, Read, Update, Delete Operation" />
       <Box mt={16}>
         <DataTable data={data} columns={columns} state={state} setState={setState} />
       </Box>
-    </>
+    </Paper>
   );
 };
 

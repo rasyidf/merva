@@ -1,10 +1,11 @@
 import { PageHeader } from "@/components/groups/Header";
+import { Paper } from "@mantine/core";
 
 export const FeatureB = () => {
   return (
-    <div>
+    <Paper p={16}>
       <PageHeader title="List View" subtitle="This is the list view for Entity B." />
-    </div>
+    </Paper>
   );
 };
 

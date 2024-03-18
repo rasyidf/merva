@@ -1,13 +1,15 @@
 import { PageHeader } from "@/components/groups/Header";
-import { Stack } from "@mantine/core";
+import { Paper, Stack } from "@mantine/core";
 
 export const Dashboard = () => {
   return (
-    <Stack gap={16}>
-      <PageHeader title="Dashboard" subtitle="Welcome to Merva Codebase" />
+    <Paper p={16}>
+      <Stack gap={16}>
+        <PageHeader title="Dashboard" subtitle="Welcome to Merva Codebase" />
 
 
-    </Stack>
+      </Stack>
+    </Paper>
   );
 };
 
