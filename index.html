@@ -1,164 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo-merva.svg" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MERVA</title>
 
-    <!-- SEO Meta -->
-    <meta
-      name="title"
-      content="MERVA - Modular Ecosystem React Vite Application"
-    />
-    <meta
-      name="description"
-      content="proudly created by @rasyidf, MERVA is a modular ecosystem react vite application that help bootstrap your application"
-    />
-    <meta
-      name="keywords"
-      content="merva, modular, ecosystem, react, vite, application, business, management, rasyidf"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/logo-merva.svg" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MERVA</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- SEO Meta -->
+  <meta name="title" content="MERVA - Modular Ecosystem React Vite Application" />
+  <meta name="description"
+    content="proudly created by @rasyidf, MERVA is a modular ecosystem react vite application that help bootstrap your application" />
+  <meta name="keywords" content="merva, modular, ecosystem, react, vite, application, business, management, rasyidf" />
 
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="revisit-after" content="30 days" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="30 days" />
 
-    <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <!-- webmanifest -->
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="application-name" content="MERVA" />
-    <meta name="theme-color" content="#3a7fc4" />
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <!-- webmanifest -->
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="application-name" content="MERVA" />
+  <meta name="theme-color" content="#3a7fc4" />
 
-    <!-- preload strategy -->
-    <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet" />
+  <!-- preload strategy -->
+  <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet" />
 
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+    }
+
+    :root {
+      --theme-color: #3a7fc4;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
     <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        font-family: "Poppins", sans-serif;
+      #root {
+        height: 100dvh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
-      :root {
-        --theme-color: #3a7fc4; 
+
+      .spinner {
+        --logo-size: 32px;
+        --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
+        position: absolute;
+        z-index: 2;
+        top: 60%;
+        left: 50%;
+        margin: var(--logo-margin) 0 0 var(--logo-margin);
+        width: var(--logo-size);
+        height: var(--logo-size);
+      }
+
+      .logo {
+        --logo-size: 64px;
+        --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
+        position: absolute;
+        top: 44%;
+        left: 50%;
+        margin: var(--logo-margin) 0 0 var(--logo-margin);
+        width: var(--logo-size);
+        height: var(--logo-size);
+      }
+
+      .spinner .path {
+        stroke: var(--theme-color);
+        stroke-linecap: round;
       }
     </style>
-  </head>
 
-  <body>
-    <div id="root">
-      <style>
-        #root {
-          height: 100dvh;
-          width: 100vw;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+    <img fetchpriority="high" src="/logo-merva.svg" class="logo" width="120px" alt="MERVA" />
+    <svg class="spinner" viewBox="0 0 50 50">
+      <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+    </svg>
+
+    <style>
+      .logo {
+        animation: fadeIn 1s ease-in-out 0.1ms;
+      }
+
+      .spinner {
+        animation: rotate 2s linear infinite;
+      }
+
+      .spinner .path {
+        animation: dash 1.6s ease-in-out infinite;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0.1;
         }
 
-        .spinner {
-          --logo-size: 32px;
-          --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
-          position: absolute;
-          z-index: 2;
-          top: 60%;
-          left: 50%;
-          margin: var(--logo-margin) 0 0 var(--logo-margin);
-          width: var(--logo-size);
-          height: var(--logo-size);
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 150;
+          stroke-dashoffset: 0;
         }
 
-        .logo {
-          --logo-size: 64px;
-          --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
-          position: absolute;
-          top: 44%;
-          left: 50%;
-          margin: var(--logo-margin) 0 0 var(--logo-margin);
-          width: var(--logo-size);
-          height: var(--logo-size);
+        50% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -35;
         }
 
-        .spinner .path {
-          stroke: var(--theme-color);
-          stroke-linecap: round;
+        100% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -124;
         }
-      </style>
+      }
+    </style>
+  </div>
 
-      <img
-        fetchpriority="high"
-        src="/logo-merva.svg"
-        class="logo"
-        width="120px"
-        alt="MERVA"
-      />
-      <svg class="spinner" viewBox="0 0 50 50">
-        <circle
-          class="path"
-          cx="25"
-          cy="25"
-          r="20"
-          fill="none"
-          stroke-width="5"
-        ></circle>
-      </svg>
+  <script fetchpriority="high" type="module" src="/src/main.tsx"></script>
+</body>
 
-      <style>
-        .logo {
-          animation: fadeIn 1s ease-in-out 0.1ms;
-        }
-
-        .spinner {
-          animation: rotate 2s linear infinite;
-        }
-
-        .spinner .path {
-          animation: dash 1.6s ease-in-out infinite;
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0.1;
-          }
-
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes rotate {
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes dash {
-          0% {
-            stroke-dasharray: 1, 150;
-            stroke-dashoffset: 0;
-          }
-
-          50% {
-            stroke-dasharray: 90, 150;
-            stroke-dashoffset: -35;
-          }
-
-          100% {
-            stroke-dasharray: 90, 150;
-            stroke-dashoffset: -124;
-          }
-        }
-      </style>
-    </div>
-
-    <script fetchpriority="high" type="module" src="/src/main.tsx"></script>
-  </body>
 </html>
