@@ -16,7 +16,7 @@ import { useDisclosure } from "@mantine/hooks";
 import AppLogo from "@/components/elements/icons/AppLogo";
 import { useViewNavigate } from "@/utils/routers";
 import { CaretDown } from "@phosphor-icons/react";
-import classes from "./header.module.css";
+import classes from "./header.module.scss";
 
 export function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
