@@ -56,7 +56,7 @@ export const FeatureC = () => {
             <Accordion.Item value="lacak">
               <Accordion.Control>Lacak Pengiriman</Accordion.Control>
               <Accordion.Panel p={0}>
-                <Paper mih="100%" h="calc(100dvh - 8px - 128px - 96px)" bg="#fafafa" p={24}>
+                <Paper mih="100%" h="calc(100dvh - 8px - 128px - 96px)" bg="var(--mantine-color-body)" p={24}>
                   <Stepper size="xs" contentPadding={0} orientation="vertical"
                     active={
                       TrackingLog.findIndex((log) => !log.completed)
@@ -82,7 +82,7 @@ export const FeatureC = () => {
             <Accordion.Item value="driver">
               <Accordion.Control>DLV-122343</Accordion.Control>
               <Accordion.Panel  >
-                <Paper mih="calc(76dvh - 72px)" bg="#fafafa" p={24}>
+                <Paper mih="calc(76dvh - 72px)" bg="var(--mantine-color-body)" p={24}>
                   <Stack>
                     <Group>
                       <Truck size={24} />
@@ -121,7 +121,7 @@ export const FeatureC = () => {
 
       </div>
       <div className={classes.mapContainer}>
-        <MapContainer center={position} zoom={10} scrollWheelZoom={false}
+        <MapContainer center={position} zoom={10} scrollWheelZoom={false} className={classes.leaflet}
           style={{ minHeight: "80dvh", minWidth: "80dvw", width: "100%", height: "100%" }}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -14,8 +14,7 @@
   z-index: 10;
   width: 378px;
   height: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--mantine-color-body);
 }
 
 .mapSidebarHeader {
@@ -48,3 +47,10 @@
     height: 50%;
   }
 }
+
+
+.leaflet { 
+  --leaflet-tile-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+  filter: light-dark(none,var(--leaflet-tile-filter));
+}
+ 
