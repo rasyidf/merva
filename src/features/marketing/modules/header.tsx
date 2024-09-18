@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import AppLogo from "@/components/ui/icons/AppLogo";
+import AppLogo from "@/components/ui/icon/AppLogo";
 import { useViewNavigate } from "@/shared/utils/routers";
 import { CaretDown } from "@phosphor-icons/react";
 import classes from "./header.module.scss";

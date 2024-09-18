@@ -1,4 +1,4 @@
-import AppLogo from '@/components/ui/icons/AppLogo';
+import AppLogo from '@/components/ui/icon/AppLogo';
 import { Center, Stack } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
 

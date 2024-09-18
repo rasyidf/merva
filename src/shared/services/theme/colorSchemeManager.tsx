@@ -6,7 +6,7 @@ export interface LocalStorageColorSchemeManagerOptions {
 }
 
 export function localStorageColorSchemeManager({
-  key = "abt-color-scheme",
+  key = "merva-color-scheme",
 }: LocalStorageColorSchemeManagerOptions = {}): MantineColorSchemeManager {
   let handleStorageEvent: (event: StorageEvent) => void;
 

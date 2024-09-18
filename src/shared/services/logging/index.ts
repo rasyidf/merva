@@ -1,4 +1,4 @@
-// Import the logging service and create an instance
+
 import { isDev } from "@/shared/utils/constants";
 import { ILogger, LogLevel, createLoggingService } from "./service"; // Replace with the actual path
 

@@ -1,2 +1,2 @@
-export { modalTheme, defaultTheme, colorSchemeManager } from "./defaultTheme";
-export { localStorageColorSchemeManager } from "./colorSchemeManager";
+export * from "./defaultTheme";
+export * from "./utils";

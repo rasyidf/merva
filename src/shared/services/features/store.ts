@@ -1,6 +1,10 @@
 import { FeatureMetadata } from "@/shared/types/FeatureMetadata";
 import { createStore } from "zustand";
-import { Storage } from "./Storage";
+
+export interface Storage {
+  getFeatures: () => FeatureMetadata[];
+  setFeatures: (features: FeatureMetadata[]) => void;
+}
 
 type State = {
   features: FeatureMetadata[];

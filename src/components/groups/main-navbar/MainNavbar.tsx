@@ -1,6 +1,6 @@
-import AppLogo from "@/components/ui/icons/AppLogo";
-import { useFeatureFlags } from "@/shared/contexts/FeatureProvider";
-import { APP_NAME, APP_NAME_SHORT, APP_VERSION } from "@/shared/utils/constants";
+import AppLogo from "@/components/ui/icon/AppLogo";
+import { useFeatureFlags } from "@/shared/services/features";
+import { APP_NAME_SHORT, APP_VERSION } from "@/shared/utils/constants";
 import { ActionIcon, AppShell, Box, Flex, NavLink, ScrollArea, Text, Title, Tooltip, rem } from "@mantine/core";
 import { CaretLeft, Gauge, X } from "@phosphor-icons/react";
 import { Link, NavLink as nLink, useLocation, useNavigate } from "react-router-dom";

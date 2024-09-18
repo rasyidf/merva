@@ -1,12 +1,12 @@
+
 import { featureRegistry } from "@/app/configs";
 import ShellMetadata from "@/features/admin";
+import { FeatureMetadata } from "@/shared/types/FeatureMetadata";
+import { RouteConfig } from "@/shared/types/RouteConfig";
 import { RouteObject } from "react-router-dom";
 import { create } from "zustand";
-import { logger } from "../services";
-import { ErrorBoundary } from "../services/features/ErrorBoundary";
-import { FeatureMetadata } from "../types/FeatureMetadata";
-import { RouteConfig } from "../types/RouteConfig";
-
+import logger from "../logging";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 type FeatureFlagsStore = {
   enabledFeatures: FeatureMetadata[];

@@ -104,6 +104,9 @@ importers:
       vite-plugin-spriteify:
         specifier: ^0.1.3
         version: 0.1.3(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.77.2)(sugarss@4.0.1(postcss@8.4.38))(terser@5.33.0)
+      webcryptobox:
+        specifier: ^4.0.0
+        version: 4.0.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -2753,6 +2756,9 @@ packages:
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
 
+  webcryptobox@4.0.0:
+    resolution: {integrity: sha512-XnFfVQsZiQYFCzgF3QVfQFrCInZcCcbJHfzY8wAIatqbnHOSOLGsczV1w+z/ZLwQhsl9EWeow5znTYN7Fx+AcQ==}
+
   which-typed-array@1.1.13:
     resolution: {integrity: sha512-P5Nra0qjSncduVPEAr7xhoF5guty49ArDTwzJ/yNuPIbZppyRxFQsRCWrocxIY+CnMVG+qfbU2FmDKyvSGClow==}
     engines: {node: '>= 0.4'}
@@ -5228,6 +5234,8 @@ snapshots:
   wcwidth@1.0.1:
     dependencies:
       defaults: 1.0.4
+
+  webcryptobox@4.0.0: {}
 
   which-typed-array@1.1.13:
     dependencies:

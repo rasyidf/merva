@@ -1,0 +1,13 @@
+.icon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  svg { 
+    width: 100%;
+  }
+
+  * {
+    fill: currentcolor;
+  }
+}

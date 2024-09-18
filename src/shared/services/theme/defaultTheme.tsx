@@ -1,4 +1,5 @@
 import { InputWrapper, createTheme } from "@mantine/core";
+import { ModalSettings } from "@mantine/modals/lib/context";
 import { localStorageColorSchemeManager } from "./colorSchemeManager";
 
 export const defaultTheme = createTheme({
@@ -8,7 +9,7 @@ export const defaultTheme = createTheme({
   },
   primaryColor: "grape",
   primaryShade: 5,
-  defaultRadius: "md",
+  defaultRadius: "sm",
   components: {
     InputWrapper: InputWrapper.extend({
       classNames: {
@@ -18,12 +19,11 @@ export const defaultTheme = createTheme({
   },
 });
 
-export const modalTheme = {
+export const modalTheme: ModalSettings = {
   radius: "md",
   withinPortal: true,
   centered: true,
 };
-
 
 export const colorSchemeManager = localStorageColorSchemeManager({
   key: "merva-color-scheme",
