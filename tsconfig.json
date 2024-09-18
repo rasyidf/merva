@@ -6,22 +6,31 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
-
     "strict": true,
     "noUncheckedIndexedAccess": true,
-
     "moduleResolution": "Node",
     "module": "ESNext",
     "outDir": "dist",
     "sourceMap": true,
-
-    "lib": ["es2022", "dom", "dom.iterable"],
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs",
+    "vite.config.mts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

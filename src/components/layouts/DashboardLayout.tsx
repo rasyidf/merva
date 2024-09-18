@@ -4,11 +4,10 @@ import { useCallback, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import { CaretUp } from "@phosphor-icons/react";
-import { MainHeader } from "../groups/Header/MainHeader";
-import { MainNavbar } from "../groups/MainNavbar";
+import { MainHeader } from "../groups/main-header/MainHeader";
+import { MainNavbar } from "../groups/main-navbar";
 
 import classes from "./DashboardLayout.module.scss";
-
 
 export const DashboardLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -28,13 +27,26 @@ export const DashboardLayout = () => {
       }}
       layout="alt"
     >
-      <Drawer opened={mobileOpened} hiddenFrom="md" onClose={toggleMobile} withCloseButton={false} withinPortal p={0} title="">
+      <Drawer
+        opened={mobileOpened}
+        hiddenFrom="md"
+        onClose={toggleMobile}
+        withCloseButton={false}
+        withinPortal
+        p={0}
+        title=""
+      >
         <Flex h="calc(100dvh - 32px)" direction="column" p={6} justify="space-between" align="stretch">
           <MainNavbar expanded={true} toggle={toggleMobile} collapseOnClick />
         </Flex>
       </Drawer>
       <AppShell.Header className={classes.header}>
-        <MainHeader navigate={navigate} collapsed={!desktopOpened} toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
+        <MainHeader
+          navigate={navigate}
+          collapsed={!desktopOpened}
+          toggleMobile={toggleMobile}
+          toggleDesktop={toggleDesktop}
+        />
       </AppShell.Header>
 
       <AppShell.Navbar visibleFrom="md" className={classes.navbar}>

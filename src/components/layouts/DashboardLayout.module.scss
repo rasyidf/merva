@@ -1,40 +1,61 @@
 .navbar {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
 
-    opacity: 1;
-    backdrop-filter: blur(80px);
-    padding: 0.5rem 1rem;
-    box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.1);
-    z-index: 100;
-    transition: all 0.3s;
+  opacity: 1;
+  backdrop-filter: blur(80px);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.1);
+  z-index: 100;
+  transition: all 0.3s;
 }
 
-// light mode
-[data-mantine-color-scheme='light'] .navbar {
+/* Nested CSS */
+
+[data-mantine-color-scheme='light'] {
+  .navbar {
     background-image:
-        radial-gradient(at 82% 59%, hsla(319, 78%, 97%, 1) 0px, transparent 50%),
-        radial-gradient(at 62% 83%, hsla(312, 71%, 97%, 1) 0px, transparent 50%),
-        radial-gradient(at 5% 21%, hsla(277, 91%, 97%, 1) 0px, transparent 50%)
+      radial-gradient(at 82% 50%,
+        var(--mantine-primary-color-1) 0px,
+        var(--mantine-primary-color-0) 50%),
+      radial-gradient(at 22% 83%,
+        var(--mantine-primary-color-3) 0px,
+        var(--mantine-primary-color-2) 50%),
+      radial-gradient(at 5% 21%,
+        var(--mantine-primary-color-2) 0px,
+        var(--mantine-primary-color-0) 50%);
+    background-blend-mode: normal;
+  }
+
+  .header {
+    background-image:
+      radial-gradient(at 50% 50%,
+        var(--mantine-primary-color-1) 0px,
+        var(--mantine-primary-color-0) 50%);
+    background-blend-mode: normal;
+  }
 }
 
-// dark mode
-[data-mantine-color-scheme='dark'] .navbar {
-    background-image:
-        radial-gradient(at 82% 59%, hsl(314, 88%, 6%, 1) 0px, transparent 50%),
-        radial-gradient(at 42% 53%, hsla(312, 71%, 6%, 1) 0px, transparent 50%),
-        radial-gradient(at 5% 21%, hsla(277, 91%, 6%, 1) 0px, transparent 50%);
-}
+[data-mantine-color-scheme='dark'] {
 
-[data-mantine-color-scheme='light'] .header {
+  .navbar {
     background-image:
-        radial-gradient(at 82% 59%, hsla(319, 78%, 97%, 1) 0px, transparent 50%),
-        radial-gradient(at 62% 83%, hsla(312, 71%, 97%, 1) 0px, transparent 50%),
-        radial-gradient(at 5% 21%, hsla(277, 91%, 97%, 1) 0px, transparent 50%);
-}
+      radial-gradient(at 82% 59%,
+        var(--mantine-primary-color-7) 0px,
+        var(--mantine-primary-color-9) 50%),
+      radial-gradient(at 62% 83%,
+        var(--mantine-primary-color-8) 0px,
+        var(--mantine-primary-color-9) 50%),
+      radial-gradient(at 5% 21%,
+        var(--mantine-primary-color-7) 0px,
+        var(--mantine-primary-color-9) 50%);
+    background-blend-mode: overlay;
+  }
 
-[data-mantine-color-scheme='dark'] .header {
+  .header {
     background-image:
-        radial-gradient(at 82% 59%, hsl(314, 88%, 6%, 1) 0px, transparent 50%),
-        radial-gradient(at 62% 83%, hsla(312, 71%, 6%, 1) 0px, transparent 50%),
-        radial-gradient(at 5% 21%, hsla(277, 91%, 6%, 1) 0px, transparent 50%);
+      radial-gradient(at 50% 50%,
+        var(--mantine-primary-color-8) 0px,
+        var(--mantine-primary-color-9) 50%);
+    background-blend-mode: soft-light;
+  }
 }

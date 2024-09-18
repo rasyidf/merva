@@ -1,0 +1,8 @@
+{
+  "messages": {
+    "paginationDescription": "Menampilkan {{ start }} - {{ end }} dari {{ length }}",
+    "paginationEmpty": "Tidak ada data",
+    "paginationSinglePage": "Menampilkan {{ length }} data",
+    "paginationLoading": "Memuat..."
+  }
+}
