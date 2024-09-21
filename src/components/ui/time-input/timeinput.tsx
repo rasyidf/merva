@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
- Button, Flex, Popover, ScrollArea, rem 
+  Button, Flex, Popover, ScrollArea, rem
 } from '@mantine/core';
 import {
   TimeInput,
@@ -12,7 +12,7 @@ import {
   type UseControllerProps,
   useController
 } from 'react-hook-form';
-import { Icon } from '../svg-icon';
+import { SvgIcon } from '../icon';
 
 export type TimeInputProps<T extends FieldValues> = UseControllerProps<T> &
   $TimeInputProps;
@@ -55,7 +55,7 @@ export function TimeInputForm<T extends FieldValues>({
     <Popover position="bottom-start" shadow="md">
       <Popover.Target>
         <TimeInput
-          leftSection={<Icon name="clock" size={20} color="black" />} // TODO: clock
+          leftSection={<SvgIcon name="calendar" width={20} color="black" />} // TODO: clock
           value={fieldValue}
           error={fieldState.error?.message}
           onChange={(e) => {
