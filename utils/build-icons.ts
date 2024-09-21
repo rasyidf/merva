@@ -18,7 +18,7 @@ program
 	.option('--input <dir>', 'Set input directory', 'utils/svg-icons')
 	.option('--output <dir>', 'Set output directory', 'src/assets/icons')
 	.option('--sprite <file>', 'Set sprite file', 'src/assets/icons/sprite.svg')
-	.option('--types <file>', 'Set types file', 'src/assets/icons/name.d.ts');
+	.option('--types <file>', 'Set types file', 'src/assets/icons/name.ts');
 
 program.parse(process.argv);
 

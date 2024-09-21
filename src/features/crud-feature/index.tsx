@@ -1,5 +1,6 @@
 import { FeatureMetadata } from "@/shared/types/FeatureMetadata";
 import { NavigationConfig } from "@/shared/types/NavigationConfig";
+import { compose } from "@/shared/utils";
 import { BookOpen } from "@phosphor-icons/react";
 import { RouteObject } from "react-router-dom";
 
@@ -16,29 +17,25 @@ const FeatureAMetadata = {
         {
           index: true,
           async lazy() {
-            const { EntityList } = await import("./pages/List");
-            return { Component: EntityList };
+            return compose(await import("./pages/List"));
           },
         },
         {
           path: "details/:id",
           async lazy() {
-            const { EntityDetails } = await import("./pages/Details");
-            return { Component: EntityDetails };
+            return compose(await import("./pages/Details"));
           },
         },
         {
           path: "create",
           async lazy() {
-            const { EntityCreate } = await import("./pages/Create");
-            return { Component: EntityCreate };
+            return compose(await import("./pages/Create"));
           },
         },
         {
           path: "edit/:id",
           async lazy() {
-            const { EntityEdit } = await import("./pages/Edit");
-            return { Component: EntityEdit };
+            return compose(await import("./pages/Edit"));
           },
         },
       ],

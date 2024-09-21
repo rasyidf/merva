@@ -1,0 +1,29 @@
+.footerRoot {
+    display: block;
+    margin: 0;
+    bottom: 0;
+    position: sticky;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--color-legion-logee-25) 30%);
+    z-index: 100;
+    padding-block: 0.5rem;
+    animation: fade-in-and-morph-up 0.2s ease-in-out both;
+    transition: transform 0.2s ease-in-out;
+
+    &Default {
+        background: transparent;
+        padding-block: 0;
+        position: relative;
+    }
+}
+
+@keyframes fade-in-and-morph-up {
+    0% {
+        opacity: 0.8;
+        transform: translateY(0.2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

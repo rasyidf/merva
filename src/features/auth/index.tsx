@@ -1,5 +1,6 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import { FeatureMetadata } from "@/shared/types/FeatureMetadata";
+import { compose } from "@/shared/utils";
 
 const AuthFeatureMetadata = {
   id: "Auth",
@@ -10,27 +11,24 @@ const AuthFeatureMetadata = {
     {
       path: "auth",
       async lazy() {
-        const { default: AuthPage } = await import("./pages/Layout");
-        return { Component: AuthPage };
+        return compose(await import("./pages/Layout"));
       },
       children: [
         {
           path: "login",
           async lazy() {
-            const { default: LoginPage } = await import("./pages/Login");
-            return { Component: LoginPage };
+            return compose(await import("./pages/Login"));
           },
         },
         {
           path: 'register',
           async lazy() {
-            const { default: RegisterPage } = await import("./pages/Register");
-            return { Component: RegisterPage };
+            return compose(await import("./pages/Register"));
           }
         },
         {
           path: "logout",
-          element: <Navigate to="/app/login" />,
+          element: <Navigate to="/auth/login" />,
         }
       ],
     },

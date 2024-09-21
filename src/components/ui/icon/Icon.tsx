@@ -1,7 +1,7 @@
 import { SVGProps } from "react";
 
 import href from "@/assets/icons/sprite.svg";
-import { IconName } from "@/assets/icons/name";
+import type { IconName } from "@/assets/icons/name";
 import clsx from "clsx";
 
 export { IconName, href };

@@ -107,7 +107,7 @@ export function MainHeader(props: Readonly<{
                     }}
                   />
                 }
-                onClick={() => props.navigate("/app/logout")}
+                onClick={() => props.navigate("/auth/logout")}
               >
                 Keluar
               </Menu.Item>

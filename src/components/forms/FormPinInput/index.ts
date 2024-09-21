@@ -1,0 +1,1 @@
+export { FormPinInput } from "./FormPinInput";

@@ -23,9 +23,9 @@ export default defineConfig({
     react(),
     spriteify({
       withTypes: true,
-      inputDir: "assets/icons",
+      inputDir: "utils/svg-icons",
       outputDir: "src/assets/icons",
-    }),
+    }) as any,
     nodePolyfills({
       exclude: ["fs"],
 
@@ -81,7 +81,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/shared/styles/_mantine";`,
+        api: 'modern-compiler',
+        additionalData: `@import "@/shared/styles/_mantine.scss";\n`,
       },
     },
   },

@@ -1,4 +1,4 @@
-import { IconName } from "@/assets/icons/name";
+import type { IconName } from "@/assets/icons/name";
 import { SvgIcon } from "@/components/ui/icon";
 import { PartialDeep } from "@/shared/types/utils";
 import { type NotificationData, notifications } from "@mantine/notifications";
