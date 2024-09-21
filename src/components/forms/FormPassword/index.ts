@@ -1,1 +1,0 @@
-export { FormPassword } from "./FormPassword";

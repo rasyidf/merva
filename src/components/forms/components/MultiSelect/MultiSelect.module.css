@@ -1,0 +1,10 @@
+.pillsList {
+  /* flex-wrap: nowrap !important; */
+  overflow-y: auto;
+  max-height: 24px;
+
+  scroll-behavior: smooth;
+  /*hidden scrollbar  */
+  scrollbar-width: none;
+
+}
