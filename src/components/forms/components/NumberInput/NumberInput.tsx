@@ -4,12 +4,12 @@ import {
   type FieldValues
 } from 'react-hook-form';
 import {
-  NumberInput as $NumberInput,
-  type NumberInputProps as $NumberInputProps
+  NumberInput as BaseNumberInput,
+  type NumberInputProps as BaseNumberInputProps
 } from '@mantine/core';
 
 export type NumberInputProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$NumberInputProps, 'value' | 'defaultValue'>;
+  Omit<BaseNumberInputProps, 'value' | 'defaultValue'>;
 
 export function NumberInput<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function NumberInput<T extends FieldValues>({
   });
 
   return (
-    <$NumberInput
+    <BaseNumberInput
       value={value}
       onChange={(e) => {
         fieldOnChange(e);

@@ -5,7 +5,7 @@ import {
 } from 'react-hook-form';
 
 import {
-  Badge as $Badge,
+  Badge as BaseBadge,
   Group,
   InputWrapper,
   type InputWrapperProps as CoreInputWrapperProps

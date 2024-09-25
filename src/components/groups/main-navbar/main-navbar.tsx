@@ -1,19 +1,17 @@
+import { SvgIcon } from "@/components/ui/icon";
 import AppLogo from "@/components/ui/icon/AppLogo";
-import { useFeatureFlags } from "@/shared/services/features";
-import { APP_NAME_SHORT, APP_VERSION } from "@/shared/utils/constants";
-import { ActionIcon, AppShell, Box, Flex, NavLink, ScrollArea, Text, Title, Tooltip, rem } from "@mantine/core";
-import { CaretLeft, Gauge, X } from "@phosphor-icons/react";
+import { useNavigationItems } from "@/shared/services/features/utils";
+import { APP_NAME, APP_NAME_SHORT, APP_VERSION } from "@/shared/utils/constants";
+import { ActionIcon, AppShell, Box, Flex, NavLink, ScrollArea, Text, Title, Tooltip } from "@mantine/core";
 import { Link, NavLink as nLink, useLocation, useNavigate } from "react-router-dom";
-import classes from "./MainNavbar.module.scss";
-import { getNavigationItems } from "./getNavigationItems";
-import { renderNavItem } from "./renderNavItem";
+import classes from "./main-navbar.module.scss";
+import { renderNavItem } from "./utils";
 
 export function MainNavbar({
   toggle,
   collapseOnClick,
 }: Readonly<{ expanded: boolean; toggle?: () => void; collapseOnClick?: boolean; }>) {
-  const { enabledFeatures } = useFeatureFlags();
-  const { navItems } = getNavigationItems(enabledFeatures);
+  const { navItems } = useNavigationItems();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -40,22 +38,12 @@ export function MainNavbar({
           </Title>
           <Tooltip label="Close" position="right">
             <ActionIcon variant="transparent" hiddenFrom="md" onClick={toggle}>
-              <X
-                style={{
-                  width: rem(16),
-                  height: rem(16),
-                }}
-              />
+              <SvgIcon name="x" />
             </ActionIcon>
           </Tooltip>
           <Tooltip label="Menus" position="right">
             <ActionIcon variant="transparent" visibleFrom="md" onClick={toggle}>
-              <CaretLeft
-                style={{
-                  width: rem(16),
-                  height: rem(16),
-                }}
-              />
+              <SvgIcon name="menu" />
             </ActionIcon>
           </Tooltip>
         </Flex>
@@ -63,7 +51,7 @@ export function MainNavbar({
       <AppShell.Section grow my="md" mx="sm" component={ScrollArea}>
         <NavLink
           className={classes.link}
-          leftSection={<Gauge />}
+          leftSection={<SvgIcon name="gauge" />}
           component={nLink}
           variant="light"
           active={pathname === "/app/dashboard"}
@@ -75,7 +63,7 @@ export function MainNavbar({
 
         <NavLink
           className={classes.link}
-          leftSection={<Gauge />}
+          leftSection={<SvgIcon name="gauge" />}
           component={nLink}
           variant="light"
           active={pathname === "/app/dashboard"}
@@ -97,7 +85,7 @@ export function MainNavbar({
               pointerEvents: "none",
             }}
           >
-            MERVA v {APP_VERSION}
+            {APP_NAME} v {APP_VERSION}
           </Text>
         </Box>
       </AppShell.Section>

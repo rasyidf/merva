@@ -1,3 +1,5 @@
-export const config = {
-  baseUrl: import.meta.env.VITE_API_URL,
+import { BASE_URL_API } from "@/shared/utils/constants";
+
+export default {
+  baseUrl: BASE_URL_API,
 };

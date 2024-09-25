@@ -2,7 +2,7 @@
 import { Row } from "@tanstack/react-table";
 
 import { ActionIcon, Menu, Tooltip } from "@mantine/core";
-import { DotsThree, PencilSimple, TrashSimple } from "@phosphor-icons/react";
+import { SvgIcon } from "@/components/ui/icon";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -16,18 +16,18 @@ export function DataTableRowActions<TData>({ row, onDelete, onEdit }: Readonly<D
       <Menu.Target>
         <Tooltip label="Actions">
           <ActionIcon variant="transparent">
-            <DotsThree width={24} height={24} />
+            <SvgIcon name="dotsHorizontal" />
           </ActionIcon>
         </Tooltip>
       </Menu.Target>
       <Menu.Dropdown w={200}>
-        <Menu.Item leftSection={<PencilSimple />}
+        <Menu.Item leftSection={<SvgIcon name="pencil" />}
           onClick={() => {
             onEdit?.(row);
 
           }}>Edit</Menu.Item>
         <Menu.Divider />
-        <Menu.Item leftSection={<TrashSimple />}
+        <Menu.Item leftSection={<SvgIcon name="trash" />}
           onClick={() => {
             onDelete?.(row);
           }}>Delete</Menu.Item>

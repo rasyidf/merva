@@ -4,12 +4,12 @@ import {
   type FieldValues
 } from "react-hook-form";
 import {
-  PinInput as $PinInput,
-  type PinInputProps as $PinInputProps
+  PinInput as BasePinInput,
+  type PinInputProps as BasePinInputProps
 } from "@mantine/core";
 
 export type PinInputProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$PinInputProps, "value" | "defaultValue">;
+  Omit<BasePinInputProps, "value" | "defaultValue">;
 
 export function PinInput<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function PinInput<T extends FieldValues>({
   });
 
   return (
-    <$PinInput
+    <BasePinInput
       value={value}
       onChange={(e) => {
         fieldOnChange(e);

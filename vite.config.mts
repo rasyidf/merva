@@ -25,7 +25,7 @@ export default defineConfig({
       withTypes: true,
       inputDir: "utils/svg-icons",
       outputDir: "src/assets/icons",
-    }) as any,
+    }),
     nodePolyfills({
       exclude: ["fs"],
 
@@ -59,7 +59,7 @@ export default defineConfig({
   build: {
     target: "esnext",
     modulePreload: true,
-    sourcemap: true, 
+    sourcemap: true,
     minify: "terser",
     terserOptions: {
       compress: true,

@@ -4,12 +4,12 @@ import {
   type UseControllerProps
 } from "react-hook-form";
 import {
-  DateTimePicker as $DateTimePicker,
-  type DateTimePickerProps as $DateTimePickerProps
+  DateTimePicker as BaseDateTimePicker,
+  type DateTimePickerProps as BaseDateTimePickerProps
 } from "@mantine/dates";
 
 export type DateTimePickerProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$DateTimePickerProps, "value" | "defaultValue">;
+  Omit<BaseDateTimePickerProps, "value" | "defaultValue">;
 
 export function DateTimePicker<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function DateTimePicker<T extends FieldValues>({
   });
 
   return (
-    <$DateTimePicker
+    <BaseDateTimePicker
       error={fieldState.error?.message}
       value={value}
       onChange={(e) => {

@@ -3,11 +3,11 @@ import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useCallback, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { CaretUp } from "@phosphor-icons/react";
-import { MainHeader } from "../groups/main-header/MainHeader";
+import { MainHeader } from "../groups/main-header/main-header";
 import { MainNavbar } from "../groups/main-navbar";
 
 import classes from "./DashboardLayout.module.scss";
+import { SvgIcon } from "../ui/icon";
 
 export const DashboardLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -71,7 +71,7 @@ export const DashboardLayout = () => {
               style={{ position: "fixed", bottom: 20, right: 20, zIndex: 300 }}
               onClick={scrollToTop}
             >
-              <CaretUp />
+              <SvgIcon name="caretUp" />
             </ActionIcon>
           </ScrollArea>
         </Paper>

@@ -1,12 +1,9 @@
+import { SvgIcon } from "@/components/ui/icon";
 import { ActionIcon, Group, Paper, Stack, Text, Tooltip } from "@mantine/core";
-import { CaretRight, Info } from "@phosphor-icons/react";
-import { ReactNode } from "react";
 
 type Props = {
   title: string;
   value: string;
-  icon?: ReactNode;
-  color?: string;
   tooltip?: string;
   onClick?: () => void;
 };
@@ -20,13 +17,13 @@ export const StatsCard = (props: Props) => {
               <Text size="sm" c="gray">
                 {props.title}
               </Text>
-              {props.tooltip && <Info size="xs" />}
+              {props.tooltip && <SvgIcon name="info" size="xs" />}
             </Group>
           </Tooltip>
 
           {props.onClick && (
             <ActionIcon size="xs" onClick={props.onClick}>
-              <CaretRight />
+              <SvgIcon name="caretRight" size="xs" />
             </ActionIcon>
           )}
         </Group>

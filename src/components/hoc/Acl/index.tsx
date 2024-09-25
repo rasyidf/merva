@@ -20,14 +20,17 @@ export const Acl = ({
 }: AclProps): ReactElement | null => {
   const auth = useMemo(() => policies.some((e) => userPolices.includes(e)), [policies, userPolices]);
 
-  if (!auth) {
-    if (forbiddenCallback) {
-      return <>{forbiddenCallback}</>;
-    }
-    if (redirect) {
-      return <Navigate to={defaultRedirect} replace />;
-    }
-    return null;
+  if (auth) {
+    return <>{children}</>;
   }
-  return <>{children}</>;
+
+  if (forbiddenCallback) {
+    return <>{forbiddenCallback}</>;
+  }
+
+  if (redirect) {
+    return <Navigate to={defaultRedirect} replace />;
+  }
+  
+  return null;
 };

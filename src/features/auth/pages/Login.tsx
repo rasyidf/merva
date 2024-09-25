@@ -1,4 +1,5 @@
 
+import { Notify } from '@/shared/services';
 import { useViewNavigate } from '@/shared/utils/routers';
 import {
   Alert,
@@ -6,7 +7,6 @@ import {
   Card,
   Checkbox,
   Group,
-  Paper,
   PasswordInput,
   Text,
   TextInput,
@@ -49,7 +49,7 @@ function Page() {
         setIsLoading(false);
       }, 1000);
     } else {
-      setError("root", { message: "Invalid email or password" });
+      Notify.error("Error", "Your credentials are invalid");
       setIsLoading(false);
     }
 

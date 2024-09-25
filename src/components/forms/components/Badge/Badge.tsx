@@ -1,5 +1,5 @@
 import {
-  Badge as $Badge,
+  Badge as BaseBadge,
   InputWrapper,
   type InputWrapperProps as CoreInputWrapperProps
 } from "@mantine/core";
@@ -57,12 +57,12 @@ export function Badge<T extends FieldValues>({
       required={props.required}
       error={fieldState.error?.message}
     >
-      <$Badge variant="light"
+      <BaseBadge variant="light"
         color={state[value]?.background ?? 'blue'}
         c={state[value]?.text ?? 'blue.3'}
       >
         {state[value]?.label ?? value}
-      </$Badge>
+      </BaseBadge>
     </InputWrapper>
 
 

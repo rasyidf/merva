@@ -6,12 +6,12 @@ import {
 import {
   DatePickerInput as CoreDatePickerInput,
   type DatePickerType,
-  type DatePickerInputProps as $DatePickerInputProps
+  type DatePickerInputProps as BaseDatePickerInputProps
 } from "@mantine/dates";
 
 export type DatePickerInputProps<T extends FieldValues, V extends DatePickerType = 'default'> =
   UseControllerProps<T> &
-    Omit<$DatePickerInputProps<V>, "value" | "defaultValue">;
+    Omit<BaseDatePickerInputProps<V>, "value" | "defaultValue">;
 
 export function DatePickerInput<T extends FieldValues, V extends DatePickerType = 'default'>({
   type,

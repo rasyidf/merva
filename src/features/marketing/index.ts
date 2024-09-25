@@ -1,7 +1,6 @@
-import { FeatureMetadata } from "@/shared/types/FeatureMetadata";
+import { FeatureMetadata } from "@/shared/types";
 import { RouteObject } from "react-router-dom";
-
-export default {
+const MarketingMetadata = {
   id: "landing",
   name: "landing page",
   enabled: true,
@@ -13,3 +12,5 @@ export default {
   ] satisfies RouteObject[],
   placement: "shell",
 } satisfies FeatureMetadata;
+
+export default MarketingMetadata;

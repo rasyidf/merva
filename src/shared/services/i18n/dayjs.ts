@@ -13,7 +13,7 @@ dayjs.locale("id");
 
 dayjs.tz.setDefault("Asia/Jakarta");
 
-import { type ThirdPartyLocalization } from "@/shared/types/ThirdPartyLocalization";
+import { type ThirdPartyLocalization } from "@/shared/types";
 export const DayjsLocalization: ThirdPartyLocalization = {
   changeLanguage: (language: string): void => {
     dayjs.locale(language);

@@ -4,12 +4,12 @@ import {
   type FieldValues
 } from "react-hook-form";
 import {
-  RadioGroup as $RadioGroup,
-  type RadioGroupProps as $RadioGroupProps
+  RadioGroup as BaseRadioGroup,
+  type RadioGroupProps as BaseRadioGroupProps
 } from "@mantine/core";
 
 export type RadioGroupProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$RadioGroupProps, "value" | "defaultValue">;
+  Omit<BaseRadioGroupProps, "value" | "defaultValue">;
 
 export function RadioGroup<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function RadioGroup<T extends FieldValues>({
   });
 
   return (
-    <$RadioGroup
+    <BaseRadioGroup
       value={value}
       onChange={(e) => {
         fieldOnChange(e);

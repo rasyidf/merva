@@ -1,7 +1,7 @@
 import { ActionIcon, Group, useComputedColorScheme, useMantineColorScheme } from "@mantine/core";
-import { Moon, Sun } from "@phosphor-icons/react";
 import cx from "clsx";
-import classes from "./ThemeSwitcher.module.scss";
+import classes from "./theme-switcher.module.scss";
+import { SvgIcon } from "@/components/ui/icon";
 
 export function ThemeSwitcher() {
   const { setColorScheme } = useMantineColorScheme();
@@ -15,8 +15,8 @@ export function ThemeSwitcher() {
         size="md"
         aria-label="Toggle color scheme"
       >
-        <Sun className={cx(classes.icon, classes.light)} weight="duotone" />
-        <Moon className={cx(classes.icon, classes.dark)} weight="duotone" />
+        <SvgIcon name="sun" className={cx(classes.icon, classes.light)} />
+        <SvgIcon name="moon" className={cx(classes.icon, classes.dark)} />
       </ActionIcon>
     </Group>
   );

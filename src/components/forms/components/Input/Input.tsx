@@ -3,10 +3,10 @@ import {
   useController,
   type FieldValues
 } from "react-hook-form";
-import { Input as CoreInput, type InputProps as $InputProps } from "@mantine/core";
+import { Input as CoreInput, type InputProps as BaseInputProps } from "@mantine/core";
 
 export type InputProps<T extends FieldValues> = UseControllerProps<T> &
-  $InputProps;
+  BaseInputProps;
 
 export function Input<T extends FieldValues>({
   name,

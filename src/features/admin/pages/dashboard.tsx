@@ -1,8 +1,8 @@
 import { PageHeader } from "@/components/groups/main-header";
-import { StatsCard } from "@/components/groups/stats-card/StatisticCard";
+import { StatsCard } from "@/components/groups/stats-card";
+import { SvgIcon } from "@/components/ui/icon";
 import { Group, Paper, Stack } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { CalendarBlank } from "@phosphor-icons/react";
 
 export const Dashboard = () => {
   return (
@@ -10,7 +10,7 @@ export const Dashboard = () => {
       <Stack gap={16}>
         <Group justify="space-between">
           <PageHeader title="Dashboard" subtitle="Welcome to Merva Codebase" />
-          <DatePickerInput miw={200} type="range" leftSection={<CalendarBlank />} />
+          <SvgIcon name="calendar" />
         </Group>
 
         <Group mt={16} w="100%">

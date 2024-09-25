@@ -4,12 +4,12 @@ import {
   type FieldValues
 } from 'react-hook-form';
 import {
-  Textarea as $Textarea,
-  type TextareaProps as $TextareaProps
+  Textarea as BaseTextarea,
+  type TextareaProps as BaseTextareaProps
 } from '@mantine/core';
 
 export type TextareaProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$TextareaProps, 'value' | 'defaultValue'>;
+  Omit<BaseTextareaProps, 'value' | 'defaultValue'>;
 
 export function Textarea<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function Textarea<T extends FieldValues>({
   });
 
   return (
-    <$Textarea
+    <BaseTextarea
       value={value}
       onChange={(e) => {
         fieldOnChange(e);

@@ -4,13 +4,13 @@ import {
   type UseControllerProps
 } from "react-hook-form";
 import {
-  Checkbox as $Checkbox,
-  type CheckboxProps as $CheckboxProps
+  Checkbox as BaseCheckbox,
+  type CheckboxProps as BaseCheckboxProps
 } from "@mantine/core";
 import { CheckboxGroup } from "./CheckBoxGroup";
 
 export type CheckboxProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$CheckboxProps, "checked" | "defaultValue">;
+  Omit<BaseCheckboxProps, "checked" | "defaultValue">;
 
 export const Checkbox = <T extends FieldValues>({
   name,
@@ -33,7 +33,7 @@ export const Checkbox = <T extends FieldValues>({
   });
 
   return (
-    <$Checkbox
+    <BaseCheckbox
       error={fieldState.error?.message}
       value={value}
       checked={value}
@@ -48,4 +48,4 @@ export const Checkbox = <T extends FieldValues>({
 };
 
 Checkbox.Group = CheckboxGroup;
-Checkbox.Item = $Checkbox;
+Checkbox.Item = BaseCheckbox;

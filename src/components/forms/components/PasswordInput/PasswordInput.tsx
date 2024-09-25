@@ -4,12 +4,12 @@ import {
   type FieldValues
 } from "react-hook-form";
 import {
-  PasswordInput as $PasswordInput,
-  type PasswordInputProps as $PasswordInputProps
+  PasswordInput as BasePasswordInput,
+  type PasswordInputProps as BasePasswordInputProps
 } from "@mantine/core";
 
 export type PasswordInputProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$PasswordInputProps, "value" | "defaultValue">;
+  Omit<BasePasswordInputProps, "value" | "defaultValue">;
 
 export function PasswordInput<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function PasswordInput<T extends FieldValues>({
   });
 
   return (
-    <$PasswordInput
+    <BasePasswordInput
       value={value}
       onChange={(e) => {
         fieldOnChange(e);

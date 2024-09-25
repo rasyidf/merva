@@ -4,12 +4,12 @@ import {
   type UseControllerProps
 } from "react-hook-form";
 import {
-  Autocomplete as $Autocomplete,
-  type AutocompleteProps as $AutocompleteProps
+  Autocomplete as BaseAutocomplete,
+  type AutocompleteProps as BaseAutocompleteProps
 } from "@mantine/core";
 
 export type AutocompleteProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$AutocompleteProps, "value" | "defaultValue">;
+  Omit<BaseAutocompleteProps, "value" | "defaultValue">;
 
 export function Autocomplete<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function Autocomplete<T extends FieldValues>({
   });
 
   return (
-    <$Autocomplete
+    <BaseAutocomplete
       error={fieldState.error?.message}
       value={value}
       onChange={(e) => {

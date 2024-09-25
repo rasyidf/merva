@@ -1,18 +1,12 @@
 import FeatureA from "@/features/crud-feature";
-import FeatureB from "@/features/feature-b";
-import FeatureC from "@/features/feature-c";
-import Management from "@/features/management";
 import AuthFeature from "@/features/auth";
 import Marketing from "@/features/marketing";
 
-import { type FeatureMetadata } from "@/shared/types/FeatureMetadata";
+import { type FeatureMetadata } from "@/shared/types";
 
 const featuresRegistry = [
   Marketing,
-  FeatureA, // TableFeature
-  FeatureB, // ListFeature
-  FeatureC,
-  Management, // SettingsFeature
+  FeatureA, // TableFeature 
   AuthFeature,
 ] satisfies FeatureMetadata[];
 

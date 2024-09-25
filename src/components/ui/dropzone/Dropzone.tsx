@@ -160,7 +160,7 @@ const Dropzone: ForwardRefRenderFunction<HTMLDivElement, Omit<Props, 'ref'>> = (
               <SvgIcon name="trash" width={128} height={128} color={"var(--mantine-color-red-6)"} />
             </BaseDropzone.Reject>
             <BaseDropzone.Idle>
-              <SvgIcon name="upload-cloud" width={128} height={128} color={"var(--mantine-color-yellow-6)"} />
+              <SvgIcon name="uploadCloud" width={128} height={128} color={"var(--mantine-color-yellow-6)"} />
             </BaseDropzone.Idle>
             <LoadingOverlay visible={isLoading} />
             <Text size="md" fw={700} mt={24} fz={16}>

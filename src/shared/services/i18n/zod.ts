@@ -1,4 +1,4 @@
-import { ThirdPartyLocalization } from "@/shared/types/ThirdPartyLocalization";
+import { ThirdPartyLocalization } from "@/shared/types";
 
 export const ZodLocalization: ThirdPartyLocalization = {
   changeLanguage: (language: string): void => {

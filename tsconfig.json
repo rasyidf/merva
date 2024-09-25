@@ -30,7 +30,7 @@
     "**/*.cjs",
     "**/*.mjs",
     "vite.config.mts"
-, "src/shared/services/modals/service.tss"  ],
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -9,6 +9,7 @@ import {
   XCircle
 } from "@phosphor-icons/react";
 
+
 export const labels = [
   {
     value: "bug",

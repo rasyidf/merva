@@ -1,2 +1,2 @@
-export { PageHeader } from "./PageHeader";
-export { MainHeader } from "./MainHeader";
+export { PageHeader } from "./page-header";
+export { MainHeader } from "./main-header";

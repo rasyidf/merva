@@ -1,8 +1,9 @@
 
-import AppLogo from "@/components/ui/icon/AppLogo";
+
+import { AppLogo } from "@/components/ui/icon";
 import { isDev } from "@/shared/utils/constants";
 import { Accordion, Code, Container, Flex, Text, Title } from "@mantine/core";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouteError } from "react-router-dom";
 
 export const ErrorBoundary = () => {

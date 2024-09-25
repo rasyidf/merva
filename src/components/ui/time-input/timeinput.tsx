@@ -4,7 +4,7 @@ import {
 } from '@mantine/core';
 import {
   TimeInput,
-  type TimeInputProps as $TimeInputProps
+  type TimeInputProps as BaseTimeInputProps
 } from '@mantine/dates';
 
 import {
@@ -15,7 +15,7 @@ import {
 import { SvgIcon } from '../icon';
 
 export type TimeInputProps<T extends FieldValues> = UseControllerProps<T> &
-  $TimeInputProps;
+  BaseTimeInputProps;
 export function TimeInputForm<T extends FieldValues>({
   name,
   control,

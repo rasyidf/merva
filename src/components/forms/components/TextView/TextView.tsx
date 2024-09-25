@@ -1,5 +1,5 @@
 import {
-  TextInput as $TextInput,
+  TextInput as BaseTextInput,
   InputWrapper,
   Text,
   type InputWrapperProps as CoreInputWrapperProps

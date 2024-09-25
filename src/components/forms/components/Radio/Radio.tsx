@@ -3,11 +3,11 @@ import {
   useController,
   type FieldValues
 } from "react-hook-form";
-import { Radio as $Radio, type RadioProps as $RadioProps } from "@mantine/core";
+import { Radio as BaseRadio, type RadioProps as BaseRadioProps } from "@mantine/core";
 import { RadioGroup } from "./RadioGroup";
 
 export type RadioProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$RadioProps, "value" | "defaultValue">;
+  Omit<BaseRadioProps, "value" | "defaultValue">;
 
 export function Radio<T extends FieldValues>({
   name,
@@ -29,7 +29,7 @@ export function Radio<T extends FieldValues>({
   });
 
   return (
-    <$Radio
+    <BaseRadio
       value={value}
       onChange={(e) => {
         fieldOnChange(e);
@@ -42,4 +42,4 @@ export function Radio<T extends FieldValues>({
 }
 
 Radio.Group = RadioGroup;
-Radio.Item = $Radio;
+Radio.Item = BaseRadio;

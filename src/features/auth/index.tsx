@@ -1,5 +1,5 @@
 import { Navigate, RouteObject } from "react-router-dom";
-import { FeatureMetadata } from "@/shared/types/FeatureMetadata";
+import { FeatureMetadata } from "@/shared/types";
 import { compose } from "@/shared/utils";
 
 const AuthFeatureMetadata = {

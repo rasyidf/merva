@@ -6,6 +6,7 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/spotlight/styles.css";
+
 import { colorSchemeManager, defaultTheme } from "../services/theme";
 
 export const ThemeProvider = (props: { children: React.ReactNode; }) => {

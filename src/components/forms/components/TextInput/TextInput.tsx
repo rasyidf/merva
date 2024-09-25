@@ -4,12 +4,12 @@ import {
   type FieldValues
 } from "react-hook-form";
 import {
-  TextInput as $TextInput,
-  type TextInputProps as $TextInputProps
+  TextInput as BaseTextInput,
+  type TextInputProps as BaseTextInputProps
 } from "@mantine/core";
 
 export type TextInputProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$TextInputProps, "value" | "defaultValue">;
+  Omit<BaseTextInputProps, "value" | "defaultValue">;
 
 export function TextInput<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function TextInput<T extends FieldValues>({
   });
 
   return (
-    <$TextInput
+    <BaseTextInput
       value={value}
       onChange={(e) => {
         e.target.value = e.target.value.trimStart();

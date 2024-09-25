@@ -46,7 +46,7 @@ const InputDebounced: React.FC<InputDebouncedProps> = ({
       onChange={handleChange}
       placeholder={t(placeholderKey, "Cari")}
       radius={radius}
-      rightSection={<SvgIcon name="magnifying-glass" width={16} height={16} />}
+      rightSection={<SvgIcon name="magnifyingGlass" width={16} height={16} />}
       size="md"
       style={{ flexGrow: 1 }}
       width={fullWidth ? "100%" : 100}

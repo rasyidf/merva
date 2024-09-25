@@ -1,6 +1,6 @@
-import type { IconName } from "@/assets/icons/name";
+import type { IconName } from "@/assets/icons/types";
 import { SvgIcon } from "@/components/ui/icon";
-import { PartialDeep } from "@/shared/types/utils";
+import { PartialDeep } from "@/shared/types";
 import { type NotificationData, notifications } from "@mantine/notifications";
 
 
@@ -62,8 +62,8 @@ const createNotification = (
   };
   const iconNameMap: Record<string, IconName> = {
     success: "check",
-    error: "x-circle",
-    warning: "alert-triangle",
+    error: "xCircle",
+    warning: "alertTriangle",
     info: "info",
   };
 
@@ -75,7 +75,7 @@ const createNotification = (
     title,
     message,
     color,
-    icon: <SvgIcon name={iconName} color={iconColorVar} />,
+    icon: <SvgIcon name={iconName} color={iconColorVar} width={32} height={32}/>,
     styles: {
       ...commonStyles,
 

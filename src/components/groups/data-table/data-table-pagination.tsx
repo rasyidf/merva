@@ -1,7 +1,10 @@
 import { Box, Flex, Group, Pagination, Paper, Select, Text, rem, useMantineColorScheme } from "@mantine/core";
-import { CaretLeft, CaretRight, DotsThree } from "@phosphor-icons/react";
 import { useDataTableContext } from "./data-table-context";
+import { SvgIcon } from "@/components/ui/icon";
 
+const CaretLeft = () => <SvgIcon name="caretLeft" />;
+const CaretRight = () => <SvgIcon name="caretRight" />;
+const DotsThree = () => <SvgIcon name="dotsHorizontal" />;
 
 export function DataTablePagination<TData>() {
   const { table } = useDataTableContext<TData>();

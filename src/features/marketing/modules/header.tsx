@@ -15,8 +15,8 @@ import { useDisclosure } from "@mantine/hooks";
 
 import AppLogo from "@/components/ui/icon/AppLogo";
 import { useViewNavigate } from "@/shared/utils/routers";
-import { CaretDown } from "@phosphor-icons/react";
 import classes from "./header.module.scss";
+import { SvgIcon } from "@/components/ui/icon";
 
 export function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
@@ -56,7 +56,7 @@ export function Header() {
                 <Box component="span" mr={5}>
                   Layanan Kami
                 </Box>
-                <CaretDown style={{ width: rem(16), height: rem(16) }} color={theme.colors.blue[6]} />
+                <SvgIcon name="caretDown" color={theme.colors.grape[6]} />
               </Center>
             </Anchor>
             <Anchor component="a" href="#testimoni" className={classes.link}>

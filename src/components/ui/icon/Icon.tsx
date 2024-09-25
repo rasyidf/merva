@@ -1,8 +1,10 @@
 import { SVGProps } from "react";
 
 import href from "@/assets/icons/sprite.svg";
-import type { IconName } from "@/assets/icons/name";
+import { type IconName, iconNames } from "@/assets/icons/types";
 import clsx from "clsx";
+
+import styles from "./Icon.module.scss";
 
 export { IconName, href };
 
@@ -16,15 +18,6 @@ const sizeClassName = {
 } as const;
 
 type Size = keyof typeof sizeClassName;
-
-const childrenSizeClassName = {
-  font: "gap-1.5",
-  xs: "gap-1.5",
-  sm: "gap-1.5",
-  md: "gap-2",
-  lg: "gap-2",
-  xl: "gap-3",
-} satisfies Record<Size, string>;
 
 /**
  * Renders an SVG icon. The icon defaults to the size of the font. To make it
@@ -45,18 +38,15 @@ export function SvgIcon({
   size?: Size;
 }) {
 
+  const validName = iconNames.includes(name) ? name : 'square';
   return (
     <svg
+      width={16} height={16}
       {...props}
-      className={clsx(sizeClassName[size], "inline self-center", className)}
-      style={{
-        display: "inline",
-        alignSelf: "center",
-        pointerEvents: "none",
-      }}
+      className={clsx(sizeClassName[size], styles.icon, 'inline self-center', className)}
     >
-      <title>{name}</title>
-      <use href={`${href}#${name}`} />
+      <title>{validName}</title>
+      <use href={`${href}#${validName}`} />
     </svg>
   );
 }

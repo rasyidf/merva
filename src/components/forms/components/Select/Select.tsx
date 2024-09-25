@@ -4,12 +4,12 @@ import {
   type FieldValues
 } from "react-hook-form";
 import {
-  Select as $Select,
-  type SelectProps as $SelectProps
+  Select as BaseSelect,
+  type SelectProps as BaseSelectProps
 } from "@mantine/core";
 
 export type SelectProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<$SelectProps, "value" | "defaultValue">;
+  Omit<BaseSelectProps, "value" | "defaultValue">;
 
 export function Select<T extends FieldValues>({
   name,
@@ -32,7 +32,7 @@ export function Select<T extends FieldValues>({
   });
 
   return (
-    <$Select
+    <BaseSelect
       value={value}
       onChange={(e, option) => {
         fieldOnChange(e);

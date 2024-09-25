@@ -1,5 +1,5 @@
+import { SvgIcon } from '@/components/ui/icon';
 import { ActionIcon, Button } from '@mantine/core';
-import { ArrowDown, ArrowUp, ArrowsDownUp } from '@phosphor-icons/react';
 import { Column } from '@tanstack/react-table';
 
 interface DataTableColumnHeaderProps<TData, TValue> {
@@ -7,7 +7,7 @@ interface DataTableColumnHeaderProps<TData, TValue> {
   title: React.ReactNode;
 }
 
-export function DataTableColumnHeader<TData, TValue>({ column, title }: DataTableColumnHeaderProps<TData, TValue>) {
+export function DataTableColumnHeader<TData, TValue>({ column, title }: Readonly<DataTableColumnHeaderProps<TData, TValue>>) {
   const toggleSort = () => {
     column.toggleSorting(
       column.getIsSorted() === 'asc' ? true : column.getIsSorted() === 'desc' ? undefined : false
@@ -28,11 +28,11 @@ export function DataTableColumnHeader<TData, TValue>({ column, title }: DataTabl
       rightSection={
         <ActionIcon hidden={column.getIsSorted() === false} variant="subtle" size="sm" radius="sm" color="dark" onClick={toggleSort}>
           {column.getIsSorted() === 'desc' ? (
-            <ArrowDown width={16} height={16} />
+            <SvgIcon name='chevronUp' />
           ) : column.getIsSorted() === 'asc' ? (
-            <ArrowUp width={16} height={16} />
+            <SvgIcon name='chevronDown' />
           ) : (
-            <ArrowsDownUp width={16} height={16} />
+            <SvgIcon name='chevronsUpDown' />
           )}
         </ActionIcon>
       }

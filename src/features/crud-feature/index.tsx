@@ -1,7 +1,7 @@
-import { FeatureMetadata } from "@/shared/types/FeatureMetadata";
-import { NavigationConfig } from "@/shared/types/NavigationConfig";
+import { SvgIcon } from "@/components/ui/icon";
+import { FeatureMetadata } from "@/shared/types";
+import { NavigationConfig } from "@/shared/types";
 import { compose } from "@/shared/utils";
-import { BookOpen } from "@phosphor-icons/react";
 import { RouteObject } from "react-router-dom";
 
 const baseUri = "/app/product";
@@ -46,7 +46,7 @@ const FeatureAMetadata = {
       id: "entity-a",
       path: `${baseUri}/entity-a/`,
       title: "Table Feature",
-      icon: <BookOpen weight="duotone" />,
+      icon: <SvgIcon name="bookMarked" />,
     },
   ] as NavigationConfig[],
 } satisfies FeatureMetadata;
