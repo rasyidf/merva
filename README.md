@@ -1,46 +1,63 @@
 # MERVA Codebase
 
-Developing a super-app can be a challenging task, especially when you have to write the same code repeatedly. The MERVA codebase is designed to alleviate this pain by providing a comprehensive set of tools and utilities that streamline the development process, allowing you to create your super-app quickly and efficiently.
+Developing a super-app can be complex, especially when managing a large codebase. The **MERVA Codebase** is designed to simplify this process by providing a modular foundation that supports efficient development. 
 
-MERVA is a Monorepo designed with Module Federation in mind, enabling developers to dynamically load mini-apps and features within a web app. This allows for the independent development of each feature within its mini-app while still maintaining shared information and state management (such as authentication, payment, and database).
+MERVA is structured as a **monolith** with modularity in mind, allowing developers to encapsulate each feature into self-contained modules. This means you can start new projects by copying existing module folders into the new project with minimal configuration, enabling faster development and reuse of code.
+
+MERVA uses **Bun** as the package manager and runtime, delivering improved performance and enhanced tooling for modern JavaScript projects.
 
 ## Table of Contents
 
-1. [List of Utilities and Features](#list-of-utilities-and-features)
+1. [Key Features](#key-features)
 2. [Getting Started](#getting-started)
 3. [Contributing](#contributing)
 
-## List of Utilities and Features <a name="list-of-utilities-and-features"></a>
+## Key Features <a name="key-features"></a>
 
-The following is a list of utilities and features included in the MERVA Codebase:
+The MERVA Codebase offers the following utilities and features:
 
-- **Dynamic Routing**: Simplify the navigation between different components and views in your app.
-- **Feature Flagging**: Toggle features on and off easily, allowing for faster development and experimentation.
-- **Error Handling**: Catch and handle errors gracefully, improving the overall user experience.
-- **Services**:
-  - Logging: Monitor your app's performance and troubleshoot issues.
-  - Notification: Communicate with users through alerts and notifications.
-  - Authentication: Securely manage user access and authentication.
-- **State Management**: Centralize and manage the state of your app, making it easier to maintain and update.
-- **API Integration**: Streamline the process of connecting your app to external APIs and services.
-- **Performance Optimization**: Improve the performance of your app through efficient code and best practices.
-- **Testing**: Ensure the quality and reliability of your app through comprehensive testing tools.
-- **Internationalization**: Adapt your app to multiple languages and locales.
+- **Modular Structure**: Each feature is encapsulated in a reusable module, simplifying future projects.
+- **Dynamic Routing**: Automatically handle navigation between different modules and features.
+- **Feature Flagging**: Enable or disable specific features without codebase alterations.
+- **Global Error Handling**: Standardized error handling across all modules for better stability.
+- **Shared Services**:
+  - **Logging**: Track performance and log issues efficiently.
+  - **Notification Service**: Real-time communication with users via alerts and notifications.
+  - **Authentication**: Centralized user access and authentication management for all modules.
+- **State Management**: Maintain a global state while enabling independent module development.
+- **API Integration**: Streamlined connection to external services and APIs with built-in retry logic.
+- **Performance Optimization**: Optimized for speed and resource management using Bun.
+- **Testing Suite**: Unit, integration, and end-to-end testing tools for the entire codebase.
+- **Internationalization (i18n)**: Support for multiple languages and locales out of the box.
 
 ## Getting Started <a name="getting-started"></a>
 
-To get started with the MERVA Codebase, follow these steps:
+To start developing with the MERVA Codebase:
 
-1. Clone the repository, make sure to remove .git file, or try
-```npx degit https://github.com/rasyidf/merva.git```
-2. Install the required dependencies.
-3. Follow the instructions in the `README.md` file for setting up and configuring your environment.
-4. Begin developing your super-app using the provided utilities and features.
+1. Clone the repository and set up the environment:
+   ```bash
+   npx degit https://github.com/rasyidf/merva.git
+   ```
+2. Install dependencies using Bun:
+   ```bash
+   bun install
+   ```
+3. Set up your environment variables by following the instructions in `.env.example`.
+4. Start the development server:
+   ```bash
+   bun run dev
+   ```
+5. Begin development by creating and configuring your modules, or reuse existing ones by copying them into your project with minimal setup.
 
-For a more in-depth guide, refer to the [official documentation](#).
+For further details, check the [official documentation](#).
 
 ## Contributing <a name="contributing"></a>
 
-We welcome contributions to the MERVA Codebase! If you're interested in helping us improve and expand the project, please follow our [contribution guidelines](#).
+We welcome contributions! To contribute:
 
-If you have any questions, concerns, or suggestions, please don't hesitate to [open an issue](#) or reach out to our [maintainers](#).
+1. Review the [contribution guidelines](#).
+2. Fork the repository, make changes, and submit a pull request.
+3. If you have suggestions or issues, feel free to [open an issue](#) or contact our [maintainers](#).
+
+Let’s collaborate to continue building a robust and scalable codebase for super-app development!
+ 
