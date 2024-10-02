@@ -7,9 +7,10 @@ import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/spotlight/styles.css";
 
-import { colorSchemeManager, defaultTheme } from "../services/theme";
+import { PropsWithChildren } from "react";
+import { colorSchemeManager, defaultTheme } from ".";
 
-export const ThemeProvider = (props: { children: React.ReactNode; }) => {
+export const ThemeProvider = (props: PropsWithChildren) => {
   return (
     <MantineProvider
       classNamesPrefix="merva"

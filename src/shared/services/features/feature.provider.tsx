@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { useMemo } from "react";
-import { buildRoutes } from "../services/features/feature-route";
-import { useEnabledFeatures } from "../services/features/feature-store";
+import { buildRoutes } from "./feature.route";
+import { useEnabledFeatures } from "./feature.store";
 
 /**
  * Renders the main router for the application.
@@ -14,6 +14,5 @@ export function RouteProvider(): JSX.Element {
 
   return <RouterProvider router={router} />;
 }
-
 
 export default RouteProvider;

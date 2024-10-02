@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, PluginOption } from "vite";
 import path from "path";
 import react from "@vitejs/plugin-react-swc";
 import { spriteify } from "vite-plugin-spriteify";
@@ -25,7 +25,7 @@ export default defineConfig({
       withTypes: true,
       inputDir: "utils/svg-icons",
       outputDir: "src/assets/icons",
-    }),
+    }) as unknown as PluginOption,
     nodePolyfills({
       exclude: ["fs"],
 

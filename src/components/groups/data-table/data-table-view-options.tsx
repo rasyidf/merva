@@ -1,12 +1,12 @@
 
 import { Button, Checkbox, Menu, Stack, Text } from "@mantine/core";
-import { Sliders } from "@phosphor-icons/react";
 import { useDataTableContext } from "./data-table-context";
+import { SvgIcon } from "@/components/ui/icon";
 
 
 export function DataTableViewOptions<TData>() {
   const { table } = useDataTableContext<TData>();
-  
+
   return (
     <Menu position="bottom-end" offset={7} shadow="md">
       <Menu.Target>
@@ -14,7 +14,7 @@ export function DataTableViewOptions<TData>() {
           variant="subtle"
           size="sm"
           color="dark"
-          leftSection={<Sliders width={16} height={16} style={{ marginLeft: 8 }} />}
+          leftSection={<SvgIcon name="slidersHorizontal" width={16} height={16} style={{ marginLeft: 8 }} />}
         >
           View
         </Button>

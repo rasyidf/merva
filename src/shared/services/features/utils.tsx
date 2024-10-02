@@ -1,8 +1,7 @@
 import { IconName } from "@/assets/icons/types";
 import { SvgIcon } from "@/components/ui/icon";
-import { FeatureMetadata } from "@/shared/types";
-import { NavigationConfig } from "@/shared/types";
-import { useEnabledFeatures } from "./feature-store";
+import { FeatureMetadata, NavigationConfig } from "@/shared/types";
+import { useEnabledFeatures } from "./feature.store";
 
 
 // Function to get navigation items
@@ -28,6 +27,8 @@ export function useNavigationItems() {
         }));
       }
 
+      if (!feature.visible) return [];
+
       // Handling feature without explicit navigation property
       return [
         {
@@ -45,7 +46,6 @@ export function useNavigationItems() {
           ),
           group: feature.group,
           disabled: !feature.enabled,
-          visible: feature.visible !== false,
         } as NavigationConfig,
       ];
     });

@@ -37,7 +37,7 @@ export function MainHeader(props: Readonly<{
 
         <Group justify="right" m={0} p={0} px={8} gap={8} wrap="nowrap">
           <ThemeSwitcher />
-          <Menu shadow="md" width={200}>
+          <Menu shadow="md" width={200} zIndex={100}>
             <Menu.Target>
               <Button variant="subtle" radius="xl" p={8} leftSection={<Avatar size="sm" variant="default" >AD</Avatar>}></Button>
             </Menu.Target>

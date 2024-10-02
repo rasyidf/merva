@@ -1,6 +1,6 @@
 import { InputWrapper, createTheme } from "@mantine/core";
 import { ModalSettings } from "@mantine/modals/lib/context";
-import { localStorageColorSchemeManager } from "./colorSchemeManager";
+import { localStorageColorSchemeManager } from "./color-scheme-manager";
 
 export const defaultTheme = createTheme({
   fontFamily: "'Poppins', sans-serif",

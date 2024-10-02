@@ -1,8 +1,9 @@
+// acl.tsx
 import { ReactElement, ReactNode, useMemo } from "react";
 import { Navigate } from "react-router-dom";
 
 export type AclProps = {
-  userPolices: string[];
+  userPolicies: string[];
   children: ReactNode;
   policies: string[];
   redirect?: boolean;
@@ -11,14 +12,14 @@ export type AclProps = {
 };
 
 export const Acl = ({
-  userPolices,
+  userPolicies,
   policies,
   children,
   redirect = false,
   defaultRedirect = "/login",
   forbiddenCallback,
 }: AclProps): ReactElement | null => {
-  const auth = useMemo(() => policies.some((e) => userPolices.includes(e)), [policies, userPolices]);
+  const auth = useMemo(() => policies.some((e) => userPolicies.includes(e)), [policies, userPolicies]);
 
   if (auth) {
     return <>{children}</>;
@@ -31,6 +32,6 @@ export const Acl = ({
   if (redirect) {
     return <Navigate to={defaultRedirect} replace />;
   }
-  
+
   return null;
 };

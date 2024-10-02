@@ -1,15 +1,13 @@
 
-import { Table } from "@tanstack/react-table";
 
 import { DataTableViewOptions } from "./data-table-view-options";
 
 import { Button, Flex, TextInput } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
-import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import { useEffect } from "react";
-import { DataTableFacetedFilter } from "./filters/data-table-faceted-filter";
-import { priorities, statuses } from "@/shared/utils/constants/data";
 import { useDataTableContext } from "./data-table-context";
+import { DataTableFacetedFilter } from "./filters/data-table-faceted-filter";
+import { SvgIcon } from "@/components/ui/icon";
 
 interface DataTableToolbarProps<TData> {
   meta?: {
@@ -42,7 +40,7 @@ export function DataTableToolbar<TData>({ meta }: Readonly<DataTableToolbarProps
     <Flex align="center" justify="space-between">
       <Flex flex={1} align="center" gap={4}>
         <TextInput
-          leftSection={<MagnifyingGlass width={16} height={16} />}
+          leftSection={<SvgIcon name="magnifyingGlass" width={16} height={16} />}
           placeholder="Search..."
           defaultValue={debouncedValue}
           onChange={(event) => setDebouncedValue(event.target.value)}
@@ -63,7 +61,7 @@ export function DataTableToolbar<TData>({ meta }: Readonly<DataTableToolbarProps
             variant="transparent"
             color="dark"
             onClick={() => table.resetColumnFilters()}
-            rightSection={<X width={16} height={16} />}
+            rightSection={<SvgIcon name="x" width={16} height={16} />}
           >
             Reset
           </Button>

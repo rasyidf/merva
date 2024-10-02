@@ -1,3 +1,5 @@
+import { IconName } from "@/assets/icons/types";
+import { SvgIcon } from "@/components/ui/icon";
 import {
   Badge,
   Button,
@@ -12,7 +14,6 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
-import { PlusCircle } from "@phosphor-icons/react";
 import { Column } from "@tanstack/react-table";
 import * as React from "react";
 
@@ -22,7 +23,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   options: {
     label: string;
     value: string;
-    icon?: React.ComponentType<{ className?: string }>;
+    icon?: IconName;
   }[];
 }
 
@@ -45,7 +46,7 @@ export function DataTableFacetedFilter<TData, TValue>({
           style={{
             border: "1px dashed",
           }}
-          leftSection={<PlusCircle width={16} height={16} />}
+          leftSection={<SvgIcon name="plus" width={16} height={16} />}
           rightSection={
             selectedValues?.size > 0 && (
               <>
@@ -99,22 +100,17 @@ export function DataTableFacetedFilter<TData, TValue>({
                   }
                   const filterValues = Array.from(newSelectedValues);
                   column?.setFilterValue(filterValues.length ? filterValues : undefined);
-                }}                
+                }}
                 label={
                   <Group justify="space-between" align="center">
                     {option.icon && (
                       <ThemeIcon size="xs" variant="transparent">
-                        <option.icon />
+                        <SvgIcon name={option.icon} height={16} width={16} />
                       </ThemeIcon>
                     )}
                     <Text size="sm" miw={80}>
                       {option.label}
                     </Text>
-                    {/* {facets?.get(option.value) && (
-                      <Text size="sm">
-                        {facets.get(option.value)}
-                      </Text>
-                    )} */}
                   </Group>
                 }
               />

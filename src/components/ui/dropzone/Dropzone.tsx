@@ -1,6 +1,6 @@
 
-import { apifetch, logger, useAuth } from "@/shared/services";
-import { BASE_URL_API } from "@/shared/utils/constants";
+import { apiFetch, logger, useAuth } from "@/shared/services";
+import { APP_URL_API } from "@/shared/utils/constants";
 
 import { ActionIcon, Flex, Image, LoadingOverlay, Stack, Text, Tooltip } from "@mantine/core";
 import { Dropzone as BaseDropzone, DropzoneProps, FileRejection, IMAGE_MIME_TYPE } from "@mantine/dropzone";
@@ -34,16 +34,16 @@ const Dropzone: ForwardRefRenderFunction<HTMLDivElement, Omit<Props, 'ref'>> = (
 
     try {
       setIsLoading(true);
-      const response = await apifetch({
-        path: `${BASE_URL_API}/common/upload`,
+      const response = await apiFetch({
+        path: `${APP_URL_API}/common/upload`,
         method: "POST",
-        data: formData,
+        body: formData,
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${accessToken}`,
         },
       })
-        .then((res) => {
+        .then((res: any) => {
           return res;
         })
         .finally(() => {

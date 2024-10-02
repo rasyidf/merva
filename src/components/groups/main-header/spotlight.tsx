@@ -1,8 +1,8 @@
 import { Code, rem, TextInput } from "@mantine/core";
 import { spotlight, Spotlight } from "@mantine/spotlight";
-import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useState } from "react";
 import classes from "./main-header.module.css";
+import { SvgIcon } from "@/components/ui/icon";
 
 const data = ["Dashboard", "Settings", "Logout", "Tasks", "Users"];
 export const SpotlightBox = () => {
@@ -17,7 +17,7 @@ export const SpotlightBox = () => {
       placeholder="Cari"
       size="xs"
       radius="lg"
-      leftSection={<MagnifyingGlass style={{ width: rem(12), height: rem(12) }} weight="bold" />}
+      leftSection={<SvgIcon name="magnifyingGlass" />}
       rightSectionWidth={70}
       rightSection={<Code className={classes.searchCode}>Ctrl + K</Code>}
       styles={{ section: { pointerEvents: "none" }, input: { border: "none" } }}
@@ -26,7 +26,7 @@ export const SpotlightBox = () => {
     />
 
     <Spotlight.Root query={query} onQueryChange={setQuery}>
-      <Spotlight.Search placeholder="Cari..." leftSection={<MagnifyingGlass />} />
+      <Spotlight.Search placeholder="Cari..." leftSection={<SvgIcon name="magnifyingGlass" />} />
       <Spotlight.ActionsList>
         {items.length > 0 ? items : <Spotlight.Empty>Tidak Ditemukan Apapun...</Spotlight.Empty>}
       </Spotlight.ActionsList>

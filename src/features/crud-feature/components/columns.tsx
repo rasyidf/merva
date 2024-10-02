@@ -1,10 +1,11 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Badge, Checkbox, Flex, Group, Text, ThemeIcon } from "@mantine/core";
-import { labels, priorities, statuses } from "../../../shared/utils/constants/data";
-import { Task } from "../data/schema";
 import DataTable from "@/components/groups/data-table";
+import { SvgIcon } from "@/components/ui/icon";
+import { labels, priorities, statuses } from "@/shared/utils/constants/data";
+import { Badge, Checkbox, Flex, Group, Text, ThemeIcon } from "@mantine/core";
+import { Task } from "../data/schema";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -35,7 +36,7 @@ export const columns: ColumnDef<Task>[] = [
     minSize: 80,
     size: 80,
     header: ({ column }) => <DataTable.ColumnHeader column={column} title="Task" />,
-    cell: ({ row }) => <Text>{row.getValue("id") as String}</Text>,
+    cell: ({ row }) => <Text>{`${row.getValue("id")}`}</Text>,
     enableSorting: false,
     enableHiding: false,
   },
@@ -70,7 +71,7 @@ export const columns: ColumnDef<Task>[] = [
         <Flex align="center">
           {status.icon && (
             <ThemeIcon variant="transparent">
-              <status.icon height={16} width={16} />
+              <SvgIcon name={status.icon} height={16} width={16} />
             </ThemeIcon>
           )}
           <span>{status.label}</span>
@@ -93,7 +94,7 @@ export const columns: ColumnDef<Task>[] = [
         <Flex align="center">
           {priority.icon && (
             <ThemeIcon variant="transparent">
-              <priority.icon height={16} width={16} />
+              <SvgIcon name={priority.icon} height={16} width={16} />
             </ThemeIcon>
           )}
           <span>{priority.label}</span>

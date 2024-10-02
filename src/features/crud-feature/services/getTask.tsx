@@ -40,7 +40,7 @@ export async function getTasks(
     params.append("search", globalFilter);
   }
 
-  const mock = import.meta.env.DEV;
+  const mock = true;
   if (mock) {
     return import("./mockGetTask").then((mod) => mod.getTasks(sorting, filters, pagination, globalFilter));
   }

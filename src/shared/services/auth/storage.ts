@@ -1,16 +1,16 @@
-import axios from "axios";
+// auth.ts
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
-import { BASE_URL_API, BASIC_API_AUTH } from "@/shared/utils/constants";
+import { APP_URL_API, AUTH_BASIC_API, URL_LOGIN, URL_REFRESH, URL_REGISTER } from "@/shared/utils/constants";
 import { modals } from "@mantine/modals";
 import { AuthProps, AuthStore } from "../../types/auth";
-import { authApiFetch, queryClient } from "../api";
+import { authApiFetch } from "../api";
 import { decodeBase64 } from "../crypto/utils";
 import { loggerset } from "./logger";
 
-const defaultValues = {
-  baseUrl: BASE_URL_API,
+const defaultValues: AuthProps = {
+  baseUrl: APP_URL_API,
   accessToken: "",
   refreshToken: "",
   expired: 0,
@@ -24,7 +24,7 @@ const defaultValues = {
   status: "",
   isAuthenticated: false,
   isRefreshingToken: false,
-} satisfies AuthProps;
+};
 
 export const useAuth = create<AuthStore>()(
   loggerset(
@@ -37,24 +37,22 @@ export const useAuth = create<AuthStore>()(
             const now = new Date().getTime() / 1000;
             return now > expired;
           },
-          login: async ({ email, password }) => {
-            const { data } = await authApiFetch({
+          login: async ({ username, password }) => {
+            const data = await authApiFetch<any>({
               method: "POST",
-              path: "user/auth/login",
-              data: {
-                email,
+              path: APP_URL_API + URL_LOGIN,
+              body: JSON.stringify({
+                username,
                 password,
-              },
+              }),
               headers: {
-                Authorization: BASIC_API_AUTH,
+                Authorization: AUTH_BASIC_API,
               },
-            }).then((res) => res.data);
+            });
+
             const jwtPayload = data.tokens.accessToken.split(".")[1];
             const decodedBase = decodeBase64(jwtPayload);
             const decoded = JSON.parse(String.fromCharCode(...decodedBase));
-
-            // set axios.defaults.headers.common.Authorization
-            axios.defaults.headers.common.Authorization = `Bearer ${data.tokens.accessToken}`;
 
             set((state) => ({
               ...state,
@@ -67,34 +65,30 @@ export const useAuth = create<AuthStore>()(
               ...data.user,
             }));
           },
-          register: async ({ email, password, name, gender }) => {
-            const response = await authApiFetch({
+          register: async ({ email, password, name }) => {
+            const data = await authApiFetch<any>({
               method: "POST",
-              path: "user/auth/register",
-              data: {
+              path: APP_URL_API + URL_REGISTER,
+              body: JSON.stringify({
                 email,
                 password,
-                name,
-                gender,
-              },
+                name
+              }),
               headers: {
-                Authorization: BASIC_API_AUTH,
+                Authorization: AUTH_BASIC_API,
               },
             });
+
             set((state) => ({
               ...state,
-              ...response.data,
+              ...data,
             }));
           },
           logout: () => {
-            // remove axios.defaults.headers.common.Authorization
-            axios.defaults.headers.common.Authorization = undefined;
-            // clear sessionStorage and localStorage
+            // Clear sessionStorage and localStorage
             sessionStorage.clear();
             localStorage.clear();
-            queryClient.invalidateQueries();
-            queryClient.cancelQueries();
-            queryClient.resetQueries();
+            // Close all modals and reset state
             modals.closeAll();
             set(() => defaultValues);
           },
@@ -113,33 +107,29 @@ export const useAuth = create<AuthStore>()(
 
             set((state) => ({ ...state, isRefreshingToken: true }));
 
-            const data = await authApiFetch({
+            const data = await authApiFetch<any>({
               method: "GET",
-              path: "user/auth/refresh",
-
+              path: APP_URL_API + URL_REFRESH,
               headers: {
                 Authorization: `Bearer ${refreshToken}`,
               },
-            })
-              .then((res) => res.data)
-              .catch((err) => {
-                set((state) => ({ ...state, isRefreshingToken: false }));
-                throw err;
-              });
+            }).catch((err) => {
+              set((state) => ({ ...state, isRefreshingToken: false }));
+              throw err;
+            });
+
             const jwtPayload = data.accessToken.split(".")[1];
             const decodedBase = decodeBase64(jwtPayload);
             const decoded = JSON.parse(String.fromCharCode(...decodedBase));
-            axios.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
 
-            set((state) => {
-              return {
-                ...state,
-                expired: decoded.exp,
-                refreshToken: data.refreshToken,
-                isRefreshingToken: false,
-                ...data,
-              };
-            });
+            set((state) => ({
+              ...state,
+              expired: decoded.exp,
+              refreshToken: data.refreshToken,
+              isRefreshingToken: false,
+              ...data,
+            }));
+
             return { accessToken: data.accessToken };
           },
           setBaseUrl: (url) => {
@@ -152,10 +142,10 @@ export const useAuth = create<AuthStore>()(
           },
         }),
         {
-          name: "cheese",
+          name: "auth",
           storage: createJSONStorage(() => localStorage),
-        },
-      ),
-    ),
-  ),
+        }
+      )
+    )
+  )
 );

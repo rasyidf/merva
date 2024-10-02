@@ -1,5 +1,5 @@
 
-import { BASE_URL_API, isDev } from "@/shared/utils/constants";
+import { APP_URL_API } from "@/shared/utils/constants";
 import { globalNavigate } from "@/shared/utils/routers/helpers";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { useAuth } from "../auth";
@@ -13,13 +13,12 @@ type AdditionalRequestProps = {
 type Props = AxiosRequestConfig<any> & AdditionalRequestProps;
 
 const instance = axios.create({
-  baseURL: BASE_URL_API,
+  baseURL: APP_URL_API,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-const verbose = isDev;
 
 instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string]: any; }>) => {
   const originalConfig = error.config as { _retry: boolean; } & AxiosRequestConfig;
@@ -30,25 +29,22 @@ instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string
 
   if (!isBearer) {
     useAuth.getState().logout();
-    if (verbose) {
-      logger.error("Non-Bearer token detected. Logging out.");
-    }
+    logger.error("Non-Bearer token detected. Logging out.");
   }
 
   // handle 500 errors
   if (error?.response?.status === 500) {
-    if (verbose) {
-      logger.error("API request error, server:", error);
-    }
+
+    logger.error("API request error, server:", error);
+
     return Promise.reject(error);
   }
 
   // handle 404 errors
 
   if (error?.response?.status === 404) {
-    if (verbose) {
-      logger.error("API request error, server:", error);
-    }
+    logger.error("API request error, server:", error);
+
     return Promise.reject(error);
   }
 
@@ -61,23 +57,20 @@ instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string
         originalConfig.headers.Authorization = `Bearer ${accessToken}`;
       }
 
-      if (verbose) {
-        logger.debug("Token refreshed. Retrying original request.");
-      }
+      logger.debug("Token refreshed. Retrying original request.");
+
       return instance(originalConfig);
     } catch (_error) {
-      if (verbose) {
-        logger.error("Token refresh failed:", _error);
-      }
+      logger.error("Token refresh failed:", _error);
+
       useAuth.getState().logout();
       globalNavigate?.("/app/login");
       return Promise.reject(_error);
     }
   }
 
-  if (verbose) {
-    logger.error("API request error:", error);
-  }
+  logger.error("API request error:", error);
+
 
   return Promise.reject(error);
 });
@@ -85,7 +78,7 @@ instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string
 export async function authApiFetch({ path, filter, ...axiosConfig }: Props): Promise<AxiosResponse<any, any>> {
   const url = buildUrl(path, filter);
 
-  const { accessToken = "" } = await useAuth.getState();
+  const { accessToken = "" } = useAuth.getState();
 
   return instance
     .request({
@@ -123,7 +116,7 @@ export default async function apifetch({ path, filter, ...axiosConfig }: Props):
 }
 
 export function buildUrl(path: string, filter?: Record<string, any> | URLSearchParams): string {
-  const url = new URL(`${path}`, `${BASE_URL_API}`);
+  const url = new URL(`${path}`, `${APP_URL_API}`);
   return url.toString();
 }
 

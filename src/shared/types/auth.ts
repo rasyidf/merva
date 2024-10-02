@@ -17,7 +17,7 @@ export type AuthProps = {
   roles: string[];
 };
 export type LoginProps = {
-  email: string;
+  username: string;
   password: string;
 };
 type RegisProps = {

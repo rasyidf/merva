@@ -1,13 +1,5 @@
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUp,
-  CheckCircle,
-  Circle,
-  MarkerCircle,
-  Timer,
-  XCircle
-} from "@phosphor-icons/react";
+import { IconName } from "@/assets/icons/types";
+
 
 
 export const labels = [
@@ -29,44 +21,52 @@ export const statuses = [
   {
     value: "backlog",
     label: "Backlog",
-    icon: MarkerCircle,
+    icon: "bookMarked",
   },
   {
     value: "todo",
     label: "Todo",
-    icon: Circle,
+    icon: "square",
   },
   {
     value: "in progress",
     label: "In Progress",
-    icon: Timer,
+    icon: "clock5",
   },
   {
     value: "done",
     label: "Done",
-    icon: CheckCircle,
+    icon: "checkCircle",
   },
   {
     value: "canceled",
     label: "Canceled",
-    icon: XCircle,
+    icon: "xCircle",
   },
-];
+] satisfies {
+  label: string;
+  value: string;
+  icon: IconName;
+}[];
 
 export const priorities = [
   {
     label: "Low",
     value: "low",
-    icon: ArrowDown,
+    icon: "caretDown",
   },
   {
     label: "Medium",
     value: "medium",
-    icon: ArrowRight,
+    icon: "caretRight",
   },
   {
     label: "High",
     value: "high",
-    icon: ArrowUp,
+    icon: "caretUp",
   },
-];
+] satisfies {
+  label: string;
+  value: string;
+  icon: IconName;
+}[];

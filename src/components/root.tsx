@@ -1,4 +1,4 @@
-import { LanguageProvider, QueryProvider, RouteProvider, ThemeProvider } from ".";
+import { LanguageProvider, QueryProvider, RouteProvider, ThemeProvider } from "../shared";
 
 function App() {
   return (

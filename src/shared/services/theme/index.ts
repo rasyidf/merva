@@ -1,2 +1,2 @@
-export * from "./defaultTheme";
+export * from "./default-theme";
 export * from "./utils";
