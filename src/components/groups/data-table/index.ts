@@ -6,7 +6,7 @@ import { DataTableToolbar } from "./data-table-toolbar";
 import { DataTableViewOptions } from "./data-table-view-options";
 import { DataTable as DataTableContainer } from "./data-table";
 import { DataTableFacetedFilter } from "./filters";
-export { useDataTable } from "./use-data-table";
+export { useDataTable } from "./utils/use-data-table";
 
 
 const DataTable = {
