@@ -21,12 +21,19 @@ export function DataTableColumnHeader<TData, TValue>({ column, title }: Readonly
       fullWidth
       radius="sm"
       color="dark"
-      styles={{
+      styles={() => ({
         label: { justifyContent: 'start', textAlign: "start" },
         inner: { justifyContent: 'space-between', width: '100%' }
-      }}
+      })}
       rightSection={
-        <ActionIcon hidden={column.getIsSorted() === false} variant="subtle" size="sm" radius="sm" color="dark" onClick={toggleSort}>
+        <ActionIcon
+          hidden={column.getIsSorted() === false}
+          variant="subtle"
+          size="sm"
+          radius="sm"
+          color="dark"
+          onClick={toggleSort}
+        >
           {column.getIsSorted() === 'desc' ? (
             <SvgIcon name='chevronUp' />
           ) : column.getIsSorted() === 'asc' ? (

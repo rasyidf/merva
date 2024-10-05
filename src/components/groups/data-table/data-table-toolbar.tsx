@@ -1,18 +1,17 @@
-
-
-import { DataTableViewOptions } from "./data-table-view-options";
-
-import { Button, Flex, TextInput } from "@mantine/core";
-import { useDebouncedState } from "@mantine/hooks";
-import { useEffect } from "react";
-import { useDataTableContext } from "./data-table-context";
-import { DataTableFacetedFilter } from "./filters/data-table-faceted-filter";
-import { SvgIcon } from "@/components/ui/icon";
+import { SvgIcon } from '@/components/ui/icon';
+import { Button, Flex, TextInput } from '@mantine/core';
+import { useDebouncedState } from '@mantine/hooks';
+import { useEffect } from 'react';
+import { useDataTableContext } from './data-table-context';
+import { DataTableViewOptions } from './data-table-view-options';
+import { DataTableFacetedFilter } from './filters/data-table-faceted-filter';
 
 interface DataTableToolbarProps<TData> {
   meta?: {
     filterableColumns: {
-      id: string; title: string; options: {
+      id: string;
+      title: string;
+      options: {
         label: string;
         value: string;
         [key: string]: any;
@@ -21,7 +20,9 @@ interface DataTableToolbarProps<TData> {
   };
 }
 
-export function DataTableToolbar<TData>({ meta }: Readonly<DataTableToolbarProps<TData>>) {
+export function DataTableToolbar<TData>({
+  meta,
+}: Readonly<DataTableToolbarProps<TData>>) {
   const { table } = useDataTableContext<TData>();
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -29,12 +30,14 @@ export function DataTableToolbar<TData>({ meta }: Readonly<DataTableToolbarProps
 
   useEffect(() => {
     table.setGlobalFilter(debouncedValue);
-  }, [debouncedValue]);
+  }, [debouncedValue, table]);
 
-  const filterableColumns = [
-    // Add more filterable columns as needed
-    ...(meta?.filterableColumns ?? []),
-  ];
+  const filterableColumns = meta?.filterableColumns ?? [];
+
+  const handleClearAllFilters = () => {
+    table.resetColumnFilters();
+    table.setGlobalFilter(undefined);
+  };
 
   return (
     <Flex align="center" justify="space-between">
@@ -51,8 +54,8 @@ export function DataTableToolbar<TData>({ meta }: Readonly<DataTableToolbarProps
             <DataTableFacetedFilter
               key={id}
               column={table.getColumn(id)}
-              title={title}
               options={options}
+              title={title}
             />
           ) : null
         )}
@@ -60,7 +63,7 @@ export function DataTableToolbar<TData>({ meta }: Readonly<DataTableToolbarProps
           <Button
             variant="transparent"
             color="dark"
-            onClick={() => table.resetColumnFilters()}
+            onClick={handleClearAllFilters}
             rightSection={<SvgIcon name="x" width={16} height={16} />}
           >
             Reset

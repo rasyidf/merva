@@ -1,5 +1,5 @@
-import { IconName } from "@/assets/icons/types";
-import { SvgIcon } from "@/components/ui/icon";
+import { IconName } from '@/assets/icons/types';
+import { SvgIcon } from '@/components/ui/icon';
 import {
   Badge,
   Button,
@@ -12,115 +12,129 @@ import {
   Text,
   TextInput,
   ThemeIcon,
-} from "@mantine/core";
-import { useDebouncedValue } from "@mantine/hooks";
-import { Column } from "@tanstack/react-table";
-import * as React from "react";
+} from '@mantine/core';
+import { useCallback, useMemo, useState } from 'react';
+import { Column } from '@tanstack/react-table';
 
-interface DataTableFacetedFilterProps<TData, TValue> {
-  column?: Column<TData, TValue>;
-  title?: string;
-  options: {
-    label: string;
-    value: string;
-    icon?: IconName;
-  }[];
+interface Option {
+  label: string;
+  value: string;
+  icon?: IconName;
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
-  column,
-  title,
-  options,
-}: Readonly<DataTableFacetedFilterProps<TData, TValue>>) {
-  const selectedValues = new Set(column?.getFilterValue() as string[]);
-  const [filterValue, setFilterValue] = React.useState<string | undefined>(undefined);
-  const [filter] = useDebouncedValue(filterValue, 200);
+interface CheckboxFilterProps<TData> {
+  options: Option[];
+  title: string;
+  column?: Column<TData, unknown>;
+}
 
-  const filteredOptions = options.filter((option) => option.label.toLowerCase().includes((filter ?? "").toLowerCase()));
+export function DataTableFacetedFilter<TData>({
+  options,
+  title,
+  column,
+}: Readonly<CheckboxFilterProps<TData>>) {
+  const [filterValue, setFilterValue] = useState<string>('');
+
+  // Get the current filter value from the column
+  const columnFilterValue = (column?.getFilterValue() ?? []) as string[];
+
+  const filteredOptions = useMemo(() => {
+    return options.filter((option) =>
+      option.label.toLowerCase().includes(filterValue.toLowerCase())
+    );
+  }, [filterValue, options]);
+
+  const handleSelect = useCallback(
+    (value: string) => {
+      const newSelected = new Set(columnFilterValue);
+      if (newSelected.has(value)) {
+        newSelected.delete(value);
+      } else {
+        newSelected.add(value);
+      }
+      column?.setFilterValue(Array.from(newSelected));
+    },
+    [columnFilterValue, column]
+  );
+
+  const handleSelectAll = useCallback(() => {
+    if (columnFilterValue.length === options.length) {
+      column?.setFilterValue([]);
+    } else {
+      column?.setFilterValue(options.map((option) => option.value));
+    }
+  }, [columnFilterValue, options, column]);
+
+  const handleClearFilters = useCallback(() => {
+    column?.setFilterValue([]);
+  }, [column]);
+
+  const selectAll = columnFilterValue.length === options.length;
 
   return (
     <Popover position="bottom-start">
       <Popover.Target>
         <Button
-          color="var(--mantine-color-text)"
-          style={{
-            border: "1px dashed",
-          }}
-          leftSection={<SvgIcon name="plus" width={16} height={16} />}
-          rightSection={
-            selectedValues?.size > 0 && (
-              <>
-                <Divider orientation="vertical" mr={8} />
-                <Flex columnGap={4}>
-                  {selectedValues.size > 2 ? (
-                    <Badge variant="light" color="gray" radius="sm">
-                      {selectedValues.size} selected
-                    </Badge>
-                  ) : (
-                    options
-                      .filter((option) => selectedValues.has(option.value))
-                      .map((option) => (
-                        <Badge variant="light" color="gray" radius="sm" key={option.value}>
-                          {option.label}
-                        </Badge>
-                      ))
-                  )}
-                </Flex>
-              </>
-            )
-          }
           variant="outline"
           size="sm"
           radius="md"
+          rightSection={
+            columnFilterValue.length > 0 && (
+              <Flex>
+                {columnFilterValue.length > 2 ? (
+                  <Badge>{columnFilterValue.length} selected</Badge>
+                ) : (
+                  columnFilterValue.map((value) => (
+                    <Badge key={value} variant="light">
+                      {options.find((opt) => opt.value === value)?.label}
+                    </Badge>
+                  ))
+                )}
+              </Flex>
+            )
+          }
         >
           {title}
         </Button>
       </Popover.Target>
       <Popover.Dropdown p={8}>
-        <Stack gap={8} justify="stretch">
+        <Stack gap={8}>
           <TextInput
             size="xs"
-            placeholder={title}
+            placeholder={`Filter ${title}`}
             value={filterValue}
             onChange={(event) => setFilterValue(event.target.value)}
           />
-          {filteredOptions.map((option, index) => {
-            return (
-              <Checkbox
-                w="100%"
-                size="sm"
-                key={option.value + index + selectedValues.size}
-                defaultChecked={selectedValues.has(option.value)}
-                onClick={() => {
-                  const newSelectedValues = new Set(selectedValues);
-                  if (newSelectedValues.has(option.value)) {
-                    newSelectedValues.delete(option.value);
-                  } else {
-                    newSelectedValues.add(option.value);
-                  }
-                  const filterValues = Array.from(newSelectedValues);
-                  column?.setFilterValue(filterValues.length ? filterValues : undefined);
-                }}
-                label={
-                  <Group justify="space-between" align="center">
-                    {option.icon && (
-                      <ThemeIcon size="xs" variant="transparent">
-                        <SvgIcon name={option.icon} height={16} width={16} />
-                      </ThemeIcon>
-                    )}
-                    <Text size="sm" miw={80}>
-                      {option.label}
-                    </Text>
-                  </Group>
-                }
-              />
-            );
-          })}
-
-          {selectedValues.size > 0 && (
+          <Checkbox
+            label="Select All"
+            checked={selectAll}
+            indeterminate={
+              columnFilterValue.length > 0 &&
+              columnFilterValue.length < options.length
+            }
+            onChange={handleSelectAll}
+          />
+          {filteredOptions.map((option) => (
+            <Checkbox
+              key={option.value}
+              label={
+                <Group align="center">
+                  {option.icon && (
+                    <ThemeIcon size="xs" variant="transparent">
+                      <SvgIcon name={option.icon} height={16} width={16} />
+                    </ThemeIcon>
+                  )}
+                  <Text size="sm">{option.label}</Text>
+                </Group>
+              }
+              checked={columnFilterValue.includes(option.value)}
+              onChange={() => handleSelect(option.value)}
+            />
+          ))}
+          {columnFilterValue.length > 0 && (
             <>
               <Divider />
-              <Button py={0} size="xs" variant="transparent" onClick={() => column?.setFilterValue(undefined)}>
+              <Button size="xs" variant="transparent" onClick={handleClearFilters}>
                 Clear filters
               </Button>
             </>
