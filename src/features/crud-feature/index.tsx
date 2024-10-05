@@ -17,25 +17,25 @@ const FeatureAMetadata = {
         {
           index: true,
           async lazy() {
-            return compose(await import("./pages/List"));
+            return compose(await import("./pages/list"));
           },
         },
         {
           path: "details/:id",
           async lazy() {
-            return compose(await import("./pages/Details"));
+            return compose(await import("./pages/details"));
           },
         },
         {
           path: "create",
           async lazy() {
-            return compose(await import("./pages/Create"));
+            return compose(await import("./pages/create"));
           },
         },
         {
           path: "edit/:id",
           async lazy() {
-            return compose(await import("./pages/Edit"));
+            return compose(await import("./pages/edit"));
           },
         },
       ],

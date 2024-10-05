@@ -9,6 +9,7 @@ import { getTasks } from "../services/getTask";
 
 export const EntityList = () => {
   const { table, isLoading, error } = useDataTable<Task, any>({
+    key: ["task"],
     columns,
     dataFetcher: ({ sorting, filters, pagination, globalFilter }) => {
       return getTasks(sorting, filters, pagination, globalFilter);

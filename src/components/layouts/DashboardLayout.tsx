@@ -1,13 +1,13 @@
 import { ActionIcon, AppShell, Drawer, Flex, Paper, ScrollArea } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import { useCallback, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import { MainHeader } from "../groups/main-header/main-header";
 import { MainNavbar } from "../groups/main-navbar";
+import { SvgIcon } from "../ui/icon";
 
 import classes from "./DashboardLayout.module.scss";
-import { SvgIcon } from "../ui/icon";
 
 export const DashboardLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
