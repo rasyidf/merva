@@ -28,7 +28,6 @@ export function renderNavItem({
       variant="light"
       key={`nav-${navItem.id}`}
       onClick={handleClick}
-      my={2}
       label={`${navItem.title}`}
       active={activePath.startsWith(navItem?.path ?? "#") || flatChildPaths.includes(activePath)}
       leftSection={navItem.icon}
