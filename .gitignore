@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 vite.config.ts.timestamp-*
+tsconfig.node.tsbuildinfo
 
 # Editor directories and files
 .vscode/*

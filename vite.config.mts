@@ -50,7 +50,6 @@ export default defineConfig({
       "react-dom",
       "react-router-dom",
       "recharts",
-      "lodash",
       "@mantine/core",
       "@mantine/hooks",
       "@mantine/dates",
@@ -68,7 +67,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          utils: ["lodash", "buffer"],
+          utils: ["buffer"],
           storage: ["axios", "zustand", "zustand/middleware"],
           runtime: ["react", "react/jsx-runtime", "react-dom"],
           router: ["react-router-dom"],

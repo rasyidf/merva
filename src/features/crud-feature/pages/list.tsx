@@ -54,7 +54,6 @@ export const EntityList = () => {
               setModalState({ action: "create", id: "" });
               open();
             }}
-            color="blue"
           >
             Create Task
           </Button>
