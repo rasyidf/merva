@@ -1,5 +1,5 @@
 import { ColumnFilter, SortingState, TableState, Updater } from "@tanstack/react-table";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { parse, ParsedQs, stringify } from "qs-esm";
 
@@ -10,6 +10,8 @@ export function useSyncWithSearchParams(
 ) {
   const location = useLocation();
   const navigate = useNavigate();
+  const isInitialRender = useRef(true);
+  const prevQueryString = useRef(location.search);
 
   useEffect(() => {
     if (enableSync) {
@@ -23,8 +25,8 @@ export function useSyncWithSearchParams(
 
       const pageIndex = parseInt((queryParams.p as string) ?? "0", 10);
       const pageSize = parseInt((queryParams.z as string) ?? "10", 10);
-      const sorting = queryParams.sort as unknown as SortingState ?? [];
-      const columnFilters = queryParams.f as unknown as ColumnFilter[] ?? [];
+      const sorting = (queryParams.sort as unknown as SortingState) ?? [];
+      const columnFilters = (queryParams.f as unknown as ColumnFilter[]) ?? [];
       const globalFilter = queryParams.q as string ?? "";
 
       setState((prevState) => {
@@ -55,13 +57,27 @@ export function useSyncWithSearchParams(
       };
 
       const newQueryString = stringify(queryParams, {
-        addQueryPrefix: true, encodeValuesOnly: true,
+        addQueryPrefix: true,
+        encodeValuesOnly: true,
         arrayFormat: "indices",
       });
 
-      if (location.search !== newQueryString) {
-        navigate({ search: newQueryString }, { replace: true });
+      if (location.search !== newQueryString && prevQueryString.current !== newQueryString) {
+        if (isInitialRender.current) {
+          // Skip navigating on the initial render to prevent infinite loop
+          isInitialRender.current = false;
+        } else {
+          navigate({ search: newQueryString }, { replace: true });
+        }
+        prevQueryString.current = newQueryString;
       }
     }
   }, [enableSync, state, navigate, location.search]);
+
+  // Reset to default page on infinite loop detection
+  useEffect(() => {
+    if (enableSync && location.search === "") {
+      navigate({ search: "?p=0&z=10" }, { replace: true });
+    }
+  }, [enableSync, location.search, navigate]);
 }

@@ -1,24 +1,13 @@
 import { SvgIcon } from '@/components/ui/icon';
-import { Button, Flex, TextInput } from '@mantine/core';
+import { ActionIcon, Button, Flex, TextInput } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDataTableContext } from './data-table-context';
 import { DataTableViewOptions } from './data-table-view-options';
+import { DataTableToolbarProps } from './DataTableToolbarProps';
+import DataTableDateFilter from './filters/data-table-date-filter';
 import { DataTableFacetedFilter } from './filters/data-table-faceted-filter';
-
-interface DataTableToolbarProps<TData> {
-  meta?: {
-    filterableColumns: {
-      id: string;
-      title: string;
-      options: {
-        label: string;
-        value: string;
-        [key: string]: any;
-      }[];
-    }[];
-  };
-}
+import DataTableNumberFilter from './filters/data-table-number-filter';
 
 export function DataTableToolbar<TData>({
   meta,
@@ -27,6 +16,7 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const [debouncedValue, setDebouncedValue] = useDebouncedState(table.getState().globalFilter, 500);
+  const [filtersVisible, setFiltersVisible] = useState<boolean>(true);
 
   useEffect(() => {
     table.setGlobalFilter(debouncedValue);
@@ -34,9 +24,14 @@ export function DataTableToolbar<TData>({
 
   const filterableColumns = meta?.filterableColumns ?? [];
 
+
   const handleClearAllFilters = () => {
     table.resetColumnFilters();
     table.setGlobalFilter(undefined);
+  };
+
+  const handleToggleFilters = () => {
+    setFiltersVisible((prev) => !prev);
   };
 
   return (
@@ -46,19 +41,54 @@ export function DataTableToolbar<TData>({
           leftSection={<SvgIcon name="magnifyingGlass" width={16} height={16} />}
           placeholder="Search..."
           defaultValue={debouncedValue}
+          size="sm"
           onChange={(event) => setDebouncedValue(event.target.value)}
           w={170}
         />
-        {filterableColumns.map(({ id, title, options }) =>
-          table.getColumn(id) ? (
-            <DataTableFacetedFilter
-              key={id}
-              column={table.getColumn(id)}
-              options={options}
-              title={title}
-            />
-          ) : null
-        )}
+
+
+        <ActionIcon variant={filtersVisible ? "subtle" : "light"} size="sm" onClick={handleToggleFilters}>
+          <SvgIcon name="filter" width={16} height={16} />
+        </ActionIcon>
+
+        {filtersVisible && filterableColumns.map((columnMeta) => {
+          if (!columnMeta) return null;
+
+          const { id, title, type, ...rest } = columnMeta;
+          const column = table.getColumn(id.toString());
+          if (!column) return null;
+
+          switch (type) {
+            case 'number':
+              return (
+                <DataTableNumberFilter
+                  key={`${id.toString()}-${type}`}
+                  column={column}
+                  title={title}
+                />
+              );
+            case 'date':
+              return (
+                <DataTableDateFilter
+                  key={`${id.toString()}-${type}`}
+                  column={column}
+                  title={title}
+                />
+              );
+            case 'text':
+              return (
+                <DataTableFacetedFilter
+                  key={`${id.toString()}-${type}`}
+                  column={column}
+                  options={(rest as any).options ?? []}
+                  title={title}
+                />
+              );
+            default:
+              return null;
+          }
+        })}
+
         {isFiltered && (
           <Button
             variant="transparent"

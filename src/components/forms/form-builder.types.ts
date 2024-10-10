@@ -1,6 +1,7 @@
 import { PropsWithChildren, ReactNode } from "react";
 import { FieldValues, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
+import { MetaField } from "./fields-list";
 
 export type FieldType = 'text' | 'number' | 'date' | 'custom';
 
@@ -9,6 +10,7 @@ export interface BaseField {
   type: FieldType;
   group?: string;
   colSpan?: number;
+  [key: PropertyKey]: any;
 }
 
 export type EditorProps = {
@@ -30,6 +32,7 @@ export type FieldRenderer = {
   editor: (props: EditorProps) => ReactNode;
   view?: (props: EditorProps) => ReactNode;
 };
+
 export interface Fields {
   [key: string]: {
     editor: (props: EditorProps) => JSX.Element;
@@ -64,7 +67,7 @@ export type FormBuilderProps = PropsWithChildren<{
 
 
 export interface RenderFieldProps {
-  field: Field;
+  field: MetaField;
   data?: Record<string, any>;
   readonly?: boolean;
 }

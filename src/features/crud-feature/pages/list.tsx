@@ -1,13 +1,41 @@
 import DataTable, { useDataTable } from "@/components/groups/data-table";
 import { PageHeader } from "@/components/groups/main-header";
-import { columns, filterableColumns } from "../components/columns";
+import { filterableColumns, useTaskColumns } from "../components/columns";
 
-import { Alert, Box, LoadingOverlay, Paper } from "@mantine/core";
+import { Notify } from "@/shared/services";
+import { modalService } from "@/shared/services/modals/service";
+import { Alert, Box, Button, Drawer, Group, LoadingOverlay, Paper } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { useState } from "react";
 import { Task } from "../data/schema";
 import { getTasks } from "../services/getTask";
+import EntityCreate from "./create";
+import EntityEdit from "./edit";
+import EntityDetails from "./details";
 
 
 export const EntityList = () => {
+
+  const [modalState, setModalState] = useState<{
+    action: 'create' | 'update' | 'detail';
+    id: string;
+  } | null>(null);
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const columns = useTaskColumns({
+    onEdit: ({ id }) => {
+      setModalState({ action: "update", id });
+      return open();
+    },
+    onDelete: ({ id }) => modalService.deleteModal({
+      message: "Are you sure you want to delete this task?",
+      onConfirm: () => {
+        Notify.success("Success", "Task " + id + " deleted successfully");
+      },
+    }),
+
+  });
+
   const { table, isLoading, error } = useDataTable<Task, any>({
     key: ["task"],
     columns,
@@ -19,7 +47,16 @@ export const EntityList = () => {
 
   return (
     <Paper p={16}>
-      <PageHeader title="Task" subtitle="This is CRUD Feature contains Create, Read, Update, Delete Operation" />
+      <PageHeader title="Task" subtitle="This is CRUD Feature contains Create, Read, Update, Delete Operation">
+        <Group  >
+          <Button onClick={() => {
+            setModalState({ action: "create", id: "" });
+            open();
+          }} color="blue">
+            Create Task
+          </Button>
+        </Group>
+      </PageHeader>
       <Box mt={16}>
         {
           error && (
@@ -35,6 +72,17 @@ export const EntityList = () => {
           <DataTable.Pagination />
         </DataTable.Container>
       </Box>
+
+      <Drawer opened={opened} position="right" onClose={close} title={
+        modalState?.action === "create" ? "Create Task" :
+          modalState?.action === "update" ? "Update Task" :
+            modalState?.action === "detail" ? "Task Details" : ""
+      }>
+        {modalState?.action === "create" && (<EntityCreate />)}
+        {modalState?.action === "update" && (<EntityEdit />)}
+        {modalState?.action === "detail" && (<EntityDetails />)}
+      </Drawer>
+
     </Paper>
   );
 };

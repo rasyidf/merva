@@ -75,8 +75,10 @@ export function DataTableFacetedFilter<TData>({
     <Popover position="bottom-start">
       <Popover.Target>
         <Button
-          variant="outline"
+          color='dark.4'
           size="sm"
+          variant="outline"
+          style={{ borderStyle: 'dashed', borderWidth: 1 }}
           radius="md"
           rightSection={
             columnFilterValue.length > 0 && (

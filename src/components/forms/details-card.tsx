@@ -34,7 +34,7 @@ export const DetailCardTitle = ({
 export const DetailCardItem = ({
   title,
   children
-}: PropsWithChildren & { title: string }) => {
+}: PropsWithChildren & { title: string; }) => {
   return (
     <InputWrapper label={title}>
       <Text c="tertiary.6">

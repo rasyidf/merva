@@ -16,7 +16,7 @@ type Props = {
 
 const Dropzone: ForwardRefRenderFunction<HTMLDivElement, Omit<Props, 'ref'>> = (props, ref) => {
   const { label, onDrop, onReject, onChange, value: initialValue, error, ...rest } = props;
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>(initialValue);
+  // const [, setPreviewUrl] = useState<string | undefined>(initialValue);
   const [uploadedUrl, setUploadedUrl] = useState<string | undefined>(undefined);
   const [localError, setLocalError] = useState<string | undefined>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -73,13 +73,13 @@ const Dropzone: ForwardRefRenderFunction<HTMLDivElement, Omit<Props, 'ref'>> = (
   const handlePreview = (file: File) => {
     const reader = new FileReader();
     reader.onload = () => {
-      setPreviewUrl(reader.result as string);
+      // setPreviewUrl(reader.result as string);
     };
     reader.readAsDataURL(file);
   };
 
   const handleDelete = () => {
-    setPreviewUrl(undefined);
+    // setPreviewUrl(undefined);
     setUploadedUrl(undefined);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";

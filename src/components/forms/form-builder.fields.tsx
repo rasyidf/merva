@@ -6,8 +6,8 @@ import {
 } from '@mantine/core';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { fields } from './fields-list';
-import { CustomField, EditorProps, Field, FieldType, RenderFieldProps } from './form-builder.types';
+import { fields, MetaField } from './fields-list';
+import { EditorProps, RenderFieldProps } from './form-builder.types';
 
 /**
  * Render a field based on the field type and data
@@ -17,7 +17,7 @@ import { CustomField, EditorProps, Field, FieldType, RenderFieldProps } from './
  * @returns 
  */
 export const RenderField: React.FC<RenderFieldProps> = ({ field, data, readonly = false }) => {
-  const fieldType: FieldType = field.type || 'text';
+  const fieldType = field.type || 'text';
 
   // Ensure that fields.text exists to provide a fallback
   const fieldRender = fields[fieldType] || fields.text;
@@ -39,14 +39,14 @@ export const RenderField: React.FC<RenderFieldProps> = ({ field, data, readonly 
 
   const editorProps: EditorProps = {
     ...field,
-    defaultValue,
-    label: defaultValue?.label || field.name,
+    label: field?.label || field.name,
     ...(readonly ? defaultReadonlyProps : {}),
+    defaultValue,
   };
 
   // Handle custom fields
   if (field.type === 'custom') {
-    const customField = field as CustomField;
+    const customField = field;
     if (typeof customField.render !== 'function') {
       throw new Error(`Custom field "${field.name}" does not have a render method.`);
     }
@@ -79,7 +79,7 @@ export const FormFields = ({
   withActionButton = true
 }: {
   data?: Record<string, unknown>;
-  meta: Array<Field>;
+  meta: MetaField[];
   readonly?: boolean;
   onCancel?: () => void;
   loading?: boolean;
@@ -98,7 +98,7 @@ export const FormFields = ({
     }
     groups[group].push(field);
     return groups;
-  }, {} as Record<string, Field[]>);
+  }, {} as Record<string, MetaField[]>);
 
   const renderGroupedFields = Object.entries(groupedFields).map(([group, fields]) => (
     <div key={group} style={{ marginBottom: '20px' }}>

@@ -37,12 +37,14 @@ export function MainHeader(props: Readonly<{
 
         <Group justify="right" m={0} p={0} px={8} gap={8} wrap="nowrap">
           <ThemeSwitcher />
-          <Menu shadow="md" width={200} zIndex={100}>
+          <Menu shadow="md" width={200} zIndex={300}>
             <Menu.Target>
-              <Button variant="subtle" radius="xl" p={8} leftSection={<Avatar size="sm" variant="default" >AD</Avatar>}></Button>
+              <Button variant="subtle" radius="xl" p={8} leftSection={<Avatar size="sm" variant="default" >AD</Avatar>}>
+                Admin
+              </Button>
             </Menu.Target>
 
-            <Menu.Dropdown>
+            <Menu.Dropdown >
               <Menu.Item
                 component="button"
                 leftSection={

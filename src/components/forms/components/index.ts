@@ -17,5 +17,5 @@ export * from "./TextInput/TextInput";
 export * from "./Badge/Badge";
 export * from "./Badge/BadgeGroup";
 export * from "./TextView/TextView";
-export * from "./InfiniteScroll/InfiniteScroll"
+export * from "./InfiniteScroll/InfiniteScroll";
 export * from "./FormLabel";

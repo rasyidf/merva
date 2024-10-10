@@ -2,12 +2,19 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import DataTable from "@/components/groups/data-table";
+import { DataTableToolbarOption } from "@/components/groups/data-table/DataTableToolbarProps";
 import { SvgIcon } from "@/components/ui/icon";
-import { labels, priorities, statuses } from "@/shared/utils/constants/data";
-import { Badge, Checkbox, Flex, Group, Text, ThemeIcon } from "@mantine/core";
+import { categories, labels, statuses, teams, userRoles } from "@/shared/utils/constants/data";
+import { Badge, Checkbox, Flex, Group, Progress, Text, ThemeIcon } from "@mantine/core";
 import { Task } from "../data/schema";
 
-export const columns: ColumnDef<Task>[] = [
+type ActionProps = {
+  onEdit: (task: Task) => void;
+  onDelete: (task: Task) => void;
+  [key: string]: any;
+};
+
+export const useTaskColumns = ({ onEdit, onDelete }: ActionProps): ColumnDef<Task>[] => [
   {
     id: "select",
     minSize: 24,
@@ -50,7 +57,7 @@ export const columns: ColumnDef<Task>[] = [
         <Group align="center" gap={4} w="100%" style={{ overflow: "hidden" }} wrap="nowrap">
           {label && <Badge variant="default">{label.label}</Badge>}
           <Text maw="100%" truncate fz="md">
-            {JSON.stringify(row.getValue("title"))}
+            {row.getValue<string>("title")}
           </Text>
         </Group>
       );
@@ -80,36 +87,44 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "priority",
-    size: 64,
-    header: ({ column }) => <DataTable.ColumnHeader column={column} title="Priority" />,
+    accessorKey: "assignedTeam",
+    size: 100,
+    header: ({ column }) => <DataTable.ColumnHeader column={column} title="Team" />,
     cell: ({ row }) => {
-      const priority = priorities.find((priority) => priority.value === row.getValue("priority"));
-
-      if (!priority) {
-        return null;
-      }
-
-      return (
-        <Flex align="center">
-          {priority.icon && (
-            <ThemeIcon variant="transparent">
-              <SvgIcon name={priority.icon} height={16} width={16} />
-            </ThemeIcon>
-          )}
-          <span>{priority.label}</span>
-        </Flex>
-      );
+      const team = teams.find((team) => team.value === row.getValue("assignedTeam"));
+      return <Text>{team ? team.label : row.getValue<string>("assignedTeam")}</Text>;
     },
+  },
+  {
+    accessorKey: "progressPercentage",
+    size: 100,
+    header: ({ column }) => <DataTable.ColumnHeader column={column} title="Progress (%)" />,
+    cell: ({ row }) => <Progress value={row.getValue<number>("progressPercentage")} />,
+  },
+  {
+    accessorKey: "dueDate",
+    size: 100,
+    header: ({ column }) => <DataTable.ColumnHeader column={column} title="Due Date" />,
+    cell: ({ row }) => <Text>{row.getValue<string>("dueDate")}</Text>,
   },
   {
     id: "actions",
     size: 30,
-    cell: ({ row }) => <DataTable.RowActions row={row} />,
+    cell: ({ row }) => (
+      <DataTable.RowActions
+        row={row}
+        onEdit={() => onEdit(row.original)}
+        onDelete={() => onDelete(row.original)}
+      />
+    ),
   },
 ];
 
 export const filterableColumns = [
-  { id: 'status', title: 'Status', options: statuses },
-  { id: 'priority', title: 'Priority', options: priorities },
-];
+  { id: 'status', type: 'text', title: 'Status', options: statuses },
+  { id: 'assignedUserRole', type: 'text', title: 'Role', options: userRoles },
+  { id: 'assignedTeam', type: 'text', title: 'Team', options: teams },
+  { id: 'category', type: 'text', title: 'Category', options: categories },
+  { id: 'progressPercentage', title: 'Progress (%)', type: 'number', options: [] },
+  { id: 'dueDate', type: 'date', title: 'Due Date', options: [] },
+] satisfies DataTableToolbarOption<Task>[]; 
