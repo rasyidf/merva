@@ -1,21 +1,9 @@
-
-import { Notify } from '@/shared/services';
-import { useViewNavigate } from '@/shared/utils/routers';
-import {
-  Alert,
-  Button,
-  Card,
-  Checkbox,
-  Group,
-  PasswordInput,
-  Text,
-  TextInput,
-  Title
-} from '@mantine/core';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-
+import { Notify } from "@/shared/services";
+import { useViewNavigate } from "@/shared/utils/routers";
+import { Alert, Button, Card, Checkbox, Group, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 type LoginFormInputs = {
   email: string;
@@ -24,11 +12,11 @@ type LoginFormInputs = {
 };
 
 const PATH_AUTH = {
-  signup: '/auth/signup',
-  passwordReset: '/auth/password-reset',
+  signup: "/auth/signup",
+  passwordReset: "/auth/password-reset",
 };
 
-function Page() {
+export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState, setError } = useForm<LoginFormInputs>();
 
@@ -52,7 +40,6 @@ function Page() {
       Notify.error("Error", "Your credentials are invalid");
       setIsLoading(false);
     }
-
   };
 
   return (
@@ -61,31 +48,19 @@ function Page() {
       <Text ta="center">Sign in to your account to continue</Text>
 
       <Card>
-
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-          <input type="text" style={{ display: "none" }}  {...register("username")} />
-          <TextInput
-            label="Email"
-            placeholder="you@mantine.dev"
-            required 
-            {...register("email", { required: true })}
-          />
+          <input type="text" style={{ display: "none" }} {...register("username")} />
+          <TextInput label="Email" placeholder="you@mantine.dev" required {...register("email", { required: true })} />
           <PasswordInput
             label="Password"
             placeholder="Your password"
             required
-            mt="md" 
+            mt="md"
             {...register("pw", { required: true })}
           />
           <Group justify="space-between" mt="lg">
-            <Checkbox
-              label="Remember me" 
-            />
-            <Text
-              component={Link}
-              to={PATH_AUTH.passwordReset}
-              size="sm" 
-            >
+            <Checkbox label="Remember me" />
+            <Text component={Link} to={PATH_AUTH.passwordReset} size="sm">
               Forgot password?
             </Text>
           </Group>
@@ -93,12 +68,12 @@ function Page() {
             Sign in
           </Button>
         </form>
-        {formState.errors.root &&
-          <Alert color="red" style={{ marginBottom: 20 }}>{formState.errors.root.message}</Alert>
-        }
+        {formState.errors.root && (
+          <Alert color="red" style={{ marginBottom: 20 }}>
+            {formState.errors.root.message}
+          </Alert>
+        )}
       </Card>
     </>
   );
 }
-
-export default Page;

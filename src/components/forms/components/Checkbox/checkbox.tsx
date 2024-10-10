@@ -1,13 +1,6 @@
-import {
-  type FieldValues,
-  useController,
-  type UseControllerProps
-} from "react-hook-form";
-import {
-  Checkbox as BaseCheckbox,
-  type CheckboxProps as BaseCheckboxProps
-} from "@mantine/core";
-import { CheckboxGroup } from "./CheckBoxGroup";
+import { type FieldValues, useController, type UseControllerProps } from "react-hook-form";
+import { Checkbox as BaseCheckbox, type CheckboxProps as BaseCheckboxProps } from "@mantine/core";
+import { CheckboxGroup } from "./checkBoxGroup";
 
 export type CheckboxProps<T extends FieldValues> = UseControllerProps<T> &
   Omit<BaseCheckboxProps, "checked" | "defaultValue">;
@@ -23,13 +16,13 @@ export const Checkbox = <T extends FieldValues>({
 }: CheckboxProps<T>) => {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (

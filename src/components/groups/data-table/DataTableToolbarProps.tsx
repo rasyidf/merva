@@ -1,8 +1,7 @@
-
 export type DataTableToolbarOption<TData = any> = {
   id: keyof TData;
   title: string;
-  type: 'number' | 'date' | 'text';
+  type: "number" | "date" | "text";
   options: {
     label: string;
     value: string;

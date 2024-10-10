@@ -1,12 +1,5 @@
-import {
-  type UseControllerProps,
-  useController,
-  type FieldValues
-} from "react-hook-form";
-import {
-  TextInput as BaseTextInput,
-  type TextInputProps as BaseTextInputProps
-} from "@mantine/core";
+import { type UseControllerProps, useController, type FieldValues } from "react-hook-form";
+import { TextInput as BaseTextInput, type TextInputProps as BaseTextInputProps } from "@mantine/core";
 
 export type TextInputProps<T extends FieldValues> = UseControllerProps<T> &
   Omit<BaseTextInputProps, "value" | "defaultValue">;
@@ -22,13 +15,13 @@ export function TextInput<T extends FieldValues>({
 }: TextInputProps<T>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (

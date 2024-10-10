@@ -1,12 +1,5 @@
-import {
-  type UseControllerProps,
-  useController,
-  type FieldValues
-} from "react-hook-form";
-import {
-  PinInput as BasePinInput,
-  type PinInputProps as BasePinInputProps
-} from "@mantine/core";
+import { type UseControllerProps, useController, type FieldValues } from "react-hook-form";
+import { PinInput as BasePinInput, type PinInputProps as BasePinInputProps } from "@mantine/core";
 
 export type PinInputProps<T extends FieldValues> = UseControllerProps<T> &
   Omit<BasePinInputProps, "value" | "defaultValue">;
@@ -22,13 +15,13 @@ export function PinInput<T extends FieldValues>({
 }: PinInputProps<T>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (

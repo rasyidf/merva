@@ -1,9 +1,9 @@
 import {
   Await as RrdAwait,
-  LoaderFunctionArgs,
-  NavigateFunction,
-  NavigateOptions,
-  To,
+  type LoaderFunctionArgs,
+  type NavigateFunction,
+  type NavigateOptions,
+  type To,
   defer,
   useLoaderData as useRrdLoaderData,
   useNavigate,
@@ -15,12 +15,10 @@ export function useLoaderData<TLoader extends ReturnType<typeof deferredLoader>>
 
 export function deferredLoader<TData extends Record<string, unknown>>(dataFunc: (args: LoaderFunctionArgs) => TData) {
   return (args: LoaderFunctionArgs) =>
-    defer(dataFunc(args)) as Omit<ReturnType<typeof defer>, "data"> & { data: TData; };
+    defer(dataFunc(args)) as Omit<ReturnType<typeof defer>, "data"> & { data: TData };
 }
 
-export interface AwaitResolveRenderFunction<T> {
-  (data: Awaited<T>): React.ReactElement;
-}
+export type AwaitResolveRenderFunction<T> = (data: Awaited<T>) => React.ReactElement;
 
 export interface AwaitProps<T> {
   children: React.ReactNode | AwaitResolveRenderFunction<T>;

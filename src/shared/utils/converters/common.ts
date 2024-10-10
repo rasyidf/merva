@@ -1,7 +1,7 @@
 /**
  * convert imported url to react-router-dom object
- * @param param0 
- * @returns 
+ * @param param0
+ * @returns
  * @example
  * compose(import('../item.tsx'))
  */

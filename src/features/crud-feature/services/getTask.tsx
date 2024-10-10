@@ -1,7 +1,7 @@
 // src/pages/getTasks.ts
 
-import { SortingState, ColumnFiltersState } from "@tanstack/react-table";
-import { Task } from "../data/schema";
+import type { SortingState, ColumnFiltersState } from "@tanstack/react-table";
+import type { Task } from "../data/schema";
 
 export async function getTasks(
   sorting: SortingState,
@@ -10,7 +10,7 @@ export async function getTasks(
     pageIndex: number;
     pageSize: number;
   },
-  globalFilter: string
+  globalFilter: string,
 ): Promise<{
   data: Task[];
   meta: {
@@ -44,7 +44,7 @@ export async function getTasks(
   if (mock) {
     return import("./mockGetTask").then((mod) => mod.getTasks(sorting, filters, pagination, globalFilter));
   }
-  
+
   const response = await fetch(`/api/tasks?${params.toString()}`);
   if (!response.ok) {
     throw new Error(`Error fetching data: ${response.statusText}`);

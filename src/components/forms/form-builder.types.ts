@@ -1,9 +1,9 @@
-import { PropsWithChildren, ReactNode } from "react";
-import { FieldValues, UseFormReturn } from "react-hook-form";
-import { z } from "zod";
-import { MetaField } from "./fields-list";
+import type { PropsWithChildren, ReactNode } from "react";
+import type { FieldValues, UseFormReturn } from "react-hook-form";
+import type { z } from "zod";
+import type { MetaField } from "./fields-list";
 
-export type FieldType = 'text' | 'number' | 'date' | 'custom';
+export type FieldType = "text" | "number" | "date" | "custom";
 
 export interface BaseField {
   name: string;
@@ -20,26 +20,24 @@ export type EditorProps = {
 };
 
 export interface CustomField extends BaseField {
-  type: 'custom';
+  type: "custom";
   group?: string;
   render: (props: EditorProps) => JSX.Element;
 }
 
 export type Field = BaseField | CustomField;
 
-
 export type FieldRenderer = {
   editor: (props: EditorProps) => ReactNode;
   view?: (props: EditorProps) => ReactNode;
 };
 
-export interface Fields {
-  [key: string]: {
-    editor: (props: EditorProps) => JSX.Element;
-    view?: (props: EditorProps) => JSX.Element;
-  };
-}
-
+// export interface Fields {
+//   [key: string]: {
+//     editor: (props: EditorProps) => JSX.Element;
+//     view?: (props: EditorProps) => JSX.Element;
+//   };
+// }
 
 export type BaseFieldMeta = {
   name: string;
@@ -49,14 +47,15 @@ export type BaseFieldMeta = {
   readOnly?: boolean;
   optional?: boolean;
   group?: string;
-  options?: string[] | {
-    label: string;
-    value: string;
-    imageUrl?: string;
-  }[];
+  options?:
+    | string[]
+    | {
+        label: string;
+        value: string;
+        imageUrl?: string;
+      }[];
   colSpan?: number;
 };
-
 
 export type FormBuilderProps = PropsWithChildren<{
   schema: z.AnyZodObject | z.ZodEffects<z.AnyZodObject>;
@@ -64,7 +63,6 @@ export type FormBuilderProps = PropsWithChildren<{
   initialData?: Record<string, unknown>;
   action?: (data: Record<string, unknown>, form: UseFormReturn<FieldValues, unknown, undefined>) => void;
 }>;
-
 
 export interface RenderFieldProps {
   field: MetaField;

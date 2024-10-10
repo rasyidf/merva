@@ -1,2 +1,2 @@
-export { SvgIcon } from "./Icon";
-export { default as AppLogo } from "./AppLogo";
+export * from "./icon";
+export * from "./appLogo";

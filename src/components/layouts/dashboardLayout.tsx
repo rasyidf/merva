@@ -13,7 +13,7 @@ export const DashboardLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   const viewport = useRef<HTMLDivElement>(null);
-  const scrollToTop = useCallback(() => viewport.current?.scrollTo({ top: 0, behavior: "smooth" }), [viewport]);
+  const scrollToTop = useCallback(() => viewport.current?.scrollTo({ top: 0, behavior: "smooth" }), []);
   const navigate = useNavigate();
 
   return (
@@ -79,5 +79,3 @@ export const DashboardLayout = () => {
     </AppShell>
   );
 };
-
-export default DashboardLayout;

@@ -1,12 +1,5 @@
-import {
-  type UseControllerProps,
-  useController,
-  type FieldValues
-} from "react-hook-form";
-import {
-  Select as BaseSelect,
-  type SelectProps as BaseSelectProps
-} from "@mantine/core";
+import { type UseControllerProps, useController, type FieldValues } from "react-hook-form";
+import { Select as BaseSelect, type SelectProps as BaseSelectProps } from "@mantine/core";
 
 export type SelectProps<T extends FieldValues> = UseControllerProps<T> &
   Omit<BaseSelectProps, "value" | "defaultValue">;
@@ -22,13 +15,13 @@ export function Select<T extends FieldValues>({
 }: SelectProps<T>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (

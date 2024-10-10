@@ -1,4 +1,4 @@
-import { IconName } from "@/assets/icons/types";
+import type { IconName } from "@/assets/icons/types";
 
 export enum Status {
   Backlog = "backlog",
@@ -97,7 +97,7 @@ export const userRoles = [
   {
     value: "Researcher",
     label: "Researcher",
-  }
+  },
 ] satisfies {
   label: string;
   value: string;
@@ -139,7 +139,7 @@ export const teams = [
   {
     value: "Transmission Team",
     label: "Transmission Team",
-  }
+  },
 ] satisfies {
   label: string;
   value: string;

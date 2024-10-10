@@ -1,6 +1,5 @@
-
-import { Button, ButtonProps } from "@mantine/core";
-import { PropsWithChildren } from "react";
+import { Button, type ButtonProps } from "@mantine/core";
+import type { PropsWithChildren } from "react";
 import { SvgIcon } from "../icon";
 import { useViewNavigate } from "@/shared/utils/routers";
 
@@ -12,13 +11,7 @@ export const AddButtonBase = Button.withProps({
 export const AddButton = ({
   children,
   onClick,
-}: PropsWithChildren<Omit<ButtonProps, "children">> & { onClick?: () => void; }) => {
+}: PropsWithChildren<Omit<ButtonProps, "children">> & { onClick?: () => void }) => {
   const navigate = useViewNavigate();
-  return (
-    <AddButtonBase
-      onClick={() => onClick?.() ?? navigate("./add")}
-    >
-      {children ?? "Tambah Data"}
-    </AddButtonBase>
-  );
+  return <AddButtonBase onClick={() => onClick?.() ?? navigate("./add")}>{children ?? "Tambah Data"}</AddButtonBase>;
 };

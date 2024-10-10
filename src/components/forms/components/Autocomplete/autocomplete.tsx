@@ -1,12 +1,5 @@
-import {
-  type FieldValues,
-  useController,
-  type UseControllerProps
-} from "react-hook-form";
-import {
-  Autocomplete as BaseAutocomplete,
-  type AutocompleteProps as BaseAutocompleteProps
-} from "@mantine/core";
+import { type FieldValues, useController, type UseControllerProps } from "react-hook-form";
+import { Autocomplete as BaseAutocomplete, type AutocompleteProps as BaseAutocompleteProps } from "@mantine/core";
 
 export type AutocompleteProps<T extends FieldValues> = UseControllerProps<T> &
   Omit<BaseAutocompleteProps, "value" | "defaultValue">;
@@ -22,13 +15,13 @@ export function Autocomplete<T extends FieldValues>({
 }: AutocompleteProps<T>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (

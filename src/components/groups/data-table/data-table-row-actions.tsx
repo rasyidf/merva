@@ -1,5 +1,4 @@
-
-import { Row } from "@tanstack/react-table";
+import type { Row } from "@tanstack/react-table";
 
 import { ActionIcon, Menu, Tooltip } from "@mantine/core";
 import { SvgIcon } from "@/components/ui/icon";
@@ -21,16 +20,23 @@ export function DataTableRowActions<TData>({ row, onDelete, onEdit }: Readonly<D
         </Tooltip>
       </Menu.Target>
       <Menu.Dropdown w={200}>
-        <Menu.Item leftSection={<SvgIcon name="pencil" />}
+        <Menu.Item
+          leftSection={<SvgIcon name="pencil" />}
           onClick={() => {
             onEdit?.(row);
-
-          }}>Edit</Menu.Item>
+          }}
+        >
+          Edit
+        </Menu.Item>
         <Menu.Divider />
-        <Menu.Item leftSection={<SvgIcon name="trash" />}
+        <Menu.Item
+          leftSection={<SvgIcon name="trash" />}
           onClick={() => {
             onDelete?.(row);
-          }}>Delete</Menu.Item>
+          }}
+        >
+          Delete
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

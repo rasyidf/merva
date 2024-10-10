@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 import href from "@/assets/icons/sprite.svg";
 import { type IconName, iconNames } from "@/assets/icons/types";
@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 import styles from "./Icon.module.scss";
 
-export { IconName, href };
+export { type IconName, href };
 
 const sizeClassName = {
   font: "w-[1em] h-[1em]",
@@ -37,18 +37,16 @@ export function SvgIcon({
   name: IconName;
   size?: Size;
 }) {
-
-  const validName = iconNames.includes(name) ? name : 'square';
+  const validName = iconNames.includes(name) ? name : "square";
   return (
     <svg
-      width={16} height={16}
+      width={16}
+      height={16}
       {...props}
-      className={clsx(sizeClassName[size], styles.icon, 'inline self-center', className)}
+      className={clsx(sizeClassName[size], styles.icon, "inline self-center", className)}
     >
       <title>{validName}</title>
       <use href={`${href}#${validName}`} />
     </svg>
   );
 }
-
-export default SvgIcon;

@@ -1,5 +1,5 @@
 // Import statements
-import { NavigationConfig } from "@/shared/types";
+import type { NavigationConfig } from "@/shared/types";
 import { NavLink } from "@mantine/core";
 import classes from "./main-navbar.module.scss";
 
@@ -35,10 +35,9 @@ export function renderNavItem({
     >
       {navItem.children && navItem.children.length > 0
         ? navItem.children.map((child) => {
-          return renderNavItem({ navItem: child, activePath, navigate });
-        })
+            return renderNavItem({ navItem: child, activePath, navigate });
+          })
         : null}
     </NavLink>
   );
 }
-

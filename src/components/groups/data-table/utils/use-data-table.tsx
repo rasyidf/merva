@@ -1,7 +1,7 @@
 // src/hooks/useDataTable.ts
 
 import { useState } from "react";
-import { TableState, ColumnDef, SortingState, ColumnFiltersState, PaginationState } from "@tanstack/react-table";
+import type { TableState, ColumnDef, SortingState, ColumnFiltersState, PaginationState } from "@tanstack/react-table";
 import { initialTableState } from "../data-table-utils";
 import { useSyncWithSearchParams } from "./use-sync-with-search-params";
 import { useFetchData } from "./use-fetch-data";

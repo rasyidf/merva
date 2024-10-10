@@ -4,13 +4,12 @@ import { globalNavigate } from "@/shared/utils/routers/helpers";
 import { useAuth } from "../auth";
 import logger from "../logging";
 
-type FetchRequestConfig = Omit<RequestInit, 'headers'> & {
+type FetchRequestConfig = Omit<RequestInit, "headers"> & {
   headers?: Record<string, string>;
   path: string;
   filter?: Record<string, any>;
   _retry?: boolean;
 };
-
 
 export async function fetchWithAuth<T = any>({
   path,
@@ -31,11 +30,7 @@ export async function fetchWithAuth<T = any>({
   };
 
   // Handle JSON body
-  if (
-    config.body &&
-    typeof config.body !== "string" &&
-    headers["Content-Type"] === "application/json"
-  ) {
+  if (config.body && typeof config.body !== "string" && headers["Content-Type"] === "application/json") {
     config.body = JSON.stringify(config.body);
   }
 
@@ -87,7 +82,6 @@ async function assertError(response: Response) {
   // Parse error response
   const errorData = await response.json().catch(() => null);
   return Promise.reject({ response, data: errorData });
-
 }
 
 async function tryToRefreshToken<T>({ path, filter, config, headers }: any) {
@@ -115,10 +109,7 @@ export async function apiFetch<T = any>(config: FetchRequestConfig): Promise<T> 
   return fetchWithAuth<T>(config);
 }
 
-export function buildUrl(
-  path: string,
-  filter?: Record<string, any> | URLSearchParams
-): string {
+export function buildUrl(path: string, filter?: Record<string, any> | URLSearchParams): string {
   const url = new URL(path, APP_URL_API);
   if (filter) {
     const params = new URLSearchParams(filter as Record<string, string>);
@@ -127,7 +118,7 @@ export function buildUrl(
   return url.toString();
 }
 
-export async function allowedPermission(error: { response: Response; data: any; }): Promise<boolean> {
+export async function allowedPermission(error: { response: Response; data: any }): Promise<boolean> {
   if (error.response.status === 403) {
     if (error.data?.message?.includes("not have permission")) {
       return false;

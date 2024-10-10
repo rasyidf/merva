@@ -1,5 +1,5 @@
-import { ColumnFilter } from "@tanstack/react-table";
-import { SetStateAction } from "react";
+import type { ColumnFilter } from "@tanstack/react-table";
+import type { SetStateAction } from "react";
 
 import type { DeepKeys } from "./utils";
 

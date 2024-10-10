@@ -1,6 +1,5 @@
-
 import { isDev } from "@/shared/utils/constants";
-import { ILogger, LogLevel, createLoggingService } from "./service"; // Replace with the actual path
+import { type ILogger, LogLevel, createLoggingService } from "./service"; // Replace with the actual path
 
 export const logger = createLoggingService(isDev ? LogLevel.DEBUG : LogLevel.WARN); // Set the initial log level and emoji usage
 

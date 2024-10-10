@@ -1,6 +1,5 @@
 import { PageHeader } from "@/components/groups/main-header";
 
-
 export const Settings = () => {
   return (
     <div>

@@ -1,8 +1,7 @@
-import { IconName } from "@/assets/icons/types";
+import type { IconName } from "@/assets/icons/types";
 import { SvgIcon } from "@/components/ui/icon";
-import { FeatureMetadata, NavigationConfig } from "@/shared/types";
+import type { FeatureMetadata, NavigationConfig } from "@/shared/types";
 import { useEnabledFeatures } from "./feature.store";
-
 
 // Function to get navigation items
 export function useNavigationItems() {
@@ -13,8 +12,7 @@ export function useNavigationItems() {
   const intermediateNavItems: NavigationConfig[] = enabledFeatures
     .filter(
       (feature) =>
-        !feature.placement ||
-        (feature.placement && !["shell", "hidden", "none"].includes(feature.placement))
+        !feature.placement || (feature.placement && !["shell", "hidden", "none"].includes(feature.placement)),
     )
     .flatMap((feature) => {
       // Handling feature with explicit navigation property
@@ -27,7 +25,9 @@ export function useNavigationItems() {
         }));
       }
 
-      if (!feature.visible) return [];
+      if (!feature.visible) {
+        return [];
+      }
 
       // Handling feature without explicit navigation property
       return [
@@ -51,17 +51,14 @@ export function useNavigationItems() {
     });
 
   // Group navigation items by 'group' property
-  const groupedNavItems = intermediateNavItems.reduce<Record<string, NavigationConfig[]>>(
-    (acc, item) => {
-      const group = item.group ?? "ungrouped";
-      if (!acc[group]) {
-        acc[group] = [];
-      }
-      acc[group].push(item);
-      return acc;
-    },
-    {}
-  );
+  const groupedNavItems = intermediateNavItems.reduce<Record<string, NavigationConfig[]>>((acc, item) => {
+    const group = item.group ?? "ungrouped";
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+    acc[group].push(item);
+    return acc;
+  }, {});
 
   // Create final navigation items with grouping
   const navItems = Object.entries(groupedNavItems).flatMap(([groupKey, items]) => {

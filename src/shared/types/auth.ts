@@ -30,7 +30,7 @@ export type AuthStore = {
   login: (payload: LoginProps) => Promise<void>;
   register: (payload: RegisProps) => Promise<void>;
   logout: () => void;
-  refresh: () => Promise<{ accessToken: string; }>;
+  refresh: () => Promise<{ accessToken: string }>;
   setBaseUrl: (url: string) => void;
   isExpired: () => boolean;
 } & AuthProps;

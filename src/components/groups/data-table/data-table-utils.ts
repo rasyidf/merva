@@ -1,5 +1,10 @@
-import { RowSelectionState, SortingState, ColumnFiltersState, ColumnSizingState, TableState } from "@tanstack/react-table";
-
+import type {
+  RowSelectionState,
+  SortingState,
+  ColumnFiltersState,
+  ColumnSizingState,
+  TableState,
+} from "@tanstack/react-table";
 
 export const initialTableState = {
   pagination: {

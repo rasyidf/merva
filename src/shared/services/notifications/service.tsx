@@ -1,8 +1,7 @@
 import type { IconName } from "@/assets/icons/types";
 import { SvgIcon } from "@/components/ui/icon";
-import { PartialDeep } from "@/shared/types";
+import type { PartialDeep } from "@/shared/types";
 import { type NotificationData, notifications } from "@mantine/notifications";
-
 
 // Common styles for notifications
 const commonStyles = {
@@ -29,7 +28,7 @@ const commonStyles = {
   icon: {
     background: "transparent",
     marginLeft: "1rem",
-    strokeWidth: 4,
+    strokeWidth: 2,
   },
 };
 
@@ -75,7 +74,7 @@ const createNotification = (
     title,
     message,
     color,
-    icon: <SvgIcon name={iconName} color={iconColorVar} width={32} height={32}/>,
+    icon: <SvgIcon name={iconName} color={iconColorVar} width={32} height={32} />,
     styles: {
       ...commonStyles,
 

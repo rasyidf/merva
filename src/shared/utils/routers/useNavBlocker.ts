@@ -1,48 +1,45 @@
+import { useEffect, useCallback } from "react";
+import { useBeforeUnload, useBlocker } from "react-router-dom";
 import { modals } from "@mantine/modals";
-import { useCallback, useContext, useEffect } from "react";
-import { UNSAFE_NavigationContext as NavigationContext } from "react-router-dom";
-
-function useConfirmExit(confirmExit: () => boolean, when = true) {
-  const { navigator } = useContext(NavigationContext);
-
-  useEffect(() => {
-    if (!when) {
-      return;
-    }
-
-    const push = navigator.push;
-
-    navigator.push = (...args: Parameters<typeof push>) => {
-      const result = confirmExit();
-      if (result !== false) {
-        push(...args);
-      }
-    };
-
-    return () => {
-      navigator.push = push;
-    };
-  }, [navigator, confirmExit, when]);
-}
 
 export function usePrompt(message: string, when = true) {
+  // Handle browser unload events
+  useBeforeUnload(
+    useCallback(
+      (event) => {
+        if (when) {
+          event.preventDefault();
+          event.returnValue = message;
+        }
+      },
+      [when, message],
+    ),
+  );
+
+  // Handle in-app navigation blocking
+  const blocker = useBlocker(when);
+
   useEffect(() => {
-    if (when) {
-      window.onbeforeunload = () => message;
+    if (blocker.state === "blocked") {
+      const handleBlockedNavigation = async () => {
+        const confirmed = await new Promise<boolean>((resolve) => {
+          modals.openConfirmModal({
+            title: "Are you sure you want to leave?",
+            children: message,
+            labels: { confirm: "Yes", cancel: "No" },
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false),
+          });
+        });
+
+        if (confirmed) {
+          blocker.proceed();
+        } else {
+          blocker.reset();
+        }
+      };
+
+      handleBlockedNavigation();
     }
-
-    return () => {
-      window.onbeforeunload = null;
-    };
-  }, [message, when]);
-
-  const confirmExit = useCallback(() => {
-    modals.open({
-      title: "Are you sure?",
-      content: message,
-    });
-    const confirm = window.confirm(message);
-    return confirm;
-  }, [message]);
-  useConfirmExit(confirmExit, when);
+  }, [blocker, message]);
 }

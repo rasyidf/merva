@@ -1,5 +1,5 @@
 import { InputWrapper, createTheme } from "@mantine/core";
-import { ModalSettings } from "@mantine/modals/lib/context";
+import type { ModalSettings } from "@mantine/modals/lib/context";
 import { localStorageColorSchemeManager } from "./color-scheme-manager";
 
 export const defaultTheme = createTheme({

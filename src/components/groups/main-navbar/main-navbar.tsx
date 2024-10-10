@@ -1,5 +1,5 @@
 import { SvgIcon } from "@/components/ui/icon";
-import AppLogo from "@/components/ui/icon/AppLogo";
+import { AppLogo } from "@/components/ui/icon/appLogo";
 import { useNavigationItems } from "@/shared/services/features/utils";
 import { APP_NAME, APP_NAME_SHORT, APP_VERSION } from "@/shared/utils/constants";
 import { ActionIcon, AppShell, Box, Flex, NavLink, ScrollArea, Stack, Text, Title, Tooltip } from "@mantine/core";
@@ -10,7 +10,11 @@ import { renderNavItem } from "./utils";
 export function MainNavbar({
   toggle,
   collapseOnClick,
-}: Readonly<{ expanded: boolean; toggle?: () => void; collapseOnClick?: boolean; }>) {
+}: Readonly<{
+  expanded: boolean;
+  toggle?: () => void;
+  collapseOnClick?: boolean;
+}>) {
   const { navItems } = useNavigationItems();
 
   const { pathname } = useLocation();

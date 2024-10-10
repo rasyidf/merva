@@ -4,7 +4,7 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 import { APP_URL_API, AUTH_BASIC_API, URL_LOGIN, URL_REFRESH, URL_REGISTER } from "@/shared/utils/constants";
 import { modals } from "@mantine/modals";
-import { AuthProps, AuthStore } from "../../types/auth";
+import type { AuthProps, AuthStore } from "../../types/auth";
 import { authApiFetch } from "../api";
 import { decodeBase64 } from "../crypto/utils";
 import { loggerset } from "./logger";
@@ -72,7 +72,7 @@ export const useAuth = create<AuthStore>()(
               body: JSON.stringify({
                 email,
                 password,
-                name
+                name,
               }),
               headers: {
                 Authorization: AUTH_BASIC_API,
@@ -96,7 +96,7 @@ export const useAuth = create<AuthStore>()(
             const isRefreshingToken = get().isRefreshingToken;
 
             if (isRefreshingToken) {
-              return new Promise<{ accessToken: string; }>((resolve) => {
+              return new Promise<{ accessToken: string }>((resolve) => {
                 setTimeout(() => {
                   resolve({ accessToken: get().accessToken ?? "" });
                 }, 1000);
@@ -144,8 +144,8 @@ export const useAuth = create<AuthStore>()(
         {
           name: "auth",
           storage: createJSONStorage(() => localStorage),
-        }
-      )
-    )
-  )
+        },
+      ),
+    ),
+  ),
 );

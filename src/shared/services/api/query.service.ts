@@ -1,7 +1,6 @@
-
 import { APP_URL_API } from "@/shared/utils/constants";
 import { globalNavigate } from "@/shared/utils/routers/helpers";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse } from "axios";
 import { useAuth } from "../auth";
 import logger from "../logging";
 
@@ -19,9 +18,8 @@ const instance = axios.create({
   },
 });
 
-
-instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string]: any; }>) => {
-  const originalConfig = error.config as { _retry: boolean; } & AxiosRequestConfig;
+instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string]: any }>) => {
+  const originalConfig = error.config as { _retry: boolean } & AxiosRequestConfig;
 
   const isBearer =
     typeof originalConfig?.headers?.Authorization === "string" &&
@@ -34,7 +32,6 @@ instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string
 
   // handle 500 errors
   if (error?.response?.status === 500) {
-
     logger.error("API request error, server:", error);
 
     return Promise.reject(error);
@@ -70,7 +67,6 @@ instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string
   }
 
   logger.error("API request error:", error);
-
 
   return Promise.reject(error);
 });
@@ -120,7 +116,7 @@ export function buildUrl(path: string, filter?: Record<string, any> | URLSearchP
   return url.toString();
 }
 
-export const allowedPermission = (error: AxiosError<{ [key: string]: any; }>) => {
+export const allowedPermission = (error: AxiosError<{ [key: string]: any }>) => {
   if (error.response?.status === 403 || error.response?.data?.message.includes("not have permission")) {
     return false;
   }

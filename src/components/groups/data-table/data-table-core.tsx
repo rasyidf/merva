@@ -15,9 +15,9 @@ export function DataTableCore<TData>() {
         stickyHeaderOffset={0}
         w="100%"
         style={{
-          tableLayout: 'auto',
+          tableLayout: "auto",
           borderSpacing: 0,
-          textAlign: 'left',
+          textAlign: "left",
         }}
       >
         <Table.Thead>
@@ -25,21 +25,18 @@ export function DataTableCore<TData>() {
             <Table.Tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <Table.Th key={header.id}>
-                  {header.isPlaceholder ? null : (flexRender(header.column.columnDef.header, header.getContext())
-                  )}
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </Table.Th>
               ))}
             </Table.Tr>
           ))}
         </Table.Thead>
         <Table.Tbody>
-          {table.getRowModel().rows.length ? (
+          {table.getRowModel().rows.length > 0 ? (
             table.getRowModel().rows.map((row) => (
-              <Table.Tr key={row.id} data-state={row.getIsSelected() && 'selected'}>
+              <Table.Tr key={row.id} data-state={row.getIsSelected() && "selected"}>
                 {row.getVisibleCells().map((cell) => (
-                  <Table.Td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Table.Td>
+                  <Table.Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Table.Td>
                 ))}
               </Table.Tr>
             ))

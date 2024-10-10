@@ -1,5 +1,3 @@
-
-
 import { AppLogo } from "@/components/ui/icon";
 import { isDev } from "@/shared/utils/constants";
 import { Accordion, Code, Container, Flex, Text, Title } from "@mantine/core";

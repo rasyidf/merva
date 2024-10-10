@@ -1,15 +1,8 @@
-import {
-  type UseControllerProps,
-  useController,
-  type FieldValues
-} from 'react-hook-form';
-import {
-  Textarea as BaseTextarea,
-  type TextareaProps as BaseTextareaProps
-} from '@mantine/core';
+import { type UseControllerProps, useController, type FieldValues } from "react-hook-form";
+import { Textarea as BaseTextarea, type TextareaProps as BaseTextareaProps } from "@mantine/core";
 
 export type TextareaProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<BaseTextareaProps, 'value' | 'defaultValue'>;
+  Omit<BaseTextareaProps, "value" | "defaultValue">;
 
 export function Textarea<T extends FieldValues>({
   name,
@@ -22,13 +15,13 @@ export function Textarea<T extends FieldValues>({
 }: TextareaProps<T>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (

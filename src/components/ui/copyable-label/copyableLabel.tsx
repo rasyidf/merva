@@ -1,4 +1,4 @@
-import { ActionIcon, CopyButton, Group, Text, TextProps, Tooltip, rem } from "@mantine/core";
+import { ActionIcon, CopyButton, Group, Text, type TextProps, Tooltip, rem } from "@mantine/core";
 import { SvgIcon } from "../icon";
 type Props = {
   value: string;
@@ -7,10 +7,10 @@ type Props = {
   labelProps: TextProps;
 };
 
-const CopyableLabel = ({ value, timeout = 2000, labelProps, disabled }: Props) => {
+export const CopyableLabel = ({ value, timeout = 2000, labelProps, disabled }: Props) => {
   return (
     <Group justify="space-between" wrap="nowrap">
-      <Text {...labelProps} c={disabled ? "gray" : labelProps.c ?? "orange"}>
+      <Text {...labelProps} c={disabled ? "gray" : (labelProps.c ?? "orange")}>
         {value}
       </Text>
       {disabled ? null : (
@@ -31,5 +31,3 @@ const CopyableLabel = ({ value, timeout = 2000, labelProps, disabled }: Props) =
     </Group>
   );
 };
-
-export default CopyableLabel;

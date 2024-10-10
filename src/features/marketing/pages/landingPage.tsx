@@ -1,13 +1,4 @@
-import {
-  Button,
-  Container,
-  Divider,
-  Group,
-  Paper,
-  ScrollArea,
-  Text,
-  Title
-} from "@mantine/core";
+import { Button, Container, Divider, Group, Paper, ScrollArea, Text, Title } from "@mantine/core";
 import { NavLink } from "react-router-dom";
 import { Header } from "../modules/header";
 
@@ -27,8 +18,8 @@ export const Component = () => {
               Buka Dashboard
             </Button>
           </Paper>
-          <Paper mt={24} component="section" id="testimoni"></Paper>
-          <Paper h={300} mt={64} component="section" id="footer"></Paper>
+          <Paper mt={24} component="section" id="testimoni" />
+          <Paper h={300} mt={64} component="section" id="footer" />
         </Container>
 
         <Divider />

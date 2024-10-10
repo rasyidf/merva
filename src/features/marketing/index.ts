@@ -1,5 +1,5 @@
-import { FeatureMetadata } from "@/shared/types";
-import { RouteObject } from "react-router-dom";
+import type { FeatureMetadata } from "@/shared/types";
+import type { RouteObject } from "react-router-dom";
 const MarketingMetadata = {
   id: "landing",
   name: "landing page",
@@ -7,7 +7,7 @@ const MarketingMetadata = {
   routes: [
     {
       path: "/",
-      lazy: () => import("./pages/LandingPage"),
+      lazy: () => import("./pages/landingPage"),
     },
   ] satisfies RouteObject[],
   placement: "shell",

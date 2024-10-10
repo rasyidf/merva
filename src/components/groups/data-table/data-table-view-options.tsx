@@ -1,8 +1,6 @@
-
 import { Button, Checkbox, Menu, Stack, Text } from "@mantine/core";
 import { useDataTableContext } from "./data-table-context";
 import { SvgIcon } from "@/components/ui/icon";
-
 
 export function DataTableViewOptions<TData>() {
   const { table } = useDataTableContext<TData>();

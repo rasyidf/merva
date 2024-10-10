@@ -1,23 +1,19 @@
-import { toTitleCase } from '@/shared/utils';
-import {
-  Button, Grid,
-  Group,
-  Title
-} from '@mantine/core';
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { fields, MetaField } from './fields-list';
-import { EditorProps, RenderFieldProps } from './form-builder.types';
+import { toTitleCase } from "@/shared/utils";
+import { Button, Grid, Group, Title } from "@mantine/core";
+import type React from "react";
+import { useFormContext } from "react-hook-form";
+import { fields, type MetaField } from "./fields-list";
+import type { EditorProps, RenderFieldProps } from "./form-builder.types";
 
 /**
  * Render a field based on the field type and data
  * @param field - The field to render
  * @param data - The data to render
- * @param readonly - Whether the field should be readonly 
- * @returns 
+ * @param readonly - Whether the field should be readonly
+ * @returns
  */
 export const RenderField: React.FC<RenderFieldProps> = ({ field, data, readonly = false }) => {
-  const fieldType = field.type || 'text';
+  const fieldType = field.type || "text";
 
   // Ensure that fields.text exists to provide a fallback
   const fieldRender = fields[fieldType] || fields.text;
@@ -33,7 +29,7 @@ export const RenderField: React.FC<RenderFieldProps> = ({ field, data, readonly 
     variant: "unstyled",
     readOnly: true,
     optional: false,
-    placeholder: '',
+    placeholder: "",
     disabled: false,
   };
 
@@ -45,9 +41,9 @@ export const RenderField: React.FC<RenderFieldProps> = ({ field, data, readonly 
   };
 
   // Handle custom fields
-  if (field.type === 'custom') {
+  if (field.type === "custom") {
     const customField = field;
-    if (typeof customField.render !== 'function') {
+    if (typeof customField.render !== "function") {
       throw new Error(`Custom field "${field.name}" does not have a render method.`);
     }
     return customField.render(editorProps);
@@ -59,7 +55,7 @@ export const RenderField: React.FC<RenderFieldProps> = ({ field, data, readonly 
   }
 
   // Use editor renderer by default
-  if (typeof fieldRender.editor === 'function') {
+  if (typeof fieldRender.editor === "function") {
     return fieldRender.editor(editorProps);
   }
 
@@ -67,23 +63,22 @@ export const RenderField: React.FC<RenderFieldProps> = ({ field, data, readonly 
   throw new Error(`No suitable renderer found for field type "${fieldType}".`);
 };
 
-
 export const FormFields = ({
   meta,
   data: initialData = {},
   loading,
   readonly,
   onCancel,
-  mode = 'create',
+  mode = "create",
   gridColumn,
-  withActionButton = true
+  withActionButton = true,
 }: {
   data?: Record<string, unknown>;
   meta: MetaField[];
   readonly?: boolean;
   onCancel?: () => void;
   loading?: boolean;
-  mode?: 'create' | 'update' | 'detail';
+  mode?: "create" | "update" | "detail";
   gridColumn?: number;
   withActionButton?: boolean;
 }) => {
@@ -91,17 +86,20 @@ export const FormFields = ({
 
   const data = hooks.getValues() ?? initialData;
 
-  const groupedFields = meta.reduce((groups, field) => {
-    const { group = "" } = field;
-    if (!groups[group]) {
-      groups[group] = [];
-    }
-    groups[group].push(field);
-    return groups;
-  }, {} as Record<string, MetaField[]>);
+  const groupedFields = meta.reduce(
+    (groups, field) => {
+      const { group = "" } = field;
+      if (!groups[group]) {
+        groups[group] = [];
+      }
+      groups[group].push(field);
+      return groups;
+    },
+    {} as Record<string, MetaField[]>,
+  );
 
   const renderGroupedFields = Object.entries(groupedFields).map(([group, fields]) => (
-    <div key={group} style={{ marginBottom: '20px' }}>
+    <div key={group} style={{ marginBottom: "20px" }}>
       {group && (
         <Title order={6} my="sm" w="100%" size={18}>
           {toTitleCase(group?.replace(/-/g, " "))}
@@ -122,11 +120,7 @@ export const FormFields = ({
       {renderGroupedFields}
       {!readonly && withActionButton && (
         <Group mt="md" justify="end">
-          <Button
-            variant="light"
-            disabled={hooks.formState.isSubmitting}
-            onClick={onCancel}
-          >
+          <Button variant="light" disabled={hooks.formState.isSubmitting} onClick={onCancel}>
             Batal
           </Button>
           <Button
@@ -135,7 +129,7 @@ export const FormFields = ({
             disabled={
               hooks.formState.isSubmitting ||
               !hooks.formState.isValid ||
-              (mode === 'update' && hooks.formState.isDirty === false)
+              (mode === "update" && hooks.formState.isDirty === false)
             }
           >
             Simpan

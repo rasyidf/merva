@@ -1,5 +1,5 @@
-import { Navigate, RouteObject } from "react-router-dom";
-import { FeatureMetadata } from "@/shared/types";
+import { Navigate, type RouteObject } from "react-router-dom";
+import type { FeatureMetadata } from "@/shared/types";
 import { compose } from "@/shared/utils";
 
 const AuthFeatureMetadata = {
@@ -11,25 +11,25 @@ const AuthFeatureMetadata = {
     {
       path: "auth",
       async lazy() {
-        return compose(await import("./pages/Layout"));
+        return compose(await import("./pages/layout"));
       },
       children: [
         {
           path: "login",
           async lazy() {
-            return compose(await import("./pages/Login"));
+            return compose(await import("./pages/login"));
           },
         },
         {
-          path: 'register',
+          path: "register",
           async lazy() {
-            return compose(await import("./pages/Register"));
-          }
+            return compose(await import("./pages/register"));
+          },
         },
         {
           path: "logout",
           element: <Navigate to="/auth/login" />,
-        }
+        },
       ],
     },
   ] as RouteObject[],

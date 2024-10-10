@@ -6,7 +6,7 @@ const prefix: string = "Invariant failed";
  * @param condition The condition to check
  * @param message (Optional) The error message to throw (or a function that returns the error message)
  */
-export default function invariant(condition: any, message?: string | (() => string)): asserts condition {
+export function invariant(condition: any, message?: string | (() => string)): asserts condition {
   if (condition) {
     return;
   }

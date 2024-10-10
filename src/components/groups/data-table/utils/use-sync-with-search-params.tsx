@@ -1,12 +1,12 @@
-import { ColumnFilter, SortingState, TableState, Updater } from "@tanstack/react-table";
+import type { ColumnFilter, SortingState, TableState, Updater } from "@tanstack/react-table";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { parse, ParsedQs, stringify } from "qs-esm";
+import { parse, type ParsedQs, stringify } from "qs-esm";
 
 export function useSyncWithSearchParams(
   enableSync: boolean,
   state: TableState,
-  setState: (state: Updater<TableState>) => void
+  setState: (state: Updater<TableState>) => void,
 ) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,11 +23,11 @@ export function useSyncWithSearchParams(
         parseArrays: true,
       }) as ParsedQs;
 
-      const pageIndex = parseInt((queryParams.p as string) ?? "0", 10);
-      const pageSize = parseInt((queryParams.z as string) ?? "10", 10);
+      const pageIndex = Number.parseInt((queryParams.p as string) ?? "0", 10);
+      const pageSize = Number.parseInt((queryParams.z as string) ?? "10", 10);
       const sorting = (queryParams.sort as unknown as SortingState) ?? [];
       const columnFilters = (queryParams.f as unknown as ColumnFilter[]) ?? [];
-      const globalFilter = queryParams.q as string ?? "";
+      const globalFilter = (queryParams.q as string) ?? "";
 
       setState((prevState) => {
         // Compare prevState and new state to prevent unnecessary updates

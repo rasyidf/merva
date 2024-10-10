@@ -1,7 +1,7 @@
 import { SvgIcon } from "@/components/ui/icon";
-import { FeatureMetadata, NavigationConfig } from "@/shared/types";
+import type { FeatureMetadata, NavigationConfig } from "@/shared/types";
 import { compose } from "@/shared/utils";
-import { RouteObject } from "react-router-dom";
+import type { RouteObject } from "react-router-dom";
 
 const baseUri = "/app/product";
 const FeatureAMetadata = {

@@ -1,6 +1,6 @@
 import { LanguageProvider, QueryProvider, RouteProvider, ThemeProvider } from "../shared";
 
-function App() {
+export function App() {
   return (
     <QueryProvider>
       <ThemeProvider>
@@ -11,5 +11,3 @@ function App() {
     </QueryProvider>
   );
 }
-
-export default App;

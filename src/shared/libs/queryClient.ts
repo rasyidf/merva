@@ -1,5 +1,5 @@
 import { QueryClient, keepPreviousData } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,7 +13,7 @@ export const queryClient = new QueryClient({
       },
       retryDelay(failureCount, error) {
         if ((error as AxiosError).status === 404) {
-          return Infinity;
+          return Number.POSITIVE_INFINITY;
         }
         return Math.min(failureCount * 1000, 30000);
       },

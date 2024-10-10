@@ -16,20 +16,18 @@ const schema = z.object({
 export const EntityCreate = (props: Props) => {
   return (
     <>
-
-      <FormBuilder schema={schema} >
+      <FormBuilder schema={schema}>
         <FormFields
           meta={[
-            { name: 'name', label: "Name", type: "text", },
-            { name: 'email', label: "Email", type: "email", },
-            { name: 'age', label: "Age", type: "number", },
-            { name: 'password', label: "Password", type: "password", },
+            { name: "name", label: "Name", type: "text" },
+            { name: "email", label: "Email", type: "email" },
+            { name: "age", label: "Age", type: "number" },
+            { name: "password", label: "Password", type: "password" },
           ]}
           onCancel={props.onCancel}
           gridColumn={1}
         />
       </FormBuilder>
-
     </>
   );
 };

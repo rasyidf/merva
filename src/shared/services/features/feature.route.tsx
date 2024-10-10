@@ -1,7 +1,6 @@
- 
 import ShellMetadata from "@/features/admin";
-import { FeatureMetadata } from "@/shared/types";
-import { RouteObject } from "react-router-dom";
+import type { FeatureMetadata } from "@/shared/types";
+import type { RouteObject } from "react-router-dom";
 
 export function buildRoutes(enabledFeatures: FeatureMetadata[]): RouteObject[] {
   const shellRoutes = enabledFeatures
@@ -17,10 +16,7 @@ export function buildRoutes(enabledFeatures: FeatureMetadata[]): RouteObject[] {
     children: [
       {
         ...ShellMetadata.routes[0],
-        children: [
-          ...(ShellMetadata?.routes?.[0]?.children ?? []),
-          ...featureRoutes,
-        ],
+        children: [...(ShellMetadata?.routes?.[0]?.children ?? []), ...featureRoutes],
       },
       ...shellRoutes,
     ],

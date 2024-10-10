@@ -7,7 +7,7 @@ import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/spotlight/styles.css";
 
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { colorSchemeManager, defaultTheme } from ".";
 
 export const ThemeProvider = (props: PropsWithChildren) => {

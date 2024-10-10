@@ -1,11 +1,7 @@
-import {
-  type FieldValues,
-  useController,
-  type UseControllerProps
-} from "react-hook-form";
+import { type FieldValues, useController, type UseControllerProps } from "react-hook-form";
 import {
   DateTimePicker as BaseDateTimePicker,
-  type DateTimePickerProps as BaseDateTimePickerProps
+  type DateTimePickerProps as BaseDateTimePickerProps,
 } from "@mantine/dates";
 
 export type DateTimePickerProps<T extends FieldValues> = UseControllerProps<T> &
@@ -22,13 +18,13 @@ export function DateTimePicker<T extends FieldValues>({
 }: DateTimePickerProps<T>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (

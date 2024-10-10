@@ -1,17 +1,15 @@
-import { SvgIcon } from '@/components/ui/icon';
-import { ActionIcon, Button, Flex, TextInput } from '@mantine/core';
-import { useDebouncedState } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
-import { useDataTableContext } from './data-table-context';
-import { DataTableViewOptions } from './data-table-view-options';
-import { DataTableToolbarProps } from './DataTableToolbarProps';
-import DataTableDateFilter from './filters/data-table-date-filter';
-import { DataTableFacetedFilter } from './filters/data-table-faceted-filter';
-import DataTableNumberFilter from './filters/data-table-number-filter';
+import { SvgIcon } from "@/components/ui/icon";
+import { ActionIcon, Button, Flex, TextInput } from "@mantine/core";
+import { useDebouncedState } from "@mantine/hooks";
+import { useEffect, useState } from "react";
+import { useDataTableContext } from "./data-table-context";
+import { DataTableViewOptions } from "./data-table-view-options";
+import type { DataTableToolbarProps } from "./DataTableToolbarProps";
+import { DataTableDateFilter } from "./filters/data-table-date-filter";
+import { DataTableFacetedFilter } from "./filters/data-table-faceted-filter";
+import { DataTableNumberFilter } from "./filters/data-table-number-filter";
 
-export function DataTableToolbar<TData>({
-  meta,
-}: Readonly<DataTableToolbarProps<TData>>) {
+export function DataTableToolbar<TData>({ meta }: Readonly<DataTableToolbarProps<TData>>) {
   const { table } = useDataTableContext<TData>();
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -23,7 +21,6 @@ export function DataTableToolbar<TData>({
   }, [debouncedValue, table]);
 
   const filterableColumns = meta?.filterableColumns ?? [];
-
 
   const handleClearAllFilters = () => {
     table.resetColumnFilters();
@@ -46,48 +43,40 @@ export function DataTableToolbar<TData>({
           w={170}
         />
 
-
         <ActionIcon variant={filtersVisible ? "subtle" : "light"} size="sm" onClick={handleToggleFilters}>
           <SvgIcon name="filter" width={16} height={16} />
         </ActionIcon>
 
-        {filtersVisible && filterableColumns.map((columnMeta) => {
-          if (!columnMeta) return null;
-
-          const { id, title, type, ...rest } = columnMeta;
-          const column = table.getColumn(id.toString());
-          if (!column) return null;
-
-          switch (type) {
-            case 'number':
-              return (
-                <DataTableNumberFilter
-                  key={`${id.toString()}-${type}`}
-                  column={column}
-                  title={title}
-                />
-              );
-            case 'date':
-              return (
-                <DataTableDateFilter
-                  key={`${id.toString()}-${type}`}
-                  column={column}
-                  title={title}
-                />
-              );
-            case 'text':
-              return (
-                <DataTableFacetedFilter
-                  key={`${id.toString()}-${type}`}
-                  column={column}
-                  options={(rest as any).options ?? []}
-                  title={title}
-                />
-              );
-            default:
+        {filtersVisible &&
+          filterableColumns.map((columnMeta) => {
+            if (!columnMeta) {
               return null;
-          }
-        })}
+            }
+
+            const { id, title, type, ...rest } = columnMeta;
+            const column = table.getColumn(id.toString());
+            if (!column) {
+              return null;
+            }
+
+            switch (type) {
+              case "number":
+                return <DataTableNumberFilter key={`${id.toString()}-${type}`} column={column} title={title} />;
+              case "date":
+                return <DataTableDateFilter key={`${id.toString()}-${type}`} column={column} title={title} />;
+              case "text":
+                return (
+                  <DataTableFacetedFilter
+                    key={`${id.toString()}-${type}`}
+                    column={column}
+                    options={(rest as any).options ?? []}
+                    title={title}
+                  />
+                );
+              default:
+                return null;
+            }
+          })}
 
         {isFiltered && (
           <Button

@@ -1,5 +1,5 @@
-import { IconName } from '@/assets/icons/types';
-import { SvgIcon } from '@/components/ui/icon';
+import type { IconName } from "@/assets/icons/types";
+import { SvgIcon } from "@/components/ui/icon";
 import {
   Badge,
   Button,
@@ -12,9 +12,9 @@ import {
   Text,
   TextInput,
   ThemeIcon,
-} from '@mantine/core';
-import { useCallback, useMemo, useState } from 'react';
-import { Column } from '@tanstack/react-table';
+} from "@mantine/core";
+import { useCallback, useMemo, useState } from "react";
+import type { Column } from "@tanstack/react-table";
 
 interface Option {
   label: string;
@@ -28,20 +28,14 @@ interface CheckboxFilterProps<TData> {
   column?: Column<TData, unknown>;
 }
 
-export function DataTableFacetedFilter<TData>({
-  options,
-  title,
-  column,
-}: Readonly<CheckboxFilterProps<TData>>) {
-  const [filterValue, setFilterValue] = useState<string>('');
+export function DataTableFacetedFilter<TData>({ options, title, column }: Readonly<CheckboxFilterProps<TData>>) {
+  const [filterValue, setFilterValue] = useState<string>("");
 
   // Get the current filter value from the column
   const columnFilterValue = (column?.getFilterValue() ?? []) as string[];
 
   const filteredOptions = useMemo(() => {
-    return options.filter((option) =>
-      option.label.toLowerCase().includes(filterValue.toLowerCase())
-    );
+    return options.filter((option) => option.label.toLowerCase().includes(filterValue.toLowerCase()));
   }, [filterValue, options]);
 
   const handleSelect = useCallback(
@@ -54,7 +48,7 @@ export function DataTableFacetedFilter<TData>({
       }
       column?.setFilterValue(Array.from(newSelected));
     },
-    [columnFilterValue, column]
+    [columnFilterValue, column],
   );
 
   const handleSelectAll = useCallback(() => {
@@ -75,10 +69,10 @@ export function DataTableFacetedFilter<TData>({
     <Popover position="bottom-start">
       <Popover.Target>
         <Button
-          color='dark.4'
+          color="dark.4"
           size="sm"
           variant="outline"
-          style={{ borderStyle: 'dashed', borderWidth: 1 }}
+          style={{ borderStyle: "dashed", borderWidth: 1 }}
           radius="md"
           rightSection={
             columnFilterValue.length > 0 && (
@@ -110,10 +104,7 @@ export function DataTableFacetedFilter<TData>({
           <Checkbox
             label="Select All"
             checked={selectAll}
-            indeterminate={
-              columnFilterValue.length > 0 &&
-              columnFilterValue.length < options.length
-            }
+            indeterminate={columnFilterValue.length > 0 && columnFilterValue.length < options.length}
             onChange={handleSelectAll}
           />
           {filteredOptions.map((option) => (

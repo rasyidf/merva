@@ -26,7 +26,7 @@
         "all": true,
         "useNamingConvention": "off",
         "noImplicitBoolean": "off",
-        "noDefaultExport": "error"
+        "noDefaultExport": "off"
       }
     }
   },

@@ -1,14 +1,7 @@
-import {
-  MultiSelect as CoreMultiSelect,
-  type MultiSelectProps as CoreMultiSelectProps
-} from "@mantine/core";
-import {
-  useController,
-  type FieldValues,
-  type UseControllerProps
-} from "react-hook-form";
+import { MultiSelect as CoreMultiSelect, type MultiSelectProps as CoreMultiSelectProps } from "@mantine/core";
+import { useController, type FieldValues, type UseControllerProps } from "react-hook-form";
 
-import styles from './MultiSelect.module.css';
+import styles from "./MultiSelect.module.css";
 
 export type MultiSelectProps<T extends FieldValues> = UseControllerProps<T> &
   Omit<CoreMultiSelectProps, "value" | "defaultValue">;
@@ -24,20 +17,20 @@ export function MultiSelect<T extends FieldValues>({
 }: MultiSelectProps<T>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (
     <CoreMultiSelect
       value={value}
       classNames={{
-        pillsList: styles.pillsList
+        pillsList: styles.pillsList,
       }}
       onChange={(e) => {
         fieldOnChange(e);
@@ -46,7 +39,7 @@ export function MultiSelect<T extends FieldValues>({
       error={fieldState.error?.message}
       {...field}
       {...props}
-      placeholder={value?.length > 0 ? '' : props.placeholder}
+      placeholder={value?.length > 0 ? "" : props.placeholder}
     />
   );
 }

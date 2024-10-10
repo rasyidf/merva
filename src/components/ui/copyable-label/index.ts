@@ -1,1 +1,1 @@
-export * from "./CopyableLabel";
+export * from "./copyableLabel";

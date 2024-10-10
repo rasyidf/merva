@@ -1,6 +1,5 @@
-
 import { QueryClient, keepPreviousData } from "@tanstack/react-query";
-import { type AxiosError } from "axios";
+import type { AxiosError } from "axios";
 import { useAuth } from "../auth";
 import logger from "../logging";
 import { Notify } from "../notifications";

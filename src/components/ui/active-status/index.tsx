@@ -1,5 +1,5 @@
 import { Badge } from "@mantine/core";
-import React from "react";
+import type React from "react";
 
 type ActiveStatusProps = {
   isActive: boolean;
@@ -8,14 +8,9 @@ type ActiveStatusProps = {
 const ActiveStatusBadge = Badge.withProps({
   m: 0,
   p: 8,
-  variant: "filled"
+  variant: "filled",
 });
 
-const ActiveStatus: React.FC<ActiveStatusProps> = ({ isActive }) => (
-  <ActiveStatusBadge color={isActive ? "green" : "gray"} >
-    {isActive ? "Aktif" : "Tidak Aktif"}
-  </ActiveStatusBadge>
+export const ActiveStatus: React.FC<ActiveStatusProps> = ({ isActive }) => (
+  <ActiveStatusBadge color={isActive ? "green" : "gray"}>{isActive ? "Aktif" : "Tidak Aktif"}</ActiveStatusBadge>
 );
-
-
-export default ActiveStatus;

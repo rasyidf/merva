@@ -1,12 +1,11 @@
+import type { ColumnDef } from "@tanstack/react-table";
 
-import { ColumnDef } from "@tanstack/react-table";
-
-import DataTable from "@/components/groups/data-table";
-import { DataTableToolbarOption } from "@/components/groups/data-table/DataTableToolbarProps";
+import { DataTable } from "@/components/groups/data-table";
+import type { DataTableToolbarOption } from "@/components/groups/data-table/DataTableToolbarProps";
 import { SvgIcon } from "@/components/ui/icon";
 import { categories, labels, statuses, teams, userRoles } from "@/shared/utils/constants/data";
 import { Badge, Checkbox, Flex, Group, Progress, Text, ThemeIcon } from "@mantine/core";
-import { Task } from "../data/schema";
+import type { Task } from "../data/schema";
 
 type ActionProps = {
   onEdit: (task: Task) => void;
@@ -111,20 +110,21 @@ export const useTaskColumns = ({ onEdit, onDelete }: ActionProps): ColumnDef<Tas
     id: "actions",
     size: 30,
     cell: ({ row }) => (
-      <DataTable.RowActions
-        row={row}
-        onEdit={() => onEdit(row.original)}
-        onDelete={() => onDelete(row.original)}
-      />
+      <DataTable.RowActions row={row} onEdit={() => onEdit(row.original)} onDelete={() => onDelete(row.original)} />
     ),
   },
 ];
 
 export const filterableColumns = [
-  { id: 'status', type: 'text', title: 'Status', options: statuses },
-  { id: 'assignedUserRole', type: 'text', title: 'Role', options: userRoles },
-  { id: 'assignedTeam', type: 'text', title: 'Team', options: teams },
-  { id: 'category', type: 'text', title: 'Category', options: categories },
-  { id: 'progressPercentage', title: 'Progress (%)', type: 'number', options: [] },
-  { id: 'dueDate', type: 'date', title: 'Due Date', options: [] },
-] satisfies DataTableToolbarOption<Task>[]; 
+  { id: "status", type: "text", title: "Status", options: statuses },
+  { id: "assignedUserRole", type: "text", title: "Role", options: userRoles },
+  { id: "assignedTeam", type: "text", title: "Team", options: teams },
+  { id: "category", type: "text", title: "Category", options: categories },
+  {
+    id: "progressPercentage",
+    title: "Progress (%)",
+    type: "number",
+    options: [],
+  },
+  { id: "dueDate", type: "date", title: "Due Date", options: [] },
+] satisfies DataTableToolbarOption<Task>[];

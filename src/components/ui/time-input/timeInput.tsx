@@ -1,51 +1,32 @@
-import { useEffect, useState } from 'react';
-import {
-  Button, Flex, Popover, ScrollArea, rem
-} from '@mantine/core';
-import {
-  TimeInput,
-  type TimeInputProps as BaseTimeInputProps
-} from '@mantine/dates';
+import { useEffect, useState } from "react";
+import { Button, Flex, Popover, ScrollArea, rem } from "@mantine/core";
+import { TimeInput, type TimeInputProps as BaseTimeInputProps } from "@mantine/dates";
 
-import {
-  type FieldValues,
-  type UseControllerProps,
-  useController
-} from 'react-hook-form';
-import { SvgIcon } from '../icon';
+import { type FieldValues, type UseControllerProps, useController } from "react-hook-form";
+import { SvgIcon } from "../icon";
 
-export type TimeInputProps<T extends FieldValues> = UseControllerProps<T> &
-  BaseTimeInputProps;
-export function TimeInputForm<T extends FieldValues>({
-  name,
-  control,
-  defaultValue,
-  ...props
-}: TimeInputProps<T>) {
+export type TimeInputProps<T extends FieldValues> = UseControllerProps<T> & BaseTimeInputProps;
+export function TimeInputForm<T extends FieldValues>({ name, control, defaultValue, ...props }: TimeInputProps<T>) {
   const {
     field: { value: fieldValue, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController({
     name,
     control,
-    defaultValue
+    defaultValue,
   });
-  const hourItem = Array(24)
-    .fill(0)
-    .map((_, i) => (i < 10 ? `0${i}` : String(i)));
+  const hourItem = new Array(24).fill(0).map((_, i) => (i < 10 ? `0${i}` : String(i)));
 
-  const minuteItem = Array(60)
-    .fill(0)
-    .map((_, i) => (i < 10 ? `0${i}` : String(i)));
+  const minuteItem = new Array(60).fill(0).map((_, i) => (i < 10 ? `0${i}` : String(i)));
 
-  const [hour, setHour] = useState<string>('00');
-  const [minute, setMinute] = useState<string>('00');
+  const [hour, setHour] = useState<string>("00");
+  const [minute, setMinute] = useState<string>("00");
 
   const displayHourItem = hourItem.map((hr) => String(Number.parseInt(hr, 10)));
 
   useEffect(() => {
     if (fieldValue) {
-      const [newHour, newMinute] = fieldValue.split(':');
+      const [newHour, newMinute] = fieldValue.split(":");
       setHour(newHour);
       setMinute(newMinute);
     }
@@ -66,15 +47,8 @@ export function TimeInputForm<T extends FieldValues>({
         />
       </Popover.Target>
       <Popover.Dropdown>
-        <Flex
-          justify="space-between"
-          style={{ height: rem(248), width: rem(312) }}
-          gap={8}
-        >
-          <ScrollArea
-            scrollbarSize={0}
-            style={{ height: '100%', width: '50%' }}
-          >
+        <Flex justify="space-between" style={{ height: rem(248), width: rem(312) }} gap={8}>
+          <ScrollArea scrollbarSize={0} style={{ height: "100%", width: "50%" }}>
             <Flex direction="column" align="center">
               {hourItem.map((hr, i) => (
                 <Button
@@ -83,7 +57,7 @@ export function TimeInputForm<T extends FieldValues>({
                     setHour(hr);
                     fieldOnChange(`${hr}:${minute}`);
                   }}
-                  variant={hour === hr ? 'light' : 'default'}
+                  variant={hour === hr ? "light" : "default"}
                   style={{ fontWeight: 500, border: 0 }}
                   fullWidth
                 >
@@ -92,10 +66,7 @@ export function TimeInputForm<T extends FieldValues>({
               ))}
             </Flex>
           </ScrollArea>
-          <ScrollArea
-            scrollbarSize={0}
-            style={{ height: '100%', width: '50%' }}
-          >
+          <ScrollArea scrollbarSize={0} style={{ height: "100%", width: "50%" }}>
             <Flex direction="column" align="center">
               {minuteItem.map((min) => (
                 <Button
@@ -104,7 +75,7 @@ export function TimeInputForm<T extends FieldValues>({
                     setMinute(min);
                     fieldOnChange(`${hour}:${min}`);
                   }}
-                  variant={minute === min ? 'light' : 'default'}
+                  variant={minute === min ? "light" : "default"}
                   style={{ fontWeight: 500, border: 0 }}
                   fullWidth
                 >

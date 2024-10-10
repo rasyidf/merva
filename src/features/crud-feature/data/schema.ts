@@ -16,7 +16,7 @@ export const taskSchema = z.object({
   assignedTeam: z.string(),
   category: z.string(),
   tags: z.array(z.string()),
-  progressPercentage: z.number().min(0).max(100)
+  progressPercentage: z.number().min(0).max(100),
 });
 
 export type Task = z.infer<typeof taskSchema>;

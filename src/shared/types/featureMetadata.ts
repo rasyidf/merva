@@ -1,7 +1,7 @@
-import { RouteConfig } from "./RouteConfig";
-import { VersionConfig } from "./VersionConfig";
-import { NavigationConfig } from "./NavigationConfig";
-import { ReactNode } from "react";
+import type { RouteConfig } from "./routeConfig";
+import type { VersionConfig } from "./versionConfig";
+import type { NavigationConfig } from "./navigationConfig";
+import type { ReactNode } from "react";
 
 export type FeatureGroup = {
   id: string;

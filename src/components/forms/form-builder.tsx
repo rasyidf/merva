@@ -1,12 +1,12 @@
 import {
   Loader,
   LoadingOverlay as LoadingOverlayComponent,
-  LoadingOverlayProps,
+  type LoadingOverlayProps,
   Stack,
-  Text
-} from '@mantine/core';
-import { FormBuilderComponent } from './form-builder.component';
-import { FormBuilderProps } from './form-builder.types';
+  Text,
+} from "@mantine/core";
+import { FormBuilderComponent } from "./form-builder.component";
+import type { FormBuilderProps } from "./form-builder.types";
 
 export const FormBuilder = (props: Readonly<FormBuilderProps>) => {
   if (props?.loading) {
@@ -27,7 +27,7 @@ export const LoadingOverlay = (props: LoadingOverlayProps) => {
               Sedang diproses...
             </Text>
           </Stack>
-        )
+        ),
       }}
     />
   );

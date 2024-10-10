@@ -1,6 +1,6 @@
 import {
   ColumnDef,
-  Table,
+  type Table,
   TableState,
   getCoreRowModel,
   getExpandedRowModel,
@@ -26,19 +26,16 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({ table, children }: Readonly<DataTableProps<TData, TValue>>) {
-
   return (
     <DataTableProvider table={table}>
       <Stack gap={6} mt={8}>
-        {
-          children ?? (
-            <>
-              <DataTableToolbar />
-              <DataTableCore />
-              <DataTablePagination />
-            </>
-          )
-        }
+        {children ?? (
+          <>
+            <DataTableToolbar />
+            <DataTableCore />
+            <DataTablePagination />
+          </>
+        )}
       </Stack>
     </DataTableProvider>
   );

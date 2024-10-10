@@ -1,19 +1,14 @@
-import {
-  type FieldValues,
-  useController,
-  type UseControllerProps
-} from "react-hook-form";
+import { type FieldValues, useController, type UseControllerProps } from "react-hook-form";
 import {
   DatePickerInput as CoreDatePickerInput,
   type DatePickerType,
-  type DatePickerInputProps as BaseDatePickerInputProps
+  type DatePickerInputProps as BaseDatePickerInputProps,
 } from "@mantine/dates";
 
-export type DatePickerInputProps<T extends FieldValues, V extends DatePickerType = 'default'> =
-  UseControllerProps<T> &
-    Omit<BaseDatePickerInputProps<V>, "value" | "defaultValue">;
+export type DatePickerInputProps<T extends FieldValues, V extends DatePickerType = "default"> = UseControllerProps<T> &
+  Omit<BaseDatePickerInputProps<V>, "value" | "defaultValue">;
 
-export function DatePickerInput<T extends FieldValues, V extends DatePickerType = 'default'>({
+export function DatePickerInput<T extends FieldValues, V extends DatePickerType = "default">({
   type,
   name,
   control,
@@ -25,23 +20,23 @@ export function DatePickerInput<T extends FieldValues, V extends DatePickerType 
 }: DatePickerInputProps<T, V>) {
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   return (
-    <CoreDatePickerInput<V> 
+    <CoreDatePickerInput<V>
       error={fieldState.error?.message}
       value={value}
       onChange={(e) => {
         fieldOnChange(e);
         onChange?.(e);
-      }} 
+      }}
       {...field}
       {...props}
     />

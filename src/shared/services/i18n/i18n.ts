@@ -1,5 +1,5 @@
 import { locales } from "@/app/locales";
-import i18n, { InitOptions } from "i18next";
+import i18n, { type InitOptions } from "i18next";
 import { initReactI18next as initReact } from "react-i18next";
 
 import { z } from "zod";
@@ -17,7 +17,7 @@ i18n.use(initReact).init({
   defaultNS: "translation",
 } satisfies InitOptions);
 
-z.setErrorMap(zodI18nMap);
+z.setErrorMap(zodI18nMap as any);
 
 export const LocalizationService = {
   changeLanguage: async (language: string): Promise<void> => {
@@ -28,4 +28,4 @@ export const LocalizationService = {
   },
 };
 
-export default i18n;
+export const i18nInstance = i18n;

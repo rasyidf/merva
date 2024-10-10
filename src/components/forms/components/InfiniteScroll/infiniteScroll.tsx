@@ -1,12 +1,7 @@
-import {
- Combobox, Flex, Loader, ScrollArea, TextInput, type InputBaseProps 
-}
-  from "@mantine/core";
+import { Combobox, Flex, Loader, ScrollArea, TextInput, type InputBaseProps } from "@mantine/core";
 import { useDebouncedValue, useIntersection } from "@mantine/hooks";
-import { UseInfiniteQueryResult } from "@tanstack/react-query";
-import {
-  ReactNode, useEffect, useRef
-} from "react";
+import type { UseInfiniteQueryResult } from "@tanstack/react-query";
+import { type ReactNode, useEffect, useRef } from "react";
 import type { FieldValues, UseControllerProps } from "react-hook-form";
 import { useController } from "react-hook-form";
 
@@ -20,7 +15,7 @@ type OptionsProps = {
 };
 
 type InfiniteScrollProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<InputBaseProps, 'value' | 'defaultValue'> & {
+  Omit<InputBaseProps, "value" | "defaultValue"> & {
     placeholder?: string;
     data?: OptionsProps[];
     label?: string | ReactNode;
@@ -50,20 +45,20 @@ export function InfiniteScroll<T extends FieldValues>({
   const { data, hasNextPage, fetchNextPage, isFetching } = query || {};
   const {
     field: { value, onChange: fieldOnChange, ...field },
-    fieldState
+    fieldState,
   } = useController<T>({
     name,
     control,
     defaultValue,
     rules,
-    shouldUnregister
+    shouldUnregister,
   });
 
   const containerRef = useRef(null);
 
   const { ref, entry } = useIntersection({
     root: containerRef.current,
-    threshold: 1
+    threshold: 1,
   });
 
   const [debounced] = useDebouncedValue(entry?.isIntersecting, 500);
@@ -72,14 +67,14 @@ export function InfiniteScroll<T extends FieldValues>({
     if (debounced) {
       fetchNextPage?.();
     }
-  }, [debounced]);
+  }, [debounced, fetchNextPage]);
 
   const options = data?.pages.flatMap((page: any) =>
     page.data.map((item: any) => (
       <Combobox.Option value={item.value} key={item.value}>
         {item.label}
       </Combobox.Option>
-    ))
+    )),
   );
 
   return (
@@ -108,18 +103,12 @@ export function InfiniteScroll<T extends FieldValues>({
           mah={200}
           type="scroll"
           ref={containerRef}
-        // placeholder="Loading..." // TODO: soka move this code
-        // onPointerEnterCapture={undefined}
-        // onPointerLeaveCapture={undefined}
+          // placeholder="Loading..." // TODO: soka move this code
+          // onPointerEnterCapture={undefined}
+          // onPointerLeaveCapture={undefined}
         >
           <Combobox.Options>
-            {options && options.length > 0 ? (
-              options
-            ) : (
-              <Combobox.Empty>
-                Nothing found
-              </Combobox.Empty>
-            )}
+            {options && options.length > 0 ? options : <Combobox.Empty>Nothing found</Combobox.Empty>}
           </Combobox.Options>
           {
             <div ref={ref}>

@@ -1,9 +1,8 @@
-
 export * from "./utils";
-export * from "./FeatureMetadata";
-export * from "./NavigationConfig";
-export * from "./RouteConfig";
-export * from "./ThirdPartyLocalization";
-export * from "./VersionConfig";
+export * from "./featureMetadata";
+export * from "./navigationConfig";
+export * from "./routeConfig";
+export * from "./thirdPartyLocalization";
+export * from "./versionConfig";
 export * from "./auth";
 export * from "./table";

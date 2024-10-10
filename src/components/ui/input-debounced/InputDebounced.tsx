@@ -1,4 +1,4 @@
-import TextInput from "@/components/ui/text-input";
+import { TextInput } from "@/components/ui/text-input";
 import { useDebouncedState } from "@mantine/hooks";
 import clsx from "clsx";
 import { useEffect } from "react";
@@ -17,7 +17,7 @@ type InputDebouncedProps = {
   fullWidth?: boolean;
 };
 
-const InputDebounced: React.FC<InputDebouncedProps> = ({
+export const InputDebounced: React.FC<InputDebouncedProps> = ({
   id = "global-filter",
   className,
   value,
@@ -53,5 +53,3 @@ const InputDebounced: React.FC<InputDebouncedProps> = ({
     />
   );
 };
-
-export default InputDebounced;

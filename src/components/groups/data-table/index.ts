@@ -8,8 +8,7 @@ import { DataTable as DataTableContainer } from "./data-table";
 import { DataTableFacetedFilter } from "./filters";
 export { useDataTable } from "./utils/use-data-table";
 
-
-const DataTable = {
+export const DataTable = {
   ColumnHeader: DataTableColumnHeader,
   Core: DataTableCore,
   Pagination: DataTablePagination,
@@ -19,7 +18,3 @@ const DataTable = {
   Container: DataTableContainer,
   Filters: DataTableFacetedFilter,
 };
-
-
-
-export default DataTable;

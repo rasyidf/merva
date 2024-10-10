@@ -1,4 +1,4 @@
-import DataTable, { useDataTable } from "@/components/groups/data-table";
+import { DataTable, useDataTable } from "@/components/groups/data-table";
 import { PageHeader } from "@/components/groups/main-header";
 import { filterableColumns, useTaskColumns } from "../components/columns";
 
@@ -7,17 +7,15 @@ import { modalService } from "@/shared/services/modals/service";
 import { Alert, Box, Button, Drawer, Group, LoadingOverlay, Paper } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
-import { Task } from "../data/schema";
+import type { Task } from "../data/schema";
 import { getTasks } from "../services/getTask";
 import EntityCreate from "./create";
-import EntityEdit from "./edit";
 import EntityDetails from "./details";
-
+import EntityEdit from "./edit";
 
 export const EntityList = () => {
-
   const [modalState, setModalState] = useState<{
-    action: 'create' | 'update' | 'detail';
+    action: "create" | "update" | "detail";
     id: string;
   } | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
@@ -27,14 +25,16 @@ export const EntityList = () => {
       setModalState({ action: "update", id });
       return open();
     },
-    onDelete: ({ id }) => modalService.deleteModal({
-      message: "Are you sure you want to delete this task?",
-      onConfirm: () => {
-        Notify.success("Success", "Task " + id + " deleted successfully");
-      },
-    }),
-
+    onDelete: ({ id }) =>
+      modalService.deleteModal({
+        message: "Are you sure you want to delete this task?",
+        onConfirm: () => {
+          Notify.success("Success", `Task ${id} deleted successfully`);
+        },
+      }),
   });
+
+  // usePrompt("You have unsaved changes. Are you sure you want to leave?", true);
 
   const { table, isLoading, error } = useDataTable<Task, any>({
     key: ["task"],
@@ -48,41 +48,51 @@ export const EntityList = () => {
   return (
     <Paper p={16}>
       <PageHeader title="Task" subtitle="This is CRUD Feature contains Create, Read, Update, Delete Operation">
-        <Group  >
-          <Button onClick={() => {
-            setModalState({ action: "create", id: "" });
-            open();
-          }} color="blue">
+        <Group>
+          <Button
+            onClick={() => {
+              setModalState({ action: "create", id: "" });
+              open();
+            }}
+            color="blue"
+          >
             Create Task
           </Button>
         </Group>
       </PageHeader>
       <Box mt={16}>
-        {
-          error && (
-            <Alert color="red" p={16} style={{ border: "1px solid red" }}>
-              {error.message}
-            </Alert>
-          )
-        }
+        {error && (
+          <Alert color="red" p={16} style={{ border: "1px solid red" }}>
+            {error.message}
+          </Alert>
+        )}
         <LoadingOverlay visible={isLoading} />
-        <DataTable.Container table={table} >
+        <DataTable.Container table={table}>
           <DataTable.Toolbar meta={{ filterableColumns }} />
           <DataTable.Core />
           <DataTable.Pagination />
         </DataTable.Container>
       </Box>
 
-      <Drawer opened={opened} position="right" onClose={close} title={
-        modalState?.action === "create" ? "Create Task" :
-          modalState?.action === "update" ? "Update Task" :
-            modalState?.action === "detail" ? "Task Details" : ""
-      }>
-        {modalState?.action === "create" && (<EntityCreate />)}
-        {modalState?.action === "update" && (<EntityEdit />)}
-        {modalState?.action === "detail" && (<EntityDetails />)}
+      <Drawer
+        opened={opened}
+        position="right"
+        onClose={close}
+        withinPortal
+        title={
+          modalState?.action === "create"
+            ? "Create Task"
+            : modalState?.action === "update"
+              ? "Update Task"
+              : modalState?.action === "detail"
+                ? "Task Details"
+                : ""
+        }
+      >
+        {modalState?.action === "create" && <EntityCreate onCancel={() => close()} />}
+        {modalState?.action === "update" && <EntityEdit />}
+        {modalState?.action === "detail" && <EntityDetails />}
       </Drawer>
-
     </Paper>
   );
 };

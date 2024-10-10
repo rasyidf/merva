@@ -1,6 +1,6 @@
-import { Badge, Button, Group, Popover, Select, Stack, TextInput } from '@mantine/core';
-import { Column } from '@tanstack/react-table';
-import { useCallback, useState } from 'react';
+import { Badge, Button, Group, Popover, Select, Stack, TextInput } from "@mantine/core";
+import type { Column } from "@tanstack/react-table";
+import { useCallback, useState } from "react";
 
 interface NumberFilterProps<TData> {
   column?: Column<TData, unknown>;
@@ -8,17 +8,17 @@ interface NumberFilterProps<TData> {
 }
 
 export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberFilterProps<TData>>) {
-  const [filterValue, setFilterValue] = useState<string>('');
-  const [filterOperator, setFilterOperator] = useState<string>('>');
+  const [filterValue, setFilterValue] = useState<string>("");
+  const [filterOperator, setFilterOperator] = useState<string>(">");
 
   // Get the current filter value from the column
-  const columnFilterData = column?.getFilterValue() as string || '';
+  const columnFilterData = (column?.getFilterValue() as string) || "";
   // split the filter value into operator and value from '>0' to ['>', '0'] and >=0 to ['>=', '0']
-  const [op, val] = RegExp(/([><=]+)(\d+)/).exec(columnFilterData) || ['', ''];
-  const columnFilterValue = ({
+  const [op, val] = new RegExp(/([><=]+)(\d+)/).exec(columnFilterData) || ["", ""];
+  const columnFilterValue = {
     operator: op,
     value: val,
-  }) as {
+  } as {
     operator: string;
     value: string;
   };
@@ -28,8 +28,8 @@ export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberF
   }, [filterOperator, filterValue, column]);
 
   const handleClearFilters = useCallback(() => {
-    setFilterValue('');
-    setFilterOperator('>');
+    setFilterValue("");
+    setFilterOperator(">");
     column?.setFilterValue(undefined);
   }, [column]);
 
@@ -37,18 +37,18 @@ export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberF
     <Popover position="bottom-start" trapFocus shadow="md">
       <Popover.Target>
         <Button
-          color='dark.4'
+          color="dark.4"
           variant="outline"
-          style={{ borderStyle: 'dashed', borderWidth: 1 }}
+          style={{ borderStyle: "dashed", borderWidth: 1 }}
           size="sm"
           radius="md"
           rightSection={
             columnFilterValue.value && (
               <Group gap={0}>
-                <Badge color='dark.4' variant='light' style={{ borderRadius: '4px 0 0 4px' }}>
+                <Badge color="dark.4" variant="light" style={{ borderRadius: "4px 0 0 4px" }}>
                   {filterOperator}
                 </Badge>
-                <Badge color='dark.4' variant='light' style={{ borderRadius: '0 4px 4px 0' }}>
+                <Badge color="dark.4" variant="light" style={{ borderRadius: "0 4px 4px 0" }}>
                   {filterValue}
                 </Badge>
               </Group>
@@ -66,19 +66,19 @@ export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberF
             comboboxProps={{ withinPortal: false }}
             onChange={(value) => setFilterOperator(value as string)}
             data={[
-              { value: '>', label: '(> ) GreaterThan' },
-              { value: '<', label: '(< ) LessThan' },
-              { value: '>=', label: '(>=) Greater Than Or Equal' },
-              { value: '<=', label: '(<=) Less Than Or Equal' },
-              { value: '=', label: '(= ) Equal' },
-              { value: '!=', label: '(!=) Not Equal' },
+              { value: ">", label: "(> ) GreaterThan" },
+              { value: "<", label: "(< ) LessThan" },
+              { value: ">=", label: "(>=) Greater Than Or Equal" },
+              { value: "<=", label: "(<=) Less Than Or Equal" },
+              { value: "=", label: "(= ) Equal" },
+              { value: "!=", label: "(!=) Not Equal" },
             ]}
             size="xs"
           />
           {/* Input for filter value */}
           <TextInput
             size="xs"
-            placeholder={`Value`}
+            placeholder={"Value"}
             value={filterValue}
             onChange={(event) => setFilterValue(event.target.value)}
             type="number"
@@ -87,7 +87,7 @@ export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberF
             Apply
           </Button>
           {/* Clear filters button if a filter is applied */}
-          {(columnFilterValue.value !== '') && (
+          {columnFilterValue.value !== "" && (
             <Button size="xs" variant="transparent" onClick={handleClearFilters}>
               Clear filters
             </Button>
@@ -97,5 +97,3 @@ export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberF
     </Popover>
   );
 }
-
-export default DataTableNumberFilter;

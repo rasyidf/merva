@@ -1,17 +1,18 @@
-import { SvgIcon } from '@/components/ui/icon';
-import { ActionIcon, Button } from '@mantine/core';
-import { Column } from '@tanstack/react-table';
+import { SvgIcon } from "@/components/ui/icon";
+import { ActionIcon, Button } from "@mantine/core";
+import type { Column } from "@tanstack/react-table";
 
 interface DataTableColumnHeaderProps<TData, TValue> {
   column: Column<TData, TValue>;
   title: React.ReactNode;
 }
 
-export function DataTableColumnHeader<TData, TValue>({ column, title }: Readonly<DataTableColumnHeaderProps<TData, TValue>>) {
+export function DataTableColumnHeader<TData, TValue>({
+  column,
+  title,
+}: Readonly<DataTableColumnHeaderProps<TData, TValue>>) {
   const toggleSort = () => {
-    column.toggleSorting(
-      column.getIsSorted() === 'asc' ? true : column.getIsSorted() === 'desc' ? undefined : false
-    );
+    column.toggleSorting(column.getIsSorted() === "asc" ? true : column.getIsSorted() === "desc" ? undefined : false);
   };
 
   return (
@@ -22,8 +23,8 @@ export function DataTableColumnHeader<TData, TValue>({ column, title }: Readonly
       radius="sm"
       color="dark"
       styles={() => ({
-        label: { justifyContent: 'start', textAlign: "start" },
-        inner: { justifyContent: 'space-between', width: '100%' }
+        label: { justifyContent: "start", textAlign: "start" },
+        inner: { justifyContent: "space-between", width: "100%" },
       })}
       rightSection={
         <ActionIcon
@@ -34,12 +35,12 @@ export function DataTableColumnHeader<TData, TValue>({ column, title }: Readonly
           color="dark"
           onClick={toggleSort}
         >
-          {column.getIsSorted() === 'desc' ? (
-            <SvgIcon name='chevronUp' />
-          ) : column.getIsSorted() === 'asc' ? (
-            <SvgIcon name='chevronDown' />
+          {column.getIsSorted() === "desc" ? (
+            <SvgIcon name="chevronUp" />
+          ) : column.getIsSorted() === "asc" ? (
+            <SvgIcon name="chevronDown" />
           ) : (
-            <SvgIcon name='chevronsUpDown' />
+            <SvgIcon name="chevronsUpDown" />
           )}
         </ActionIcon>
       }

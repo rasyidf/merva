@@ -1,5 +1,5 @@
 // acl.tsx
-import { ReactElement, ReactNode, useMemo } from "react";
+import { type ReactElement, type ReactNode, useMemo } from "react";
 import { Navigate } from "react-router-dom";
 
 export type AclProps = {

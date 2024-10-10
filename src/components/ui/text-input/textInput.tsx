@@ -1,6 +1,6 @@
 import { TextInput as TextBase } from "@mantine/core";
 
-const TextInputBase = TextBase.withProps({
+export const TextInput = TextBase.withProps({
   radius: "sm",
   size: "md",
   styles: (theme) => ({
@@ -16,5 +16,3 @@ const TextInputBase = TextBase.withProps({
     selected: { background: theme.colors.blue[1] },
   }),
 });
-
-export default TextInputBase;

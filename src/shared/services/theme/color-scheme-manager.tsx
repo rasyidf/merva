@@ -1,4 +1,4 @@
-import { MantineColorScheme, MantineColorSchemeManager, isMantineColorScheme } from "@mantine/core";
+import { type MantineColorScheme, type MantineColorSchemeManager, isMantineColorScheme } from "@mantine/core";
 import logger from "../logging";
 
 export interface LocalStorageColorSchemeManagerOptions {

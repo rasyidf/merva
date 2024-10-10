@@ -1,1 +1,1 @@
-export { default as InputDebounced } from "./InputDebounced";
+export * from "./InputDebounced";

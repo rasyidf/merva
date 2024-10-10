@@ -1,4 +1,13 @@
-import { ColumnDef, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, TableState, Updater, useReactTable } from "@tanstack/react-table";
+import {
+  type ColumnDef,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  type TableState,
+  type Updater,
+  useReactTable,
+} from "@tanstack/react-table";
 
 interface UseInitializeTableOptions<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

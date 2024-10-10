@@ -1,9 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  FormProvider, SubmitHandler, useForm
-} from 'react-hook-form';
-import { FormBuilderProps } from './form-builder.types';
-import { LoadingOverlay } from './form-builder';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
+import type { FormBuilderProps } from "./form-builder.types";
+import { LoadingOverlay } from "./form-builder";
 
 /**
  * To use the FormBuilder, you need to provide the schema and the meta data
@@ -41,16 +39,11 @@ import { LoadingOverlay } from './form-builder';
  * ```
  */
 
-export const FormBuilderComponent = ({
-  schema,
-  action,
-  children,
-  initialData
-}: Readonly<FormBuilderProps>) => {
+export const FormBuilderComponent = ({ schema, action, children, initialData }: Readonly<FormBuilderProps>) => {
   const hooks = useForm({
     resolver: zodResolver(schema),
-    mode: 'all',
-    defaultValues: initialData
+    mode: "all",
+    defaultValues: initialData,
   });
 
   const { handleSubmit } = hooks;
@@ -62,9 +55,7 @@ export const FormBuilderComponent = ({
   return (
     <FormProvider {...hooks}>
       <LoadingOverlay visible={hooks.formState.isSubmitting} />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {children}
-      </form>
+      <form onSubmit={handleSubmit(onSubmit)}>{children}</form>
     </FormProvider>
   );
 };

@@ -1,11 +1,6 @@
 import { Flex, Stack, Text, Title } from "@mantine/core";
 
-export function PageHeader({
-  title,
-  subtitle,
-  children,
-  ...rest
-}: PageHeaderProps): JSX.Element {
+export function PageHeader({ title, subtitle, children, ...rest }: PageHeaderProps): JSX.Element {
   return (
     <Flex
       justify="space-between"
@@ -21,7 +16,8 @@ export function PageHeader({
         backdropFilter: "blur(10px)",
         WebkitBackdropFilter: "blur(10px)",
       }}
-      {...rest} >
+      {...rest}
+    >
       <Stack gap={0}>
         <Title order={3}>{title}</Title>
         {subtitle && (

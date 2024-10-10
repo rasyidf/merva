@@ -1,12 +1,12 @@
 import { CryptoHelper } from "@/shared/services/crypto";
-import { StateStorage } from "zustand/middleware";
+import type { StateStorage } from "zustand/middleware";
 
 export const secureStorage: StateStorage = {
   getItem: async (name: string): Promise<string | null> => {
     const encrypted = localStorage.getItem(name) ?? "";
 
     if (CryptoHelper.isEncrypted(encrypted)) {
-      return await CryptoHelper.decrypt(encrypted) || null;
+      return (await CryptoHelper.decrypt(encrypted)) || null;
     }
     return null;
   },

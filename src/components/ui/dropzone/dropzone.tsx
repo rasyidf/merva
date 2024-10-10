@@ -1,11 +1,10 @@
-
 import { apiFetch, logger, useAuth } from "@/shared/services";
 import { APP_URL_API } from "@/shared/utils/constants";
 
 import { ActionIcon, Flex, Image, LoadingOverlay, Stack, Text, Tooltip } from "@mantine/core";
-import { Dropzone as BaseDropzone, DropzoneProps, FileRejection, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { ForwardRefRenderFunction, forwardRef, useRef, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
+import { Dropzone as BaseDropzone, type DropzoneProps, type FileRejection, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { type ForwardRefRenderFunction, forwardRef, useRef, useState } from "react";
+import type { ControllerRenderProps } from "react-hook-form";
 import { SvgIcon } from "../icon";
 
 type Props = {
@@ -14,7 +13,7 @@ type Props = {
 } & ControllerRenderProps<any, string> &
   DropzoneProps;
 
-const Dropzone: ForwardRefRenderFunction<HTMLDivElement, Omit<Props, 'ref'>> = (props, ref) => {
+const Dropzone: ForwardRefRenderFunction<HTMLDivElement, Omit<Props, "ref">> = (props, ref) => {
   const { label, onDrop, onReject, onChange, value: initialValue, error, ...rest } = props;
   // const [, setPreviewUrl] = useState<string | undefined>(initialValue);
   const [uploadedUrl, setUploadedUrl] = useState<string | undefined>(undefined);
@@ -166,7 +165,9 @@ const Dropzone: ForwardRefRenderFunction<HTMLDivElement, Omit<Props, 'ref'>> = (
             <Text size="md" fw={700} mt={24} fz={16}>
               Drag & drop files or{" "}
               <span style={{ color: "#FFCC39" }}>
-                Browse <input type="file"
+                Browse{" "}
+                <input
+                  type="file"
                   accept={"*"}
                   style={{ display: "none" }}
                   ref={fileInputRef}

@@ -1,17 +1,14 @@
 import data from "../data/tasks.json";
-import {
-  ColumnFilter,
-  ColumnFiltersState, PaginationState, SortingState
-} from "@tanstack/react-table";
+import type { ColumnFilter, ColumnFiltersState, PaginationState, SortingState } from "@tanstack/react-table";
 import z from "zod";
-import { Task, taskSchema } from "../data/schema";
+import { type Task, taskSchema } from "../data/schema";
 
 export async function getTasks(
   sorting: SortingState,
   columnFilters: ColumnFiltersState,
   pagination: PaginationState,
-  q: string
-): Promise<{ data: Task[]; meta: { pageIndex: number; pageSize: number; pageCount: number; }; }> {
+  q: string,
+): Promise<{ data: Task[]; meta: { pageIndex: number; pageSize: number; pageCount: number } }> {
   const tasks: Record<string, any>[] = data;
 
   let filtered = tasks;
@@ -28,7 +25,7 @@ export async function getTasks(
       if (value instanceof String) {
         return task[column].toLowerCase().includes(value.toLowerCase());
       }
-      if (value instanceof Array) {
+      if (Array.isArray(value)) {
         return value.includes(task[column]);
       }
       return false;

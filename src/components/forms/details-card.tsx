@@ -1,7 +1,5 @@
-import {
-  Card, Divider, InputWrapper, Stack, Text, Title
-} from '@mantine/core';
-import { PropsWithChildren, ReactNode } from 'react';
+import { Card, Divider, InputWrapper, Stack, Text, Title } from "@mantine/core";
+import type { PropsWithChildren, ReactNode } from "react";
 
 export const DetailCard = ({ children }: PropsWithChildren) => {
   return (
@@ -14,7 +12,7 @@ export const DetailCard = ({ children }: PropsWithChildren) => {
 export const DetailCardTitle = ({
   title,
   order = 1,
-  px = 24
+  px = 24,
 }: {
   title: string;
   order?: number;
@@ -31,29 +29,24 @@ export const DetailCardTitle = ({
   );
 };
 
-export const DetailCardItem = ({
-  title,
-  children
-}: PropsWithChildren & { title: string; }) => {
+export const DetailCardItem = ({ title, children }: PropsWithChildren & { title: string }) => {
   return (
     <InputWrapper label={title}>
-      <Text c="tertiary.6">
-        {children}
-      </Text>
+      <Text c="tertiary.6">{children}</Text>
     </InputWrapper>
   );
 };
 
 export const DetailBuilder = ({
   data,
-  metaData
+  metaData,
 }: {
   data: Record<string, string | number | undefined>;
   metaData: Record<
     string,
     {
       title?: string;
-      type?: 'date' | 'currency' | 'text';
+      type?: "date" | "currency" | "text";
     }
   >;
 }) => {
@@ -62,8 +55,8 @@ export const DetailBuilder = ({
       <Stack gap={16} mb={24} px={24}>
         {Object.keys(data).map((key, index) => {
           return (
-            <DetailCardItem title={metaData[key]?.title || key} key={index}>
-              {formatText(data?.[key]) || '-'}
+            <DetailCardItem title={metaData[key]?.title || key} key={`${metaData[key]?.title}-${index}`}>
+              {formatText(data?.[key]) || "-"}
             </DetailCardItem>
           );
         })}
@@ -74,16 +67,22 @@ export const DetailBuilder = ({
 
 function formatText(arg0: string | number | undefined): ReactNode {
   if (arg0 === undefined) {
-    return '-';
+    return "-";
   }
 
-  if (typeof arg0 === 'number') {
+  if (typeof arg0 === "number") {
     return arg0.toLocaleString();
   }
 
-  if (typeof arg0 === 'string') {
-    const split = arg0.split('\n');
-    return <>{split.map((item, index) => <Text key={`${arg0.length}index${index}`}>{item}</Text>)}</>;
+  if (typeof arg0 === "string") {
+    const split = arg0.split("\n");
+    return (
+      <>
+        {split.map((item, index) => (
+          <Text key={`${arg0.length}index${index}`}>{item}</Text>
+        ))}
+      </>
+    );
   }
 
   return arg0;
