@@ -7,8 +7,8 @@ export const defaultTheme = createTheme({
   headings: {
     fontFamily: "'Inter Variable', sans-serif",
   },
-  primaryColor: "grape",
-  primaryShade: 5,
+  primaryColor: "dark",
+  primaryShade: 8,
   defaultRadius: "sm",
   components: {
     InputWrapper: InputWrapper.extend({

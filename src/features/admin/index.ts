@@ -1,4 +1,4 @@
-import { DashboardLayout } from "@/components/layouts/dashboardLayout";
+import { DashboardLayout } from "@/shared/components/layouts/DashboardLayout";
 import type { RouteObject } from "react-router-dom";
 import type { FeatureMetadata } from "@/shared/types";
 
@@ -8,24 +8,18 @@ const ShellMetadata = {
   enabled: true,
   routes: [
     {
-      path: "/app",
-      Component: DashboardLayout,
-      children: [
-        {
-          path: "/app/dashboard",
-          async lazy() {
-            const { Dashboard } = await import("./pages/dashboard");
-            return { Component: Dashboard };
-          },
-        },
-        {
-          path: "/app/settings",
-          async lazy() {
-            const { Settings } = await import("./pages/settings");
-            return { Component: Settings };
-          },
-        },
-      ] as RouteObject[],
+      path: "/app/dashboard",
+      async lazy() {
+        const { Dashboard } = await import("./pages/dashboard");
+        return { Component: Dashboard };
+      },
+    },
+    {
+      path: "/app/settings",
+      async lazy() {
+        const { Settings } = await import("./pages/settings");
+        return { Component: Settings };
+      },
     },
   ] satisfies RouteObject[],
   activeVersion: "1.0.0",

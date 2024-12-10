@@ -1,6 +1,6 @@
-import { PageHeader } from "@/components/groups/main-header";
-import { StatsCard } from "@/components/groups/stats-card";
-import { SvgIcon } from "@/components/ui/icon";
+import { PageHeader } from "@/shared/components/groups/main-header";
+import { StatsCard } from "@/shared/components/groups/stats-card";
+import { SvgIcon } from "@/shared/components/ui/icon";
 import { Group, Paper, Stack } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 

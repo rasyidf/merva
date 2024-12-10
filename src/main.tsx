@@ -1,17 +1,14 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
 
 import "@fontsource-variable/inter";
+
 import "@/shared/libs/dayjs";
-import "@/shared/styles/index.scss";
+import "@/shared/styles/index.css";
+import "@mantine/core/styles.css";
 
-import { App } from "./components/root";
+import { MainApp } from "./shared/components/root";
 
+import { createRoot } from "react-dom/client";
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+root.render(<MainApp />);

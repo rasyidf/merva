@@ -1,4 +1,4 @@
-import { SvgIcon } from "@/components/ui/icon";
+import { SvgIcon } from "@/shared/components/ui/icon";
 import type { FeatureMetadata, NavigationConfig } from "@/shared/types";
 import { compose } from "@/shared/utils";
 import type { RouteObject } from "react-router-dom";

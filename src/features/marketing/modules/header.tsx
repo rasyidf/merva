@@ -13,10 +13,10 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { AppLogo } from "@/components/ui/icon/appLogo";
+import { AppLogo } from "@/shared/components/ui/icon/appLogo";
 import { useViewNavigate } from "@/shared/utils/routers";
-import classes from "./header.module.scss";
-import { SvgIcon } from "@/components/ui/icon";
+import classes from "./header.module.css";
+import { SvgIcon } from "@/shared/components/ui/icon";
 
 export function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);

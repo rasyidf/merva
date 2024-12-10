@@ -1,5 +1,5 @@
 import type { ColumnFilter } from "@tanstack/react-table";
-import type { SetStateAction } from "react";
+import type { ReactNode, SetStateAction } from "react";
 
 import type { DeepKeys } from "./utils";
 
@@ -16,7 +16,7 @@ export type FilterType<T = any> = {
 
 export type FilterComponentDefinition = {
   id: string;
-  render: (props: { paramName: string } & FilterType) => JSX.Element;
+  render: (props: { paramName: string } & FilterType) => ReactNode;
 };
 
 export class FilterHelper<TData> {

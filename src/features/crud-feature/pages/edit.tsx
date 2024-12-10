@@ -1,4 +1,4 @@
-import { PageHeader } from "@/components/groups/main-header";
+import { PageHeader } from "@/shared/components/groups/main-header";
 
 export const EntityEdit = () => {
   return (

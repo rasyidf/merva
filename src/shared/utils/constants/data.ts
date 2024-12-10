@@ -1,4 +1,4 @@
-import type { IconName } from "@/assets/icons/types";
+import type { IconName } from "@/shared/assets/icons/types";
 
 export enum Status {
   Backlog = "backlog",

@@ -1,5 +1,5 @@
-import { FormBuilder, FormFields } from "@/components/forms";
-import { PageHeader } from "@/components/groups/main-header";
+import { FormBuilder, FormFields } from "@/shared/components/forms";
+import { PageHeader } from "@/shared/components/groups/main-header";
 import { z } from "zod";
 
 type Props = {

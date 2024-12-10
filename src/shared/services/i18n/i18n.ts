@@ -1,4 +1,4 @@
-import { locales } from "@/app/locales";
+import { locales } from "@/core/locales";
 import i18n, { type InitOptions } from "i18next";
 import { initReactI18next as initReact } from "react-i18next";
 

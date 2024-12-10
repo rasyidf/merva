@@ -1,5 +1,5 @@
-import { DataTable, useDataTable } from "@/components/groups/data-table";
-import { PageHeader } from "@/components/groups/main-header";
+import { DataTable, useDataTable } from "@/shared/components/groups/data-table";
+import { PageHeader } from "@/shared/components/groups/main-header";
 import { filterableColumns, useTaskColumns } from "../components/columns";
 
 import { Notify } from "@/shared/services";

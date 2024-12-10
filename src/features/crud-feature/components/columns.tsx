@@ -1,8 +1,8 @@
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { DataTable } from "@/components/groups/data-table";
-import type { DataTableToolbarOption } from "@/components/groups/data-table/DataTableToolbarProps";
-import { SvgIcon } from "@/components/ui/icon";
+import { DataTable } from "@/shared/components/groups/data-table";
+import type { DataTableToolbarOption } from "@/shared/components/groups/data-table/DataTableToolbarProps";
+import { SvgIcon } from "@/shared/components/ui/icon";
 import { categories, labels, statuses, teams, userRoles } from "@/shared/utils/constants/data";
 import { Badge, Checkbox, Flex, Group, Progress, Text, ThemeIcon } from "@mantine/core";
 import type { Task } from "../data/schema";
