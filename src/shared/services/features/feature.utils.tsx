@@ -28,7 +28,6 @@ export function processFeatures(enabledFeatures: FeatureMetadata[]): {
   const errorRoutes: RouteObject[] = [
     { path: "/401", Component: Page401 },
     { path: "/403", Component: Page403 },
-    { path: "/404", Component: Page404 },
     { path: "/500", Component: Page500 },
     { path: "/503", Component: Page503 },
     { path: "*", Component: Page404 },
