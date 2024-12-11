@@ -27,6 +27,24 @@ const AuthFeatureMetadata = {
           },
         },
         {
+          path: 'password-reset',
+          async lazy() {
+            return compose(await import("./pages/password-reset"));
+          },
+        },
+        {
+          path: 'password-reset/:token',
+          async lazy() {
+            return compose(await import("./pages/change-password"));
+          },
+        },
+        {
+          path: 'otp',
+          async lazy() {
+            return compose(await import("./pages/otp"));
+          },
+        },
+        {
           path: "logout",
           element: <Navigate to="/auth/login" />,
         },

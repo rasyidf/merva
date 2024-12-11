@@ -1,6 +1,6 @@
 import { Notify } from "@/shared/services";
 import { useViewNavigate } from "@/shared/utils/routers";
-import { Alert, Button, Card, Checkbox, Group, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import { Alert, Button, Card, Checkbox, Group, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -12,13 +12,19 @@ type LoginFormInputs = {
 };
 
 const PATH_AUTH = {
-  signup: "/auth/signup",
+  signup: "/auth/register",
   passwordReset: "/auth/password-reset",
 };
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, formState, setError } = useForm<LoginFormInputs>();
+  const { register, handleSubmit, formState, setError } = useForm<LoginFormInputs>({
+    defaultValues: {
+      email: "",
+      username: "",
+      pw: "",
+    },
+  });
 
   const navigate = useViewNavigate();
 
@@ -44,10 +50,10 @@ export default function Page() {
 
   return (
     <>
-      <Title ta="center">Welcome back!</Title>
-      <Text ta="center">Sign in to your account to continue</Text>
+      <Stack>
+        <Text fw={600} fz={16}>Login!</Text>
+        <Text fz={14}>Enter your email and password below to log into your account</Text>
 
-      <Card>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <input type="text" style={{ display: "none" }} {...register("username")} />
           <TextInput label="Email" placeholder="you@mantine.dev" required {...register("email", { required: true })} />
@@ -68,12 +74,18 @@ export default function Page() {
             Sign in
           </Button>
         </form>
-        {formState.errors.root && (
-          <Alert color="red" style={{ marginBottom: 20 }}>
-            {formState.errors.root.message}
-          </Alert>
-        )}
-      </Card>
+        <Text ta="center" fz={14}>
+          Don't have an account?{" "}
+          <Text component={Link} to={PATH_AUTH.signup} fz={14} c="blue">
+            Sign up
+          </Text>
+        </Text>
+      </Stack>
+      {formState.errors.root && (
+        <Alert color="red" style={{ marginBottom: 20 }}>
+          {formState.errors.root.message}
+        </Alert>
+      )}
     </>
   );
 }

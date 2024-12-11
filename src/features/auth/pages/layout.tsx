@@ -1,5 +1,5 @@
 import { AppLogo } from "@/shared/components/ui/icon/appLogo";
-import { Center, Stack } from "@mantine/core";
+import { Box, Card, Center, Stack } from "@mantine/core";
 import { Outlet } from "react-router-dom";
 
 export default function SignInLayout() {
@@ -9,12 +9,17 @@ export default function SignInLayout() {
         height: "100vh",
         width: "100vw",
       }}
+      bg="gray.0"
     >
       <Stack>
         <Center>
           <AppLogo />
         </Center>
-        <Outlet />
+        <Card withBorder shadow="md" radius="md" p={24} miw={300}>
+          <Outlet />
+        </Card>
+
+        <Box h="48px" />
       </Stack>
     </Center>
   );
