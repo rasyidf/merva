@@ -42,7 +42,7 @@ export const DashboardLayout = () => {
           <MainNavbar expanded={true} toggle={toggleMobile} collapseOnClick />
         </Flex>
       </Drawer>
-      <AppShell.Header className={classes.header}>
+      <AppShell.Header  withBorder={false}  className={classes.header}>
         <MainHeader
           navigate={navigate}
           collapsed={!desktopOpened}

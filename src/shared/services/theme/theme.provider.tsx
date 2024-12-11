@@ -5,6 +5,7 @@ import { Notifications } from "@mantine/notifications";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
 import "@mantine/spotlight/styles.css";
+import "@mantine/charts/styles.css";
 
 import type { PropsWithChildren } from "react";
 import { colorSchemeManager, defaultTheme } from ".";

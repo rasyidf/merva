@@ -22,7 +22,7 @@ export function MainHeader(
           </ActionIcon>
           {props.collapsed && (
             <ActionIcon visibleFrom="md" variant="transparent" onClick={props.toggleDesktop}>
-              <SvgIcon name="caretRight" />
+              <SvgIcon name="menu" />
             </ActionIcon>
           )}
         </Group>
