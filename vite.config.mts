@@ -24,7 +24,7 @@ export default defineConfig({
     spriteify({
       withTypes: true,
       inputDir: "utils/svg-icons",
-      outputDir: "src/assets/icons",
+      outputDir: "src/shared/assets/icons",
     }) as unknown as PluginOption,
     nodePolyfills({
       exclude: ["fs"],
