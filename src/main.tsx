@@ -1,7 +1,7 @@
 
 import "@fontsource-variable/inter";
 
-import "@/shared/libs/dayjs";
+import "@/shared/libs";
 import "@/shared/styles/index.css";
 import "@mantine/core/styles.css";
 

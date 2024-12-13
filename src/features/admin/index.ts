@@ -15,7 +15,7 @@ const ShellMetadata = {
       },
     },
     {
-      path: "/app/settings",
+      path: "/app/settings/:tab?",
       async lazy() {
         const { Settings } = await import("./pages/settings");
         return { Component: Settings };
