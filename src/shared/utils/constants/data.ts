@@ -37,7 +37,7 @@ export const statuses = [
   {
     value: "in progress",
     label: "In Progress",
-    icon: "clock5",
+    icon: "clock-5",
   },
   {
     value: "done",
