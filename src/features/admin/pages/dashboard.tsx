@@ -1,90 +1,10 @@
 import { PageHeader } from "@/shared/components/groups/main-header";
-import { StatCardProps, StatsCard } from "@/shared/components/groups/stats-card";
+import { StatsCard } from "@/shared/components/groups/stats-card";
 import { SvgIcon } from "@/shared/components/ui/icon";
 import { BarChart } from "@mantine/charts";
-import { Avatar, Card, Group, Paper, Stack, Table, Text } from "@mantine/core";
+import { Avatar, Card, Group, Paper, SimpleGrid, Stack, Table, Text } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-
-const stats = [
-  {
-    title: "Total Revenue",
-    subtitle: "+20.1% from last month",
-    value: "$45,231.89",
-    icon: "banknote",
-  },
-  {
-    title: "Subscriptions",
-    subtitle: "+180.1% from last month",
-    value: "+2350",
-    icon: "users"
-  },
-  {
-    title: "Sales",
-    subtitle: "+19% from last month",
-    value: "+12,234",
-    icon: "creditCard"
-  },
-  {
-    title: "Active Now",
-    subtitle: "+201 since last hour",
-    value: "+573",
-    icon: "scale"
-  },
-] satisfies StatCardProps[];
-
-export const data = [
-  { month: 'January', Registered: 1200, Processed: 900, Completed: 200 },
-  { month: 'February', Registered: 1900, Processed: 1200, Completed: 400 },
-  { month: 'March', Registered: 400, Processed: 1000, Completed: 200 },
-  { month: 'April', Registered: 1000, Processed: 200, Completed: 800 },
-  { month: 'May', Registered: 800, Processed: 1400, Completed: 1200 },
-  { month: 'June', Registered: 750, Processed: 600, Completed: 1000 },
-];
-
-
-const userData = [
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
-    name: 'Robert Wolfkisser',
-    job: 'Engineer',
-    email: 'rob_wolf@gmail.com',
-    rate: 22,
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
-    name: 'Jill Jailbreaker',
-    job: 'Engineer',
-    email: 'jj@breaker.com',
-    rate: 45,
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
-    name: 'Henry Silkeater',
-    job: 'Designer',
-    email: 'henry@silkeater.io',
-    rate: 76,
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
-    name: 'Bill Horsefighter',
-    job: 'Designer',
-    email: 'bhorsefighter@gmail.com',
-    rate: 15,
-  },
-  {
-    avatar:
-      'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png',
-    name: 'Jeremy Footviewer',
-    job: 'Manager',
-    email: 'jeremy@foot.dev',
-    rate: 98,
-  },
-];
-
+import { userData, stats, data } from "../data/userData";
 
 export function UsersStack() {
   const rows = userData.map((item) => (
@@ -113,7 +33,7 @@ export function UsersStack() {
         <Text fz="xs" c="dimmed">
           Rate
         </Text>
-      </Table.Td> 
+      </Table.Td>
     </Table.Tr>
   ));
 
@@ -132,20 +52,21 @@ export const Dashboard = () => {
       <Stack gap={16}>
         <Group justify="space-between">
           <PageHeader title="Dashboard" subtitle="Welcome to Merva Codebase" />
-          
+
           <DatePickerInput type="range" rightSection={<SvgIcon name="calendar" />} miw={320} />
         </Group>
 
-        <Group mt={16} w="100%">
+        <SimpleGrid mt={16} w="100%" cols={{ xs: 1, md: 2, lg: 4 }} spacing={16}>
           {
             stats.map((stat, index) => (
               <StatsCard key={index} {...stat} />
             ))
           }
-        </Group>
+        </SimpleGrid>
         <Card withBorder p={16} radius="md">
           <BarChart
-            h={300}
+          h={300}
+          w="100%"
             data={data}
             dataKey="month"
             withLegend

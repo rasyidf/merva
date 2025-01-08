@@ -1,4 +1,5 @@
-import { Button, Badge, Group, Popover, Select, Stack, TextInput } from "@mantine/core";
+import { Button, Badge, Group, Popover, Stack, Radio } from "@mantine/core";
+import { DatePicker } from '@mantine/dates';
 import type { Column } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { useCallback, useState } from "react";
@@ -10,21 +11,46 @@ interface DateFilterProps<TData> {
 
 export function DataTableDateFilter<TData>({ column, title }: Readonly<DateFilterProps<TData>>) {
   const [filterType, setFilterType] = useState<string>("today");
-  const [customDate, setCustomDate] = useState<string>("");
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
 
-  // Get the current filter value from the column
-  const columnFilterValue = column?.getFilterValue() as string;
+  const columnFilterValue = column?.getFilterValue() as { from: string; to: string };
 
   const handleFilterChange = useCallback(() => {
-    const filterValue = filterType === "custom" ? customDate : filterType;
-    column?.setFilterValue(filterValue);
-  }, [filterType, customDate, column]);
+    const dateMap: Record<string, { from: string; to: string }> = {
+      today: {
+        from: dayjs().startOf("day").format("YYYY-MM-DD HH:mm:ss"),
+        to: dayjs().format("YYYY-MM-DD HH:mm:ss")
+      },
+      yesterday: {
+        from: dayjs().subtract(1, "day").startOf("day").format("YYYY-MM-DD HH:mm:ss"),
+        to: dayjs().subtract(1, "day").endOf("day").format("YYYY-MM-DD HH:mm:ss")
+      },
+      thisWeek: {
+        from: dayjs().startOf("week").format("YYYY-MM-DD HH:mm:ss"),
+        to: dayjs().format("YYYY-MM-DD HH:mm:ss")
+      },
+      thisMonth: {
+        from: dayjs().startOf("month").format("YYYY-MM-DD HH:mm:ss"),
+        to: dayjs().format("YYYY-MM-DD HH:mm:ss")
+      },
+      thisYear: {
+        from: dayjs().startOf("year").format("YYYY-MM-DD HH:mm:ss"),
+        to: dayjs().format("YYYY-MM-DD HH:mm:ss")
+      },
+    };
+
+    column?.setFilterValue(dateMap[filterType]);
+  }, [filterType, column]);
 
   const handleClearFilters = useCallback(() => {
     setFilterType("today");
-    setCustomDate("");
+    setDateRange([null, null]);
     column?.setFilterValue(undefined);
   }, [column]);
+
+  const getDisplayDate = useCallback((value: { from: string; to: string }) => {
+    return `${dayjs(value.from).format("DD/MM/YY HH:mm")} - ${dayjs(value.to).format("DD/MM/YY HH:mm")}`;
+  }, []);
 
   return (
     <Popover position="bottom-start" trapFocus shadow="md">
@@ -38,9 +64,7 @@ export function DataTableDateFilter<TData>({ column, title }: Readonly<DateFilte
             columnFilterValue && (
               <Group>
                 <Badge color="dark.3" variant="light" style={{ borderRadius: "4px 0 0 4px" }}>
-                  {filterType === "custom"
-                    ? dayjs(columnFilterValue).format("YYYY-MM-DD")
-                    : dayjs(columnFilterValue).fromNow(true)}
+                  {getDisplayDate(columnFilterValue)}
                 </Badge>
               </Group>
             )
@@ -51,38 +75,31 @@ export function DataTableDateFilter<TData>({ column, title }: Readonly<DateFilte
       </Popover.Target>
       <Popover.Dropdown p={8}>
         <Stack gap={8}>
-          <Group align="center">
-            {/* Select dropdown for date filter type */}
-            <Select
+          <Group align="flex-start" gap="md">
+            <Radio.Group
               value={filterType}
-              comboboxProps={{ withinPortal: false }}
-              onChange={(value) => setFilterType(value as string)}
-              data={[
-                { value: dayjs().format("YYYY-MM-DD"), label: "Today" },
-                { value: dayjs().subtract(1, "day").format("YYYY-MM-DD"), label: "Yesterday" },
-                { value: dayjs().startOf("week").format("YYYY-MM-DD"), label: "This week" },
-                { value: dayjs().startOf("month").format("YYYY-MM-DD"), label: "This month" },
-                { value: dayjs().startOf("year").format("YYYY-MM-DD"), label: "This year" },
-                { value: "custom", label: "Custom" },
-              ]}
+              onChange={setFilterType}
               size="xs"
+            >
+              <Stack gap={8}>
+                <Radio value="today" label="Today" />
+                <Radio value="yesterday" label="Yesterday" />
+                <Radio value="thisWeek" label="This week" />
+                <Radio value="thisMonth" label="This month" />
+                <Radio value="thisYear" label="This year" />
+              </Stack>
+            </Radio.Group>
+            <DatePicker
+              value={dateRange}
+              type="range"
+              onChange={setDateRange}
+              numberOfColumns={2}
             />
-            {/* Input for custom date value */}
-            {filterType === "custom" && (
-              <TextInput
-                size="xs"
-                placeholder={"YYYY-MM-DD"}
-                value={customDate}
-                onChange={(event) => setCustomDate(event.target.value)}
-                type="date"
-              />
-            )}
-            <Button size="xs" onClick={handleFilterChange}>
-              Apply
-            </Button>
           </Group>
-          {/* Clear filters button if a filter is applied */}
-          {columnFilterValue !== "" && (
+          <Button size="xs" onClick={handleFilterChange}>
+            Apply
+          </Button>
+          {columnFilterValue && (
             <Button size="xs" variant="transparent" onClick={handleClearFilters}>
               Clear filters
             </Button>

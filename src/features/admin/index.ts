@@ -23,6 +23,24 @@ const ShellMetadata = {
     },
   ] satisfies RouteObject[],
   activeVersion: "1.0.0",
+  navigation: [
+    // 
+              // <NavLink
+              //   className={classes.link}
+              //   leftSection={<SvgIcon name="gauge" />}
+              //   component={nLink}
+              //   variant="light"
+              //   active={pathname === "/app/dashboard"}
+              //   to="/app/dashboard"
+              //   label="Dashboard"
+              // />
+              {
+                id: "dashboard",
+                title: "Dashboard",
+                icon: "gauge",
+                path: "/app/dashboard",
+              }
+  ]
 } satisfies FeatureMetadata;
 
 export default ShellMetadata;

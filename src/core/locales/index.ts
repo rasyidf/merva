@@ -1,4 +1,7 @@
-import translation from "./id/translation.json";
+import idTranslation from "./id/translation.json";
+import enTranslation from "./en/translation.json";
+
 export const locales = {
-  id: { translation },
+  id: { translation: idTranslation },
+  en: { translation: enTranslation },
 };

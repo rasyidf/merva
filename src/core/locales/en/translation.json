@@ -1,0 +1,9 @@
+{
+    "messages": {
+      "paginationDescription": "Showing {{ start }} - {{ end }} from {{ length }}",
+      "paginationEmpty": "No data",
+      "paginationSinglePage": "Showing {{ length }} data",
+      "paginationLoading": "Loading..."
+    }
+  }
+  

@@ -1,9 +1,9 @@
 .icon {
-  display: 'inline';
+  display: inline;
   align-items: center;
   justify-content: center;
-  align-self: 'center';
-  pointer-events: 'none';
+  align-self: center;
+  pointer-events: none;
 
   & svg {
     width: 100%;

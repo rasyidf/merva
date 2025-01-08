@@ -4,7 +4,7 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 import { APP_URL_API, AUTH_BASIC_API, URL_LOGIN, URL_REFRESH, URL_REGISTER } from "@/shared/utils/constants";
 import { modals } from "@mantine/modals";
-import type { AuthProps, AuthStore } from "../../types/auth";
+import type { AuthProps, AuthStore } from "@/shared/types/auth";
 import { authApiFetch } from "../api";
 import { decodeBase64 } from "../crypto/utils";
 

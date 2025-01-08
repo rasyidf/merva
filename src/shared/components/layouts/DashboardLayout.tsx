@@ -1,6 +1,6 @@
 import { ActionIcon, AppShell, Drawer, Flex, Paper, ScrollArea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import { MainHeader } from "../groups/main-header/main-header";
@@ -12,18 +12,38 @@ import classes from "./DashboardLayout.module.css";
 export const DashboardLayout = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+  const [expanded, setExpanded] = useState<boolean>(() => {
+    const savedState = localStorage.getItem("navbar-expanded");
+    return savedState ? JSON.parse(savedState) : false;
+  });
   const viewport = useRef<HTMLDivElement>(null);
   const scrollToTop = useCallback(() => viewport.current?.scrollTo({ top: 0, behavior: "smooth" }), []);
   const navigate = useNavigate();
+
+  const handleToggle = () => {
+    setExpanded((prev: boolean) => {
+      const newState = !prev;
+      localStorage.setItem("navbar-expanded", JSON.stringify(newState));
+      return newState;
+    });
+    // toggleDesktop();
+  };
+
+  useEffect(() => {
+    const savedState = localStorage.getItem("navbar-expanded");
+    if (savedState !== null) {
+      setExpanded(JSON.parse(savedState));
+    }
+  }, []);
 
   return (
     <AppShell
       padding={{ base: 0 }}
       header={{ height: 56 }}
       navbar={{
-        width: { base: 0, md: 280 },
+        width: { base: 0, md: expanded ? 280 : 80 },
         breakpoint: "md",
-        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+        collapsed: { mobile: !mobileOpened },
       }}
       layout="alt"
     >
@@ -47,12 +67,12 @@ export const DashboardLayout = () => {
           navigate={navigate}
           collapsed={!desktopOpened}
           toggleMobile={toggleMobile}
-          toggleDesktop={toggleDesktop}
+          toggleDesktop={handleToggle}
         />
       </AppShell.Header>
 
       <AppShell.Navbar withBorder={false} visibleFrom="md" className={classes.navbar}>
-        <MainNavbar expanded={desktopOpened} toggle={toggleDesktop} />
+        <MainNavbar expanded={expanded} toggle={handleToggle} />
       </AppShell.Navbar>
 
       <AppShell.Main>

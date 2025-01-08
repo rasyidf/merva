@@ -14,6 +14,7 @@ const violet: MantineColorsTuple = [
   '#5d1cae',
   '#501599'
 ];
+
 export const defaultTheme = createTheme({
   fontFamily: "'Poppins', sans-serif",
   headings: {
@@ -22,7 +23,6 @@ export const defaultTheme = createTheme({
   colors:{
     violet,
   },
-  
   primaryColor: "violet",
   primaryShade: 6,
   defaultRadius: "sm",
