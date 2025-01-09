@@ -1,109 +1,55 @@
-import {
-  Anchor,
-  Box,
-  Burger,
-  Button,
-  Center,
-  Divider,
-  Drawer,
-  Group,
-  ScrollArea,
-  rem,
-  useMantineTheme,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './header.module.css';
 
 import { AppLogo } from "@/shared/components/ui/icon/appLogo";
-import { useViewNavigate } from "@/shared/utils/routers";
-import classes from "./header.module.css";
-import { SvgIcon } from "@/shared/components/ui/icon";
+import { Button, Group } from '@mantine/core';
+import { useViewNavigate } from '@/shared/utils/routers';
 
-export function Header() {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-  const theme = useMantineTheme();
-
+export const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const viewNavigate = useViewNavigate();
-
-  const isAuthenticated = true;
-
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const isAuthenticated = false;
   const authButton = isAuthenticated ? (
     <Button variant="filled" onClick={() => viewNavigate("/app/dashboard")}>
       Dashboard
     </Button>
   ) : (
     <>
-      <Button variant="outline" onClick={() => viewNavigate("/app/register")}>
-        Daftar Sekarang
+      <Button variant="outline" onClick={() => viewNavigate("/auth/register")}>
+        Sign Up
       </Button>
-      <Button variant="filled" onClick={() => viewNavigate("/app/login")}>
-        Login
+      <Button variant="filled" onClick={() => viewNavigate("/auth/login")}>
+        Sign In
       </Button>
     </>
   );
 
   return (
-    <Box>
-      <header className={classes.header}>
-        <Group justify="space-between" h="100%">
-          <AppLogo width={30} />
+    <header className={styles.header}>
+      <div className={styles.logo}>
+        <AppLogo />
+      </div>
+      <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`}>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="#features">Features</Link></li>
+          <li><Link to="#portfolio">Portfolio</Link></li>
+          <li><Link to="/docs">Docs</Link></li>
+          <li><Link to="#contact">Contact</Link></li>
+        </ul>
+      </nav>
+      <button className={styles.menuToggle} onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <Group>
 
-          <Group h="100%" gap={0} visibleFrom="sm">
-            <Anchor component="a" href="#home" className={classes.link}>
-              Home
-            </Anchor>
-            <Anchor component="a" href="#" className={classes.link}>
-              <Center inline>
-                <Box component="span" mr={5}>
-                  Layanan Kami
-                </Box>
-                <SvgIcon name="caretDown" color={theme.colors.grape[6]} />
-              </Center>
-            </Anchor>
-            <Anchor component="a" href="#testimoni" className={classes.link}>
-              Testimoni
-            </Anchor>
-          </Group>
-
-          <Group visibleFrom="sm">{authButton}</Group>
-
-          <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
-        </Group>
-      </header>
-
-      <Drawer
-        opened={drawerOpened}
-        onClose={closeDrawer}
-        size="100%"
-        padding="md"
-        title="Navigation"
-        hiddenFrom="sm"
-        zIndex={1000000}
-      >
-        <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
-          <Divider my="sm" />
-
-          <Anchor component="a" href="#" className={classes.link}>
-            Home
-          </Anchor>
-
-          <Anchor component="a" href="#" className={classes.link}>
-            Layanan Kami
-          </Anchor>
-
-          <Anchor component="a" href="#" className={classes.link}>
-            Testimoni
-          </Anchor>
-          <Anchor component="a" href="#" className={classes.link}>
-            Daftar Client
-          </Anchor>
-
-          <Divider my="sm" />
-
-          <Group justify="center" grow pb="xl" px="md">
-            {authButton}
-          </Group>
-        </ScrollArea>
-      </Drawer>
-    </Box>
+        {authButton}
+      </Group>
+    </header>
   );
-}
+};
+

@@ -56,10 +56,10 @@ export default function Page() {
 
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <input type="text" style={{ display: "none" }} {...register("username")} />
-          <TextInput label="Email" placeholder="you@mantine.dev" required {...register("email", { required: true })} />
+          <TextInput label="Email" placeholder="use: admin@mail.com" required {...register("email", { required: true })} />
           <PasswordInput
             label="Password"
-            placeholder="Your password"
+            placeholder="use: Rahasia123"
             required
             mt="md"
             {...register("pw", { required: true })}

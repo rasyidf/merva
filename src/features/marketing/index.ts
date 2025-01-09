@@ -9,6 +9,14 @@ const MarketingMetadata = {
       path: "/",
       lazy: () => import("./pages/landingPage"),
     },
+    {
+      path: "/docs",
+      lazy: () => import("./pages/docsPage"),
+    },
+    {
+      path: "/portfolio",
+      lazy: () => import("./pages/portfolioPage"),
+    }
   ] satisfies RouteObject[],
   placement: "shell",
 } satisfies FeatureMetadata;
