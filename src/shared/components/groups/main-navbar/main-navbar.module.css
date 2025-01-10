@@ -72,10 +72,9 @@
 
 .toggleButton {
   position: absolute;
-  z-index: 10;
-  background: blue;
-  left: calc(var(--app-shell-navbar-width) + 2px);
-  bottom: 2rem;
+  z-index: 10; 
+  left: calc(var(--app-shell-navbar-width) - 8px);
+  top: 1rem;
   transform: translateY(-10%);
   transition: transform 0.2s;
   min-width: 0;

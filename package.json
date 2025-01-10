@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bunx --bun vite",
     "build": "tsc -b && bunx --bun vite build",
-    "preview": "bunx --bun vite preview",
+    "start": "bunx --bun vite preview",
     "format": "bunx biome format ./src --write",
     "lint": "bunx biome check ./src",
     "add:icon": "bunx @sly-cli/sly add",
