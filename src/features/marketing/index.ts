@@ -1,5 +1,6 @@
 import type { FeatureMetadata } from "@/shared/types";
 import type { RouteObject } from "react-router-dom";
+
 const MarketingMetadata = {
   id: "landing",
   name: "landing page",
@@ -19,6 +20,16 @@ const MarketingMetadata = {
     }
   ] satisfies RouteObject[],
   placement: "shell",
+  locales: [
+    {
+      lang: "en",
+      resources: () => import("./locales/en.json"),
+    },
+    {
+      lang: "id",
+      resources: () => import("./locales/id.json"),
+    },
+  ]
 } satisfies FeatureMetadata;
 
 export default MarketingMetadata;

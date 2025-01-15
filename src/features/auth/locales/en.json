@@ -1,0 +1,58 @@
+{
+    "login": {
+        "title": "Sign In!",
+        "subtitle": "Enter your email and password below to log into your account",
+        "email": "Email",
+        "email_placeholder": "use: admin@mail.com",
+        "password": "Password",
+        "password_placeholder": "use: Rahasia123",
+        "remember_me": "Remember me",
+        "forgot_password": "Forgot password?",
+        "sign_in": "Sign in",
+        "no_account": "Don't have an account?",
+        "sign_up": "Sign up"
+    },
+    "register": {
+        "welcome": "Welcome!",
+        "subtitle": "Enter your email and password to create an account.",
+        "email": "Email",
+        "email_placeholder": "you@mantine.dev",
+        "password": "Password",
+        "password_placeholder": "Your password",
+        "confirm_password": "Confirm Password",
+        "confirm_password_placeholder": "Confirm password",
+        "create_account": "Create account",
+        "have_account": "Already have an account?",
+        "sign_in": "Sign In"
+    },
+    "password_reset": {
+        "title": "Forgot Password",
+        "subtitle": "Enter your registered email and we will send you a link to reset your password.",
+        "email": "Email",
+        "email_placeholder": "name@example.com",
+        "continue": "Continue",
+        "no_account": "Don't have an account?",
+        "sign_up": "Sign up"
+    },
+    "otp": {
+        "title": "Two-factor Authentication",
+        "subtitle": "Please enter the authentication code that we have sent to your email.",
+        "verify": "Verify",
+        "no_code": "Didn't receive the code?",
+        "resend": "Resend code"
+    },
+    "change_password": {
+        "title": "Change Password",
+        "old_password": "Old Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm New Password",
+        "submit": "Change Password",
+        "password_mismatch": "New passwords do not match",
+        "success": "Password changed successfully",
+        "errors": {
+            "old_password_required": "Old Password is required",
+            "new_password_required": "New Password is required",
+            "confirm_password_required": "Confirm New Password is required"
+        }
+    }
+}

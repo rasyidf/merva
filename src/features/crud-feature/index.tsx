@@ -48,6 +48,16 @@ const FeatureAMetadata = {
       icon: <SvgIcon name="bookMarked" />,
     },
   ] as NavigationConfig[],
+  locales: [
+    {
+      lang: "en",
+      resources: async () => await import("./locales/en.json"),
+    },
+    {
+      lang: "id",
+      resources: async () => await import("./locales/id.json"),
+    }
+  ]
 } satisfies FeatureMetadata;
 
 export default FeatureAMetadata;

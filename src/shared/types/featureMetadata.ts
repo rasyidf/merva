@@ -9,17 +9,24 @@ export type FeatureGroup = {
   icon?: ReactNode;
 };
 
+export type LocalizationConfig = {
+  lang: string;
+  resources: () => Promise<{ default: Record<string, any> }>;
+}
+
+
 export interface FeatureMetadata {
   id: string;
-  name: string;
-  group?: string;
-  enabled?: boolean;
-  routes?: RouteConfig[];
-  navigation?: NavigationConfig[];
-  versions?: VersionConfig[];
+  name?: string;
   activeVersion?: string;
-  icon?: string | ReactNode;
   description?: string;
+  enabled?: boolean;
+  group?: string;
+  icon?: string | ReactNode;
   metadata?: { [key: string]: any; };
   placement?: "shell" | "hidden" | "none";
+  navigation?: NavigationConfig[];
+  locales?: LocalizationConfig[];
+  routes?: RouteConfig[];
+  versions?: VersionConfig[];
 }

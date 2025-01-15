@@ -3,7 +3,7 @@ import type { FeatureMetadata } from "@/shared/types";
 import { compose } from "@/shared/utils";
 
 const AuthFeatureMetadata = {
-  id: "Auth",
+  id: "auth",
   name: "Authentication Feature",
   enabled: true,
   placement: "shell",
@@ -51,6 +51,16 @@ const AuthFeatureMetadata = {
       ],
     },
   ] as RouteObject[],
+  locales: [
+    {
+      lang: "id",
+      resources: async () => import("./locales/id.json"),
+    },
+    {
+      lang: "en",
+      resources: async () => import("./locales/en.json"),
+    }
+  ]
 } satisfies FeatureMetadata;
 
 export default AuthFeatureMetadata;

@@ -4,6 +4,7 @@ import { Alert, Button, Card, Checkbox, Group, PasswordInput, Stack, Text, TextI
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 type LoginFormInputs = {
   email: string;
@@ -26,6 +27,7 @@ export default function Page() {
     },
   });
 
+  const { t } = useTranslation("auth");
   const navigate = useViewNavigate();
 
   const onSubmit = async (data: LoginFormInputs) => {
@@ -51,33 +53,37 @@ export default function Page() {
   return (
     <>
       <Stack>
-        <Text fw={600} fz={16}>Login!</Text>
-        <Text fz={14}>Enter your email and password below to log into your account</Text>
+        <Text fw={600} fz={16}>{t('login.title')}</Text>
+        <Text fz={14}>{t('login.subtitle')}</Text>
 
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <input type="text" style={{ display: "none" }} {...register("username")} />
-          <TextInput label="Email" placeholder="use: admin@mail.com" required {...register("email", { required: true })} />
+          <TextInput 
+            label={t('login.email')} 
+            placeholder={t('login.email_placeholder')} 
+            required {...register("email", { required: true })} 
+          />
           <PasswordInput
-            label="Password"
-            placeholder="use: Rahasia123"
+            label={t('login.password')}
+            placeholder={t('login.password_placeholder')}
             required
             mt="md"
             {...register("pw", { required: true })}
           />
           <Group justify="space-between" mt="lg">
-            <Checkbox label="Remember me" />
+            <Checkbox label={t('login.remember_me')} />
             <Text component={Link} to={PATH_AUTH.passwordReset} size="sm">
-              Forgot password?
+              {t('login.forgot_password')}
             </Text>
           </Group>
           <Button fullWidth mt="xl" type="submit" loading={isLoading}>
-            Sign in
+            {t('login.sign_in')}
           </Button>
         </form>
         <Text ta="center" fz={14}>
-          Don't have an account?{" "}
+          {t('login.no_account')}{" "}
           <Text component={Link} to={PATH_AUTH.signup} fz={14} c="blue">
-            Sign up
+            {t('login.sign_up')}
           </Text>
         </Text>
       </Stack>
