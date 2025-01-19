@@ -1,56 +1,11 @@
 import { PageHeader } from "@/shared/components/groups/main-header";
-import { Tabs, Stack, Card, TextInput, Switch, Button } from "@mantine/core";
-import { useParams, useNavigate } from "react-router-dom";
-
-const ProfileTab = () => (
-  <Stack>
-    <Card>
-      <TextInput label="Username" placeholder="Enter your username" />
-      <TextInput label="Email" placeholder="Enter your email" />
-      <Button>Save Profile</Button>
-    </Card>
-  </Stack>
-);
-
-const AppearanceTab = () => (
-  <Stack>
-    <Card>
-      <Switch label="Dark Mode" />
-      <Switch label="Compact Mode" />
-      <Button>Save Appearance</Button>
-    </Card>
-  </Stack>
-);
-
-const NotificationsTab = () => (
-  <Stack>
-    <Card>
-      <Switch label="Email Notifications" />
-      <Switch label="SMS Notifications" />
-      <Button>Save Notifications</Button>
-    </Card>
-  </Stack>
-);
-
-const OtherTab = () => (
-  <Stack>
-    <Card>
-      <TextInput label="Custom Setting 1" placeholder="Enter value" />
-      <TextInput label="Custom Setting 2" placeholder="Enter value" />
-      <Button>Save Other Settings</Button>
-    </Card>
-  </Stack>
-);
-
-const AdvancedTab = () => (
-  <Stack>
-    <Card>
-      <TextInput label="API Endpoint" placeholder="Enter API endpoint" />
-      <Switch label="Enable Debug Mode" />
-      <Button>Save Advanced Settings</Button>
-    </Card>
-  </Stack>
-);
+import { Box, Flex, Tabs } from "@mantine/core";
+import { useNavigate, useParams } from "react-router-dom";
+import { AdvancedTab } from "../modules/AdvancedTab";
+import { AppearanceTab } from "../modules/AppearanceTab";
+import { NotificationsTab } from "../modules/NotificationsTab";
+import { OtherTab } from "../modules/OtherTab";
+import { ProfileTab } from "../modules/ProfileTab";
 
 export const Settings = () => {
   const { tab } = useParams();
@@ -71,7 +26,6 @@ export const Settings = () => {
           <Tabs.Tab value="other">Other</Tabs.Tab>
           <Tabs.Tab value="advanced">Advanced</Tabs.Tab>
         </Tabs.List>
-
         <Tabs.Panel value="profile"><ProfileTab /></Tabs.Panel>
         <Tabs.Panel value="appearance"><AppearanceTab /></Tabs.Panel>
         <Tabs.Panel value="notifications"><NotificationsTab /></Tabs.Panel>

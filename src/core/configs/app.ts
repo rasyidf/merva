@@ -5,5 +5,4 @@ export default {
   appShortName: APP_NAME_SHORT,
   appUrl: APP_URL,
   appVersion: APP_VERSION,
-  defaultLocale: "id",
 };

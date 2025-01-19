@@ -1,6 +1,5 @@
-import { DashboardLayout } from "@/shared/components/layouts/DashboardLayout";
-import type { RouteObject } from "react-router-dom";
 import type { FeatureMetadata } from "@/shared/types";
+import type { RouteObject } from "react-router-dom";
 
 const ShellMetadata = {
   id: "admin",
