@@ -1,4 +1,5 @@
-import { Badge, Button, Group, Popover, Select, Stack, TextInput } from "@mantine/core";
+import { Badge, Button, Group, Popover, Stack, TextInput, Combobox, useCombobox, InputBase, Input } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks"; // Add this import
 import type { Column } from "@tanstack/react-table";
 import { useCallback, useState } from "react";
 
@@ -10,6 +11,21 @@ interface NumberFilterProps<TData> {
 export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberFilterProps<TData>>) {
   const [filterValue, setFilterValue] = useState<string>("");
   const [filterOperator, setFilterOperator] = useState<string>(">");
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+  const [opened, { open, close }] = useDisclosure(false); // Add this line
+
+  const operatorOptions = [
+    { value: ">", label: "Greater Than" },
+    { value: "<", label: "Less Than" },
+    { value: ">=", label: "At Least" },
+    { value: "<=", label: "At Most" },
+    { value: "=", label: "Equal" },
+    { value: "!=", label: "Not Equal" },
+  ];
+
+  const selectedOperator = operatorOptions.find(option => option.value === filterOperator);
 
   // Get the current filter value from the column
   const columnFilterData = (column?.getFilterValue() as string) || "";
@@ -25,23 +41,31 @@ export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberF
 
   const handleFilterChange = useCallback(() => {
     column?.setFilterValue(`${filterOperator}${filterValue}`);
+    close();
   }, [filterOperator, filterValue, column]);
 
   const handleClearFilters = useCallback(() => {
     setFilterValue("");
     setFilterOperator(">");
     column?.setFilterValue(undefined);
+    close();
   }, [column]);
 
   return (
-    <Popover position="bottom-start" trapFocus shadow="md">
+    <Popover
+      position="bottom-start"
+      trapFocus
+      shadow="md"
+      opened={opened} // Control the popover's open state
+      onClose={close} // Close the popover when needed
+    >
       <Popover.Target>
         <Button
           color="dark.4"
-          variant="outline"
-          style={{ borderStyle: "dashed", borderWidth: 1 }}
-          size="sm"
+          variant="light"
+          size="xs"
           radius="md"
+          onClick={open} // Open the popover on button click
           rightSection={
             columnFilterValue.value && (
               <Group gap={0}>
@@ -60,21 +84,50 @@ export function DataTableNumberFilter<TData>({ column, title }: Readonly<NumberF
       </Popover.Target>
       <Popover.Dropdown p={8}>
         <Stack gap={8}>
-          <Select
-            value={filterOperator}
-            withCheckIcon={false}
-            comboboxProps={{ withinPortal: false }}
-            onChange={(value) => setFilterOperator(value as string)}
-            data={[
-              { value: ">", label: "(> ) GreaterThan" },
-              { value: "<", label: "(< ) LessThan" },
-              { value: ">=", label: "(>=) Greater Than Or Equal" },
-              { value: "<=", label: "(<=) Less Than Or Equal" },
-              { value: "=", label: "(= ) Equal" },
-              { value: "!=", label: "(!=) Not Equal" },
-            ]}
-            size="xs"
-          />
+          <Combobox
+            withinPortal
+            store={combobox}
+            onOptionSubmit={(val) => {
+              setFilterOperator(val);
+              combobox.closeDropdown();
+            }}
+          >
+            <Combobox.Target>
+              <InputBase
+                component="button"
+                type="button"
+                pointer
+                rightSection={<Combobox.Chevron />}
+                rightSectionPointerEvents="none"
+                onClick={() => combobox.toggleDropdown()}
+              >
+                {selectedOperator && (
+                  <Group gap={4}>
+                    <Badge size="xs" miw={32} radius="sm" color="dark.4" variant="light">
+                      {selectedOperator.value}
+                    </Badge>
+                    {selectedOperator.label}
+                  </Group>
+                )}
+                {!selectedOperator && <Input.Placeholder>Pick operator</Input.Placeholder>}
+              </InputBase>
+            </Combobox.Target>
+
+            <Combobox.Dropdown>
+              <Combobox.Options>
+                {operatorOptions.map((option) => (
+                  <Combobox.Option value={option.value} key={option.value}>
+                    <Group gap={4}>
+                      <Badge size="xs" miw={32} radius="sm" color="dark.4" variant="light">
+                        {option.value}
+                      </Badge>
+                      {option.label}
+                    </Group>
+                  </Combobox.Option>
+                ))}
+              </Combobox.Options>
+            </Combobox.Dropdown>
+          </Combobox>
           {/* Input for filter value */}
           <TextInput
             size="xs"

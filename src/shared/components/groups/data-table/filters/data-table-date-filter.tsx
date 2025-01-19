@@ -57,9 +57,9 @@ export function DataTableDateFilter<TData>({ column, title }: Readonly<DateFilte
       <Popover.Target>
         <Button
           color="dark.4"
-          variant="outline"
-          style={{ borderStyle: "dashed", borderWidth: 1 }}
-          size="sm"
+          variant="light"
+          size="xs"
+          radius="md"
           rightSection={
             columnFilterValue && (
               <Group>
