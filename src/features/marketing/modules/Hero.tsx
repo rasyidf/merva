@@ -1,26 +1,47 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Hero.module.css';
-import { AppLogo } from '@/shared/components/ui/icon';
-import { Button } from '@mantine/core';
+import styles from "./Hero.module.css";
+import { AppLogo } from "@/shared/components/ui/icon";
+import { AnimatedDashboard } from "./animated-dashboard";
+import { motion } from "motion/react";
+import { Button } from "@mantine/core";
+import { Link } from "react-router-dom";
 
-const Hero: React.FC = () => {
+export function Hero() {
   return (
-    <section className={styles.hero}>
-      <div className={styles.content}>
-        <h1>Welcome to Merva</h1>
-        <p>A modular ecosystem React Vite app boilerplate and portfolio showcase</p>
-        <div className={styles.cta}>
-          <Button component={Link} size='lg' to="/docs" variant='white'>Get Started</Button>
-          <Button component={Link} size='lg' to="/portfolio" color="white" variant='outline'>View Portfolio</Button>
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <div className={styles.logoContainer}>
+          <AppLogo className={styles.logo} />
+          <span className="text-gray-800">Crafting Digital Excellence</span>
         </div>
-      </div>
-      <div className={styles.illustration}>
-        <AppLogo color='white' width={'30dvw'} height={'30dvw'} />
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className={styles.heading}>
+          Ocean of Innovations,
+          <br />
+          Wave of Solutions
+        </motion.h1>
+
+        <p className={styles.paragraph}>
+          From concept to launch, BWDX provides design, development, and consultation services to help your business stand out in a crowded digital world.
+        </p>
+
+        <div className={styles.buttonContainer}>
+          <Button size="lg" component={Link} to="/contact" className={styles.button}
+            leftSection={
+              <span className="ml-2">→</span>
+            }
+          >
+            Let's Discuss
+          </Button>
+        </div>
+
+        <AnimatedDashboard />
       </div>
     </section>
   );
-};
+}
 
 export default Hero;
-

@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  perspective: 300px;
+}
+
+.motionDiv {
+  width: 100%;
+  transform-origin: center;
+}
+
+.image {
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}

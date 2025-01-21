@@ -14,7 +14,7 @@ export const URL_REGISTER = "/auth/register";
 
 export const URL_REFRESH = "auth/refresh";
 
-export const AUTH_BASIC_API = import.meta.env.MERVA_API_BASIC_AUTH ?? "Basic {token}";
+export const AUTH_BASIC_API = import.meta.env.MERVA_API_BASIC_AUTH ?? "";
 
 export const DATABASE_URL = import.meta.env.MERVA_DATABASE_URL ?? "./database.sqlite";
 

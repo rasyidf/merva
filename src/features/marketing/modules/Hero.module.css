@@ -144,3 +144,64 @@
   }
 }
 
+.section {
+  background-color: white;
+  min-height: 100vh;
+  padding-top: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+}
+
+.logoContainer {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-color: #e5e7eb;
+  backdrop-filter: blur(4px);
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 1rem;
+  height: 1rem;
+  background-color: transparent;
+  color: #2563eb;
+}
+
+.heading {
+  color: #111827;
+  font-size: 5rem;
+  font-weight: bold;
+  max-width: 64rem;
+  margin: 0 auto;
+  line-height: 5rem;
+}
+
+.paragraph {
+  margin-top: 1.5rem;
+  color: #9ca3af;
+  font-size: 1.125rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttonContainer {
+  margin-top: 2.5rem;
+}
+
+.button:hover {
+  text-decoration: none;
+}
+
