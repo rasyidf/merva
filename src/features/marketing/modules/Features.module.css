@@ -18,7 +18,7 @@
 }
 
 .featureCard {
-  background-color: var(--mantine-color-gray-0);
+  background: var(--mantine-color-white);
   padding: 2rem;
   border-radius: 12px;
   text-align: center;

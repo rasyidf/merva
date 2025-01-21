@@ -4,6 +4,7 @@ import { AnimatedDashboard } from "./animated-dashboard";
 import { motion } from "motion/react";
 import { Button } from "@mantine/core";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
 export function Hero() {
   return (
@@ -29,7 +30,7 @@ export function Hero() {
         </p>
 
         <div className={styles.buttonContainer}>
-          <Button size="lg" component={Link} to="/contact" className={styles.button}
+          <Button size="lg" component={Link} to="/contact" className={clsx(styles.button, styles.hero)}
             leftSection={
               <span className="ml-2">→</span>
             }

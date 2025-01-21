@@ -34,7 +34,7 @@
     "idb-keyval": "^6.2.1",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
-    "motion": "^11.16.4",
+    "motion": "11.18.2",
     "qs-esm": "^7.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

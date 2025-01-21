@@ -40,12 +40,7 @@ export function MainNavbar({
                 <ActionIcon variant="transparent" hiddenFrom="md" onClick={toggle}>
                   <SvgIcon name="x" />
                 </ActionIcon>
-              </Tooltip>
-              <Tooltip label="Menus" position="right">
-                <ActionIcon variant="transparent" visibleFrom="md" onClick={toggle}>
-                  <SvgIcon name="menu" />
-                </ActionIcon>
-              </Tooltip>
+              </Tooltip> 
             </>
           )}
         </Flex>
@@ -73,7 +68,7 @@ export function MainNavbar({
         onClick={toggle}
         variant="white"
       >
-        <SvgIcon name="caretRight" />
+        <SvgIcon name="caretRight" size="lg" />
       </Button>
     </>
   );

@@ -44,7 +44,9 @@ export function processFeatures(enabledFeatures: FeatureMetadata[]): {
       ...shellRoutes,
       ...errorRoutes,
     ],
+    HydrateFallback: () => <div>Loading...</div>,
   };
+  
 
   const routes = [rootRoute];
 
