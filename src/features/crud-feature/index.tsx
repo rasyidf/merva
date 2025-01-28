@@ -1,4 +1,4 @@
-import { SvgIcon } from "@/components/ui/icon";
+import { SvgIcon } from "@/shared/components/ui/icon";
 import type { FeatureMetadata, NavigationConfig } from "@/shared/types";
 import { compose } from "@/shared/utils";
 import type { RouteObject } from "react-router-dom";
@@ -48,6 +48,16 @@ const FeatureAMetadata = {
       icon: <SvgIcon name="bookMarked" />,
     },
   ] as NavigationConfig[],
+  locales: [
+    {
+      lang: "en",
+      resources: async () => await import("./locales/en.json"),
+    },
+    {
+      lang: "id",
+      resources: async () => await import("./locales/id.json"),
+    }
+  ]
 } satisfies FeatureMetadata;
 
 export default FeatureAMetadata;

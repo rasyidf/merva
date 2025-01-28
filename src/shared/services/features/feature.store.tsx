@@ -1,4 +1,4 @@
-import { featureRegistry } from "@/app/configs";
+import { featureRegistry } from "@/core/configs";
 import { create } from "zustand";
 import type { FeatureMetadata } from "../../types/featureMetadata";
 
@@ -15,6 +15,7 @@ export const useFeatureFlagsStore = create<FeatureFlagsStore>((set) => ({
 }));
 
 const initialEnabledFeatures = featureRegistry.filter(isFeatureEnabled);
+
 useFeatureFlagsStore.getState().setEnabledFeatures(initialEnabledFeatures);
 
 export const useEnabledFeatures = () => useFeatureFlagsStore((state) => state.enabledFeatures);

@@ -18,8 +18,8 @@ const instance = axios.create({
   },
 });
 
-instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string]: any }>) => {
-  const originalConfig = error.config as { _retry: boolean } & AxiosRequestConfig;
+instance.interceptors.response.use(null, async (error: AxiosError<{ [key: string]: any; }>) => {
+  const originalConfig = error.config as { _retry: boolean; } & AxiosRequestConfig;
 
   const isBearer =
     typeof originalConfig?.headers?.Authorization === "string" &&
@@ -116,7 +116,7 @@ export function buildUrl(path: string, filter?: Record<string, any> | URLSearchP
   return url.toString();
 }
 
-export const allowedPermission = (error: AxiosError<{ [key: string]: any }>) => {
+export const allowedPermission = (error: AxiosError<{ [key: string]: any; }>) => {
   if (error.response?.status === 403 || error.response?.data?.message.includes("not have permission")) {
     return false;
   }

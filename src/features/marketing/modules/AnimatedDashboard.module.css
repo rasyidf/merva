@@ -1,0 +1,42 @@
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  perspective: 300px;
+}
+
+.motionDiv {
+  width: 100%;
+  transform-origin: bottom;
+}
+
+.image {
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.animatedDiv {
+  /* ...existing styles... */
+  animation: rotateScaleOpacity linear both;
+  /* animation-timeline: scroll(); */
+
+  view-timeline-name: --revealing-image;
+  view-timeline-axis: block;
+  animation-timeline: --revealing-image;
+
+  /* Tweak range when effect should run*/
+  animation-range: entry 25% cover 50%;
+}
+
+@keyframes rotateScaleOpacity {
+  0% {
+    transform: rotateX(20deg) scale(0.9);
+    opacity: 0.6;
+  }
+  80% {
+    transform: rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+}

@@ -1,17 +1,18 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
 
 import "@fontsource-variable/inter";
-import "@/shared/libs/dayjs";
-import "@/shared/styles/index.scss";
 
-import { App } from "./components/root";
+import "@mantine/core/styles.css";
+import "@/shared/styles/index.css";
 
-const container = document.getElementById("root") as HTMLElement;
-const root = createRoot(container);
+import "@/shared/libs";
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+import { MainApp } from "./shared/components/root";
+import { createRoot } from "react-dom/client";
+import { featureRegistry } from "./core/configs";
+import { initializeFeatures } from "./shared/services/features/feature.service";
+
+
+// Bootstrap the application
+await initializeFeatures(featureRegistry);
+
+createRoot(document.getElementById("root") as HTMLElement).render(<MainApp />);

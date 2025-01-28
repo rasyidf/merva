@@ -1,0 +1,58 @@
+{
+    "login": {
+        "title": "Masuk!",
+        "subtitle": "Masukkan email dan kata sandi Anda di bawah ini untuk masuk ke akun Anda",
+        "email": "Email",
+        "email_placeholder": "gunakan: admin@mail.com",
+        "password": "Kata Sandi",
+        "password_placeholder": "gunakan: Rahasia123",
+        "remember_me": "Ingat saya",
+        "forgot_password": "Lupa kata sandi?",
+        "sign_in": "Masuk",
+        "no_account": "Belum punya akun?",
+        "sign_up": "Daftar"
+    },
+    "register": {
+        "welcome": "Selamat Datang!",
+        "subtitle": "Masukkan email dan kata sandi untuk membuat akun.",
+        "email": "Email",
+        "email_placeholder": "anda@mantine.dev",
+        "password": "Kata Sandi",
+        "password_placeholder": "Kata sandi Anda",
+        "confirm_password": "Konfirmasi Kata Sandi",
+        "confirm_password_placeholder": "Konfirmasi kata sandi",
+        "create_account": "Buat akun",
+        "have_account": "Sudah punya akun?",
+        "sign_in": "Masuk"
+    },
+    "password_reset": {
+        "title": "Lupa Kata Sandi",
+        "subtitle": "Masukkan email terdaftar Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda.",
+        "email": "Email",
+        "email_placeholder": "nama@contoh.com",
+        "continue": "Lanjutkan",
+        "no_account": "Belum punya akun?",
+        "sign_up": "Daftar"
+    },
+    "otp": {
+        "title": "Autentikasi Dua Faktor",
+        "subtitle": "Silakan masukkan kode autentikasi yang telah kami kirim ke email Anda.",
+        "verify": "Verifikasi",
+        "no_code": "Tidak menerima kode?",
+        "resend": "Kirim ulang kode"
+    },
+    "change_password": {
+        "title": "Ubah Kata Sandi",
+        "old_password": "Kata Sandi Lama",
+        "new_password": "Kata Sandi Baru",
+        "confirm_password": "Konfirmasi Kata Sandi Baru",
+        "submit": "Ubah Kata Sandi",
+        "password_mismatch": "Kata sandi baru tidak cocok",
+        "success": "Kata sandi berhasil diubah",
+        "errors": {
+            "old_password_required": "Kata Sandi Lama wajib diisi",
+            "new_password_required": "Kata Sandi Baru wajib diisi",
+            "confirm_password_required": "Konfirmasi Kata Sandi Baru wajib diisi"
+        }
+    }
+}

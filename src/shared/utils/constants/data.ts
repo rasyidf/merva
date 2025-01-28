@@ -1,4 +1,4 @@
-import type { IconName } from "@/assets/icons/types";
+import type { IconName } from "@/shared/assets/icons/types";
 
 export enum Status {
   Backlog = "backlog",
@@ -37,7 +37,7 @@ export const statuses = [
   {
     value: "in progress",
     label: "In Progress",
-    icon: "clock5",
+    icon: "clock-5",
   },
   {
     value: "done",

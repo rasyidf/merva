@@ -9,24 +9,24 @@ export type FeatureGroup = {
   icon?: ReactNode;
 };
 
+export type LocalizationConfig = {
+  lang: string;
+  resources: () => Promise<{ default: Record<string, any> }>;
+}
+
+
 export interface FeatureMetadata {
   id: string;
-  name: string;
-  // Group can be a simple string or a more complex object for advanced grouping.
-  group?: string;
-  enabled?: boolean;
-  // Explicitly defining all possible placements for clarity.
-  placement?: "shell" | "feature" | "hidden" | "none";
-  // Routes associated with the feature.
-  routes?: RouteConfig[];
-  // Navigation items specific to the feature.
-  navigation?: NavigationConfig[];
-  // Versioning information if applicable.
-  versions?: VersionConfig[];
-  // Currently active version of the feature.
+  name?: string;
   activeVersion?: string;
-  // Additional properties for enhanced flexibility:
-  icon?: string | ReactNode; // Icon associated with the feature.
-  description?: string; // Description of the feature.
-  visible?: boolean; // Visibility of the feature in the UI.
+  description?: string;
+  enabled?: boolean;
+  group?: string;
+  icon?: string | ReactNode;
+  metadata?: { [key: string]: any; };
+  placement?: "shell" | "hidden" | "none";
+  navigation?: NavigationConfig[];
+  locales?: LocalizationConfig[];
+  routes?: RouteConfig[];
+  versions?: VersionConfig[];
 }

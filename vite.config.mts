@@ -24,7 +24,7 @@ export default defineConfig({
     spriteify({
       withTypes: true,
       inputDir: "utils/svg-icons",
-      outputDir: "src/assets/icons",
+      outputDir: "src/shared/assets/icons",
     }) as unknown as PluginOption,
     nodePolyfills({
       exclude: ["fs"],
@@ -67,21 +67,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          utils: ["buffer"],
+          // utils: ["buffer"],
           storage: ["axios", "zustand", "zustand/middleware"],
           runtime: ["react", "react/jsx-runtime", "react-dom"],
           router: ["react-router-dom"],
           // editor: ["@mantine/tiptap", "@mantine/carousel"],
           ui: ["@mantine/core", "@mantine/hooks", "@mantine/dates"]
         },
-      },
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-        additionalData: `@import "@/shared/styles/_mantine.scss";\n`,
       },
     },
   },

@@ -3,7 +3,7 @@ import type { FeatureMetadata } from "@/shared/types";
 import { compose } from "@/shared/utils";
 
 const AuthFeatureMetadata = {
-  id: "Auth",
+  id: "auth",
   name: "Authentication Feature",
   enabled: true,
   placement: "shell",
@@ -27,12 +27,40 @@ const AuthFeatureMetadata = {
           },
         },
         {
+          path: 'password-reset',
+          async lazy() {
+            return compose(await import("./pages/password-reset"));
+          },
+        },
+        {
+          path: 'password-reset/:token',
+          async lazy() {
+            return compose(await import("./pages/change-password"));
+          },
+        },
+        {
+          path: 'otp',
+          async lazy() {
+            return compose(await import("./pages/otp"));
+          },
+        },
+        {
           path: "logout",
           element: <Navigate to="/auth/login" />,
         },
       ],
     },
   ] as RouteObject[],
+  locales: [
+    {
+      lang: "id",
+      resources: async () => import("./locales/id.json"),
+    },
+    {
+      lang: "en",
+      resources: async () => import("./locales/en.json"),
+    }
+  ]
 } satisfies FeatureMetadata;
 
 export default AuthFeatureMetadata;

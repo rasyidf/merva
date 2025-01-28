@@ -1,6 +1,5 @@
-import { DashboardLayout } from "@/components/layouts/dashboardLayout";
-import type { RouteObject } from "react-router-dom";
 import type { FeatureMetadata } from "@/shared/types";
+import type { RouteObject } from "react-router-dom";
 
 const ShellMetadata = {
   id: "admin",
@@ -8,27 +7,29 @@ const ShellMetadata = {
   enabled: true,
   routes: [
     {
-      path: "/app",
-      Component: DashboardLayout,
-      children: [
-        {
-          path: "/app/dashboard",
-          async lazy() {
-            const { Dashboard } = await import("./pages/dashboard");
-            return { Component: Dashboard };
-          },
-        },
-        {
-          path: "/app/settings",
-          async lazy() {
-            const { Settings } = await import("./pages/settings");
-            return { Component: Settings };
-          },
-        },
-      ] as RouteObject[],
+      path: "/app/dashboard",
+      async lazy() {
+        const { Dashboard } = await import("./pages/dashboard");
+        return { Component: Dashboard };
+      },
+    },
+    {
+      path: "/app/settings/:tab?",
+      async lazy() {
+        const { Settings } = await import("./pages/settings");
+        return { Component: Settings };
+      },
     },
   ] satisfies RouteObject[],
   activeVersion: "1.0.0",
+  navigation: [
+    {
+      id: "dashboard",
+      title: "Dashboard",
+      icon: "gauge",
+      path: "/app/dashboard",
+    }
+  ]
 } satisfies FeatureMetadata;
 
 export default ShellMetadata;
