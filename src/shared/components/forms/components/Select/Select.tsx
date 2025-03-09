@@ -1,8 +1,10 @@
 import { type UseControllerProps, useController, type FieldValues } from "react-hook-form";
-import { Select as BaseSelect, type SelectProps as BaseSelectProps } from "@mantine/core";
+import { Select as BaseSelect, type SelectProps as BaseSelectProps, type ComboboxItem } from "@mantine/core";
 
 export type SelectProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<BaseSelectProps, "value" | "defaultValue">;
+  Omit<BaseSelectProps, "value" | "defaultValue"> & {
+    onChange?: (value: string, item: ComboboxItem) => void;
+  };
 
 export function Select<T extends FieldValues>({
   name,
@@ -26,10 +28,12 @@ export function Select<T extends FieldValues>({
 
   return (
     <BaseSelect
-      value={value}
-      onChange={(e, option) => {
-        fieldOnChange(e);
-        onChange?.(e, option);
+      value={value ?? ""}
+      onChange={(val, item) => {
+        fieldOnChange(val);
+        if (onChange) {
+          onChange(val, item);
+        }
       }}
       error={fieldState.error?.message}
       {...field}

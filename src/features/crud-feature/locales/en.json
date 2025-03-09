@@ -1,1 +1,84 @@
-{}
+{
+  "tasks": {
+    "list": {
+      "title": "Tasks",
+      "subtitle": "Manage and track your tasks",
+      "createButton": "Create Task",
+      "deleteConfirm": "Are you sure you want to delete this task?"
+    },
+    "create": {
+      "title": "Create Task",
+      "subtitle": "Create a new task with detailed information"
+    },
+    "edit": {
+      "title": "Edit Task",
+      "subtitle": "Editing task {{id}}"
+    },
+    "details": {
+      "backToList": "Back to List",
+      "editTask": "Edit Task"
+    },
+    "form": {
+      "fields": {
+        "title": "Title",
+        "status": "Status",
+        "label": "Label",
+        "priority": "Priority",
+        "storyPoints": "Story Points",
+        "dueDate": "Due Date",
+        "estimatedTime": "Estimated Hours",
+        "assignedTo": "Assigned To",
+        "role": "Role",
+        "team": "Team",
+        "category": "Category",
+        "tags": "Tags",
+        "progress": "Progress (%)"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create Task",
+        "update": "Update Task"
+      },
+      "priorities": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    },
+    "notifications": {
+      "create": {
+        "success": "Task created successfully",
+        "error": "Failed to create task"
+      },
+      "update": {
+        "success": "Task updated successfully",
+        "error": "Failed to update task"
+      },
+      "delete": {
+        "success": "Task deleted successfully",
+        "error": "Failed to delete task"
+      },
+      "fetch": {
+        "error": "Failed to fetch task"
+      },
+      "refresh": "Task list refreshed"
+    },
+    "shortcuts": {
+      "title": "Keyboard Shortcuts",
+      "new": "Create new task",
+      "edit": "Edit selected task",
+      "refresh": "Refresh task list",
+      "delete": "Delete selected task",
+      "escape": "Close current form / Return to list",
+      "navigate": "Navigate through tasks",
+      "select": "Select/deselect task",
+      "open": "Open task details",
+      "note": "Note: {{mod}} refers to the Command key on macOS and Control key on other platforms",
+      "button": "Show keyboard shortcuts"
+    },
+    "validation": {
+      "required": "{{field}} is required",
+      "range": "Value must be between {{min}} and {{max}}"
+    }
+  }
+}

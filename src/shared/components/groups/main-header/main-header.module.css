@@ -1,7 +1,37 @@
+.header {
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  padding: var(--mantine-spacing-md);
+  height: 100%;
+}
+
 .searchCode {
   font-weight: 700;
   font-size: rem(10px);
+  width: 100%;
+  padding-right: rem(4px);
   background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
-  border-radius: rem(16px);
-  border: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-7));
+  border-radius: rem(8px);
+  /* padding: rem(2px) rem(6px); */
+  /* border: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-7)); */
+}
+
+.userButton {
+  padding: rem(4px) rem(8px);
+  border-radius: var(--mantine-radius-sm);
+  transition: background-color 150ms ease;
+  
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+  }
+}
+
+@media (max-width: $mantine-breakpoint-xs) {
+  .header {
+    padding: var(--mantine-spacing-sm);
+  }
+  
+  .searchCode {
+    display: none;
+  }
 }

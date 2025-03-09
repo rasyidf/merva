@@ -12,26 +12,26 @@ import {
   Page503,
 } from "@/shared/shell/pages";
 
+const errorRoutes: RouteObject[] = [
+  { path: "/401", Component: Page401 },
+  { path: "/403", Component: Page403 },
+  { path: "/500", Component: Page500 },
+  { path: "/503", Component: Page503 },
+  { path: "*", Component: Page404 },
+];
+
 export function processFeatures(enabledFeatures: FeatureMetadata[]): {
   routes: RouteObject[];
   navItems: NavigationConfig[];
 } {
+  // Split features based on placement
+  const shellFeatures = enabledFeatures.filter(f => f.placement === "shell");
+  const appFeatures = enabledFeatures.filter(f => !f.placement || f.placement === "app");
+  const hiddenFeatures = enabledFeatures.filter(f => f.placement === "hidden");
+
   // Generate routes
-  const shellRoutes = enabledFeatures
-    .filter((feature) => feature.placement === "shell")
-    .flatMap((feature) => feature.routes ?? []);
-
-  const featureRoutes = enabledFeatures
-    .filter((feature) => feature.placement !== "shell")
-    .flatMap((feature) => feature.routes ?? []);
-
-  const errorRoutes: RouteObject[] = [
-    { path: "/401", Component: Page401 },
-    { path: "/403", Component: Page403 },
-    { path: "/500", Component: Page500 },
-    { path: "/503", Component: Page503 },
-    { path: "*", Component: Page404 },
-  ];
+  const shellRoutes = shellFeatures.flatMap(feature => feature.routes ?? []);
+  const appRoutes = [...appFeatures, ...hiddenFeatures].flatMap(feature => feature.routes ?? []);
 
   const rootRoute: RouteObject = {
     path: "/",
@@ -39,55 +39,43 @@ export function processFeatures(enabledFeatures: FeatureMetadata[]): {
       {
         path: "/app",
         Component: DashboardLayout,
-        children: featureRoutes,
+        children: appRoutes,
       },
       ...shellRoutes,
       ...errorRoutes,
     ],
-    HydrateFallback: () => <div>Loading...</div>,
+    HydrateFallback: () => <div></div>,
   };
-  
 
-  const routes = [rootRoute];
-
-  // Generate navigation items
-  const navItems: NavigationConfig[] = enabledFeatures
-    .filter(
-      (feature) =>
-        !feature.placement || (feature.placement && !["shell", "hidden", "none"].includes(feature.placement)),
-    )
+  // Generate navigation items - only include app features that should be in sidebar
+  const navItems = appFeatures
+    .filter(feature => feature.enabled !== false)
     .flatMap((feature) => {
-      if (feature.navigation && feature.navigation.length > 0) {
+      if (feature.navigation?.length) {
         return feature.navigation.map((navItem) => ({
           ...navItem,
           group: feature.group,
           disabled: !feature.enabled,
-          visible: feature.placement !== "hidden",
         }));
       }
 
-      if (feature.placement !== "hidden") {
-        return [];
-      }
-
-      return [
-        {
-          id: feature.id,
-          title: feature.name,
-          path: feature.routes?.[0]?.path ?? "#",
-          icon: feature.icon ? (
-            typeof feature.icon === "string" ? (
-              <SvgIcon name={feature.icon as IconName} />
-            ) : (
-              feature.icon
-            )
+      // Generate default navigation if none provided
+      return feature.routes?.length ? [{
+        id: feature.id,
+        title: feature.name ?? feature.id,
+        path: feature.routes?.[0]?.path ?? "#",
+        icon: feature.icon ? (
+          typeof feature.icon === "string" ? (
+            <SvgIcon name={feature.icon as IconName} />
           ) : (
-            <SvgIcon name="square" />
-          ),
-          group: feature.group,
-          disabled: !feature.enabled,
-        } as NavigationConfig,
-      ];
+            feature.icon
+          )
+        ) : (
+          <SvgIcon name="square" />
+        ),
+        group: feature.group,
+        disabled: !feature.enabled,
+      }] : [];
     });
 
   // Group navigation items
@@ -100,16 +88,14 @@ export function processFeatures(enabledFeatures: FeatureMetadata[]): {
     return acc;
   }, {});
 
-  const finalNavItems = Object.entries(groupedNavItems).flatMap(([groupKey, items]) => {
-    if (groupKey === "ungrouped") {
-      return items;
-    }
-    return {
+  // Convert groups to parent nav items
+  const finalNavItems = Object.entries(groupedNavItems).flatMap(([groupKey, items]) =>
+    groupKey === "ungrouped" ? items : {
       id: groupKey,
       title: groupKey,
       children: items,
-    } as NavigationConfig;
-  });
+    } as NavigationConfig
+  );
 
-  return { routes, navItems: finalNavItems };
+  return { routes: [rootRoute], navItems: finalNavItems };
 }

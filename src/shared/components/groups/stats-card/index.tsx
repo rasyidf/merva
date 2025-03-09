@@ -20,35 +20,41 @@ export const StatsCard = (props: StatCardProps) => {
     <Paper style={{ flexGrow: 1 }} withBorder radius="md" p="md" onClick={props.onClick}>
       <Stack gap={16}>
         <Group justify="space-between">
-          <Tooltip label={props.tooltip}>
-            <Group justify="left" gap="xs">
-              <Text fz={14} c="gray.8">
-                {props.title}
-              </Text>
-              {props.tooltip && <SvgIcon name="info" size="xs" />}
-            </Group>
-          </Tooltip>
-
-
-          {props.onClick && (
-            <ActionIcon size="xs" onClick={props.onClick}>
-              <SvgIcon name="caretRight" size="xs" />
-            </ActionIcon>
+          {props.tooltip ? (
+            <Tooltip label={props.tooltip}>
+              <Group justify="left" gap="xs">
+                <Text fz={14} c="gray.8">
+                  {props.title}
+                </Text>
+                <SvgIcon name="info" size="xs" />
+              </Group>
+            </Tooltip>
+          ) : (
+            <Text fz={14} c="gray.8">
+              {props.title}
+            </Text>
           )}
-          {
-            props.icon ? <SvgIcon name={props.icon} size="xs" /> : null
-          }
+
+          <Group gap="xs">
+            {props.icon && <SvgIcon name={props.icon} size="xs" />}
+            {props.onClick && (
+              <ActionIcon size="xs" onClick={(e) => {
+                e.stopPropagation();
+                props.onClick?.();
+              }}>
+                <SvgIcon name="caretRight" size="xs" />
+              </ActionIcon>
+            )}
+          </Group>
         </Group>
         <Group align="flex-end" gap="xs">
           <Text className={classes.value}>{props.value}</Text>
-          {
-            props.diff && (
-              <Text c={props.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
-                <span>{props.diff}%</span>
-                <SvgIcon name={props.diff > 0 ? 'arrowUpRight' : 'arrowDownRight'} size="xs" />
-              </Text>
-            )
-          }
+          {props.diff !== undefined && (
+            <Text c={props.diff > 0 ? 'teal' : 'red'} fz="sm" fw={500} className={classes.diff}>
+              <span>{props.diff}%</span>
+              <SvgIcon name={props.diff > 0 ? 'arrowUpRight' : 'arrowDownRight'} size="xs" />
+            </Text>
+          )}
         </Group>
 
         <Text fz={12} c="gray">

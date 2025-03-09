@@ -1,24 +1,28 @@
 import { ActionIcon, AppShell, Drawer, Flex, Paper, ScrollArea } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useWindowScroll } from "@mantine/hooks";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-
 import { MainHeader } from "../groups/main-header/main-header";
 import { MainNavbar } from "../groups/main-navbar";
 import { SvgIcon } from "../ui/icon";
-
 import classes from "./DashboardLayout.module.css";
+import cx from "clsx";
 
 export const DashboardLayout = () => {
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+  const [mobileOpened, { toggle: toggleMobile, close: closeMobile }] = useDisclosure();
   const [expanded, setExpanded] = useState<boolean>(() => {
     const savedState = localStorage.getItem("navbar-expanded");
     return savedState ? JSON.parse(savedState) : false;
   });
+
   const viewport = useRef<HTMLDivElement>(null);
-  const scrollToTop = useCallback(() => viewport.current?.scrollTo({ top: 0, behavior: "smooth" }), []);
+  const [scroll] = useWindowScroll();
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const navigate = useNavigate();
+
+  const scrollToTop = useCallback(() => {
+    viewport.current?.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handleToggle = () => {
     setExpanded((prev: boolean) => {
@@ -26,7 +30,6 @@ export const DashboardLayout = () => {
       localStorage.setItem("navbar-expanded", JSON.stringify(newState));
       return newState;
     });
-    // toggleDesktop();
   };
 
   useEffect(() => {
@@ -36,36 +39,39 @@ export const DashboardLayout = () => {
     }
   }, []);
 
+  useEffect(() => {
+    setShowScrollTop(scroll.y > 100);
+  }, [scroll.y]);
+
   return (
     <AppShell
-      padding={{ base: 0 }}
+      padding={0}
       header={{ height: 56 }}
       navbar={{
-        width: { base: 0, md: expanded ? 280 : 80 },
+        width: { base: 0, md: expanded ? 280 : 64 },
         breakpoint: "md",
-        collapsed: { mobile: !mobileOpened },
+        collapsed: { mobile: !mobileOpened }
       }}
       layout="alt"
     >
       <Drawer
         opened={mobileOpened}
         hiddenFrom="md"
-        onClose={toggleMobile}
+        onClose={closeMobile}
         withCloseButton={false}
         withinPortal
-        radius='md'
-        p={0}
-        title=""
+        radius="md"
+        padding={0}
       >
-        
         <Flex h="calc(100dvh - 32px)" direction="column" p={6} justify="space-between" align="stretch">
-          <MainNavbar expanded={true} toggle={toggleMobile} collapseOnClick />
+          <MainNavbar expanded={true} toggle={closeMobile} collapseOnClick />
         </Flex>
       </Drawer>
-      <AppShell.Header  withBorder={false}  className={classes.header}>
+
+      <AppShell.Header withBorder={false} className={classes.header}>
         <MainHeader
           navigate={navigate}
-          collapsed={!desktopOpened}
+          collapsed={!expanded}
           toggleMobile={toggleMobile}
           toggleDesktop={handleToggle}
         />
@@ -79,25 +85,27 @@ export const DashboardLayout = () => {
         <Paper radius={0}>
           <ScrollArea
             h="calc(100vh - var(--app-shell-header-offset))"
-            // p={16}
-            scrollbars="y"
+            scrollbarSize={8}
+            scrollHideDelay={500}
             type="hover"
             offsetScrollbars
             viewportRef={viewport}
+            className={classes.scrollArea}
           >
             <Outlet />
-            <ActionIcon
-              variant="filled"
-              radius="xl"
-              size="md"
-              style={{ position: "fixed", bottom: 20, right: 20, zIndex: 300 }}
-              onClick={scrollToTop}
-            >
-              <SvgIcon name="caretUp" />
-            </ActionIcon>
           </ScrollArea>
         </Paper>
       </AppShell.Main>
+
+      <ActionIcon
+        variant="filled"
+        radius="xl"
+        size="md"
+        className={cx(classes.scrollToTop, showScrollTop && classes.visible)}
+        onClick={scrollToTop}
+      >
+        <SvgIcon name="caretUp" />
+      </ActionIcon>
     </AppShell>
   );
 };

@@ -1,1 +1,83 @@
-{}
+{
+  "tasks": {
+    "list": {
+      "title": "Tugas",
+      "subtitle": "Kelola dan pantau tugas Anda",
+      "createButton": "Buat Tugas",
+      "deleteConfirm": "Apakah Anda yakin ingin menghapus tugas ini?"
+    },
+    "create": {
+      "title": "Buat Tugas",
+      "subtitle": "Buat tugas baru dengan informasi lengkap"
+    },
+    "edit": {
+      "title": "Edit Tugas",
+      "subtitle": "Mengedit tugas {{id}}"
+    },
+    "details": {
+      "backToList": "Kembali ke Daftar",
+      "editTask": "Edit Tugas"
+    },
+    "form": {
+      "fields": {
+        "title": "Judul",
+        "status": "Status",
+        "label": "Label",
+        "priority": "Prioritas",
+        "storyPoints": "Story Points",
+        "dueDate": "Tenggat Waktu",
+        "estimatedTime": "Estimasi Jam",
+        "assignedTo": "Ditugaskan Kepada",
+        "role": "Peran",
+        "team": "Tim",
+        "category": "Kategori",
+        "tags": "Tag",
+        "progress": "Progress (%)"
+      },
+      "buttons": {
+        "cancel": "Batal",
+        "create": "Buat Tugas",
+        "update": "Perbarui Tugas"
+      },
+      "priorities": {
+        "low": "Rendah",
+        "medium": "Sedang",
+        "high": "Tinggi"
+      }
+    },
+    "notifications": {
+      "create": {
+        "success": "Tugas berhasil dibuat",
+        "error": "Gagal membuat tugas"
+      },
+      "update": {
+        "success": "Tugas berhasil diperbarui",
+        "error": "Gagal memperbarui tugas"
+      },
+      "delete": {
+        "success": "Tugas berhasil dihapus",
+        "error": "Gagal menghapus tugas"
+      },
+      "fetch": {
+        "error": "Gagal mengambil tugas"
+      }
+    },
+    "shortcuts": {
+      "title": "Pintasan Keyboard",
+      "new": "Buat tugas baru",
+      "edit": "Edit tugas terpilih",
+      "refresh": "Segarkan daftar tugas",
+      "delete": "Hapus tugas terpilih",
+      "escape": "Tutup formulir / Kembali ke daftar",
+      "navigate": "Navigasi antar tugas",
+      "select": "Pilih/batal pilih tugas",
+      "open": "Buka detail tugas",
+      "note": "Catatan: {{mod}} merujuk pada tombol Command di macOS dan Control di platform lain",
+      "button": "Tampilkan pintasan keyboard"
+    },
+    "validation": {
+      "required": "{{field}} wajib diisi",
+      "range": "Nilai harus antara {{min}} dan {{max}}"
+    }
+  }
+}

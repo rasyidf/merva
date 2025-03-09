@@ -35,15 +35,16 @@ export function SvgIcon({
   ...props
 }: SVGProps<SVGSVGElement> & {
   name: IconName;
-  size?: Size;
+  size?: Size | number;
 }) {
   const validName = iconNames.includes(name) ? name : "square";
+  const iconSize = typeof size === "number" ? `${size}px` : sizeClassName[size];
   return (
     <svg
       width={16}
       height={16}
       {...props}
-      className={clsx(sizeClassName[size], styles.icon, "inline self-center", className)}
+      className={clsx(iconSize, styles.icon, "inline self-center", className)}
     >
       <title>{validName}</title>
       <use href={`${href}#${validName}`} />

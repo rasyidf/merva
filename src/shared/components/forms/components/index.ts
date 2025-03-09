@@ -18,3 +18,6 @@ export * from "./Badge/badgeGroup";
 export * from "./TextView/TextView";
 export * from "./InfiniteScroll/infiniteScroll";
 export * from "./FormLabel";
+export * from './fields-layout';
+export * from './repeatable-fields';
+export * from './form-wizard';

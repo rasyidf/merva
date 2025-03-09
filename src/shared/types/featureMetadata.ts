@@ -24,7 +24,7 @@ export interface FeatureMetadata {
   group?: string;
   icon?: string | ReactNode;
   metadata?: { [key: string]: any; };
-  placement?: "shell" | "hidden" | "none";
+  placement?: "shell" | "app" | "hidden" | "none";
   navigation?: NavigationConfig[];
   locales?: LocalizationConfig[];
   routes?: RouteConfig[];

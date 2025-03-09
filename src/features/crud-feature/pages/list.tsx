@@ -1,98 +1,124 @@
 import { DataTable, useDataTable } from "@/shared/components/groups/data-table";
 import { PageHeader } from "@/shared/components/groups/main-header";
-import { filterableColumns, useTaskColumns } from "../components/columns";
-
-import { Notify } from "@/shared/services";
+import { SvgIcon } from "@/shared/components/ui/icon";
 import { modalService } from "@/shared/services/modals/service";
-import { Alert, Box, Button, Drawer, Group, LoadingOverlay, Paper } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { ActionIcon, Alert, Box, Button, Group, LoadingOverlay, Menu, Paper, Stack } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { useState } from "react";
-import type { Task } from "../data/schema";
-import { getTasks } from "../services/getTask";
-import EntityCreate from "./create";
-import EntityDetails from "./details";
-import EntityEdit from "./edit";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { filterableColumns, useTaskColumns } from "../components/columns";
+import { TaskShortcuts } from "../components/TaskShortcuts";
+import { TaskService } from "../services/taskService";
+import { TaskExport } from "../utils/taskExport";
+import { featureId } from "..";
 
 export const EntityList = () => {
-  const [modalState, setModalState] = useState<{
-    action: "create" | "update" | "detail";
-    id: string;
-  } | null>(null);
-  const [opened, { open, close }] = useDisclosure(false);
-
+  const navigate = useNavigate();
+  const { t } = useTranslation(featureId);
+  const taskService = new TaskService();
   const columns = useTaskColumns({
-    onEdit: ({ id }) => {
-      setModalState({ action: "update", id });
-      return open();
-    },
-    onDelete: ({ id }) =>
+    onEdit: ({ id }) => navigate(`edit/${id}`),
+    onDelete: async ({ id }) =>
       modalService.deleteModal({
-        message: "Are you sure you want to delete this task?",
-        onConfirm: () => {
-          Notify.success("Success", `Task ${id} deleted successfully`);
+        message: t("tasks.list.deleteConfirm"),
+        onConfirm: async () => {
+          try {
+            await taskService.deleteTask(id);
+            notifications.show({
+              title: t("tasks.notifications.delete.success"),
+              message: t("tasks.notifications.delete.message"),
+              color: "green",
+            });
+            await table.reset();
+          } catch (error) {
+            notifications.show({
+              title: t("tasks.notifications.delete.error"),
+              message: error instanceof Error ? error.message : "Unknown error",
+              color: "red",
+            });
+          }
         },
       }),
   });
 
-  // usePrompt("You have unsaved changes. Are you sure you want to leave?", true);
-
-  const { table, isLoading, error } = useDataTable<Task, any>({
-    key: ["task"],
+  const { table, isLoading, error, data } = useDataTable({
+    key: ["tasks"],
     columns,
     dataFetcher: ({ sorting, filters, pagination, globalFilter }) => {
-      return getTasks(sorting, filters, pagination, globalFilter);
+      return taskService.getTasks(sorting, filters, pagination, globalFilter);
     },
     enableSearchParamsSync: true,
   });
 
+  const handleExport = (format: "csv" | "json") => {
+
+    TaskExport.export([], { format });
+  };
+
+
   return (
-    <Paper p={16}>
-      <PageHeader title="Task" subtitle="This is CRUD Feature contains Create, Read, Update, Delete Operation">
-        <Group>
-          <Button
-            onClick={() => {
-              setModalState({ action: "create", id: "" });
-              open();
-            }}
-          >
-            Create Task
-          </Button>
-        </Group>
-      </PageHeader>
-      <Box mt={16}>
+    <Stack gap="md">
+      <TaskShortcuts
+        taskId={'selectedTaskId'}
+        onRefresh={table.reset}
+      />
+
+      <Paper p="md">
+        <PageHeader
+          title={t("tasks.list.title")}
+          subtitle={t("tasks.list.subtitle")}
+        >
+          <Group>
+            <Menu shadow="md" width={200}>
+              <Menu.Target>
+                <ActionIcon variant="light" size="lg">
+                  <SvgIcon name="fileDown" width={20} height={20} />
+                </ActionIcon>
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                <Menu.Label>Export Tasks</Menu.Label>
+                <Menu.Item onClick={() => handleExport("csv")}>
+                  <Group>
+                    <SvgIcon name="fileSpreadsheet" width={16} height={16} />
+                    <span>Export as CSV</span>
+                  </Group>
+                </Menu.Item>
+                <Menu.Item onClick={() => handleExport("json")}>
+                  <Group>
+                    <SvgIcon name="filePieChart" width={16} height={16} />
+                    <span>Export as JSON</span>
+                  </Group>
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+
+            <Button onClick={() => navigate("create")}>
+              {t("tasks.list.createButton")}
+            </Button>
+          </Group>
+        </PageHeader>
+      </Paper>
+
+
+      <Paper p="md">
         {error && (
-          <Alert color="red" p={16} style={{ border: "1px solid red" }}>
+          <Alert color="red" mb={16}>
             {error.message}
           </Alert>
         )}
-        <LoadingOverlay visible={isLoading} />
-        <DataTable.Container table={table}>
-          <DataTable.Toolbar meta={{ filterableColumns }} />
-          <DataTable.Core />
-          <DataTable.Pagination />
-        </DataTable.Container>
-      </Box>
 
-      <Drawer
-        opened={opened}
-        position="right"
-        onClose={close}
-        withinPortal
-        title={
-          modalState?.action === "create"
-            ? "Create Task"
-            : modalState?.action === "update"
-              ? "Update Task"
-              : modalState?.action === "detail"
-                ? "Task Details"
-                : ""
-        }
-      >
-        {modalState?.action === "create" && <EntityCreate onCancel={() => close()} />}
-        {modalState?.action === "update" && <EntityEdit />}
-        {modalState?.action === "detail" && <EntityDetails />}
-      </Drawer>
-    </Paper>
+        <Box pos="relative">
+          <LoadingOverlay visible={isLoading} />
+          <DataTable.Container table={table}>
+            <DataTable.Toolbar meta={{ filterableColumns }} />
+            <DataTable.Core />
+            <DataTable.Pagination />
+          </DataTable.Container>
+        </Box>
+      </Paper>
+    </Stack>
   );
 };
 

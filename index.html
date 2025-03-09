@@ -58,7 +58,7 @@
         align-items: center;
       }
 
-      .spinner {
+      .loadingSpinner {
         --logo-size: 32px;
         --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
         position: absolute;
@@ -70,7 +70,7 @@
         height: var(--logo-size);
       }
 
-      .logo {
+      .loadingLogo {
         --logo-size: 64px;
         --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
         position: absolute;
@@ -81,14 +81,14 @@
         height: var(--logo-size);
       }
 
-      .spinner .path {
+      .loadingSpinner .path {
         stroke: var(--theme-color);
         stroke-linecap: round;
       }
     </style>
 
-    <img fetchpriority="high" src="/logo-merva.svg" class="logo" width="120px" alt="MERVA" />
-    <svg class="spinner" viewBox="0 0 50 50">
+    <img fetchpriority="high" src="/logo-merva.svg" class="loadingLogo" width="64px" alt="MERVA" />
+    <svg class="loadingSpinner" viewBox="0 0 50 50" width="64px" height="64px">
       <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
     </svg>
 

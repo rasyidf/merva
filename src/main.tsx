@@ -1,4 +1,3 @@
-
 import "@fontsource-variable/inter";
 
 import "@mantine/core/styles.css";
@@ -11,8 +10,9 @@ import { createRoot } from "react-dom/client";
 import { featureRegistry } from "./core/configs";
 import { initializeFeatures } from "./shared/services/features/feature.service";
 
+// Initialize features before bootstrapping the app
+await initializeFeatures(featureRegistry).catch(console.error);
 
-// Bootstrap the application
-await initializeFeatures(featureRegistry);
-
-createRoot(document.getElementById("root") as HTMLElement).render(<MainApp />);
+// Only mount the app after features are initialized
+const root = createRoot(document.getElementById("root") as HTMLElement);
+root.render(<MainApp />);

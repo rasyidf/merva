@@ -2,5 +2,44 @@
   background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
   opacity: 1; 
   z-index: 100;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  border-right: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  backdrop-filter: blur(10px);
+}
+
+.header {
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  backdrop-filter: blur(10px);
+  z-index: 101;
+}
+
+.scrollArea {
+  height: calc(100vh - var(--app-shell-header-offset));
+  padding: var(--mantine-spacing-md);
+}
+
+.scrollToTop {
+  position: fixed;
+  bottom: var(--mantine-spacing-xl);
+  right: var(--mantine-spacing-xl);
+  z-index: 300;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: $mantine-breakpoint-sm) {
+  .scrollToTop {
+    bottom: var(--mantine-spacing-lg);
+    right: var(--mantine-spacing-lg);
+  }
+
+  .scrollArea {
+    padding: var(--mantine-spacing-sm);
+  }
 }

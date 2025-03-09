@@ -5,6 +5,10 @@ import { processFeatures } from "./feature.utils";
 // Function to get navigation items
 export function useNavigationItems() {
   const enabledFeatures = useEnabledFeatures();
-  const { navItems } = useMemo(() => processFeatures(enabledFeatures), [enabledFeatures]);
-  return { navItems };
+  const navigationItems = useMemo(() => {
+    const { navItems } = processFeatures(enabledFeatures);
+    return navItems;
+  }, [enabledFeatures]);
+  
+  return { navItems: navigationItems };
 }

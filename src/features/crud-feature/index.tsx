@@ -3,10 +3,12 @@ import type { FeatureMetadata, NavigationConfig } from "@/shared/types";
 import { compose } from "@/shared/utils";
 import type { RouteObject } from "react-router-dom";
 
+export const featureId = "feature-a";
+
 const baseUri = "/app/product";
-const FeatureAMetadata = {
+const FeatureMetadata = {
   id: "feature-a",
-  name: "Entity A",
+  name: "Tasks",
   group: "Products",
   enabled: true, // Feature flag to enable/disable the entire feature
   routes: [
@@ -60,4 +62,4 @@ const FeatureAMetadata = {
   ]
 } satisfies FeatureMetadata;
 
-export default FeatureAMetadata;
+export default FeatureMetadata;

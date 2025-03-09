@@ -4,7 +4,6 @@ import { useRef } from 'react'
 import styles from "./AnimatedDashboard.module.css"
 
 export function AnimatedDashboard() {
-  const ref = useRef<HTMLDivElement>(null) 
 
   return (
     <div className={styles.scrollableContainer}>
@@ -12,9 +11,9 @@ export function AnimatedDashboard() {
         <div
           className={styles.animatedDiv}
         >
-          <img 
+          <img
             src="/hero.png"
-            alt="Dashboard Preview" 
+            alt="Dashboard Preview"
             className={styles.image}
           />
         </div>

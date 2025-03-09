@@ -1,34 +1,59 @@
-import { FormBuilder, FormFields } from "@/shared/components/forms";
 import { PageHeader } from "@/shared/components/groups/main-header";
-import { z } from "zod";
+import { Paper, Tabs } from "@mantine/core";
+import { TaskForm } from "../components/TaskForm";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { TaskTemplateSelector } from "../components/TaskTemplateSelector";
+import { taskTemplates, applyTemplate } from "../data/taskTemplates";
+import type { Task } from "../data/schema";
+import { featureId } from "..";
 
-type Props = {
-  onCancel: () => void;
-};
+export const EntityCreate = () => {
+  const { t } = useTranslation(featureId);
+  const [activeTab, setActiveTab] = useState<string>("blank");
+  const [selectedTemplate, setSelectedTemplate] = useState<string>();
 
-const schema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  age: z.number().int(),
-  password: z.string().min(6),
-});
+  const handleTemplateChange = (templateId: string) => {
+    setSelectedTemplate(templateId);
+    const template = taskTemplates.find(t => t.id === templateId);
+    if (template) {
+      const initialValues = applyTemplate(template);
+      return initialValues as Partial<Task>;
+    }
+    return undefined;
+  };
 
-export const EntityCreate = (props: Props) => {
   return (
-    <>
-      <FormBuilder schema={schema}>
-        <FormFields
-          meta={[
-            { name: "name", label: "Name", type: "text" },
-            { name: "email", label: "Email", type: "email" },
-            { name: "age", label: "Age", type: "number" },
-            { name: "password", label: "Password", type: "password" },
-          ]}
-          onCancel={props.onCancel}
-          gridColumn={1}
-        />
-      </FormBuilder>
-    </>
+    <Paper p="md">
+      <PageHeader
+        title={t("tasks.create.title")}
+        subtitle={t("tasks.create.subtitle")}
+      />
+
+      <Tabs value={activeTab} onChange={(value) => setActiveTab(value || "blank")} mt="md">
+        <Tabs.List>
+          <Tabs.Tab value="blank">Blank Task</Tabs.Tab>
+          <Tabs.Tab value="template">Use Template</Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="blank">
+          <TaskForm mode="create" />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="template">
+          <TaskTemplateSelector
+            value={selectedTemplate}
+            onChange={handleTemplateChange}
+          />
+          {selectedTemplate && (
+            <TaskForm
+              mode="create"
+              initialValues={handleTemplateChange(selectedTemplate)}
+            />
+          )}
+        </Tabs.Panel>
+      </Tabs>
+    </Paper>
   );
 };
 

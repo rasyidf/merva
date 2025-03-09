@@ -2,6 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import type { FormBuilderProps } from "./form-builder.types";
 import { LoadingOverlay } from "./form-builder";
+import { z } from "zod";
+import { useFormPersistence } from "./hooks/use-form-persistence";
+import { useCallback, useEffect, useMemo } from "react";
+import { notifications } from "@mantine/notifications";
+
+interface ValidationError extends Error {
+  errors?: { [key: string]: string };
+}
 
 /**
  * To use the FormBuilder, you need to provide the schema and the meta data
@@ -38,24 +46,142 @@ import { LoadingOverlay } from "./form-builder";
  * <FormBuilder schema={schema} meta={meta} />
  * ```
  */
-
-export const FormBuilderComponent = ({ schema, action, children, initialData }: Readonly<FormBuilderProps>) => {
-  const hooks = useForm({
+export const FormBuilderComponent = ({ 
+  schema, 
+  onSubmit, 
+  onError,
+  children, 
+  initialData,
+  mode = "create",
+  id,
+  persistData = true,
+  excludeFromPersistence = [],
+  showSuccessNotification = true,
+  showErrorNotification = true,
+}: Readonly<FormBuilderProps>) => {
+  // Memoize the form configuration to prevent unnecessary re-renders
+  const formConfig = useMemo(() => ({
     resolver: zodResolver(schema),
-    mode: "all",
+    mode: "onTouched" as const,
     defaultValues: initialData,
+  }), [schema, initialData]);
+
+  const hooks = useForm(formConfig);
+  const { handleSubmit, setError, clearErrors, formState } = hooks;
+
+  // Form persistence
+  const formKey = useMemo(() => `form_${id || window.location.pathname}`, [id]);
+  const { clearPersistedData } = useFormPersistence(hooks, {
+    enabled: persistData,
+    key: formKey,
+    exclude: excludeFromPersistence,
   });
 
-  const { handleSubmit } = hooks;
+  // Clear form data when component unmounts if form was submitted successfully
+  useEffect(() => {
+    return () => {
+      if (formState.isSubmitSuccessful) {
+        clearPersistedData();
+      }
+    };
+  }, [formState.isSubmitSuccessful, clearPersistedData]);
 
-  const onSubmit: SubmitHandler<Record<string, unknown>> = (data) => {
-    action?.(data, hooks);
-  };
+  // Show validation errors in notifications
+  useEffect(() => {
+    if (!showErrorNotification) return;
+    
+    const errors = Object.entries(formState.errors);
+    if (errors.length > 0) {
+      notifications.show({
+        title: "Validation Errors",
+        message: errors.map(([field, error]) => `${field}: ${error?.message}`).join("\n"),
+        color: "red",
+      });
+    }
+  }, [formState.errors, showErrorNotification]);
+
+  const handleFormSubmit: SubmitHandler<Record<string, unknown>> = useCallback(async (data) => {
+    try {
+      clearErrors();
+      // Transform data before submission if needed
+      const transformedData = Object.entries(data).reduce((acc, [key, value]) => {
+        let field: z.ZodTypeAny | undefined;
+        
+        if (schema instanceof z.ZodEffects) {
+          const innerSchema = schema._def.schema;
+          if (innerSchema instanceof z.ZodObject) {
+            field = innerSchema.shape[key];
+          }
+        } else if (schema instanceof z.ZodObject) {
+          field = schema.shape[key];
+        }
+
+        if (field?._def?.transform) {
+          acc[key] = field._def.transform(value);
+        } else {
+          acc[key] = value;
+        }
+        return acc;
+      }, {} as Record<string, unknown>);
+
+      await onSubmit?.(transformedData, hooks);
+      
+      if (showSuccessNotification) {
+        notifications.show({
+          title: mode === "create" ? "Created Successfully" : "Updated Successfully",
+          message: "Your changes have been saved.",
+          color: "green",
+        });
+      }
+
+      clearPersistedData();
+    } catch (error) {
+      if (error instanceof Error) {
+        // Handle validation errors
+        const validationError = error as ValidationError;
+        if (validationError.name === 'ValidationError' && validationError.errors) {
+          Object.entries(validationError.errors).forEach(([field, message]) => {
+            if (typeof message === 'string' && field !== 'name') {
+              setError(field, { type: 'manual', message });
+            }
+          });
+        }
+        onError?.(error);
+
+        if (showErrorNotification) {
+          notifications.show({
+            title: "Error",
+            message: error.message || "An error occurred while saving",
+            color: "red",
+          });
+        }
+      }
+    }
+  }, [schema, onSubmit, hooks, mode, showSuccessNotification, clearPersistedData, setError, onError, showErrorNotification, clearErrors]);
+
+  const handleFormError = useCallback((errors: typeof formState.errors) => {
+    if (!showErrorNotification) return;
+    
+    const errorMessages = Object.entries(errors)
+      .map(([field, error]) => `${field}: ${error?.message}`)
+      .join("\n");
+
+    notifications.show({
+      title: "Validation Failed",
+      message: errorMessages,
+      color: "red",
+    });
+  }, [showErrorNotification]);
 
   return (
     <FormProvider {...hooks}>
-      <LoadingOverlay visible={hooks.formState.isSubmitting} />
-      <form onSubmit={handleSubmit(onSubmit)}>{children}</form>
+      <LoadingOverlay visible={formState.isSubmitting} />
+      <form 
+        onSubmit={handleSubmit(handleFormSubmit, handleFormError)}
+        noValidate
+      >
+        {children}
+      </form>
     </FormProvider>
   );
 };

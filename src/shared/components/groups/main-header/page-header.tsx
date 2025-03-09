@@ -1,37 +1,53 @@
-import { Flex, Stack, Text, Title } from "@mantine/core";
+import { Flex, Group, Stack, Text, Title } from "@mantine/core";
+import clsx from "clsx";
+import { useRef } from "react";
+import classes from "./page-header.module.css";
 
-export function PageHeader({ title, subtitle, children, ...rest }: PageHeaderProps) {
-  return (
-    <Flex
-      justify="space-between"
-      bg="var(--mantine-color-background)"
-      p="sm"
-      pos="sticky"
-      style={{
-        zIndex: "var(--mantine-z-index-modal)",
-        top: -1,
-        left: 0,
-        right: 0,
-        // glass effect
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
-      }}
-      {...rest}
-    >
-      <Stack gap={0}>
-        <Title order={3}>{title}</Title>
-        {subtitle && (
-          <Text size="sm" c="gray">
-            {subtitle}
-          </Text>
-        )}
-      </Stack>
-      {children}
-    </Flex>
-  );
-}
-type PageHeaderProps = {
+export interface PageHeaderProps extends React.ComponentPropsWithoutRef<"div"> {
   title: string;
   subtitle?: string;
+  extras?: React.ReactNode;
+  backLink?: string;
+  fixed?: boolean;
   children?: React.ReactNode;
-} & React.ComponentPropsWithoutRef<"div">;
+}
+
+export function PageHeader({
+  title,
+  subtitle,
+  extras,
+  fixed = true,
+  children,
+  className,
+  ...rest
+}: PageHeaderProps) {
+
+
+  return (
+    <>
+      <Flex
+        justify="space-between"
+        bg="var(--mantine-color-body)"
+        p="md"
+        className={clsx(
+          classes.header,
+          className
+        )}
+        {...rest}
+      >
+        <Stack gap={4}>
+          <Group gap="xs" align="center">
+            <Title order={3} className={classes.title}>{title}</Title>
+            {extras}
+          </Group>
+          {subtitle && (
+            <Text size="sm" c="dimmed" className={classes.subtitle}>
+              {subtitle}
+            </Text>
+          )}
+        </Stack>
+        {children && <Group gap="sm">{children}</Group>}
+      </Flex>
+    </>
+  );
+}

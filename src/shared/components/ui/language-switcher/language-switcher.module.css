@@ -1,0 +1,38 @@
+.control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  border-radius: var(--mantine-radius-md);
+  border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6));
+  transition: background-color 150ms ease;
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+  
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+  }
+}
+
+.label {
+  font-weight: 500;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.item {
+  position: relative;
+
+  &[data-active] {
+    background-color: var(--mantine-primary-color-light);
+    color: var(--mantine-primary-color);
+  }
+}
+
+@media (max-width: $mantine-breakpoint-xs) {
+  .control {
+    padding: var(--mantine-spacing-xs);
+  }
+
+  .label {
+    font-size: var(--mantine-font-size-xs);
+  }
+}

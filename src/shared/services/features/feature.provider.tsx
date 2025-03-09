@@ -8,8 +8,10 @@ import { processFeatures } from "./feature.utils";
  */
 export function FeatureProvider() {
   const enabledFeatures = useEnabledFeatures();
-  const { routes } = useMemo(() => processFeatures(enabledFeatures), [enabledFeatures]);
-  const router = createBrowserRouter(routes);
+  const router = useMemo(() => {
+    const { routes } = processFeatures(enabledFeatures);
+    return createBrowserRouter(routes);
+  }, [enabledFeatures]);
 
   return <RouterProvider router={router} />;
 }
