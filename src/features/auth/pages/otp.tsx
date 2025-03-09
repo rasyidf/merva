@@ -1,4 +1,4 @@
-import { PinInput } from '@/shared/components/forms';
+import { PinInput } from '@/shared/components/forms/components';
 import { Box, Button, Group, Text } from '@mantine/core';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

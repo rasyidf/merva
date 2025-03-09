@@ -1,10 +1,10 @@
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { Box, Button, Group, Paper, Stack, Title } from "@mantine/core";
 import { useFormContext } from "react-hook-form";
-import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import { SvgIcon } from "../../ui/icon";
+import type { MetaField } from "../form-builder.types";
 import { useFormArray } from "../hooks";
 import { FieldsLayout } from "./fields-layout";
-import type { MetaField } from "../form-builder.types";
-import { SvgIcon } from "../../ui/icon";
 
 interface RepeatableFieldsProps {
   label?: string;

@@ -9,6 +9,19 @@ export const patterns = {
   decimal: /^-?\d*\.?\d*$/,
 };
 
+export const masks = {
+  phone: "#### ###-####",
+  date: "##/##/####",
+  datetime: "##/##/#### ##:##",
+  time: "##:##",
+  currency: "$#,##0.00",
+  percentage: "#0.00%",
+  ssn: "###-##-####",
+  zip: "#####-####",
+  creditCard: "#### #### #### ####",
+  ipAddress: "###.###.###.###",
+}
+
 export const messages = {
   required: 'This field is required',
   email: 'Please enter a valid email address',

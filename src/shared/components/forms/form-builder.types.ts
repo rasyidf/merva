@@ -20,56 +20,85 @@ export type FieldType =
   | "badge"
   | "tags";
 
-export interface ValidationRules {
-  required?: boolean;
+export type ValidationRule<T = any> = 
+  | boolean 
+  | number 
+  | string 
+  | RegExp 
+  | ((value: T, formValues: Record<string, any>) => boolean | string);
+
+export interface WizardStep {
+  id: string;
+  title: string;
+  description?: string;
+  fields: MetaField[];
+  dependencies?: string[];
+  validate?: (data: Record<string, any>) => Promise<boolean> | boolean;
+  canSkip?: boolean;
+}
+
+export interface FormWizardOptions {
+  steps: WizardStep[];
+  initialStep?: string;
+  onStepChange?: (from: string, to: string) => void;
+  onComplete?: (data: Record<string, any>) => void;
+}
+
+export interface ValidationRules<T = any> {
+  required?: ValidationRule<T>;
   min?: number;
   max?: number;
   minLength?: number;
   maxLength?: number;
   pattern?: RegExp;
-  validate?: (value: any) => boolean | string;
+  validate?: (value: T, formValues: Record<string, any>) => boolean | string | Promise<boolean | string>;
+  deps?: string[];
 }
 
-export interface BaseField {
+export interface BaseField<T = any> {
   name: string;
   type: FieldType;
   label?: string;
   placeholder?: string;
   description?: string;
   group?: string;
-  colSpan?: number;
+  colSpan?: number | { base: number; sm?: number; md?: number; lg?: number };
   disabled?: boolean;
   readOnly?: boolean;
   hidden?: boolean;
-  validation?: ValidationRules;
-  defaultValue?: any;
-  transform?: (value: any) => any;
-  formatValue?: (value: any) => any;
+  validation?: ValidationRules<T>;
+  defaultValue?: T;
+  transform?: (value: T) => any;
+  formatValue?: (value: T) => any;
   dependencies?: string[];
+  searchable?: boolean;
+  allowDeselect?: boolean;
+  options?: SelectOption[];
   [key: PropertyKey]: any;
 }
 
-export type EditorProps = Omit<BaseField, "type"> & {
+export type EditorProps<T = any> = Omit<BaseField<T>, "type"> & {
   error?: string;
-  onChange?: (value: any) => void;
+  onChange?: (value: T) => void;
   onBlur?: () => void;
-  value?: any;
+  value?: T;
+  control?: UseFormReturn<any>["control"];
 };
 
-export interface CustomField extends BaseField {
+export interface CustomField<T = any> extends BaseField<T> {
   type: "custom";
-  render: (props: EditorProps) => ReactNode;
-  parseValue?: (value: any) => any;
+  render: (props: EditorProps<T>) => ReactNode;
+  parseValue?: (value: T) => any;
 }
 
-export type Field = BaseField | CustomField;
+export type Field<T = any> = BaseField<T> | CustomField<T>;
 
-export type FieldRenderer = {
-  editor: (props: EditorProps) => ReactNode;
-  view?: (props: EditorProps) => ReactNode;
-  parse?: (value: any) => any;
-  format?: (value: any) => any;
-};
+export interface FieldRenderer<T = any> {
+  editor: (props: EditorProps<T>) => ReactNode;
+  view?: (props: EditorProps<T>) => ReactNode;
+  parse?: (value: T) => any;
+  format?: (value: T) => any;
+}
 
 export type Fields = {
   [K in FieldType]: FieldRenderer;
@@ -79,6 +108,8 @@ export interface SelectOption {
   label: string;
   value: string | number;
   disabled?: boolean;
+  group?: string;
+  data?: any;
 }
 
 export type BaseFieldMeta = BaseField & {
@@ -88,7 +119,7 @@ export type BaseFieldMeta = BaseField & {
 export type MetaField = BaseFieldMeta & {
   type: FieldType;
   group?: string;
-  colSpan?: number;
+  colSpan?: number | { base: number; sm?: number; md?: number; lg?: number };
 };
 
 export interface RenderFieldProps {
@@ -108,7 +139,6 @@ export interface FormBuilderProps extends PropsWithChildren {
   id?: string;
   persistData?: boolean;
   excludeFromPersistence?: string[];
-  showSuccessNotification?: boolean;
-  showErrorNotification?: boolean;
+  showNotifications?: boolean;
   validate?: (values: any) => Record<string, string> | Promise<Record<string, string>>;
 }

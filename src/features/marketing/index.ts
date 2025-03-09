@@ -8,26 +8,35 @@ const MarketingMetadata = {
   routes: [
     {
       path: "/",
-      lazy: () => import("./pages/landingPage"),
+      lazy: async () => {
+        const { Component } = await import("./pages/landingPage");
+        return { Component };
+      },
     },
     {
       path: "/docs",
-      lazy: () => import("./pages/docsPage"),
+      lazy: async () => {
+        const { Component } = await import("./pages/docsPage");
+        return { Component };
+      },
     },
     {
       path: "/portfolio",
-      lazy: () => import("./pages/portfolioPage"),
+      lazy: async () => {
+        const { Component } = await import("./pages/portfolioPage");
+        return { Component };
+      },
     }
   ] satisfies RouteObject[],
   placement: "shell",
   locales: [
     {
       lang: "en",
-      resources: () => import("./locales/en.json"),
+      resources: async () => await import("./locales/en.json"),
     },
     {
       lang: "id",
-      resources: () => import("./locales/id.json"),
+      resources: async () => await import("./locales/id.json"),
     },
   ]
 } satisfies FeatureMetadata;

@@ -1,23 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
-import type { MetaField } from '../form-builder.types';
+import type { FormWizardOptions, MetaField } from '../form-builder.types';
 
-export interface WizardStep {
-  id: string;
-  title: string;
-  description?: string;
-  fields: MetaField[];
-  dependencies?: string[];
-  validate?: (data: Record<string, any>) => Promise<boolean> | boolean;
-  canSkip?: boolean;
-}
-
-export interface FormWizardOptions {
-  steps: WizardStep[];
-  initialStep?: string;
-  onStepChange?: (from: string, to: string) => void;
-  onComplete?: (data: Record<string, any>) => void;
-}
 
 export const useFormWizard = (
   form: UseFormReturn<any>,

@@ -1,8 +1,9 @@
 import { Box, Button, Group, Paper, Stepper, Title } from "@mantine/core";
 import type { ReactNode } from "react";
 import { useFormContext } from "react-hook-form";
-import { useFormWizard, type WizardStep } from "../hooks/use-form-wizard";
+import { useFormWizard } from "../hooks/use-form-wizard";
 import { FieldsLayout } from "./fields-layout";
+import { WizardStep } from "../form-builder.types";
 
 interface FormWizardProps {
   steps: WizardStep[];
@@ -60,7 +61,7 @@ export const FormWizard = ({
             label={step.title}
             description={step.description}
             loading={loading && currentStepIndex === index}
-            // completed={visitedSteps.has(step.id)}
+          // completed={visitedSteps.has(step.id)}
           />
         ))}
       </Stepper>

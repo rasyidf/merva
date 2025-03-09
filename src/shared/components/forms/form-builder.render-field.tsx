@@ -1,4 +1,4 @@
-import { Stack, Text } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { useFormContext } from "react-hook-form";
 import { useMemo } from "react";
 import { fields } from "./form-builder.fields-list";
@@ -6,18 +6,18 @@ import type { EditorProps, RenderFieldProps } from "./form-builder.types";
 
 export const RenderField = ({ field, data, readonly = false }: RenderFieldProps) => {
   const fieldType = field.type || "text";
-  const fieldRender = fields[fieldType] || fields.text;
+  const fieldRender = fields[fieldType];
 
   if (!fieldRender) {
-    throw new Error(`No renderer found for field type "${fieldType}"`);
+    console.warn(`No renderer found for field type "${fieldType}", falling back to text`);
+    return <RenderField {...{ field: { ...field, type: "text" }, data, readonly }} />;
   }
 
   const { watch, formState: { errors }, control } = useFormContext();
   const error = errors[field.name]?.message as string;
-  const description = field.description;
   const watchedValue = watch(field.name);
 
-  // Only compute these values if field has dependencies
+  // Only compute dependencies if they exist
   const shouldShow = useMemo(() => {
     if (!field.dependencies?.length) return true;
     const dependencyValues = field.dependencies.map(dep => watch(dep));
@@ -29,7 +29,7 @@ export const RenderField = ({ field, data, readonly = false }: RenderFieldProps)
   // Memoize shared props to prevent unnecessary re-renders
   const sharedProps = useMemo(() => {
     const defaultValue = data?.[field.name];
-    const baseProps = {
+    const baseProps: EditorProps = {
       name: field.name,
       control,
       defaultValue,
@@ -37,8 +37,11 @@ export const RenderField = ({ field, data, readonly = false }: RenderFieldProps)
       placeholder: field.placeholder,
       error,
       disabled: field.disabled || readonly,
-      description,
-      ...field.validation && { rules: field.validation },
+      description: field.description,
+      ...(field.validation && { rules: field.validation }),
+      options: field.options,
+      searchable: field.searchable,
+      allowDeselect: field.allowDeselect,
     };
 
     if (readonly) {
@@ -53,30 +56,30 @@ export const RenderField = ({ field, data, readonly = false }: RenderFieldProps)
     }
 
     return baseProps;
-  }, [field, data, error, readonly, control, description]);
+  }, [field, data, error, readonly, control]);
 
-  // Memoize rendering logic
+  // Apply value transformations
+  const transformedValue = useMemo(() => {
+    if (readonly && fieldRender.view) {
+      return field.formatValue?.(watchedValue) ?? 
+             fieldRender.format?.(watchedValue) ?? 
+             watchedValue;
+    }
+    return field.transform?.(watchedValue) ?? 
+           fieldRender.parse?.(watchedValue) ?? 
+           watchedValue;
+  }, [field, fieldRender, watchedValue, readonly]);
+
+  // Render appropriate component
   const content = useMemo(() => {
     if (field.type === "custom" && typeof field.render === "function") {
-      return field.render(sharedProps);
+      return field.render({ ...sharedProps, value: transformedValue });
     }
 
-    if (readonly && fieldRender.view) {
-      const formattedValue = field.formatValue?.(watchedValue) ?? 
-                          fieldRender.format?.(watchedValue) ?? 
-                          watchedValue;
-      return fieldRender.view({ ...sharedProps, value: formattedValue });
-    }
+    return readonly && fieldRender.view 
+      ? fieldRender.view({ ...sharedProps, value: transformedValue })
+      : fieldRender.editor({ ...sharedProps, value: transformedValue });
+  }, [field, fieldRender, sharedProps, transformedValue, readonly]);
 
-    const parsedValue = field.transform?.(watchedValue) ?? 
-                     fieldRender.parse?.(watchedValue) ?? 
-                     watchedValue;
-    return fieldRender.editor({ ...sharedProps, value: parsedValue });
-  }, [field, fieldRender, sharedProps, watchedValue, readonly]);
-
-  return (
-    <Stack gap={0}>
-      {content}
-    </Stack>
-  );
+  return <Stack gap={0}>{content}</Stack>;
 };

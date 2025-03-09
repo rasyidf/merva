@@ -1,7 +1,7 @@
 import { PageHeader } from "@/shared/components/groups/main-header";
 import { Paper, Tabs } from "@mantine/core";
 import { TaskForm } from "../components/TaskForm";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { TaskTemplateSelector } from "../components/TaskTemplateSelector";
 import { taskTemplates, applyTemplate } from "../data/taskTemplates";
@@ -13,14 +13,17 @@ export const EntityCreate = () => {
   const [activeTab, setActiveTab] = useState<string>("blank");
   const [selectedTemplate, setSelectedTemplate] = useState<string>();
 
-  const handleTemplateChange = (templateId: string) => {
-    setSelectedTemplate(templateId);
-    const template = taskTemplates.find(t => t.id === templateId);
+  const templateValues = useMemo(() => {
+    if (!selectedTemplate) return undefined;
+    const template = taskTemplates.find(t => t.id === selectedTemplate);
     if (template) {
-      const initialValues = applyTemplate(template);
-      return initialValues as Partial<Task>;
+      return applyTemplate(template) as Partial<Task>;
     }
     return undefined;
+  }, [selectedTemplate]);
+
+  const handleTemplateChange = (templateId: string) => {
+    setSelectedTemplate(templateId);
   };
 
   return (
@@ -48,7 +51,7 @@ export const EntityCreate = () => {
           {selectedTemplate && (
             <TaskForm
               mode="create"
-              initialValues={handleTemplateChange(selectedTemplate)}
+              initialValues={templateValues}
             />
           )}
         </Tabs.Panel>

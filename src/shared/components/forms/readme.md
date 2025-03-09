@@ -4,16 +4,16 @@ A powerful and flexible form building system built on top of React Hook Form, Ma
 
 ## Features
 
-- 🎯 **Dynamic Form Generation**: Build forms dynamically using a declarative configuration
-- 🔍 **Field Types**: Rich set of field types including text, number, date, select, multiselect, checkbox, radio, and more
-- ✨ **Form Wizard**: Multi-step form support with progress tracking
-- 🔄 **Repeatable Fields**: Support for array/repeatable field groups with drag-and-drop reordering
-- 🎭 **Field Dependencies**: Complex field relationships and conditional rendering
-- ✅ **Validation**: Built-in validation using Zod with support for custom validation rules
-- 📝 **Field Masking**: Input masking for formatted data entry
-- 💾 **Form Persistence**: Automatic form state persistence with localStorage
-- 🎨 **Flexible Layouts**: Grid, stack, and section-based layouts with customizable styling
-- 🔌 **Extensible**: Easy to add custom field types and behaviors
+- 🎯 **Dynamic Form Generation**: Build forms declaratively with a simple schema-based configuration
+- 🔍 **Rich Field Types**: Built-in support for common field types with consistent behavior
+- ✨ **Form Wizard**: Multi-step forms with validation and navigation
+- 🔄 **Repeatable Fields**: Array fields with drag-and-drop reordering
+- 🎭 **Field Dependencies**: Declarative field relationships and conditional rendering
+- ✅ **Validation**: First-class Zod integration with custom validation support
+- 📝 **Field Masking**: Built-in masks for common formats (phone, currency, etc.)
+- 💾 **Form Persistence**: Auto-save form state with customizable storage
+- 🎨 **Flexible Layouts**: Grid, stack, and section-based layouts
+- 🔌 **Extensible**: Register custom field types with full TypeScript support
 
 ## Installation
 
@@ -24,10 +24,10 @@ npm install @mantine/core @mantine/hooks @hookform/resolvers react-hook-form zod
 ## Basic Usage
 
 ```tsx
-import { FormBuilder } from './components/forms';
+import { FormBuilder, FormFields } from './components/forms';
 import { z } from 'zod';
 
-// Define your form schema
+// Define your validation schema
 const schema = z.object({
   name: z.string().min(3, 'Name must be at least 3 characters'),
   email: z.string().email('Invalid email address'),
@@ -38,27 +38,32 @@ const schema = z.object({
 const fields = [
   { 
     name: 'name',
-    label: 'Full Name',
     type: 'text',
-    placeholder: 'Enter your name'
+    label: 'Full Name',
+    placeholder: 'Enter your name',
+    // Optional: Add client-side validation
+    validation: {
+      required: 'Name is required'
+    }
   },
   {
     name: 'email',
-    label: 'Email',
     type: 'email',
+    label: 'Email',
     placeholder: 'Enter your email'
   },
   {
     name: 'age',
-    label: 'Age',
     type: 'number',
-    placeholder: 'Enter your age'
+    label: 'Age',
+    placeholder: 'Enter your age',
+    // Optional: Transform value before submission
+    transform: (value: string) => parseInt(value, 10)
   }
 ];
 
-// Use the FormBuilder
 const MyForm = () => {
-  const handleSubmit = (data) => {
+  const handleSubmit = async (data) => {
     console.log('Form submitted:', data);
   };
 
@@ -66,11 +71,14 @@ const MyForm = () => {
     <FormBuilder
       schema={schema}
       onSubmit={handleSubmit}
+      // Optional: Enable form state persistence
+      persistData
+      id="my-form"
     >
       <FormFields
         fields={fields}
         layout="grid"
-        columns={2}
+        columns={{ base: 12, md: 6 }}
       />
     </FormBuilder>
   );
@@ -79,20 +87,73 @@ const MyForm = () => {
 
 ## Advanced Features
 
+### Custom Field Types
+
+Register custom field types with full type safety:
+
+```tsx
+import { registry } from './utils/field-registry';
+
+// Create your custom field component
+const MyCustomField = (props: EditorProps) => {
+  // Your implementation
+};
+
+// Register the field type
+registry.register('custom-field', {
+  editor: MyCustomField,
+  view: MyCustomField,
+  parse: (value) => value,
+  format: (value) => value
+});
+
+// Update type definitions
+declare module './form-builder.types' {
+  interface FieldType {
+    'custom-field': typeof MyCustomField;
+  }
+}
+```
+
+### Field Dependencies
+
+Create dynamic form behavior:
+
+```tsx
+const fields = [
+  {
+    name: 'hasAddress',
+    type: 'checkbox',
+    label: 'Do you have a different mailing address?'
+  },
+  {
+    name: 'address',
+    type: 'textarea',
+    label: 'Mailing Address',
+    dependencies: ['hasAddress'],
+    validate: ([hasAddress]) => hasAddress === true
+  }
+];
+```
+
 ### Form Wizard
 
-Create multi-step forms with progress tracking:
+Create multi-step forms:
 
 ```tsx
 const steps = [
   {
     id: 'personal',
     title: 'Personal Info',
-    description: 'Basic information',
     fields: [
       { name: 'name', type: 'text', label: 'Name' },
       { name: 'email', type: 'email', label: 'Email' }
-    ]
+    ],
+    // Optional: Add step validation
+    validate: async (data) => {
+      // Validate step data
+      return true;
+    }
   },
   {
     id: 'address',
@@ -114,124 +175,117 @@ const steps = [
 
 ### Repeatable Fields
 
-Create dynamic field arrays with drag-and-drop support:
+Create dynamic field arrays:
 
 ```tsx
 const fields = [
   {
     name: 'items',
     type: 'repeatable',
-    fields: [
-      { name: 'name', type: 'text', label: 'Item Name' },
-      { name: 'quantity', type: 'number', label: 'Quantity' }
-    ],
+    label: 'Line Items',
     min: 1,
-    max: 5
+    max: 10,
+    fields: [
+      { name: 'description', type: 'text', label: 'Description' },
+      { name: 'quantity', type: 'number', label: 'Quantity' },
+      { name: 'price', type: 'number', label: 'Price' }
+    ]
   }
 ];
-```
-
-### Field Dependencies
-
-Create dynamic form behavior based on field values:
-
-```tsx
-const dependencies = [
-  {
-    sourceField: 'hasAddress',
-    targetField: 'address',
-    rule: value => value === true,
-    effect: 'show'
-  }
-];
-
-<FormBuilder
-  schema={schema}
-  fields={fields}
-  dependencies={dependencies}
-/>
 ```
 
 ### Field Masking
 
-Apply input masks for formatted data entry:
+Apply input masks:
 
 ```tsx
 const fields = [
   {
     name: 'phone',
-    type: 'text',
-    label: 'Phone',
-    mask: '(###) ###-####'
+    type: 'phone',
+    label: 'Phone Number',
+    // Built-in phone mask will be applied
   },
   {
-    name: 'creditCard',
-    type: 'text',
-    label: 'Credit Card',
-    mask: '#### #### #### ####'
+    name: 'amount',
+    type: 'number',
+    label: 'Amount',
+    // Custom mask
+    mask: {
+      parse: (value: string) => Number(value.replace(/[^0-9.-]/g, '')),
+      format: (value: number) => value.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      })
+    }
   }
 ];
 ```
 
-## Customization
+### Validation Composition
 
-### Adding Custom Field Types
-
-1. Create your custom field component
-2. Add it to the fields registry
-3. Update the field type definitions
+Use the validation composer for clean, chainable validation rules:
 
 ```tsx
-// Custom field component
-const MyCustomField = (props) => {
-  // Your implementation
-};
+import { validate } from './components/forms';
 
-// Add to fields registry
-fields.custom = {
-  editor: MyCustomField,
-  view: MyCustomField,
-  parse: value => value,
-  format: value => value
-};
-
-// Update type definitions
-type FieldType = 
-  | 'text'
-  | 'number'
-  // ... other types
-  | 'custom';
-```
-
-### Styling
-
-The form components use Mantine's theming system. You can customize the appearance by:
-
-1. Using Mantine's theme provider
-2. Passing style props to individual components
-3. Using CSS modules or styled-components
-
-```tsx
-<MantineProvider theme={{
-  components: {
-    FormBuilder: {
-      styles: {
-        // Your custom styles
-      }
-    }
+const fields = [
+  {
+    name: 'email',
+    type: 'email',
+    label: 'Email',
+    validation: validate()
+      .required('Email is required')
+      .email()
+      .toRules()
+  },
+  {
+    name: 'password',
+    type: 'password',
+    label: 'Password',
+    validation: validate()
+      .required('Password is required')
+      .minLength(8, 'Password must be at least 8 characters')
+      .pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/,
+        'Password must contain uppercase, lowercase and numbers'
+      )
+      .toRules()
+  },
+  {
+    name: 'confirmPassword',
+    type: 'password',
+    label: 'Confirm Password',
+    validation: validate()
+      .required('Please confirm your password')
+      .dependsOn('password')
+      .custom((value, form) => value === form.password || 'Passwords must match')
+      .toRules()
   }
-}}>
-  <FormBuilder {...props} />
-</MantineProvider>
+];
 ```
 
 ## Best Practices
 
-1. **Validation**: Define comprehensive validation rules using Zod schemas
-2. **Field Dependencies**: Keep dependency rules simple and maintainable
-3. **Performance**: Use memoization for complex computed values
-4. **Accessibility**: Ensure proper ARIA attributes and keyboard navigation
-5. **Error Handling**: Implement proper error boundaries and user feedback
+1. **Schema Validation**
+   - Define comprehensive Zod schemas for type-safe validation
+   - Use schema transformations for data formatting
+
+2. **Field Dependencies**
+   - Keep dependency rules simple and declarative
+   - Use the validate function for complex conditions
+
+3. **Performance**
+   - Fields are automatically memoized for optimal rendering
+   - Use section groups for better organization
+
+4. **Type Safety**
+   - Leverage TypeScript for better developer experience
+   - Register custom field types with proper typing
+
+5. **Error Handling**
+   - Implement form-level error handling
+   - Use field-level error messages for better UX
 
 ## Contributing
 

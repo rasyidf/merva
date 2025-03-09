@@ -4,11 +4,10 @@ import { useNavigationItems } from "@/shared/services/features/utils";
 import { APP_NAME_SHORT, APP_VERSION } from "@/shared/utils/constants";
 import { ActionIcon, AppShell, Box, Flex, FloatingIndicator, ScrollArea, Stack, Text, Title, Tooltip } from "@mantine/core";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import classes from "./main-navbar.module.css";
 import { NavItems } from "./utils";
 import clsx from "clsx";
-import { NavigationConfig } from "@/shared/types";
 
 interface MainNavbarProps {
   expanded: boolean;
@@ -24,13 +23,29 @@ export function MainNavbar({ expanded, toggle, collapseOnClick }: Readonly<MainN
   const [controlRefs, setControlRefs] = useState<Record<string, HTMLElement | null>>({});
   const [activeItemPath, setActiveItemPath] = useState(pathname);
 
-  // Separate navigation items by placement
-  const topNavItems = navItems.filter(item => !item.placement || item.placement === 'top');
-  const bottomNavItems = navItems.filter(item => item.placement === 'bottom');
+  // Memoize navigation items to prevent unnecessary re-renders
+  const { topNavItems, bottomNavItems } = useMemo(() => ({
+    topNavItems: navItems.filter(item => !item.placement || item.placement === 'top'),
+    bottomNavItems: navItems.filter(item => item.placement === 'bottom')
+  }), [navItems]);
+
+  // Memoize the control refs setter to prevent unnecessary re-renders
+  const handleSetControlRefs = useCallback((refs: Record<string, HTMLElement | null>) => {
+    setControlRefs(prev => {
+      // Only update if refs have actually changed
+      const hasChanges = Object.entries(refs).some(
+        ([key, value]) => prev[key] !== value
+      );
+      return hasChanges ? refs : prev;
+    });
+  }, []);
 
   useEffect(() => {
-    setActiveItemPath(pathname);
-  }, [pathname]);
+    // Only update active path if it's different from current pathname
+    if (activeItemPath !== pathname) {
+      setActiveItemPath(pathname);
+    }
+  }, [pathname, activeItemPath]);
 
   return (
     <Flex h="100%" direction="column">
@@ -59,9 +74,9 @@ export function MainNavbar({ expanded, toggle, collapseOnClick }: Readonly<MainN
       <AppShell.Section grow component={ScrollArea} className={classes.scrollArea}>
         <Stack gap={4} px="xs" className={classes.navRoot} ref={rootRef}>
           {rootRef.current && controlRefs[activeItemPath] && (
-            <FloatingIndicator
+            <FloatingIndicator 
               target={controlRefs[activeItemPath]}
-              parent={rootRef.current} 
+              parent={rootRef.current}
               className={classes.navIndicator}
             />
           )}
@@ -73,12 +88,11 @@ export function MainNavbar({ expanded, toggle, collapseOnClick }: Readonly<MainN
             collapseOnClick={collapseOnClick}
             toggle={toggle}
             controlRefs={controlRefs}
-            setControlRefs={setControlRefs}
+            setControlRefs={handleSetControlRefs}
           />
         </Stack>
       </AppShell.Section>
 
-      {/* Bottom Navigation Section */}
       {bottomNavItems.length > 0 && (
         <AppShell.Section py="xs">
           <Stack gap={4} px="xs">
@@ -90,7 +104,7 @@ export function MainNavbar({ expanded, toggle, collapseOnClick }: Readonly<MainN
               collapseOnClick={collapseOnClick}
               toggle={toggle}
               controlRefs={controlRefs}
-              setControlRefs={setControlRefs}
+              setControlRefs={handleSetControlRefs}
             />
           </Stack>
         </AppShell.Section>

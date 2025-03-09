@@ -1,9 +1,10 @@
-import { useTranslation } from "react-i18next";
-import { Accordion, Button, Group, Paper, Stack } from "@mantine/core";
-import { categories, labels, statuses, teams, userRoles } from "@/shared/utils/constants/data";
-import { useForm, type SubmitHandler } from "react-hook-form";
+
+import { DatePickerInput, MultiSelect, NumberInput, TextInput } from "@/shared/components/forms/components";
 import { SvgIcon } from "@/shared/components/ui/icon";
-import { DatePickerInput, MultiSelect, NumberInput, TextInput } from "@/shared/components/forms";
+import { categories, labels, statuses, teams, userRoles } from "@/shared/utils/constants/data";
+import { Accordion, Button, Group, Paper, Stack } from "@mantine/core";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface TaskFilterProps {
   onFilter: (filters: Record<string, any>) => void;

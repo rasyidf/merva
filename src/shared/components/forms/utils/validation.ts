@@ -117,12 +117,13 @@ export const createFieldValidator = (rules: ValidationRules & { type?: FieldType
 
   if (typeof rules.validate === 'function') {
     schema = schema.superRefine((val, ctx) => {
-      const result = rules.validate!(val);
+      const result = rules.validate!(val, ctx);
       if (!result) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: typeof result === 'string' ? result : 'Validation failed'
+          message: 'This field is required'
         });
+        return;
       }
     });
   }

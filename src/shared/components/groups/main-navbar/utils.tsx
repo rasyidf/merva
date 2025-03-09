@@ -17,6 +17,17 @@ interface NavItemsProps {
   level?: number;
 }
 
+type GroupConfig = {
+  items: NavigationConfig[];
+  config: {
+    groupLabel?: string;
+    groupIcon?: string | React.ReactNode;
+    groupOrder?: number;
+  };
+};
+
+type GroupedItems = [string, GroupConfig][];
+
 export const NavItems: FC<NavItemsProps> = ({
   navItems,
   pathname,
@@ -30,31 +41,39 @@ export const NavItems: FC<NavItemsProps> = ({
 }) => {
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
 
-  const groupedItems = useMemo(() => {
-    const groups: Record<string, { items: NavigationConfig[], config: Partial<NavigationConfig> }> = {};
-    
-    navItems.forEach(item => {
-      if (item.visible === false || item.disabled) return;
+  // Memoize grouped items to prevent unnecessary recalculations
+  const groupedItems = useMemo<GroupedItems>(() => {
+    // For top level only, handle feature groups
+    if (level === 0) {
+      const groups: Record<string, GroupConfig> = {};
       
-      const groupKey = item.group || 'default';
-      if (!groups[groupKey]) {
-        groups[groupKey] = {
-          items: [],
-          config: {
-            groupLabel: item.groupLabel,
-            groupIcon: item.groupIcon,
-            groupOrder: item.groupOrder
-          }
-        };
-      }
-      groups[groupKey].items.push(item);
-    });
+      navItems.forEach(item => {
+        if (item.visible === false || item.disabled) return;
+        
+        const groupKey = item.group || 'default';
+        if (!groups[groupKey]) {
+          groups[groupKey] = {
+            items: [],
+            config: {
+              groupLabel: item.groupLabel,
+              groupIcon: item.groupIcon,
+              groupOrder: item.groupOrder
+            }
+          };
+        }
+        groups[groupKey].items.push(item);
+      });
 
-    return Object.entries(groups).sort(([,a], [,b]) => 
-      (a.config.groupOrder || 0) - (b.config.groupOrder || 0)
-    );
-  }, [navItems]);
+      return Object.entries(groups).sort(([,a], [,b]) => 
+        (a.config.groupOrder || 0) - (b.config.groupOrder || 0)
+      );
+    }
 
+    // For nested levels, don't process groups
+    return [['default', { items: navItems, config: {} }]];
+  }, [navItems, level]);
+
+  // Memoize the ref handler
   const handleRef = useCallback((path: string) => (node: HTMLElement | null) => {
     if (node) {
       const newRefs = { ...controlRefs };
@@ -70,20 +89,22 @@ export const NavItems: FC<NavItemsProps> = ({
       {groupedItems.map(([groupKey, { items, config }]) => {
         if (items.length === 0) return null;
 
-        const groupContent = items.map((item) => {
-          const childPaths = item.children?.map((child) => child.path) ?? [];
+        const groupContent = items.map((item: NavigationConfig) => {
+          const childPaths = item.children?.map((child: NavigationConfig) => child.path) ?? [];
           const isItemExpanded = expandedItems[item.id] ?? false;
-          const isActive = pathname === item.path || pathname.startsWith(item?.path ?? "#") || childPaths.some(path => pathname.startsWith(path ?? "#"));
+          const isActive = pathname === item.path || 
+                          pathname.startsWith(item?.path ?? "#") || 
+                          childPaths.some((path: string | undefined) => pathname.startsWith(path ?? "#"));
           const hasChildren = (item.children?.length ?? 0) > 0;
 
-          const handleClick = () => {
+          const handleClick = useCallback(() => {
             if (hasChildren) {
               setExpandedItems(prev => ({ ...prev, [item.id]: !prev[item.id] }));
             } else if (item.path) {
               navigate(item.path);
               if (collapseOnClick) toggle?.();
             }
-          };
+          }, [item.id, item.path, hasChildren]);
 
           const icon = useMemo(() => (
             typeof item.icon === "string" ? (
@@ -127,9 +148,9 @@ export const NavItems: FC<NavItemsProps> = ({
                 children: classes.linkChildren
               }}
             >
-              {(navBarExpanded || level > 0) && item.children && item.children.length > 0 && (
+              {(navBarExpanded || level > 0) && hasChildren && item.children && (
                 <NavItems
-                  navItems={item.children.filter(child => child.visible !== false && !child.disabled)}
+                  navItems={item.children}
                   pathname={pathname}
                   navigate={navigate}
                   expanded={navBarExpanded}
@@ -157,9 +178,9 @@ export const NavItems: FC<NavItemsProps> = ({
               <Menu.Target>
                 {navLink}
               </Menu.Target>
-              
+
               <Menu.Dropdown>
-                {item.children?.map(child => (
+                {item.children?.map((child: NavigationConfig) => (
                   <Menu.Item
                     key={child.id}
                     leftSection={
@@ -188,9 +209,10 @@ export const NavItems: FC<NavItemsProps> = ({
           ) : navLink;
         });
 
+        // Only show group labels at the top level
         return (
-          <Stack key={groupKey} gap={2}>
-            {config.groupLabel && navBarExpanded && (
+          <Stack key={`group-${groupKey}`} gap={2}>
+            {level === 0 && groupKey !== 'default' && config.groupLabel && navBarExpanded && (
               <Text className={classes.groupLabel}>
                 {config.groupIcon && typeof config.groupIcon === 'string' && (
                   <SvgIcon 

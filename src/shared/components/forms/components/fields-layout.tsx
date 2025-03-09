@@ -1,7 +1,7 @@
-import { Grid, Paper, Stack, Title } from "@mantine/core";
-import type { MetaField } from "../form-builder.types";
-import { RenderField } from "../form-builder.render-field";
 import { toTitleCase } from "@/shared/utils";
+import { Grid, Paper, Stack, Title } from "@mantine/core";
+import { RenderField } from "../form-builder.render-field";
+import type { MetaField } from "../form-builder.types";
 
 interface FieldsLayoutProps {
   fields: MetaField[];

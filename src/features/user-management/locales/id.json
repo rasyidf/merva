@@ -1,0 +1,141 @@
+{
+  "user_management": {
+    "title": "Manajemen Pengguna",
+    "subtitle": "Kelola pengguna dan izin akses mereka",
+
+    "users": {
+      "list": {
+        "title": "Pengguna",
+        "search_placeholder": "Cari pengguna...",
+        "filter_by_status": "Filter berdasarkan status",
+        "add_user": "Tambah Pengguna",
+        "no_users_found": "Tidak ada pengguna ditemukan.",
+        "loading": "Memuat pengguna..."
+      },
+      "create": {
+        "title": "Buat Pengguna",
+        "subtitle": "Tambahkan pengguna baru ke sistem"
+      },
+      "details": {
+        "title": "Detail Pengguna",
+        "subtitle": "Lihat informasi tentang {{name}}",
+        "edit_user": "Edit Pengguna",
+        "delete_user": "Hapus Pengguna",
+        "basic_info": "Informasi Dasar",
+        "work_info": "Informasi Pekerjaan",
+        "roles_permissions": "Peran & Izin",
+        "assigned_roles": "Peran yang Ditetapkan",
+        "no_roles_assigned": "Tidak ada peran yang ditetapkan",
+        "not_provided": "Tidak disediakan",
+        "never": "Tidak pernah",
+        "not_assigned": "Tidak ditugaskan",
+        "no_bio": "Tidak ada bio yang disediakan"
+      },
+      "edit": {
+        "title": "Edit Pengguna",
+        "subtitle": "Edit informasi untuk {{name}}"
+      },
+      "delete": {
+        "title": "Konfirmasi penghapusan",
+        "message": "Apakah Anda yakin ingin menghapus pengguna ini? Tindakan ini tidak dapat dibatalkan."
+      },
+      "back_to_users": "Kembali ke Pengguna"
+    },
+
+    "roles": {
+      "list": {
+        "title": "Manajemen Peran",
+        "subtitle": "Kelola peran dan izin mereka",
+        "search_placeholder": "Cari peran...",
+        "add_role": "Tambah Peran",
+        "no_roles_found": "Tidak ada peran ditemukan.",
+        "loading": "Memuat peran..."
+      },
+      "create": {
+        "title": "Buat Peran",
+        "subtitle": "Tambahkan peran baru dengan izin tertentu"
+      },
+      "details": {
+        "title": "Detail Peran",
+        "subtitle": "Lihat informasi tentang peran {{name}}",
+        "edit_role": "Edit Peran",
+        "delete_role": "Hapus Peran",
+        "system_role": "Peran Sistem (Hanya Baca)",
+        "no_description": "Tidak ada deskripsi yang disediakan",
+        "created": "Dibuat",
+        "updated": "Terakhir diperbarui",
+        "permissions": "Izin",
+        "permission": "Izin",
+        "action": "Tindakan",
+        "description": "Deskripsi",
+        "no_permissions": "Peran ini tidak memiliki izin yang ditetapkan."
+      },
+      "edit": {
+        "title": "Edit Peran",
+        "subtitle": "Edit informasi untuk peran {{name}}"
+      },
+      "delete": {
+        "title": "Konfirmasi penghapusan",
+        "message": "Apakah Anda yakin ingin menghapus peran ini? Pengguna yang ditetapkan ke peran ini akan kehilangan izin ini. Tindakan ini tidak dapat dibatalkan."
+      },
+      "system_role": {
+        "edit_title": "Tidak Dapat Mengedit Peran Sistem",
+        "edit_message": "Ini adalah peran yang ditentukan oleh sistem dan tidak dapat diedit. Peran sistem sangat penting untuk fungsi aplikasi yang benar.",
+        "delete_title": "Tidak Dapat Menghapus Peran Sistem",
+        "delete_message": "Ini adalah peran yang ditentukan oleh sistem dan tidak dapat dihapus. Peran sistem sangat penting untuk fungsi aplikasi yang benar."
+      },
+      "back_to_roles": "Kembali ke Peran"
+    },
+
+    "form": {
+      "user": {
+        "username": "Nama Pengguna",
+        "username_placeholder": "Masukkan nama pengguna",
+        "email": "Email",
+        "email_placeholder": "Masukkan alamat email",
+        "fullName": "Nama Lengkap",
+        "fullName_placeholder": "Masukkan nama lengkap",
+        "password": "Kata Sandi",
+        "password_placeholder": "Masukkan kata sandi",
+        "new_password": "Kata Sandi Baru",
+        "confirm_password": "Konfirmasi Kata Sandi",
+        "confirm_password_placeholder": "Konfirmasi kata sandi",
+        "change_password": "Ubah Kata Sandi",
+        "cancel_password_change": "Batalkan Perubahan Kata Sandi",
+        "phone": "Nomor Telepon",
+        "phone_placeholder": "Masukkan nomor telepon",
+        "department": "Departemen",
+        "department_placeholder": "Pilih departemen",
+        "position": "Jabatan",
+        "position_placeholder": "Masukkan jabatan",
+        "status": "Status",
+        "status_placeholder": "Pilih status pengguna",
+        "roles": "Peran",
+        "roles_placeholder": "Pilih peran pengguna",
+        "bio": "Bio",
+        "bio_placeholder": "Masukkan bio pengguna",
+        "create_user": "Buat Pengguna",
+        "update_user": "Perbarui Pengguna"
+      },
+      "role": {
+        "name": "Nama Peran",
+        "name_placeholder": "Masukkan nama peran",
+        "description": "Deskripsi",
+        "description_placeholder": "Masukkan deskripsi peran",
+        "permissions": "Izin",
+        "permissions_description": "Pilih izin untuk peran ini",
+        "permissions_placeholder": "Pilih izin",
+        "create_role": "Buat Peran",
+        "update_role": "Perbarui Peran"
+      }
+    },
+
+    "status": {
+      "active": "Aktif",
+      "inactive": "Tidak Aktif",
+      "pending": "Tertunda",
+      "suspended": "Ditangguhkan",
+      "all": "Semua status"
+    }
+  }
+}

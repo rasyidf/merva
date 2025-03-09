@@ -1,0 +1,141 @@
+{
+  "user_management": {
+    "title": "User Management",
+    "subtitle": "Manage users and their access permissions",
+
+    "users": {
+      "list": {
+        "title": "Users",
+        "search_placeholder": "Search users...",
+        "filter_by_status": "Filter by status",
+        "add_user": "Add User",
+        "no_users_found": "No users found.",
+        "loading": "Loading users..."
+      },
+      "create": {
+        "title": "Create User",
+        "subtitle": "Add a new user to the system"
+      },
+      "details": {
+        "title": "User Details",
+        "subtitle": "View information about {{name}}",
+        "edit_user": "Edit User",
+        "delete_user": "Delete User",
+        "basic_info": "Basic Information",
+        "work_info": "Work Information",
+        "roles_permissions": "Roles & Permissions",
+        "assigned_roles": "Assigned Roles",
+        "no_roles_assigned": "No roles assigned",
+        "not_provided": "Not provided",
+        "never": "Never",
+        "not_assigned": "Not assigned",
+        "no_bio": "No bio provided"
+      },
+      "edit": {
+        "title": "Edit User",
+        "subtitle": "Edit information for {{name}}"
+      },
+      "delete": {
+        "title": "Confirm deletion",
+        "message": "Are you sure you want to delete this user? This action cannot be undone."
+      },
+      "back_to_users": "Back to Users"
+    },
+
+    "roles": {
+      "list": {
+        "title": "Role Management",
+        "subtitle": "Manage roles and their permissions",
+        "search_placeholder": "Search roles...",
+        "add_role": "Add Role",
+        "no_roles_found": "No roles found.",
+        "loading": "Loading roles..."
+      },
+      "create": {
+        "title": "Create Role",
+        "subtitle": "Add a new role with specific permissions"
+      },
+      "details": {
+        "title": "Role Details",
+        "subtitle": "View information about the {{name}} role",
+        "edit_role": "Edit Role",
+        "delete_role": "Delete Role",
+        "system_role": "System Role (Read Only)",
+        "no_description": "No description provided",
+        "created": "Created",
+        "updated": "Last updated",
+        "permissions": "Permissions",
+        "permission": "Permission",
+        "action": "Action",
+        "description": "Description",
+        "no_permissions": "This role has no assigned permissions."
+      },
+      "edit": {
+        "title": "Edit Role",
+        "subtitle": "Edit information for {{name}} role"
+      },
+      "delete": {
+        "title": "Confirm deletion",
+        "message": "Are you sure you want to delete this role? Users assigned to this role will lose these permissions. This action cannot be undone."
+      },
+      "system_role": {
+        "edit_title": "Cannot Edit System Role",
+        "edit_message": "This is a system-defined role and cannot be edited. System roles are essential for the application to function correctly.",
+        "delete_title": "Cannot Delete System Role",
+        "delete_message": "This is a system-defined role and cannot be deleted. System roles are essential for the application to function correctly."
+      },
+      "back_to_roles": "Back to Roles"
+    },
+
+    "form": {
+      "user": {
+        "username": "Username",
+        "username_placeholder": "Enter username",
+        "email": "Email",
+        "email_placeholder": "Enter email address",
+        "fullName": "Full Name",
+        "fullName_placeholder": "Enter full name",
+        "password": "Password",
+        "password_placeholder": "Enter password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "confirm_password_placeholder": "Confirm password",
+        "change_password": "Change Password",
+        "cancel_password_change": "Cancel Password Change",
+        "phone": "Phone Number",
+        "phone_placeholder": "Enter phone number",
+        "department": "Department",
+        "department_placeholder": "Select department",
+        "position": "Position",
+        "position_placeholder": "Enter position",
+        "status": "Status",
+        "status_placeholder": "Select user status",
+        "roles": "Roles",
+        "roles_placeholder": "Select user roles",
+        "bio": "Bio",
+        "bio_placeholder": "Enter user bio",
+        "create_user": "Create User",
+        "update_user": "Update User"
+      },
+      "role": {
+        "name": "Role Name",
+        "name_placeholder": "Enter role name",
+        "description": "Description",
+        "description_placeholder": "Enter role description",
+        "permissions": "Permissions",
+        "permissions_description": "Select permissions for this role",
+        "permissions_placeholder": "Select permissions",
+        "create_role": "Create Role",
+        "update_role": "Update Role"
+      }
+    },
+
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "suspended": "Suspended",
+      "all": "All statuses"
+    }
+  }
+}
