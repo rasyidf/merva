@@ -40,8 +40,38 @@
     }
 
     :root {
+      --logo-size: 64px;
+      --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
       font-family: 'Inter', sans-serif;
       --theme-color: #3a7fc4;
+    }
+
+    .loadingSpinner {
+      --logo-size: 32px;
+      --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
+      position: absolute;
+      z-index: 2;
+      top: 60%;
+      left: 50%;
+      margin: var(--logo-margin) 0 0 var(--logo-margin);
+      width: var(--logo-size);
+      height: var(--logo-size);
+    }
+
+    .loadingLogo {
+      --logo-size: 64px;
+      --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
+      position: absolute;
+      top: 44%;
+      left: 50%;
+      margin: var(--logo-margin) 0 0 var(--logo-margin);
+      width: var(--logo-size);
+      height: var(--logo-size);
+    }
+
+    .loadingSpinner .path {
+      stroke: var(--theme-color);
+      stroke-linecap: round;
     }
   </style>
 </head>
@@ -56,34 +86,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-      }
-
-      .loadingSpinner {
-        --logo-size: 32px;
-        --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
-        position: absolute;
-        z-index: 2;
-        top: 60%;
-        left: 50%;
-        margin: var(--logo-margin) 0 0 var(--logo-margin);
-        width: var(--logo-size);
-        height: var(--logo-size);
-      }
-
-      .loadingLogo {
-        --logo-size: 64px;
-        --logo-margin: calc(calc(var(--logo-size) / 2) * -1);
-        position: absolute;
-        top: 44%;
-        left: 50%;
-        margin: var(--logo-margin) 0 0 var(--logo-margin);
-        width: var(--logo-size);
-        height: var(--logo-size);
-      }
-
-      .loadingSpinner .path {
-        stroke: var(--theme-color);
-        stroke-linecap: round;
       }
     </style>
 
