@@ -51,7 +51,7 @@ export const AppearanceTab = () => {
                 { value: 'light', label: 'Light Theme' },
                 { value: 'dark', label: 'Dark Theme' },
               ]}
-              {...form.register('theme')}
+              // {...form.register('theme')}
             />
           </FormField>
           <FormField>
@@ -64,14 +64,14 @@ export const AppearanceTab = () => {
                 { value: 'purple', label: 'Purple' },
                 { value: 'orange', label: 'Orange' },
               ]}
-              {...form.register('colorScheme')}
+              // {...form.register('colorScheme')}
             />
           </FormField>
           <FormField>
             <ColorInput 
               label="Accent Color" 
               placeholder="Pick a color"
-              {...form.register('accentColor')}
+              // {...form.register('accentColor')}
             />
           </FormField>
         </SettingsFormGrid>
@@ -88,7 +88,7 @@ export const AppearanceTab = () => {
                 { value: 'compact', label: 'Compact' },
                 { value: 'spacious', label: 'Spacious' },
               ]}
-              {...form.register('density')}
+              // {...form.register('density')}
             />
           </FormField>
           <FormField>
@@ -100,7 +100,7 @@ export const AppearanceTab = () => {
                 { value: 'medium', label: 'Medium (Default)' },
                 { value: 'large', label: 'Large' },
               ]}
-              {...form.register('fontSize')}
+              // {...form.register('fontSize')}
             />
           </FormField>
         </SettingsFormGrid>

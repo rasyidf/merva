@@ -48,7 +48,7 @@ export const OtherTab = () => {
                 { value: 'fr', label: 'French' },
                 { value: 'de', label: 'German' },
               ]}
-              {...form.register('language')}
+              // {...form.register('language')}
             />
           </FormField>
           <FormField>
@@ -61,7 +61,7 @@ export const OtherTab = () => {
                 { value: 'CST', label: 'Central Time' },
                 { value: 'PST', label: 'Pacific Time' },
               ]}
-              {...form.register('timezone')}
+              // {...form.register('timezone')}
             />
           </FormField>
         </SettingsFormGrid>
@@ -78,7 +78,7 @@ export const OtherTab = () => {
                 { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY' },
                 { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD' },
               ]}
-              {...form.register('dateFormat')}
+              // {...form.register('dateFormat')}
             />
           </FormField>
           <FormField>
@@ -89,7 +89,7 @@ export const OtherTab = () => {
                 { value: '12h', label: '12-hour (AM/PM)' },
                 { value: '24h', label: '24-hour' },
               ]}
-              {...form.register('timeFormat')}
+              // {...form.register('timeFormat')}
             />
           </FormField>
           <FormField fullWidth>
@@ -101,7 +101,7 @@ export const OtherTab = () => {
                 { value: 'weekly', label: 'Weekly Digest' },
                 { value: 'never', label: 'Never' },
               ]}
-              {...form.register('emailFrequency')}
+              // {...form.register('emailFrequency')}
             />
           </FormField>
         </SettingsFormGrid>

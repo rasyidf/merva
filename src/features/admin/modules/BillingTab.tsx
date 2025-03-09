@@ -242,8 +242,8 @@ export const BillingTab = () => {
                   { value: 'paypal', label: 'PayPal' },
                   { value: 'bank-transfer', label: 'Bank Transfer' },
                 ]}
-                leftSection={<SvgIcon name="credit-card" />}
-                {...form.register('paymentMethod')}
+                leftSection={<SvgIcon name="creditCard" />}
+                // {...form.register('paymentMethod')}
               />
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 6 }}>
@@ -316,7 +316,7 @@ export const BillingTab = () => {
                   { value: 'UK', label: 'United Kingdom' },
                   { value: 'AU', label: 'Australia' },
                 ]}
-                {...form.register('billingCountry')}
+                // {...form.register('billingCountry')}
               />
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 6 }}>
@@ -372,7 +372,7 @@ export const BillingTab = () => {
                     </Tooltip>
                     <Tooltip label="Download PDF">
                       <ActionIcon variant="subtle" color="gray">
-                        <SvgIcon name="file-down" />
+                        <SvgIcon name="fileDown" />
                       </ActionIcon>
                     </Tooltip>
                   </Group>

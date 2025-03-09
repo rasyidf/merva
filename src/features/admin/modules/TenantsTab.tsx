@@ -312,7 +312,7 @@ export const TenantsTab = () => {
                                                 <Menu.Divider />
                                                 {tenant.status !== 'suspended' ? (
                                                     <Menu.Item
-                                                        leftSection={<SvgIcon name="circleX" />}
+                                                        leftSection={<SvgIcon name="xCircle" />}
                                                         color="yellow"
                                                         onClick={() => handleSuspendTenant(tenant)}
                                                     >

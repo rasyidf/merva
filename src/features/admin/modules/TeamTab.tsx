@@ -350,13 +350,13 @@ export const TeamTab = () => {
               placeholder="Select a role"
               data={roleOptions}
               required
-              {...inviteForm.register('role')}
+              // {...inviteForm.register('role')}
             />
             <MultiSelect
               label="Permissions"
               placeholder="Select permissions"
               data={availablePermissions}
-              {...inviteForm.register('permissions')}
+              // {...inviteForm.register('permissions')}
             />
             <Divider my="sm" />
             <Group justify="flex-end" mt="md">
@@ -394,13 +394,13 @@ export const TeamTab = () => {
                 placeholder="Select a role"
                 data={roleOptions}
                 required
-                {...editForm.register('role')}
+                // {...editForm.register('role')}
               />
               <MultiSelect
                 label="Permissions"
                 placeholder="Select permissions"
                 data={availablePermissions}
-                {...editForm.register('permissions')}
+                // {...editForm.register('permissions')}
               />
               <Divider my="sm" />
               <Group justify="flex-end" mt="md">
