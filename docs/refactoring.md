@@ -4,11 +4,11 @@ This document outlines the refactoring tasks needed to improve the MERVA codebas
 
 ## React Router Upgrades
 
-- [ ] Replace all `react-router-dom` imports with `react-router` (v7 compatibility)
-- [ ] Update the `Link` component imports from `react-router` to the correct `Link` component
-- [ ] Replace `<Link to` usage in marketing modules with correct imports
-- [ ] Update navigation components to use the latest React Router APIs
-- [ ] Ensure consistent usage of navigation hooks (standardize on `useViewNavigate` or regular `useNavigate`)
+- [x] Replace all `react-router-dom` imports with `react-router` (v7 compatibility)
+- [x] Update the `Link` component imports from `react-router` to the correct `Link` component
+- [x] Replace `<Link to` usage in marketing modules with correct imports
+- [x] Update navigation components to use the latest React Router APIs
+- [x] Ensure consistent usage of navigation hooks (standardize on `useViewNavigate`)
 
 ## Code Organization & Structure
 

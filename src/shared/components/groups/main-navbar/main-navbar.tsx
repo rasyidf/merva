@@ -3,7 +3,8 @@ import { AppLogo } from "@/shared/components/ui/icon/appLogo";
 import { useNavigationItems } from "@/shared/services/features/utils";
 import { APP_NAME, APP_NAME_SHORT, APP_VERSION } from "@/shared/utils/constants";
 import { ActionIcon, AppShell, Box, Card, Flex, NavLink, ScrollArea, Stack, Text, Title, Tooltip, Button, Popover } from "@mantine/core";
-import { Link, NavLink as nLink, useLocation, useNavigate } from "react-router";
+import { Link, NavLink as nLink, useLocation } from "react-router";
+import { useViewNavigate } from "@/shared/utils/routers";
 import { useMemo } from "react";
 import classes from "./main-navbar.module.css";
 import { renderNavItems } from "./utils";
@@ -20,7 +21,7 @@ export function MainNavbar({
 }>) {
   const { navItems } = useNavigationItems();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = useViewNavigate();
 
   const navitems = renderNavItems({ navItems, pathname, navigate, expanded, collapseOnClick, toggle });
 

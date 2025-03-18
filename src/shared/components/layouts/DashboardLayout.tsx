@@ -1,8 +1,8 @@
 import { ActionIcon, AppShell, Drawer, Flex, Paper, ScrollArea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router";
-
+import { Outlet } from "react-router";
+import { useViewNavigate } from "@/shared/utils/routers";
 import { MainHeader } from "../groups/main-header/main-header";
 import { MainNavbar } from "../groups/main-navbar";
 import { SvgIcon } from "../ui/icon";
@@ -18,7 +18,7 @@ export const DashboardLayout = () => {
   });
   const viewport = useRef<HTMLDivElement>(null);
   const scrollToTop = useCallback(() => viewport.current?.scrollTo({ top: 0, behavior: "smooth" }), []);
-  const navigate = useNavigate();
+  const navigate = useViewNavigate();
 
   const handleToggle = () => {
     setExpanded((prev: boolean) => {

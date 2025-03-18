@@ -1,6 +1,7 @@
 import { PageHeader } from "@/shared/components/groups/main-header";
 import { Box, Flex, Tabs } from "@mantine/core";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
+import { useViewNavigate } from "@/shared/utils/routers";
 import { AdvancedTab } from "../modules/AdvancedTab";
 import { AppearanceTab } from "../modules/AppearanceTab";
 import { NotificationsTab } from "../modules/NotificationsTab";
@@ -9,7 +10,7 @@ import { ProfileTab } from "../modules/ProfileTab";
 
 export const Settings = () => {
   const { tab } = useParams();
-  const navigate = useNavigate();
+  const navigate = useViewNavigate();
 
   const handleTabChange = (value: string | null) => {
     navigate(`/app/settings/${value}`);

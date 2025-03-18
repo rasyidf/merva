@@ -4,26 +4,13 @@ import {
   type To,
   useNavigate,
 } from "react-router";
+import { useViewNavigate } from "./index";
 
-
-
-export function useViewNavigate() {
-  const redirect = useNavigate();
-  const viewNavigate = (newRoute: To, options?: NavigateOptions | undefined) => {
-    if (document.startViewTransition) {
-      return document.startViewTransition(() => {
-        redirect(newRoute, options);
-      });
-    }
-    return redirect(newRoute, options);
-  };
-  return viewNavigate;
-}
+export { useViewNavigate };
 
 export let globalNavigate: NavigateFunction;
 
 export const GlobalHistory = () => {
   globalNavigate = useNavigate();
-
   return null;
 };

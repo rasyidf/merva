@@ -1,6 +1,7 @@
 import type { ColumnFilter, SortingState, TableState, Updater } from "@tanstack/react-table";
 import { useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
+import { useViewNavigate } from "@/shared/utils/routers";
 import { parse, type ParsedQs, stringify } from "qs-esm";
 
 export function useSyncWithSearchParams(
@@ -9,7 +10,7 @@ export function useSyncWithSearchParams(
   setState: (state: Updater<TableState>) => void,
 ) {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate = useViewNavigate();
   const isInitialRender = useRef(true);
   const prevQueryString = useRef(location.search);
 

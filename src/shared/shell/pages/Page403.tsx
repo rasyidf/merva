@@ -1,10 +1,9 @@
-
 import { AppLogo } from '@/shared/components/ui/icon';
 import { Button, Group, Text, Title, Center } from '@mantine/core';
-import { useNavigate } from 'react-router';
+import { useViewNavigate } from '@/shared/utils/routers';
 
 export const Page403: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = useViewNavigate();
 
   const goBack = () => {
     navigate('../');
