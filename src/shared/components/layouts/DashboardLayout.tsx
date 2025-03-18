@@ -1,7 +1,7 @@
 import { ActionIcon, AppShell, Drawer, Flex, Paper, ScrollArea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router";
 
 import { MainHeader } from "../groups/main-header/main-header";
 import { MainNavbar } from "../groups/main-navbar";

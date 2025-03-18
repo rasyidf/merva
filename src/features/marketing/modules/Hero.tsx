@@ -3,7 +3,7 @@ import { AppLogo } from "@/shared/components/ui/icon";
 import { AnimatedDashboard } from "./animated-dashboard";
 import { motion } from "motion/react";
 import { Button } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import clsx from "clsx";
 
 export function Hero() {

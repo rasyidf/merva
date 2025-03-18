@@ -1,7 +1,7 @@
 import { AppLogo } from "@/shared/components/ui/icon/appLogo";
 import LanguageSwitcher from "@/shared/components/ui/language-switcher/language-switcher";
 import { Box, Card, Center, Paper, Stack } from "@mantine/core";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 
 export default function SignInLayout() {
   return (

@@ -3,7 +3,7 @@ import type { IconName } from "@/shared/assets/icons/types";
 import { DashboardLayout } from "@/shared/components/layouts/DashboardLayout";
 import { SvgIcon } from "@/shared/components/ui/icon";
 import type { FeatureMetadata, NavigationConfig } from "@/shared/types";
-import type { RouteObject } from "react-router-dom";
+import type { RouteObject } from "react-router";
 import {
   Page401,
   Page403,

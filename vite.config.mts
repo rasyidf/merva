@@ -48,7 +48,7 @@ export default defineConfig({
     include: [
       "react",
       "react-dom",
-      "react-router-dom",
+      "react-router",
       "recharts",
       "@mantine/core",
       "@mantine/hooks",
@@ -70,7 +70,7 @@ export default defineConfig({
           // utils: ["buffer"],
           storage: ["axios", "zustand", "zustand/middleware"],
           runtime: ["react", "react/jsx-runtime", "react-dom"],
-          router: ["react-router-dom"],
+          router: ["react-router"],
           // editor: ["@mantine/tiptap", "@mantine/carousel"],
           ui: ["@mantine/core", "@mantine/hooks", "@mantine/dates"]
         },

@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { useMemo } from "react";
 import { useEnabledFeatures } from "./feature.store";
 import { processFeatures } from "./feature.utils";

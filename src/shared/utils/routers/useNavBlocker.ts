@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { useBeforeUnload, useBlocker } from "react-router-dom";
+import { useBeforeUnload, useBlocker } from "react-router";
 import { modals } from "@mantine/modals";
 
 export function usePrompt(message: string, when = true) {

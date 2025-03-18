@@ -1,5 +1,5 @@
 /**
- * convert imported url to react-router-dom object
+ * convert imported url to react-router object
  * @param param0
  * @returns
  * @example

@@ -1,4 +1,4 @@
-import { useNavigate, type To, type NavigateOptions } from "react-router-dom";
+import { useNavigate, type To, type NavigateOptions } from "react-router";
 
 export function useViewNavigate() {
   const redirect = useNavigate();

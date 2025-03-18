@@ -1,6 +1,6 @@
 import type { ColumnFilter, SortingState, TableState, Updater } from "@tanstack/react-table";
 import { useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { parse, type ParsedQs, stringify } from "qs-esm";
 
 export function useSyncWithSearchParams(

@@ -2,7 +2,7 @@ import { AppLogo } from "@/shared/components/ui/icon";
 import { isDev } from "@/shared/utils/constants";
 import { Accordion, Code, Container, Flex, Text, Title } from "@mantine/core";
 import React, { useEffect } from "react";
-import { useRouteError } from "react-router-dom";
+import { useRouteError } from "react-router";
 
 export const ErrorBoundary = () => {
   const error = useRouteError();

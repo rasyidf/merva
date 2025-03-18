@@ -1,5 +1,5 @@
 import type { FeatureMetadata } from "@/shared/types";
-import type { RouteObject } from "react-router-dom";
+import type { RouteObject } from "react-router";
 
 const MarketingMetadata = {
   id: "landing",

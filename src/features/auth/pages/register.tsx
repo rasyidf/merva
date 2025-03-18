@@ -1,5 +1,5 @@
 import { Anchor, Button, PasswordInput, Text, TextInput, Title } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { LocalizationService } from "@/shared/services/i18n/i18n.service";
 

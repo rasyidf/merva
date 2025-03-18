@@ -1,6 +1,6 @@
 import { PageHeader } from "@/shared/components/groups/main-header";
 import { Box, Flex, Tabs } from "@mantine/core";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { AdvancedTab } from "../modules/AdvancedTab";
 import { AppearanceTab } from "../modules/AppearanceTab";
 import { NotificationsTab } from "../modules/NotificationsTab";

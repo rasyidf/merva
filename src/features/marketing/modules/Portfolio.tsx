@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import styles from './Portfolio.module.css';
 
 const PortfolioItem: React.FC<{ title: string; description: string; image: string; link: string }> = ({ title, description, image, link }) => (

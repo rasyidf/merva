@@ -1,4 +1,4 @@
-import { Navigate, type RouteObject } from "react-router-dom";
+import { Navigate, type RouteObject } from "react-router";
 import type { FeatureMetadata } from "@/shared/types";
 import { compose } from "@/shared/utils";
 
