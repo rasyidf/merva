@@ -1,8 +1,48 @@
-export * from "./fields-list";
-export * from "./form-builder.component";
-export * from "./form-builder";
-export * from "./form-builder.types";
-export * from "./form-builder.fields";
-export * from "./render-field";
-export * from "./components";
-export * from "./details-card";
+// Core form components
+export * from './components';
+
+// Form builder & fields
+export { FormBuilder } from "./form-builder";
+export { FormFields } from "./form-builder.fields";
+// export { fields } from "./form-builder.fields-list";
+// export { registry } from "./utils/field-registry";
+
+// // Re-export form hooks for easier imports
+// export {
+//   useFieldConditions,
+//   useFieldDependencies,
+//   useFieldMask,
+//   useFieldOptions,
+//   useFieldValidation,
+//   useFormArray,
+//   useFormPersistence,
+//   useFormWizard,
+// } from "./hooks";
+
+// // Export form utilities
+// export {
+//   createFieldTransformer,
+//   createFieldValidator,
+//   createDynamicSchema,
+//   masks,
+//   messages,
+//   patterns,
+//   validators,
+// } from "./utils";
+
+// Export form types
+export type {
+  BaseField,
+  CustomField,
+  EditorProps,
+  Field,
+  FieldRenderer,
+  FieldType,
+  FormBuilderProps,
+  // MetaField,
+  RenderFieldProps,
+  // SelectOption,
+  // ValidationRule,
+  // ValidationRules,
+  // WizardStep,
+} from "./form-builder.types";

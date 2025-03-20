@@ -8,6 +8,7 @@ export type NavigationConfig = {
   icon?: IconName | ReactNode;
   group?: string;
   disabled?: boolean;
+  placement?: string;
   visible?: boolean;
   children?: NavigationConfig[];
 };

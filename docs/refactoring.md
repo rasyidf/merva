@@ -2,6 +2,8 @@
 
 This document outlines the refactoring tasks needed to improve the MERVA codebase for better stability, extensibility, and modularity, following SOLID principles.
 
+Implement, test then commit,
+
 ## React Router Upgrades
 
 - [x] Replace all `react-router-dom` imports with `react-router` (v7 compatibility)

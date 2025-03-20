@@ -2,6 +2,9 @@ import type { FeatureMetadata } from "@/shared/types";
 import { LocalizationService } from "../i18n/i18n.service";
 import { processFeatures } from "./feature.utils";
 import { SupportedLanguage } from "@/core/configs/locale";
+import { featureStore } from "./feature.store";
+import { FeatureValidator } from "./feature.validator";
+import { logger } from "../logging";
 
 async function loadFeatureLocales(feature: FeatureMetadata) {
   if (!feature.locales?.length) return;
@@ -31,11 +34,30 @@ async function loadFeatureLocales(feature: FeatureMetadata) {
   );
 }
 
-export async function initializeFeatures(features: FeatureMetadata[]) {
-  const enabledFeatures = features.filter(f => f.enabled !== false);
+export async function initializeFeatures(features: FeatureMetadata[]): Promise<void> {
+  const validator = FeatureValidator.getInstance();
+  
+  // Validate all features before initialization
+  const isValid = validator.validateFeatures(features);
+  if (!isValid) {
+    logger.error('Feature initialization aborted due to validation errors');
+    throw new Error('Feature validation failed');
+  }
+
+  // Filter enabled features
+  const enabledFeatures = features.filter(feature => feature.enabled !== false);
 
   // Load locales for all enabled features
   await Promise.all(enabledFeatures.map(loadFeatureLocales));
- 
-//   return processFeatures(enabledFeatures);
+
+  // Initialize features in store
+  featureStore.setState({
+    features: enabledFeatures,
+    initialized: true,
+  });
+
+  logger.info('Features initialized successfully', {
+    totalFeatures: features.length,
+    enabledFeatures: enabledFeatures.length,
+  });
 }
